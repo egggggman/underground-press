@@ -1,7 +1,9 @@
 # Issue 001 City Beat Plan
 
-**Status:** Editorial and production plan  
-**Department:** City Beat  
+**Status:** Editorial and production plan
+
+**Department:** City Beat
+
 **Motto:** *For Those Who Found Their Way.*
 
 ## Editorial objective
@@ -27,8 +29,10 @@ Reading order must remain obvious at arm's length: lead story, urgent utility, c
 
 ### Lead local story
 
-**Working slug:** `CITY-LEAD-001`  
-**Working headline:** *When the Fog Moves In, the Block Listens*  
+**Working slug:** `CITY-LEAD-001`
+
+**Working headline:** *When the Fog Moves In, the Block Listens*
+
 **Editorial question:** How do neighbors, workers, and underground travelers adjust when waterfront fog shortens sightlines but carries bells, horns, and pipe sounds farther?
 
 Report this as a service story grounded in daily routines, not as a supernatural claim or a piece of tourism copy. Seek at least three voices: one waterfront worker or resident, one person who regularly moves between aboveground and underground routes, and one organizer or steward responsible for access or safety. Confirm every quotation, location, route condition, and safety instruction before publication.
