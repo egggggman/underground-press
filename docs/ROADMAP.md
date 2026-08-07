@@ -19,7 +19,14 @@
 - [ ] Reusable production checklist
 - [ ] Migrate world references in approved templates only where appropriate
 
-## Phase 3 — Issue Assembly
+## Phase 3 — Editorial Content Library
+
+- [x] Establish advertisements, classifieds, editorials, letters, and corrections collections
+- [x] Establish community calendar, weather, business spotlight, transit watch, and poll collections
+- [x] Establish recurring-feature continuity guidance
+- [ ] Populate issue-ready copy under editorial review
+
+## Phase 4 — Issue Assembly
 
 - [ ] Assemble Issue 001 from source assets
 - [ ] Validate Issue 001 against the World Bible and Business Bible
@@ -27,14 +34,14 @@
 - [ ] Validate all live content fields
 - [ ] Archive the published issue as an immutable milestone
 
-## Phase 4 — Living World
+## Phase 5 — Living World
 
 - [ ] Expand districts, people, landmarks, traditions, and transportation as stories require
 - [ ] Record events and continuity after every published issue
 - [ ] Maintain the timeline and running-gag indexes
 - [ ] Add puzzle answers from each issue to the following issue
 
-## Phase 5 — Print Pipeline
+## Phase 6 — Print Pipeline
 
 - [ ] Add automated preflight checks
 - [ ] Establish print-vendor export settings
