@@ -4,7 +4,8 @@
 
 - [ ] Asset map points to the editorially approved Issue source files.
 - [ ] Crossword grid and clue artwork are separate, complete, and internally consistent.
-- [ ] Sudoku givens, Pizza Cipher text, and Brain Bender clues match their approved sources.
+- [ ] Sudoku givens, Pizza Cipher text, and Neighborhood Search grid match their approved sources.
+- [ ] Neighborhood Search words use straight horizontal, vertical, or diagonal paths, including reverse placements; its marked cells spell `FOUNDYOURWAY` in reading order.
 - [ ] No answer key, solution layer, or hidden answer text appears in the reader-facing assets.
 - [ ] Compositor sidecar SHA-256 values match an independent preflight hash.
 - [ ] `git status --ignored` shows generated proofs under an ignored path.
@@ -26,6 +27,7 @@
 - [ ] Spot colors and type follow `design-system/tokens/design_tokens.json`.
 - [ ] A human solver checks every puzzle from the final placed proof.
 - [ ] A second editor confirms clues, instructions, credits, provenance, and answer-release language.
+- [ ] Lived-In Design details remain outside solving areas and do not obscure puzzle data.
 
 ## Export gate
 

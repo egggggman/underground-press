@@ -20,8 +20,11 @@ LOCKED = {
     "crossword-clues.svg": "1a6a3db6d9d171033dd86747ab96222c844e565d0fe048aae85d3f0407b7de51",
     "sudoku.svg": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375",
     "pizza-cipher.svg": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1",
-    "brain-bender.svg": "12c11866cece1484e6ac548a75f23c9476c5e779716f2aa05032b2ecc40fcba2",
+    "neighborhood-search.svg": "802ff9433453aad57e77496e464f52f0e81f2282df2e308db9b65b9f44a6c836",
 }
+
+NEIGHBORHOOD_SEARCH = ASSETS / "neighborhood-search.json"
+BIG_FOUR = {"crossword", "neighborhood_search", "pizza_cipher", "sudoku"}
 
 
 def digest(path: Path) -> str:
@@ -36,6 +39,7 @@ def main() -> int:
     contract = json.loads(CONTRACT.read_text(encoding="utf-8"))
     composition = json.loads(COMPOSITION.read_text(encoding="utf-8"))
     report = json.loads(SIDECAR.read_text(encoding="utf-8"))
+    search = json.loads(NEIGHBORHOOD_SEARCH.read_text(encoding="utf-8"))
     width = contract["coordinate_system"]["page_width"]
     height = contract["coordinate_system"]["page_height"]
     zones = {}
@@ -53,6 +57,26 @@ def main() -> int:
         fail(f"missing composition zones: {sorted(required - composition.keys())}")
     if composition.keys() - zones.keys():
         fail(f"unknown composition zones: {sorted(composition.keys() - zones.keys())}")
+    if not BIG_FOUR <= composition.keys():
+        fail(f"missing permanent Big Four puzzle: {sorted(BIG_FOUR - composition.keys())}")
+    grid = search["grid"]
+    size = search["size"]
+    if size != 15 or len(grid) != size or any(len(row) != size for row in grid):
+        fail("Neighborhood Search grid must be 15x15")
+    allowed_directions = {-1, 0, 1}
+    for placement in search["placements"]:
+        row = placement["row"] - 1
+        col = placement["col"] - 1
+        dr = placement["dr"]
+        dc = placement["dc"]
+        if dr not in allowed_directions or dc not in allowed_directions or (dr, dc) == (0, 0):
+            fail(f"bent or invalid placement: {placement['word']}")
+        found = "".join(grid[row + i * dr][col + i * dc] for i in range(len(placement["word"])))
+        if found != placement["word"]:
+            fail(f"word placement mismatch: {placement['word']} found {found}")
+    hidden = "".join(grid[row - 1][col - 1] for row, col in search["hidden_message"]["cells"])
+    if hidden != search["hidden_message"]["answer"] or hidden != "FOUNDYOURWAY":
+        fail(f"hidden message mismatch: {hidden}")
     for filename, expected in LOCKED.items():
         actual = digest(ASSETS / filename)
         if actual != expected:

@@ -8,10 +8,6 @@
       "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\issues\\issue_001\\assets\\puzzle-dojo\\art\\tonys-pizza-issue-001.png",
       "sha256": "ad3153499e15f575218911eff9092c3887cfaf333c68c9d0afefbd8a4b3265d5"
     },
-    "brain_bender": {
-      "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\issues\\issue_001\\assets\\puzzle-dojo\\brain-bender.svg",
-      "sha256": "12c11866cece1484e6ac548a75f23c9476c5e779716f2aa05032b2ecc40fcba2"
-    },
     "cipher_corner": {
       "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\design-system\\components\\puzzle-dojo\\cipher_corner.svg",
       "sha256": "9c6592bfae45026575282e6db47a86db4b51d67f1ee6e9fcedd895355fd3d34e"
@@ -35,6 +31,10 @@
     "mini_ads": {
       "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\design-system\\components\\puzzle-dojo\\mini_ads.svg",
       "sha256": "ece54e8738e3a0d526eb01817fc1af6eccae5c94b8d4aca263c1adc39083409b"
+    },
+    "neighborhood_search": {
+      "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\issues\\issue_001\\assets\\puzzle-dojo\\neighborhood-search.svg",
+      "sha256": "802ff9433453aad57e77496e464f52f0e81f2282df2e308db9b65b9f44a6c836"
     },
     "page_8_footer": {
       "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\issues\\issue_001\\assets\\puzzle-dojo\\art\\footer-page-8.svg",
