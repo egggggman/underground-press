@@ -96,7 +96,7 @@ See `businesses/FLAGSHIP_BUSINESSES.md` for the canonical entries and `docs/BUSI
 | `transportation/` | Routes, vehicles, access systems, and movement rules |
 | `events/` | Issue-level happenings with continuity impact |
 | `timeline/` | Ordered canonical history |
-| `history/` | Background eras, legends, and established past events |
+| `history/` | Background eras and established past events |
 | `memories/` | Personal and shared recollections that shape community identity |
 | `legends/` | Durable folklore whose factual truth remains unresolved |
 | `rumors/` | Current unverified claims, leads, and community chatter |
