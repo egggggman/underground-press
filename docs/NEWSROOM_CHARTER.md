@@ -6,6 +6,8 @@ The Underground Press is a neighborhood newspaper documenting life beneath Portl
 
 Its production system preserves handmade newspaper energy while making recurring issues consistent and reproducible.
 
+The paper publishes biweekly for Portland's underground community. Copies may be found organically aboveground, but the newsroom writes first for the neighbors below. Reader-facing issues use Sliding Time and show no calendar year or date.
+
 ## Editorial principles
 
 1. Lead with a clear primary story.
@@ -14,6 +16,8 @@ Its production system preserves handmade newspaper energy while making recurring
 4. Use empty space intentionally with ads, notes, corrections, classifieds, stamps, doodles, or short items.
 5. Keep reporting readable even when the design feels worn, imperfect, or improvised.
 6. Treat neighborhood life and continuity as the heart of the paper.
+7. Apply the Local Angle Rule: cover what extraordinary events do to neighborhood life rather than chasing spectacle.
+8. Let community members contribute and participate through the Underground Press Club while preserving newsroom anonymity.
 
 ## Production principles
 
@@ -30,6 +34,14 @@ Portland, Maine is the official city of The Underground Press. The newspaper is 
 Real Portland flavor is encouraged, but the setting is an alternate Portland inspired by the real city rather than a perfect historical or geographic replica. The TMNT-inspired universe remains intact.
 
 The authoritative setting reference is `world/WORLD_BIBLE.md`.
+
+## Identity and attribution
+
+The motto is **For Those Who Found Their Way.** The newsroom does not publish a staff roster or conventional bylines. Its standing attribution is:
+
+> Published by Nobody / Contributors Everybody / Approved by Myrtle
+
+This anonymity protects the collective voice without erasing community contributions.
 
 ## Visual character
 

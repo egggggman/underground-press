@@ -42,11 +42,13 @@ The Underground Press is not merely “a TMNT newspaper.” It is:
 
 Pages should celebrate neighborhood businesses, community events, puzzles, local game stores, everyday heroes, small traditions, humor, and continuity.
 
-## Emotional Design
+## Lived-In Design
 
 The Underground Press should feel like a newspaper that has been sitting on kitchen tables around Portland since 1991: familiar, handled, saved, clipped, argued over, and passed between neighbors.
 
 Recurring memories, traditions, inside jokes, and community stories should reward close reading across issues. These details must deepen belonging without making a first-time reader feel locked out.
+
+The masthead is living rather than mechanically frozen: it may collect earned history while retaining its core identity. Use the turtle-shell mark for navigation and wayfinding. Treat sewer caps as collectible issue objects, not interchangeable navigation icons.
 
 ## Page approval standard
 
@@ -59,6 +61,7 @@ A page is ready only when it:
 5. reflects the Portland world where appropriate;
 6. preserves approved content systems and live data;
 7. meets the existing quality bar rather than averaging down to unfinished pages.
+8. uses Lived-In Design details as evidence of community handling and history, never as arbitrary distress.
 
 ## Preservation rule
 
