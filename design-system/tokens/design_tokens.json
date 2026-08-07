@@ -1,0 +1,26 @@
+{
+  "name": "The Underground Press Component Library",
+  "version": "1.0",
+  "units": "SVG viewBox pixels; catalog uses points/inches",
+  "colors": {
+    "ink": "#171812",
+    "paper": "#EDE0B3",
+    "panel": "#D9C99B",
+    "oxblood": "#8C2118",
+    "sewer_green": "#143F2C",
+    "mustard": "#D29E2E",
+    "paper_white": "#FFFDF3"
+  },
+  "type": {
+    "display": "Impact, Arial Narrow, sans-serif",
+    "editorial": "Georgia, Times New Roman, serif",
+    "utility": "Arial, Helvetica, sans-serif"
+  },
+  "production": {
+    "bleed_in": 0.125,
+    "safe_in": 0.25,
+    "default_page": "11x17 portrait",
+    "editable_field_pattern": "[[FIELD_NAME]]",
+    "recommended_svg_editor": "Inkscape, Illustrator, Affinity Designer, Figma"
+  }
+}
