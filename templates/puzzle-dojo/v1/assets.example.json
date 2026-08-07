@@ -1,0 +1,13 @@
+{
+  "crossword": "../../../issues/issue_001/assets/puzzle-dojo/crossword.svg",
+  "clues": "../../../issues/issue_001/assets/puzzle-dojo/clues.svg",
+  "sudoku": "../../../issues/issue_001/assets/puzzle-dojo/sudoku.svg",
+  "pizza_cipher": "../../../issues/issue_001/assets/puzzle-dojo/pizza_cipher.svg",
+  "brain_bender": "../../../issues/issue_001/assets/puzzle-dojo/brain_bender.svg",
+  "ad": "../../../ads/tonys-pizza/tonys_pizza_master.svg",
+  "sewer_cap": "../../../sewer-caps/templates/sewer_cap_blank.svg",
+  "puzzle_desk": "../../../design-system/components/utility-widgets/puzzle_desk.svg",
+  "seagullotine": "../../../design-system/components/seagullotine/editorial_panel.svg",
+  "page_8_issue_banner": "../../../design-system/components/page-furniture/issue_banner.svg",
+  "page_8_footer": "../../../design-system/components/page-furniture/page_number.svg"
+}
