@@ -24,6 +24,7 @@
 - [x] Establish advertisements, classifieds, editorials, letters, and corrections collections
 - [x] Establish community calendar, weather, business spotlight, transit watch, and poll collections
 - [x] Establish recurring-feature continuity guidance
+- [x] Establish the permanent Artifact Library for rare Special Editions
 - [ ] Populate issue-ready copy under editorial review
 
 ## Phase 4 — Issue Assembly
@@ -40,6 +41,14 @@
 - [ ] Record events and continuity after every published issue
 - [ ] Maintain the timeline and running-gag indexes
 - [ ] Add puzzle answers from each issue to the following issue
+
+## Special Editions
+
+- [ ] Define the first community milestone worthy of a rare Special Edition
+- [ ] Commission one exclusive, theme-specific keepsake through `artifacts/ARTIFACT_LIBRARY.md`
+- [ ] Prototype, QA, release, and archive the artifact with its Special Edition
+
+Special Editions commemorate events or milestones that change the neighborhood's story; they are not calendar-driven holiday issues. Each includes one exclusive artifact designed to Display, Play, Build, Learn, Collect, or Share.
 
 ## Phase 6 — Print Pipeline
 
