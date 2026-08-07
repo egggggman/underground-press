@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+.env
+.env.*
+
+# Generated documents and exports
+generated/
+exports/
+temp-exports/
+tmp-exports/
+issues/**/exports/
+issues/**/generated/
+*.generated.pdf
+*-proof.pdf
+*-print.pdf
+
+# Temporary working files
+*.tmp
+*.temp
+*.bak
+*.swp
+~$*
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local editor and tool state
+.vscode/
+.idea/
+
+# Fonts are licensed assets and must not be committed
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.eot
