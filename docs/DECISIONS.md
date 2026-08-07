@@ -23,3 +23,11 @@ Small rotations, registration drift, paper texture, and ink variation may suppor
 ## D-006: Licensed fonts are not stored
 
 Font stacks are documented as tokens. Font binaries remain outside the repository and are handled during production or press handoff.
+
+## D-007: Portland, Maine is the official setting
+
+**Decision:** The Underground Press is officially set in Portland, Maine.
+
+**Reason:** Portland provides a distinctive identity while preserving the TMNT-inspired underground setting.
+
+**Status:** **LOCKED**
