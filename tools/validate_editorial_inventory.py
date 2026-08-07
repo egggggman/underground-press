@@ -32,4 +32,3 @@ spotlight_biz={r["related_business"] for r in json.loads((ROOT/"content/business
 if spotlight_biz != BUSINESSES: errors.append(f"spotlights: expected {sorted(BUSINESSES)}, found {sorted(spotlight_biz)}")
 print(json.dumps({"counts":counts,"total":sum(counts.values()),"unique_ids":len(seen),"errors":errors},indent=2))
 sys.exit(bool(errors))
-
