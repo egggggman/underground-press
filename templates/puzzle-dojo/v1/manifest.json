@@ -16,7 +16,10 @@
     "puzzle.crossword", "puzzle.crossword-clues", "puzzle.sudoku",
     "puzzle.pizza-cipher", "puzzle.brain-bender",
     "advertisement.tonys-pizza", "collectible.sewer-cap",
-    "utility-widget.puzzle-desk", "seagullotine.editorial-panel",
+    "puzzle-dojo.puzzle-tip", "puzzle-dojo.seagullotine-quote",
+    "puzzle-dojo.puzzle-bench", "puzzle-dojo.cipher-corner",
+    "puzzle-dojo.mini-ads", "puzzle-dojo.portland-memory",
+    "puzzle-dojo.last-issue-solutions", "seagullotine.editorial-panel",
     "page-furniture.issue-banner", "page-furniture.editors-note",
     "page-furniture.page-number"
   ],

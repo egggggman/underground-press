@@ -30,8 +30,8 @@
         {"id": "sudoku", "component_id": "puzzle.sudoku", "kind": "puzzle_asset", "x": 22, "y": 300, "width": 230, "height": 240, "required": true},
         {"id": "pizza_cipher", "component_id": "puzzle.pizza-cipher", "kind": "puzzle_asset", "x": 270, "y": 300, "width": 228, "height": 240, "required": true},
         {"id": "brain_bender", "component_id": "puzzle.brain-bender", "kind": "puzzle_asset", "x": 516, "y": 300, "width": 254, "height": 240, "required": true},
-        {"id": "puzzle_desk", "component_id": "utility-widget.puzzle-desk", "kind": "component", "x": 22, "y": 78, "width": 360, "height": 200, "required": true},
-        {"id": "seagullotine", "component_id": "seagullotine.editorial-panel", "kind": "component", "x": 400, "y": 78, "width": 370, "height": 200, "required": true},
+        {"id": "puzzle_tip", "component_id": "puzzle-dojo.puzzle-tip", "kind": "component", "x": 22, "y": 78, "width": 360, "height": 200, "required": true},
+        {"id": "seagullotine", "component_id": "puzzle-dojo.seagullotine-quote", "kind": "component", "x": 400, "y": 78, "width": 370, "height": 200, "required": true},
         {"id": "page_8_footer", "component_id": "page-furniture.page-number", "kind": "footer", "x": 22, "y": 22, "width": 748, "height": 30, "required": true}
       ]
     },
@@ -42,9 +42,12 @@
         {"id": "page_9_issue_banner", "component_id": "page-furniture.issue-banner", "kind": "page_furniture", "x": 22, "y": 1151, "width": 748, "height": 51, "required": true},
         {"id": "ad", "component_id": "advertisement.tonys-pizza", "kind": "component", "x": 22, "y": 842, "width": 476, "height": 280, "required": true},
         {"id": "sewer_cap", "component_id": "collectible.sewer-cap", "kind": "component", "x": 510, "y": 842, "width": 260, "height": 280, "required": true},
-        {"id": "page_9_puzzle_desk", "component_id": "utility-widget.puzzle-desk", "kind": "component", "x": 22, "y": 566, "width": 476, "height": 258, "required": true},
-        {"id": "page_9_seagullotine", "component_id": "seagullotine.editorial-panel", "kind": "component", "x": 22, "y": 78, "width": 476, "height": 470, "required": true},
-        {"id": "page_9_furniture", "component_id": "page-furniture.editors-note", "kind": "page_furniture", "x": 510, "y": 300, "width": 260, "height": 524, "required": false},
+        {"id": "puzzle_bench", "component_id": "puzzle-dojo.puzzle-bench", "kind": "component", "x": 22, "y": 566, "width": 476, "height": 258, "required": true},
+        {"id": "cipher_corner", "component_id": "puzzle-dojo.cipher-corner", "kind": "component", "x": 510, "y": 566, "width": 260, "height": 258, "required": true},
+        {"id": "page_9_seagullotine", "component_id": "seagullotine.editorial-panel", "kind": "component", "x": 22, "y": 300, "width": 476, "height": 248, "required": true},
+        {"id": "mini_ads", "component_id": "puzzle-dojo.mini-ads", "kind": "component", "x": 510, "y": 300, "width": 260, "height": 248, "required": true},
+        {"id": "memory_fragment", "component_id": "puzzle-dojo.portland-memory", "kind": "component", "x": 22, "y": 78, "width": 476, "height": 204, "required": true},
+        {"id": "last_issue_solutions", "component_id": "puzzle-dojo.last-issue-solutions", "kind": "component", "x": 510, "y": 78, "width": 260, "height": 204, "required": true},
         {"id": "page_9_footer", "component_id": "page-furniture.page-number", "kind": "footer", "x": 22, "y": 22, "width": 748, "height": 30, "required": true}
       ]
     }
