@@ -42,6 +42,12 @@ The Underground Press is not merely “a TMNT newspaper.” It is:
 
 Pages should celebrate neighborhood businesses, community events, puzzles, local game stores, everyday heroes, small traditions, humor, and continuity.
 
+## Emotional Design
+
+The Underground Press should feel like a newspaper that has been sitting on kitchen tables around Portland since 1991: familiar, handled, saved, clipped, argued over, and passed between neighbors.
+
+Recurring memories, traditions, inside jokes, and community stories should reward close reading across issues. These details must deepen belonging without making a first-time reader feel locked out.
+
 ## Page approval standard
 
 A page is ready only when it:

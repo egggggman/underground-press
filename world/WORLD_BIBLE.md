@@ -10,6 +10,10 @@ This is the authoritative reference for the setting, continuity, and recurring w
 
 The Underground Press is a neighborhood newspaper documenting life beneath Portland, Maine in a TMNT-inspired world.
 
+It is not merely a record of events. It is also a record of a community's memories.
+
+History establishes the best-known chronology of what happened. Memory preserves how people experienced, retell, and understand what happened. Both are canonical in their own ways: history as established fact, and memory as an authentic part of community identity even when recollections differ. Legends and rumors remain canonical as stories in circulation, not as proof that their claims are true.
+
 It is published from beneath Portland and covers the people, businesses, events, puzzles, local game stores, everyday heroes, small traditions, humor, and ongoing continuity of the community above and below street level.
 
 ## Canonical world rules
@@ -92,7 +96,10 @@ See `businesses/FLAGSHIP_BUSINESSES.md` for the canonical entries and `docs/BUSI
 | `transportation/` | Routes, vehicles, access systems, and movement rules |
 | `events/` | Issue-level happenings with continuity impact |
 | `timeline/` | Ordered canonical history |
-| `history/` | Background eras, legends, and established past events |
+| `history/` | Background eras and established past events |
+| `memories/` | Personal and shared recollections that shape community identity |
+| `legends/` | Durable folklore whose factual truth remains unresolved |
+| `rumors/` | Current unverified claims, leads, and community chatter |
 | `running_gags/` | Repeated jokes and their usage boundaries |
 
 ## Approval standard
