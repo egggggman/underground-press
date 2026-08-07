@@ -1,0 +1,28 @@
+# The Underground Press
+
+The Underground Press is a reusable **1991 mutant-subway tabloid publishing system**: a newsroom-in-a-box for producing recurring issues with a consistent editorial voice, visual language, advertisements, puzzles, characters, and production workflow.
+
+It preserves the handmade energy of an underground newspaper while making every issue easier to assemble, revise, archive, and reproduce.
+
+## Newsroom structure
+
+- `docs/` — newsroom manual, editorial standards, and production checklists
+- `design-system/` — colors, typography rules, layouts, widgets, and reusable page furniture
+- `ads/` — fictional advertisers, coupons, classifieds, and gap-filling ad formats
+- `sewer-caps/` — collectible Sewer Cap templates and issue-ready artwork
+- `art/` — original characters, textures, halftones, and spot illustrations
+- `puzzles/` — reusable puzzle frames, generators, and issue-specific puzzle data
+- `issues/issue_001/` — source material and production files for the first issue
+- `scripts/` — layout, validation, and export automation
+
+## Working principles
+
+1. Reuse systems; customize stories.
+2. Keep source assets separate from generated exports.
+3. Preserve every published issue as an immutable snapshot.
+4. Track original work and documentation—never bundled font files.
+5. Make the paper feel like it came off a press in 1991 and out of a mutant subway newsroom.
+
+## Status
+
+Initial newsroom scaffold.
