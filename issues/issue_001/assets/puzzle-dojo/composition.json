@@ -1,0 +1,21 @@
+{
+  "crossword": "crossword.svg",
+  "clues": "crossword-clues.svg",
+  "sudoku": "sudoku.svg",
+  "pizza_cipher": "pizza-cipher.svg",
+  "brain_bender": "brain-bender.svg",
+  "ad": "art/tonys-pizza-issue-001.png",
+  "sewer_cap": "art/sewer-cap-001.png",
+  "puzzle_tip": "../../../../design-system/components/puzzle-dojo/puzzle_tip.svg",
+  "seagullotine": "../../../../design-system/components/puzzle-dojo/seagullotine_quote.svg",
+  "page_8_issue_banner": "art/masthead-page-8.svg",
+  "page_8_footer": "art/footer-page-8.svg",
+  "page_9_issue_banner": "art/masthead-page-9.svg",
+  "puzzle_bench": "../../../../design-system/components/puzzle-dojo/puzzle_bench.svg",
+  "cipher_corner": "../../../../design-system/components/puzzle-dojo/cipher_corner.svg",
+  "page_9_seagullotine": "art/seagullotine-issue-001.png",
+  "mini_ads": "../../../../design-system/components/puzzle-dojo/mini_ads.svg",
+  "memory_fragment": "../../../../design-system/components/puzzle-dojo/portland_memory.svg",
+  "last_issue_solutions": "../../../../design-system/components/puzzle-dojo/last_issue_solutions.svg",
+  "page_9_footer": "art/footer-page-9.svg"
+}
