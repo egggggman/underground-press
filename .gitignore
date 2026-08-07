@@ -23,6 +23,12 @@ issues/**/generated/
 *.generated.pdf
 *-proof.pdf
 *-print.pdf
+catalog/
+previews/
+reference_raster/
+proofs/
+screenshots/
+*.zip
 
 # Temporary working files
 *.tmp
