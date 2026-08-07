@@ -11,6 +11,7 @@ It preserves the handmade energy of an underground newspaper while making every 
 - `ads/` — fictional advertisers, coupons, classifieds, and gap-filling ad formats
 - `sewer-caps/` — collectible Sewer Cap templates and issue-ready artwork
 - `art/` — original characters, textures, halftones, and spot illustrations
+- `artifacts/` — exclusive keepsakes for rare Special Editions and their production records
 - `puzzles/` — reusable puzzle frames, generators, and issue-specific puzzle data
 - `issues/issue_001/` — source material and production files for the first issue
 - `scripts/` — layout, validation, and export automation

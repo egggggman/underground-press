@@ -73,9 +73,16 @@ Do not redesign the approved:
 
 Only migrate world references where appropriate. Preserve puzzle and game data exactly when applying visual templates.
 
+## Special Edition artifacts
+
+Special Edition artifacts should feel like objects made by the same newsroom as the paper: tactile, purposeful, locally specific, and rooted in the publication's 1991 visual language. Their form may vary, but clarity and usability take priority over decorative distressing. Templates, instructions, folds, cuts, clues, and QR codes must remain legible and testable at final size.
+
+An artifact's design must serve its edition's theme and at least one principle: Display, Play, Build, Learn, Collect, or Share. It must not resemble generic merchandise or advertising. Use `artifacts/ARTIFACT_LIBRARY.md` for format, production, QA, and archival requirements; this Style Bible remains the authority for visual identity.
+
 ## Relationship to other references
 
 - `world/WORLD_BIBLE.md` governs setting and continuity.
 - `docs/BUSINESS_BIBLE.md` summarizes recurring business usage.
 - `docs/DECISIONS.md` records locked production decisions.
+- `artifacts/ARTIFACT_LIBRARY.md` governs Special Edition artifact creation and archival.
 - Existing design-system tokens and editable masters remain the implementation source.
