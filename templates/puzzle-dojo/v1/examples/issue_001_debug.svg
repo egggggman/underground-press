@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="17in" viewBox="0 0 792 1224" role="img" aria-labelledby="title desc">
+  <title id="title">Issue 001 Puzzle Dojo layout debug reference</title>
+  <desc id="desc">Half-scale side-by-side geometry proof with no puzzle content or answers.</desc>
+  <style>.page{fill:#EDE0B3;stroke:#171812;stroke-width:2}.zone{fill:#D9C99B;stroke:#143F2C;stroke-width:1;stroke-dasharray:5 3}.utility{fill:#8C2118;fill-opacity:.18}.t{font:700 8px Arial,sans-serif;fill:#171812}.h{font:700 16px Arial,sans-serif;fill:#8C2118}.n{font:9px Georgia,serif;fill:#171812}</style>
+  <text class="h" x="18" y="24">PUZZLE DOJO / ISSUE #001 / CONTRACT DEBUG</text>
+  <text class="n" x="18" y="42">Geometry only — no puzzle data. Page coordinates are scaled 1:2.</text>
+  <g id="page-8-debug" transform="translate(0 66) scale(.5)">
+    <rect class="page" x="18" y="0" width="756" height="1152"/>
+    <rect class="zone utility" x="22" y="22" width="748" height="51"/><text class="t" x="32" y="52">ISSUE BANNER</text>
+    <rect class="zone" x="22" y="94" width="450" height="560"/><text class="t" x="32" y="116">CROSSWORD</text>
+    <rect class="zone" x="490" y="94" width="280" height="560"/><text class="t" x="500" y="116">CLUES</text>
+    <rect class="zone" x="22" y="684" width="230" height="240"/><text class="t" x="32" y="706">SUDOKU</text>
+    <rect class="zone" x="270" y="684" width="228" height="240"/><text class="t" x="280" y="706">PIZZA CIPHER</text>
+    <rect class="zone" x="516" y="684" width="254" height="240"/><text class="t" x="526" y="706">BRAIN BENDER</text>
+    <rect class="zone" x="22" y="946" width="360" height="200"/><text class="t" x="32" y="968">PUZZLE DESK</text>
+    <rect class="zone" x="400" y="946" width="370" height="200"/><text class="t" x="410" y="968">SEAGULLOTINE</text>
+  </g>
+  <g id="page-9-debug" transform="translate(396 66) scale(.5)">
+    <rect class="page" x="18" y="0" width="756" height="1152"/>
+    <rect class="zone utility" x="22" y="22" width="748" height="51"/><text class="t" x="32" y="52">ISSUE BANNER</text>
+    <rect class="zone" x="22" y="102" width="476" height="280"/><text class="t" x="32" y="124">TONY'S PIZZA AD</text>
+    <rect class="zone" x="510" y="102" width="260" height="280"/><text class="t" x="520" y="124">SEWER CAP</text>
+    <rect class="zone" x="22" y="400" width="476" height="258"/><text class="t" x="32" y="422">PUZZLE DESK</text>
+    <rect class="zone utility" x="510" y="400" width="260" height="524"/><text class="t" x="520" y="422">PAGE FURNITURE</text>
+    <rect class="zone" x="22" y="676" width="476" height="470"/><text class="t" x="32" y="698">SEAGULLOTINE</text>
+  </g>
+  <text class="n" x="18" y="666">Reference: validated Issue #1 department hierarchy. Exact production coordinates live in layout_contract.json.</text>
+</svg>

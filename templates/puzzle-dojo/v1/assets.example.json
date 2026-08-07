@@ -9,5 +9,9 @@
   "puzzle_desk": "../../../design-system/components/utility-widgets/puzzle_desk.svg",
   "seagullotine": "../../../design-system/components/seagullotine/editorial_panel.svg",
   "page_8_issue_banner": "../../../design-system/components/page-furniture/issue_banner.svg",
-  "page_8_footer": "../../../design-system/components/page-furniture/page_number.svg"
+  "page_8_footer": "../../../design-system/components/page-furniture/page_number.svg",
+  "page_9_issue_banner": "../../../design-system/components/page-furniture/issue_banner.svg",
+  "page_9_puzzle_desk": "../../../design-system/components/utility-widgets/puzzle_desk.svg",
+  "page_9_seagullotine": "../../../design-system/components/seagullotine/editorial_panel.svg",
+  "page_9_footer": "../../../design-system/components/page-furniture/page_number.svg"
 }
