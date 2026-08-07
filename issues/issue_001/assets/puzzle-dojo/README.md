@@ -16,4 +16,4 @@ PyMuPDF 1.28.2 applied fixed crop rectangles in the PDF's native 792 × 1224 poi
 
 The permanent Big Four are Crossword, Neighborhood Search, Pizza Cipher, and Sudoku. `brain-bender.svg` remains preserved in this directory as a reusable bonus puzzle, but it is not an Issue #1 production slot.
 
-Treat any hash change as a new editorial revision requiring validation. The compositor may link and scale these files according to the layout contract but must never rewrite them.
+SVG hashes are calculated with line endings normalized to LF so the same approved vector bytes validate on every checkout platform. Treat any other hash change as a new editorial revision requiring validation. The compositor may link and scale these files according to the layout contract but must never rewrite them.

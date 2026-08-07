@@ -28,7 +28,10 @@ BIG_FOUR = {"crossword", "neighborhood_search", "pizza_cipher", "sudoku"}
 
 
 def digest(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+    data = path.read_bytes()
+    if path.suffix.lower() == ".svg":
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
 
 
 def fail(message: str) -> None:
