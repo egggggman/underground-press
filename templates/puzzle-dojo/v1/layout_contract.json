@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "contract_id": "puzzle-dojo.master.v1",
+  "version": "1.0.0",
+  "coordinate_system": {
+    "units": "pt",
+    "origin": "bottom-left",
+    "page_width": 792,
+    "page_height": 1224,
+    "trim": "11x17 in portrait",
+    "bleed": 9,
+    "safe_margin": 18
+  },
+  "placement_policy": {
+    "mode": "contain",
+    "allow_upscale": false,
+    "allow_crop": false,
+    "allow_asset_mutation": false,
+    "preserve_aspect_ratio": true,
+    "embed_assets": false
+  },
+  "pages": [
+    {
+      "page": 8,
+      "role": "puzzle_workbench",
+      "zones": [
+        {"id": "page_8_issue_banner", "component_id": "page-furniture.issue-banner", "kind": "page_furniture", "x": 22, "y": 1151, "width": 748, "height": 51, "required": true},
+        {"id": "crossword", "component_id": "puzzle.crossword", "kind": "puzzle_asset", "x": 22, "y": 570, "width": 450, "height": 560, "required": true},
+        {"id": "clues", "component_id": "puzzle.crossword-clues", "kind": "puzzle_asset", "x": 490, "y": 570, "width": 280, "height": 560, "required": true},
+        {"id": "sudoku", "component_id": "puzzle.sudoku", "kind": "puzzle_asset", "x": 22, "y": 300, "width": 230, "height": 240, "required": true},
+        {"id": "pizza_cipher", "component_id": "puzzle.pizza-cipher", "kind": "puzzle_asset", "x": 270, "y": 300, "width": 228, "height": 240, "required": true},
+        {"id": "brain_bender", "component_id": "puzzle.brain-bender", "kind": "puzzle_asset", "x": 516, "y": 300, "width": 254, "height": 240, "required": true},
+        {"id": "puzzle_desk", "component_id": "utility-widget.puzzle-desk", "kind": "component", "x": 22, "y": 78, "width": 360, "height": 200, "required": true},
+        {"id": "seagullotine", "component_id": "seagullotine.editorial-panel", "kind": "component", "x": 400, "y": 78, "width": 370, "height": 200, "required": true},
+        {"id": "page_8_footer", "component_id": "page-furniture.page-number", "kind": "footer", "x": 22, "y": 22, "width": 748, "height": 30, "required": true}
+      ]
+    },
+    {
+      "page": 9,
+      "role": "department_back_page",
+      "zones": [
+        {"id": "page_9_issue_banner", "component_id": "page-furniture.issue-banner", "kind": "page_furniture", "x": 22, "y": 1151, "width": 748, "height": 51, "required": true},
+        {"id": "ad", "component_id": "advertisement.tonys-pizza", "kind": "component", "x": 22, "y": 842, "width": 476, "height": 280, "required": true},
+        {"id": "sewer_cap", "component_id": "collectible.sewer-cap", "kind": "component", "x": 510, "y": 842, "width": 260, "height": 280, "required": true},
+        {"id": "page_9_puzzle_desk", "component_id": "utility-widget.puzzle-desk", "kind": "component", "x": 22, "y": 566, "width": 476, "height": 258, "required": true},
+        {"id": "page_9_seagullotine", "component_id": "seagullotine.editorial-panel", "kind": "component", "x": 22, "y": 78, "width": 476, "height": 470, "required": true},
+        {"id": "page_9_furniture", "component_id": "page-furniture.editors-note", "kind": "page_furniture", "x": 510, "y": 300, "width": 260, "height": 524, "required": false},
+        {"id": "page_9_footer", "component_id": "page-furniture.page-number", "kind": "footer", "x": 22, "y": 22, "width": 748, "height": 30, "required": true}
+      ]
+    }
+  ]
+}
