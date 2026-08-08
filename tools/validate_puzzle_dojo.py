@@ -109,3 +109,4 @@ if __name__ == "__main__":
     except (OSError, ValueError, ET.ParseError, json.JSONDecodeError) as error:
         print(f"Puzzle Dojo validation failed: {error}", file=sys.stderr)
         raise SystemExit(1)
+
