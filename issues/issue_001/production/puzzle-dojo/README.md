@@ -4,7 +4,7 @@ This directory contains the production-linked Pages 8-9 SVG and its compositor s
 
 ## Final page architecture
 
-Page 8 is the solving workbench. A Today's Training strip turns the permanent Big Four into a completion ritual, followed by the approved Crossword and clues, Sudoku, Pizza Cipher, Neighborhood Search, Puzzle Tip, and Seagullotine quote. Page 9 is the department back page: approved advertisement art, Sewer Cap #001, Puzzle Bench, Cipher Corner, Seagullotine art, two mini advertisements, a labeled Portland memory fragment, and the Last Issue Solutions module.
+Page 8 is the solving workbench. It holds the approved Crossword and clues, Sudoku, Pizza Cipher, and Neighborhood Search, followed by a Puzzle Tip and Seagullotine quote. Page 9 is the department back page: approved advertisement art, Sewer Cap #001, Puzzle Bench, Cipher Corner, Seagullotine art, two mini advertisements, a labeled Portland memory fragment, and the Last Issue Solutions module.
 
 The permanent Big Four are **Crossword, Neighborhood Search, Pizza Cipher, and Sudoku**. The Issue #1 Neighborhood Search is a canonical 15x15 grid for “Welcome to Portland Beneath Portland”; its JSON records every straight-line placement and the marked-cell hidden message `FOUNDYOURWAY`. Brain Bender remains preserved as a reusable bonus puzzle outside the Issue #1 production composition.
 
