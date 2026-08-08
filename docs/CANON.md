@@ -12,7 +12,7 @@ This register summarizes immutable project truths. The detailed World Bible and 
 4. **Quality Shop is owned by the Shamos family.** It is a neighborhood institution known for outstanding Italian sandwiches.
 5. **Puzzle integrity is inviolable.** Approved puzzle templates, clues, grids, rules, solutions, and live data must remain internally consistent and may not be changed incidentally during layout or world-building work.
 6. **Published issue snapshots are immutable.** Corrections are appended transparently rather than silently rewriting the record.
-7. **The motto is “For Those Who Found Their Way.”**
+7. **The motto is “We’re all looking for a place to land.”**
 8. **The newsroom is anonymous.** The standing credit is `Published by Nobody / Contributors Everybody / Approved by Myrtle`.
 9. **Reader-facing issues follow Sliding Time.** The paper publishes biweekly, but no visible calendar year or date appears on an issue.
 10. **The primary audience is Portland's underground community.** Aboveground readers discover copies organically; the paper does not reposition itself for them.
@@ -32,3 +32,4 @@ This register summarizes immutable project truths. The detailed World Bible and 
 - Special Editions are rare and earned. Each includes exactly one exclusive Artifact tied to the event or milestone.
 - Almanac seasons use an alphabetical concept, but no complete set of 26 season names is canon until publication earns it.
 - Community contributions and the Underground Press Club give neighbors a route into the paper without making the newsroom publicly attributable.
+

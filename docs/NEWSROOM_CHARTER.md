@@ -37,7 +37,7 @@ The authoritative setting reference is `world/WORLD_BIBLE.md`.
 
 ## Identity and attribution
 
-The motto is **For Those Who Found Their Way.** The newsroom does not publish a staff roster or conventional bylines. Its standing attribution is:
+The motto is **We’re all looking for a place to land.** The newsroom does not publish a staff roster or conventional bylines. Its standing attribution is:
 
 > Published by Nobody / Contributors Everybody / Approved by Myrtle
 
@@ -48,3 +48,4 @@ This anonymity protects the collective voice without erasing community contribut
 The house style evokes a 1991 offset-printed newspaper: warm newsprint, oxblood alerts, sewer-green utility fields, mustard accents, condensed display type, editorial serif copy, strong rules, subtle ink bleed, and restrained registration drift.
 
 The approved Issue #1 front page is the Gold Standard for every department. Before approval, ask: **Would this page feel like it came off the same press as the approved front page?** If not, revise it.
+

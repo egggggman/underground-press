@@ -73,7 +73,7 @@ The neighborhood is the protagonist. Extraordinary events matter chiefly through
 
 - **Seagullotine** is a recurring neighborhood voice and editorial personality.
 - **Cassiopeia** sincerely believes her repurposed garbage is better than everyone else's garbage. The conviction, not knowing irony, is the core running gag.
-- **Alice** is a harmless, bored fruit-fly eavesdropper and gossip source.
+- **Alice** is a harmless, bored black fly eavesdropper and gossip source.
 - **Myrtle** is the neighborhood hissy cat. Her ink mark is the paper's official authentication stamp.
 
 ## Permanent business canon
@@ -121,3 +121,4 @@ See `businesses/FLAGSHIP_BUSINESSES.md` for the canonical entries and `docs/BUSI
 World consistency does not replace visual quality. The approved Issue #1 front page remains the Gold Standard. Every future page must answer yes to:
 
 > **Would this page feel like it came off the same press as the approved front page?**
+
