@@ -8,26 +8,41 @@
   <text x="20" y="83" font-family="Arial,sans-serif" font-size="11" fill="#222">Find the places, people, businesses, and landmarks</text>
   <text x="20" y="98" font-family="Arial,sans-serif" font-size="11" fill="#222">that make our neighborhood feel like home.</text>
   <rect x="18" y="112" width="304" height="304" fill="#fffaf0" stroke="#254b3c" stroke-width="2"/>
-  <g font-family="Courier New,monospace" font-size="15" font-weight="700" text-anchor="middle" fill="#1d1d1d">
-    <text x="28" y="132">F</text><text x="48" y="132">O</text><text x="68" y="132">U</text><text x="88" y="132">N</text><text x="108" y="132">D</text><text x="128" y="132">Y</text><text x="148" y="132">O</text><text x="168" y="132">U</text><text x="188" y="132">R</text><text x="208" y="132">A</text><text x="228" y="132">S</text><text x="248" y="132">W</text><text x="268" y="132">T</text><text x="288" y="132">A</text><text x="308" y="132">L</text>
-    <text x="28" y="152">Y</text><text x="48" y="152">K</text><text x="68" y="152">B</text><text x="88" y="152">I</text><text x="108" y="152">H</text><text x="128" y="152">T</text><text x="148" y="152">R</text><text x="168" y="152">X</text><text x="188" y="152">L</text><text x="208" y="152">D</text><text x="228" y="152">E</text><text x="248" y="152">M</text><text x="268" y="152">U</text><text x="288" y="152">E</text><text x="308" y="152">U</text>
-    <text x="28" y="172">P</text><text x="48" y="172">Q</text><text x="68" y="172">E</text><text x="88" y="172">A</text><text x="108" y="172">E</text><text x="128" y="172">L</text><text x="148" y="172">P</text><text x="168" y="172">I</text><text x="188" y="172">Z</text><text x="208" y="172">Z</text><text x="228" y="172">A</text><text x="248" y="172">U</text><text x="268" y="172">N</text><text x="288" y="172">W</text><text x="308" y="172">X</text>
-    <text x="28" y="192">V</text><text x="48" y="192">A</text><text x="68" y="192">S</text><text x="88" y="192">H</text><text x="108" y="192">I</text><text x="128" y="192">Y</text><text x="148" y="192">C</text><text x="168" y="192">O</text><text x="188" y="192">I</text><text x="208" y="192">S</text><text x="228" y="192">G</text><text x="248" y="192">N</text><text x="268" y="192">O</text><text x="288" y="192">A</text><text x="308" y="192">J</text>
-    <text x="28" y="212">M</text><text x="48" y="212">Q</text><text x="68" y="212">U</text><text x="88" y="212">N</text><text x="108" y="212">D</text><text x="128" y="212">E</text><text x="148" y="212">R</text><text x="168" y="212">G</text><text x="188" y="212">R</text><text x="208" y="212">O</text><text x="228" y="212">U</text><text x="248" y="212">N</text><text x="268" y="212">D</text><text x="288" y="212">K</text><text x="308" y="212">E</text>
-    <text x="28" y="232">J</text><text x="48" y="232">B</text><text x="68" y="232">O</text><text x="88" y="232">S</text><text x="108" y="232">L</text><text x="128" y="232">Q</text><text x="148" y="232">P</text><text x="168" y="232">R</text><text x="188" y="232">F</text><text x="208" y="232">T</text><text x="228" y="232">L</text><text x="248" y="232">X</text><text x="268" y="232">I</text><text x="288" y="232">T</text><text x="308" y="232">B</text>
-    <text x="28" y="252">G</text><text x="48" y="252">J</text><text x="68" y="252">H</text><text x="88" y="252">B</text><text x="108" y="252">H</text><text x="128" y="252">Q</text><text x="148" y="252">L</text><text x="168" y="252">O</text><text x="188" y="252">E</text><text x="208" y="252">V</text><text x="228" y="252">L</text><text x="248" y="252">J</text><text x="268" y="252">L</text><text x="288" y="252">Q</text><text x="308" y="252">E</text>
-    <text x="28" y="272">E</text><text x="48" y="272">L</text><text x="68" y="272">T</text><text x="88" y="272">R</text><text x="108" y="272">Y</text><text x="128" y="272">M</text><text x="148" y="272">D</text><text x="168" y="272">B</text><text x="188" y="272">I</text><text x="208" y="272">F</text><text x="228" y="272">E</text><text x="248" y="272">A</text><text x="268" y="272">H</text><text x="288" y="272">Z</text><text x="308" y="272">I</text>
-    <text x="28" y="292">F</text><text x="48" y="292">R</text><text x="68" y="292">H</text><text x="88" y="292">C</text><text x="108" y="292">I</text><text x="128" y="292">Y</text><text x="148" y="292">C</text><text x="168" y="292">R</text><text x="188" y="292">U</text><text x="208" y="292">S</text><text x="228" y="292">T</text><text x="248" y="292">G</text><text x="268" y="292">N</text><text x="288" y="292">R</text><text x="308" y="292">H</text>
-    <text x="28" y="312">G</text><text x="48" y="312">J</text><text x="68" y="312">G</text><text x="88" y="312">E</text><text x="108" y="312">Q</text><text x="128" y="312">D</text><text x="148" y="312">O</text><text x="168" y="312">A</text><text x="188" y="312">L</text><text x="208" y="312">B</text><text x="228" y="312">S</text><text x="248" y="312">A</text><text x="268" y="312">E</text><text x="288" y="312">D</text><text x="308" y="312">V</text>
-    <text x="28" y="332">Y</text><text x="48" y="332">T</text><text x="68" y="332">I</text><text x="88" y="332">L</text><text x="108" y="332">A</text><text x="128" y="332">U</text><text x="148" y="332">Q</text><text x="168" y="332">H</text><text x="188" y="332">L</text><text x="208" y="332">R</text><text x="228" y="332">C</text><text x="248" y="332">A</text><text x="268" y="332">W</text><text x="288" y="332">P</text><text x="308" y="332">C</text>
-    <text x="28" y="352">F</text><text x="48" y="352">K</text><text x="68" y="352">L</text><text x="88" y="352">K</text><text x="108" y="352">P</text><text x="128" y="352">R</text><text x="148" y="352">T</text><text x="168" y="352">E</text><text x="188" y="352">E</text><text x="208" y="352">F</text><text x="228" y="352">F</text><text x="248" y="352">O</text><text x="268" y="352">C</text><text x="288" y="352">R</text><text x="308" y="352">L</text>
-    <text x="28" y="372">K</text><text x="48" y="372">F</text><text x="68" y="372">P</text><text x="88" y="372">F</text><text x="108" y="372">G</text><text x="128" y="372">G</text><text x="148" y="372">S</text><text x="168" y="372">O</text><text x="188" y="372">W</text><text x="208" y="372">T</text><text x="228" y="372">M</text><text x="248" y="372">S</text><text x="268" y="372">H</text><text x="288" y="372">K</text><text x="308" y="372">E</text>
-    <text x="28" y="392">I</text><text x="48" y="392">U</text><text x="68" y="392">D</text><text x="88" y="392">U</text><text x="108" y="392">I</text><text x="128" y="392">C</text><text x="148" y="392">V</text><text x="168" y="392">Q</text><text x="188" y="392">T</text><text x="208" y="392">K</text><text x="228" y="392">M</text><text x="248" y="392">L</text><text x="268" y="392">D</text><text x="288" y="392">B</text><text x="308" y="392">C</text>
-    <text x="28" y="412">N</text><text x="48" y="412">L</text><text x="68" y="412">G</text><text x="88" y="412">S</text><text x="108" y="412">J</text><text x="128" y="412">B</text><text x="148" y="412">I</text><text x="168" y="412">W</text><text x="188" y="412">C</text><text x="208" y="412">B</text><text x="228" y="412">M</text><text x="248" y="412">P</text><text x="268" y="412">H</text><text x="288" y="412">J</text><text x="308" y="412">W</text>
+  <g font-family="Courier New,monospace" font-size="15" font-weight="700" fill="#1d1d1d">
+    <text x="22" y="132">I T L F L T C R P A S U T R L</text>
+    <text x="22" y="152">E K B I H T R X L O E M U E U</text>
+    <text x="22" y="172">P U E A E L P I Z Z A U N W X</text>
+    <text x="22" y="192">V A S H I Y C O I S G N O A J</text>
+    <text x="22" y="212">M Q U N D E R G R O U N D N E</text>
+    <text x="22" y="232">J D O S L Q P R F T L X I T B</text>
+    <text x="22" y="252">G J H B H Q L O E Y L J L Q E</text>
+    <text x="22" y="272">E L T R Y M D B I F E A H Z I</text>
+    <text x="22" y="292">O R H C I Y C R U S T G N R H</text>
+    <text x="22" y="312">G J G E Q D U A L B S A E D V</text>
+    <text x="22" y="332">Y T I L A U Q H L R C A W P R</text>
+    <text x="22" y="352">F K L K P R W E E F F O C R L</text>
+    <text x="22" y="372">K F P F G G S O W T M S H K E</text>
+    <text x="22" y="392">I U D U I C V Q T K M L D A C</text>
+    <text x="22" y="412">N L G S J Y I W C B M P H J W</text>
   </g>
-  <g fill="#7a2933"><circle cx="28" cy="136" r="2"/><circle cx="48" cy="136" r="2"/><circle cx="68" cy="136" r="2"/><circle cx="88" cy="136" r="2"/><circle cx="108" cy="136" r="2"/><circle cx="128" cy="136" r="2"/><circle cx="148" cy="136" r="2"/><circle cx="168" cy="136" r="2"/><circle cx="188" cy="136" r="2"/><circle cx="248" cy="136" r="2"/><circle cx="288" cy="136" r="2"/><circle cx="28" cy="156" r="2"/></g>
+  <g fill="#7a2933"><circle cx="88" cy="136" r="2"/><circle cx="208" cy="156" r="2"/><circle cx="48" cy="176" r="2"/><circle cx="288" cy="216" r="2"/><circle cx="48" cy="236" r="2"/><circle cx="208" cy="256" r="2"/><circle cx="28" cy="296" r="2"/><circle cx="148" cy="316" r="2"/><circle cx="308" cy="336" r="2"/><circle cx="148" cy="356" r="2"/><circle cx="288" cy="396" r="2"/><circle cx="128" cy="416" r="2"/></g>
   <g font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#254b3c">
-    <text x="340" y="132">PORTLAND</text><text x="340" y="152">UNDERGROUND</text><text x="340" y="172">HARBOR</text><text x="340" y="192">FERRY</text><text x="340" y="212">FOG</text><text x="340" y="232">QUALITY</text><text x="340" y="252">CRUST</text><text x="340" y="272">DONUT</text><text x="340" y="292">PIZZA</text><text x="340" y="312">COFFEE</text><text x="340" y="332">MYRTLE</text><text x="340" y="352">ALICE</text><text x="340" y="372">CASSIOPEIA</text><text x="340" y="392">SEAGULL</text><text x="340" y="412">LIGHTHOUSE</text><text x="340" y="432">TUNNEL</text>
+    <text x="340" y="132">PORTLAND</text>
+    <text x="340" y="152">UNDERGROUND</text>
+    <text x="340" y="172">HARBOR</text>
+    <text x="340" y="192">FERRY</text>
+    <text x="340" y="212">FOG</text>
+    <text x="340" y="232">QUALITY</text>
+    <text x="340" y="252">CRUST</text>
+    <text x="340" y="272">DONUT</text>
+    <text x="340" y="292">PIZZA</text>
+    <text x="340" y="312">COFFEE</text>
+    <text x="340" y="332">MYRTLE</text>
+    <text x="340" y="352">ALICE</text>
+    <text x="340" y="372">CASSIOPEIA</text>
+    <text x="340" y="392">SEAGULL</text>
+    <text x="340" y="412">LIGHTHOUSE</text>
+    <text x="340" y="432">TUNNEL</text>
   </g>
   <text x="20" y="443" font-family="Arial,sans-serif" font-size="10" fill="#222">Words may run horizontally, vertically, diagonally, and backward.</text>
   <text x="20" y="460" font-family="Arial,sans-serif" font-size="10" font-style="italic" fill="#7a2933">Then read marked cells left to right, top to bottom.</text>

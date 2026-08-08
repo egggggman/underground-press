@@ -20,7 +20,7 @@ LOCKED = {
     "crossword-clues.svg": "1a6a3db6d9d171033dd86747ab96222c844e565d0fe048aae85d3f0407b7de51",
     "sudoku.svg": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375",
     "pizza-cipher.svg": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1",
-    "neighborhood-search.svg": "802ff9433453aad57e77496e464f52f0e81f2282df2e308db9b65b9f44a6c836",
+    "neighborhood-search.svg": "b4df5405d5e5a2073da47f006db212840f36c53e6f206cb01da0795f261c8c35",
 }
 
 NEIGHBORHOOD_SEARCH = ASSETS / "neighborhood-search.json"
@@ -80,6 +80,9 @@ def main() -> int:
     hidden = "".join(grid[row - 1][col - 1] for row, col in search["hidden_message"]["cells"])
     if hidden != search["hidden_message"]["answer"] or hidden != "FOUNDYOURWAY":
         fail(f"hidden message mismatch: {hidden}")
+    hidden_rows = {row for row, _ in search["hidden_message"]["cells"]}
+    if len(hidden_rows) < 8:
+        fail("hidden message cells are too clustered to remain hidden")
     for filename, expected in LOCKED.items():
         actual = digest(ASSETS / filename)
         if actual != expected:

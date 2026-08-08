@@ -4,9 +4,9 @@
   "theme": "Welcome to Portland Beneath Portland",
   "intro": "Find the places, people, businesses, and landmarks that make our neighborhood feel like home.",
   "grid": [
-    "FOUNDYOURASWTAL", "YKBIHTRXLDEMUEU", "PQEAELPIZZAUNWX", "VASHIYCOISGNOAJ", "MQUNDERGROUNDKE",
-    "JBOSLQPRFTLXITB", "GJHBHQLOEVLJLQE", "ELTRYMDBIFEAHZI", "FRHCIYCRUSTGNRH", "GJGEQDOALBSAEDV",
-    "YTILAUQHLRCAWPC", "FKLKPRTEEFFOCRL", "KFPFGGSOWTMSHKE", "IUDUICVQTKMLDBC", "NLGSJBIWCBMPHJW"
+    "ITLFLTCRPASUTRL", "EKBIHTRXLOEMUEU", "PUEAELPIZZAUNWX", "VASHIYCOISGNOAJ", "MQUNDERGROUNDNE",
+    "JDOSLQPRFTLXITB", "GJHBHQLOEYLJLQE", "ELTRYMDBIFEAHZI", "ORHCIYCRUSTGNRH", "GJGEQDUALBSAEDV",
+    "YTILAUQHLRCAWPR", "FKLKPRWEEFFOCRL", "KFPFGGSOWTMSHKE", "IUDUICVQTKMLDAC", "NLGSJYIWCBMPHJW"
   ],
   "placements": [
     {"word": "PORTLAND", "row": 3, "col": 7, "dr": 1, "dc": 1},
@@ -29,6 +29,6 @@
   "hidden_message": {
     "answer": "FOUNDYOURWAY",
     "instruction": "After finding every word, read the marked cells from left to right, top to bottom.",
-    "cells": [[1,1],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,12],[1,14],[2,1]]
+    "cells": [[1,4],[2,10],[3,2],[5,14],[6,2],[7,10],[9,1],[10,7],[11,15],[12,7],[14,14],[15,6]]
   }
 }
