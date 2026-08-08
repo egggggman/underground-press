@@ -18,6 +18,8 @@ generated/
 exports/
 temp-exports/
 tmp-exports/
+output/
+tmp/
 issues/**/exports/
 issues/**/generated/
 *.generated.pdf
