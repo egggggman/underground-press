@@ -6,6 +6,21 @@ City Beat turns local reporting into a page neighbors can use quickly and rememb
 
 Apply it beneath the project's controlling references: `docs/STYLE_BIBLE.md`, `docs/EDITORIAL_PHILOSOPHY.md`, `docs/NEWSROOM_CHARTER.md`, `docs/CANON.md`, `world/WORLD_BIBLE.md`, and `world/VOICE.md`. The approved Issue #1 front page remains the visual Gold Standard.
 
+## Fictional-world service reporting
+
+City Beat behaves like a real local-news desk inside the fictional world. Under
+Sliding Time, editors may select an issue season without a real calendar date.
+Composite anonymous neighborhood sources and invented in-universe operational
+details are permitted, including weather, access conditions, events, schedules,
+locations, and accessibility notes.
+
+Real Portland detail may ground the fiction, but invented operations must not
+masquerade as verified real-world public information. Sources have limited
+knowledge: they may disagree, hedge, speculate, and remember differently.
+Attribution, rumor, uncertainty, and neighborhood perspective remain mandatory.
+Fictional reporting does not become durable canon merely by appearing in a
+draft or service listing.
+
 ## Layout philosophy
 
 Build the page like a neighborhood desk assembled from reliable reporting and handled paper. The result may feel found, repaired, reused, improved, and loved, but never accidental.
