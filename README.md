@@ -1,5 +1,16 @@
 # The Underground Press
 
+## Repository validation
+
+Run `python tools/validate_repo.py` before production handoff. It performs the
+repository's JSON, SVG/XML, editorial inventory, generator-drift, Puzzle Dojo
+layout/source-integrity, placeholder, canon terminology, reference, and local
+hygiene checks in one deterministic pass.
+
+Committed files under `content/*/inventory.json` are the publication source of
+truth. `tools/build_editorial_inventory.py` is the reproducible generator: it
+checks for drift by default and writes only when invoked with `--write`.
+
 The Underground Press is a reusable **1991 mutant-subway tabloid publishing system**: a newsroom-in-a-box for producing recurring issues with a consistent editorial voice, visual language, advertisements, puzzles, characters, and production workflow.
 
 It preserves the handmade energy of an underground newspaper while making every issue easier to assemble, revise, archive, and reproduce.

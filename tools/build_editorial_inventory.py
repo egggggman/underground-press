@@ -1,5 +1,8 @@
-import json
+import argparse
+import difflib
 from pathlib import Path
+
+from inventory_contract import serialized_inventory
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -10,9 +13,20 @@ def item(id_, type_, category, season, district, business, callback, **copy):
         "canon_impact": "none", "callback": callback, "status": "approved-inventory", **copy,
     }
 
-def write(name, rows):
+def write(name, rows, *, check=False):
     path = ROOT / "content" / name / "inventory.json"
-    path.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    generated = serialized_inventory(rows)
+    if check:
+        current = path.read_text(encoding="utf-8") if path.exists() else ""
+        if current != generated:
+            diff = "".join(difflib.unified_diff(
+                current.splitlines(keepends=True), generated.splitlines(keepends=True),
+                fromfile=str(path), tofile="generated",
+            ))
+            raise ValueError(f"generated inventory drift: {path}\n{diff}")
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(generated, encoding="utf-8")
 
 classified_specs = [
  ("marketplace", "evergreen", "Pair of iron bookends, heavy enough to discourage even the most ambitious shelf. Scratched, sound, five dollars.", "Ask for June at the corner bulletin board."),
@@ -162,5 +176,26 @@ editorial_specs = [
 ]
 editorials=[item(f"EDT-{i:03}","editorial",c,"evergreen",None,None,False,headline=h,body=b,byline="The Editorial Board" if c=="newsroom" else "The Seagullotine",opinion_label="OPINION",editorial_note="Institutional or signed opinion; verify issue context before publication.") for i,(h,c,b) in enumerate(editorial_specs,1)]
 
-for name, rows in [("classifieds",classifieds),("advertisements",ads),("letters",letters),("corrections",corrections),("community_calendar",calendar),("weather",weather),("polls",polls),("transit_watch",transit),("business_spotlights",spotlights),("editorials",editorials)]:
-    write(name, rows)
+INVENTORIES = [("classifieds",classifieds),("advertisements",ads),("letters",letters),("corrections",corrections),("community_calendar",calendar),("weather",weather),("polls",polls),("transit_watch",transit),("business_spotlights",spotlights),("editorials",editorials)]
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description="Build deterministic editorial inventory JSON.")
+    parser.add_argument(
+        "--write", action="store_true",
+        help="replace committed inventories (default: check for generator drift)",
+    )
+    args = parser.parse_args(argv)
+    for name, rows in INVENTORIES:
+        write(name, rows, check=not args.write)
+    action = "wrote" if args.write else "verified"
+    print(f"Editorial inventory generator {action} {len(INVENTORIES)} collections.")
+    return 0
+
+
+if __name__ == "__main__":
+    try:
+        raise SystemExit(main())
+    except (OSError, UnicodeError, ValueError) as error:
+        print(f"Editorial inventory generation failed: {error}")
+        raise SystemExit(1)
