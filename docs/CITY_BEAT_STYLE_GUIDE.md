@@ -100,7 +100,7 @@ The tone is observant, plainspoken, scrappy, affectionate, and alert to the stra
 
 ## Visual identity and motto
 
-City Beat belongs to a publication made for neighbors above and below the city. The motto, *For Those Who Found Their Way.*, should appear as stable publication furniture—not a headline gimmick—and should reinforce welcome, belonging, and discovery.
+City Beat belongs to a publication made for neighbors above and below the city. The motto, *We’re all looking for a place to land.*, should appear as stable publication furniture—not a headline gimmick—and should reinforce welcome, belonging, and discovery.
 
 Before approval, ask:
 
@@ -123,4 +123,5 @@ Both answers must be yes.
 - Test hierarchy at thumbnail size and readability at final print size.
 - Confirm collage objects have an editorial job and obscure nothing essential.
 - Confirm any Living Masthead detail follows the 5% and immutability rules.
-- Confirm *For Those Who Found Their Way.* is exact and legible.
+- Confirm *We’re all looking for a place to land.* is exact and legible.
+

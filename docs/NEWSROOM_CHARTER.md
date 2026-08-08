@@ -6,6 +6,8 @@ The Underground Press is a neighborhood newspaper documenting life beneath Portl
 
 Its production system preserves handmade newspaper energy while making recurring issues consistent and reproducible.
 
+The paper publishes biweekly for Portland's underground community. Copies may be found organically aboveground, but the newsroom writes first for the neighbors below. Reader-facing issues use Sliding Time and show no calendar year or date.
+
 ## Editorial principles
 
 1. Lead with a clear primary story.
@@ -14,6 +16,8 @@ Its production system preserves handmade newspaper energy while making recurring
 4. Use empty space intentionally with ads, notes, corrections, classifieds, stamps, doodles, or short items.
 5. Keep reporting readable even when the design feels worn, imperfect, or improvised.
 6. Treat neighborhood life and continuity as the heart of the paper.
+7. Apply the Local Angle Rule: cover what extraordinary events do to neighborhood life rather than chasing spectacle.
+8. Let community members contribute and participate through the Underground Press Club while preserving newsroom anonymity.
 
 ## Production principles
 
@@ -31,8 +35,17 @@ Real Portland flavor is encouraged, but the setting is an alternate Portland ins
 
 The authoritative setting reference is `world/WORLD_BIBLE.md`.
 
+## Identity and attribution
+
+The motto is **We’re all looking for a place to land.** The newsroom does not publish a staff roster or conventional bylines. Its standing attribution is:
+
+> Published by Nobody / Contributors Everybody / Approved by Myrtle
+
+This anonymity protects the collective voice without erasing community contributions.
+
 ## Visual character
 
 The house style evokes a 1991 offset-printed newspaper: warm newsprint, oxblood alerts, sewer-green utility fields, mustard accents, condensed display type, editorial serif copy, strong rules, subtle ink bleed, and restrained registration drift.
 
 The approved Issue #1 front page is the Gold Standard for every department. Before approval, ask: **Would this page feel like it came off the same press as the approved front page?** If not, revise it.
+
