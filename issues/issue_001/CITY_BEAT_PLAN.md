@@ -6,6 +6,22 @@
 
 **Motto:** *We’re all looking for a place to land.*
 
+## Issue 001 reporting authority
+
+Issue 001 is a fog-season edition under Sliding Time; no real calendar date is
+required. City Beat reports as a local-news desk inside the fictional world.
+Composite anonymous neighborhood sources are permitted, and issue-specific
+weather, access conditions, events, schedules, locations, and accessibility
+notes may be created as in-universe reporting.
+
+Real Portland geography, history, culture, infrastructure, and flavor may
+ground the fiction, but invented operational details must never masquerade as
+verified real-world public information. Copy and production notes must make the
+fictional-world frame clear. Sources retain limited knowledge and may disagree,
+hedge, speculate, or remember differently. Existing standards for attribution,
+rumor, uncertainty, and neighborhood perspective remain controlling; this
+authority does not permit omniscient reporting or silently create durable canon.
+
 ## Editorial objective
 
 Make City Beat the useful, observant center of Issue #1: a page where neighbors above and below Portland can understand what changed, what may slow them down, where to gather, and which small details deserve remembering. Reporting should be plainspoken, locally textured, and alert to strangeness without turning residents into scenery.
