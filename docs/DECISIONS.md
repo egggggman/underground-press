@@ -1,5 +1,13 @@
 # Production Decisions
 
+## D-008: Issue 001 art direction approved
+
+The Page 2 fog lead study establishes the approved Issue 001 art direction:
+dominant gritty halftone editorial art, warm handled newsprint, oxblood and
+sewer-green press furniture, reported found objects, and dense neighborhood-desk
+assembly. The direction is approved while its final physical treatment remains
+in refinement; the clean preliminary Pages 2–3 proofs are not art-approved.
+
 ## D-007: Issue 001 uses fictional-world service reporting
 
 Issue 001 City Beat operates as a local-news desk inside the fictional world.

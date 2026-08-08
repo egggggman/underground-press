@@ -1,7 +1,12 @@
 # Issue 001 Art Style Lock — Candidate
 
-**Status:** Editor review; not locked until the representative Page 2 lead study
-is approved.
+**Status:** Direction approved; physical-treatment lock proof in progress.
+
+The editor approved the representative Page 2 study as the correct feel and
+foundational art direction. The study itself is not the final finish standard:
+distressed display ink, press wear, spot illustration, found-object layering,
+and physical density must be strengthened before the treatment is locked for
+systematic application.
 
 The approved Page One benchmark—not the cleaner preliminary Pages 2–3
 proofs—defines the physical art language for Issue 001.
@@ -37,4 +42,3 @@ halftone and press integration.
 Approve the Page 2 lead-package study before applying this candidate to complete
 Pages 2–3. Approval locks the rules above; requested changes revise this
 candidate before wider production.
-
