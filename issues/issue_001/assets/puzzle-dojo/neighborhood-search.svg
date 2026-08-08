@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 508 480" role="img" aria-labelledby="title desc">
+  <title id="title">Neighborhood Search</title>
+  <desc id="desc">A 15 by 15 word search themed Welcome to Portland Beneath Portland.</desc>
+  <rect width="508" height="480" rx="10" fill="#f3ead5"/>
+  <rect x="8" y="8" width="492" height="464" rx="7" fill="none" stroke="#254b3c" stroke-width="4"/>
+  <text x="20" y="38" font-family="Georgia,serif" font-size="27" font-weight="700" fill="#254b3c">Neighborhood Search</text>
+  <text x="20" y="62" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#7a2933">WELCOME TO PORTLAND BENEATH PORTLAND</text>
+  <text x="20" y="83" font-family="Arial,sans-serif" font-size="11" fill="#222">Find the places, people, businesses, and landmarks</text>
+  <text x="20" y="98" font-family="Arial,sans-serif" font-size="11" fill="#222">that make our neighborhood feel like home.</text>
+  <rect x="18" y="112" width="304" height="304" fill="#fffaf0" stroke="#254b3c" stroke-width="2"/>
+  <g font-family="Courier New,monospace" font-size="15" font-weight="700" fill="#1d1d1d">
+    <text x="22" y="132">I T L F L T C R P A S U T R L</text>
+    <text x="22" y="152">E K B I H T R X L O E M U E U</text>
+    <text x="22" y="172">P U E A E L P I Z Z A U N W X</text>
+    <text x="22" y="192">V A S H I Y C O I S G N O A J</text>
+    <text x="22" y="212">M Q U N D E R G R O U N D N E</text>
+    <text x="22" y="232">J D O S L Q P R F T L X I T B</text>
+    <text x="22" y="252">G J H B H Q L O E Y L J L Q E</text>
+    <text x="22" y="272">E L T R Y M D B I F E A H Z I</text>
+    <text x="22" y="292">O R H C I Y C R U S T G N R H</text>
+    <text x="22" y="312">G J G E Q D U A L B S A E D V</text>
+    <text x="22" y="332">Y T I L A U Q H L R C A W P R</text>
+    <text x="22" y="352">F K L K P R W E E F F O C R L</text>
+    <text x="22" y="372">K F P F G G S O W T M S H K E</text>
+    <text x="22" y="392">I U D U I C V Q T K M L D A C</text>
+    <text x="22" y="412">N L G S J Y I W C B M P H J W</text>
+  </g>
+  <g fill="#7a2933"><circle cx="88" cy="136" r="2"/><circle cx="208" cy="156" r="2"/><circle cx="48" cy="176" r="2"/><circle cx="288" cy="216" r="2"/><circle cx="48" cy="236" r="2"/><circle cx="208" cy="256" r="2"/><circle cx="28" cy="296" r="2"/><circle cx="148" cy="316" r="2"/><circle cx="308" cy="336" r="2"/><circle cx="148" cy="356" r="2"/><circle cx="288" cy="396" r="2"/><circle cx="128" cy="416" r="2"/></g>
+  <g font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#254b3c">
+    <text x="340" y="132">PORTLAND</text>
+    <text x="340" y="152">UNDERGROUND</text>
+    <text x="340" y="172">HARBOR</text>
+    <text x="340" y="192">FERRY</text>
+    <text x="340" y="212">FOG</text>
+    <text x="340" y="232">QUALITY</text>
+    <text x="340" y="252">CRUST</text>
+    <text x="340" y="272">DONUT</text>
+    <text x="340" y="292">PIZZA</text>
+    <text x="340" y="312">COFFEE</text>
+    <text x="340" y="332">MYRTLE</text>
+    <text x="340" y="352">ALICE</text>
+    <text x="340" y="372">CASSIOPEIA</text>
+    <text x="340" y="392">SEAGULL</text>
+    <text x="340" y="412">LIGHTHOUSE</text>
+    <text x="340" y="432">TUNNEL</text>
+  </g>
+  <text x="20" y="443" font-family="Arial,sans-serif" font-size="10" fill="#222">Words may run horizontally, vertically, diagonally, and backward.</text>
+  <text x="20" y="460" font-family="Arial,sans-serif" font-size="10" font-style="italic" fill="#7a2933">Then read marked cells left to right, top to bottom.</text>
+</svg>
+

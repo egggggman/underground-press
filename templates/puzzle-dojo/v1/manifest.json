@@ -1,0 +1,33 @@
+{
+  "template_id": "puzzle-dojo.master",
+  "name": "Puzzle Dojo Master Template",
+  "version": "1.0.0",
+  "status": "production",
+  "page_size": {"name": "11x17 portrait", "width_pt": 792, "height_pt": 1224, "page_count": 2},
+  "master": "puzzle_dojo_master.svg",
+  "layout_contract": "layout_contract.json",
+  "compositor": "compose.py",
+  "dependencies": {
+    "python": ">=3.10 (standard library only)",
+    "component_library": ">=1.0",
+    "design_tokens": "../../../design-system/tokens/design_tokens.json"
+  },
+  "component_ids": [
+    "puzzle.crossword", "puzzle.crossword-clues", "puzzle.sudoku",
+    "puzzle.pizza-cipher", "puzzle.neighborhood-search", "puzzle.brain-bender",
+    "advertisement.crust-bucket", "collectible.sewer-cap",
+    "puzzle-dojo.puzzle-tip", "puzzle-dojo.seagullotine-quote",
+    "puzzle-dojo.puzzle-bench", "puzzle-dojo.cipher-corner",
+    "puzzle-dojo.mini-ads", "puzzle-dojo.portland-memory",
+    "puzzle-dojo.last-issue-solutions", "seagullotine.editorial-panel",
+    "page-furniture.issue-banner", "page-furniture.editors-note",
+    "page-furniture.page-number"
+  ],
+  "content_policy": {
+    "master_contains_puzzle_data": false,
+    "assets_are_linked_not_embedded": true,
+    "assets_are_never_rewritten": true,
+    "generated_proofs_are_tracked": false,
+    "tracked_reference": "examples/issue_001_debug.svg"
+  }
+}

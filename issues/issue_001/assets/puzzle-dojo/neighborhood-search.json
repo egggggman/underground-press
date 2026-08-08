@@ -1,0 +1,35 @@
+{
+  "size": 15,
+  "title": "Neighborhood Search",
+  "theme": "Welcome to Portland Beneath Portland",
+  "intro": "Find the places, people, businesses, and landmarks that make our neighborhood feel like home.",
+  "grid": [
+    "ITLFLTCRPASUTRL", "EKBIHTRXLOEMUEU", "PUEAELPIZZAUNWX", "VASHIYCOISGNOAJ", "MQUNDERGROUNDNE",
+    "JDOSLQPRFTLXITB", "GJHBHQLOEYLJLQE", "ELTRYMDBIFEAHZI", "ORHCIYCRUSTGNRH", "GJGEQDUALBSAEDV",
+    "YTILAUQHLRCAWPR", "FKLKPRWEEFFOCRL", "KFPFGGSOWTMSHKE", "IUDUICVQTKMLDAC", "NLGSJYIWCBMPHJW"
+  ],
+  "placements": [
+    {"word": "PORTLAND", "row": 3, "col": 7, "dr": 1, "dc": 1},
+    {"word": "UNDERGROUND", "row": 5, "col": 3, "dr": 0, "dc": 1},
+    {"word": "HARBOR", "row": 11, "col": 8, "dr": -1, "dc": 0},
+    {"word": "FERRY", "row": 8, "col": 10, "dr": -1, "dc": -1},
+    {"word": "FOG", "row": 6, "col": 9, "dr": -1, "dc": 1},
+    {"word": "QUALITY", "row": 11, "col": 7, "dr": 0, "dc": -1},
+    {"word": "CRUST", "row": 9, "col": 7, "dr": 0, "dc": 1},
+    {"word": "DONUT", "row": 5, "col": 13, "dr": -1, "dc": 0},
+    {"word": "PIZZA", "row": 3, "col": 7, "dr": 0, "dc": 1},
+    {"word": "COFFEE", "row": 12, "col": 13, "dr": 0, "dc": -1},
+    {"word": "MYRTLE", "row": 8, "col": 6, "dr": 0, "dc": -1},
+    {"word": "ALICE", "row": 1, "col": 10, "dr": 1, "dc": -1},
+    {"word": "CASSIOPEIA", "row": 12, "col": 13, "dr": -1, "dc": -1},
+    {"word": "SEAGULL", "row": 1, "col": 11, "dr": 1, "dc": 0},
+    {"word": "LIGHTHOUSE", "row": 12, "col": 3, "dr": -1, "dc": 0},
+    {"word": "TUNNEL", "row": 6, "col": 10, "dr": -1, "dc": 1}
+  ],
+  "hidden_message": {
+    "answer": "FOUNDYOURWAY",
+    "instruction": "After finding every word, read the marked cells from left to right, top to bottom.",
+    "cells": [[1,4],[2,10],[3,2],[5,14],[6,2],[7,10],[9,1],[10,7],[11,15],[12,7],[14,14],[15,6]]
+  }
+}
+

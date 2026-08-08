@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 476 280" role="img" aria-labelledby="title desc">
+  <title id="title">The Crust Bucket advertisement</title>
+  <desc id="desc">Illustrated local pizza advertisement for the Portland publication.</desc>
+  <defs>
+    <pattern id="dots" width="7" height="7" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#17130f" opacity=".16"/></pattern>
+  </defs>
+  <rect x="2" y="2" width="472" height="276" fill="#ead8ad" stroke="#17130f" stroke-width="4"/>
+  <rect x="12" y="12" width="452" height="256" fill="url(#dots)" stroke="#8c2118" stroke-width="3" stroke-dasharray="9 5"/>
+  <path d="M20 22h436v54H20z" fill="#8c2118"/>
+  <text x="238" y="61" text-anchor="middle" font-family="Impact,Arial Narrow,sans-serif" font-size="39" letter-spacing="1" fill="#f4e8c6">THE CRUST BUCKET</text>
+  <g transform="translate(40 94) rotate(-5 85 70)">
+    <path d="M18 24L158 12 105 145z" fill="#d7a428" stroke="#17130f" stroke-width="5"/>
+    <path d="M18 24q68-28 140-12" fill="none" stroke="#8c2118" stroke-width="17"/>
+    <circle cx="65" cy="52" r="10" fill="#8c2118"/><circle cx="106" cy="43" r="10" fill="#8c2118"/><circle cx="91" cy="84" r="9" fill="#173f32"/>
+    <path d="M56 98q29 21 58-2" fill="none" stroke="#17130f" stroke-width="4"/>
+  </g>
+  <text x="206" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#173f32">HOT PIE. LOCAL GOSSIP.</text>
+  <text x="206" y="141" font-family="Georgia,serif" font-size="17" fill="#17130f">Rotating coupons. No fixed clock.</text>
+  <text x="206" y="166" font-family="Georgia,serif" font-size="17" fill="#17130f">Ask what came out of the oven.</text>
+  <rect x="202" y="190" width="236" height="49" fill="#173f32" stroke="#17130f" stroke-width="2"/>
+  <text x="320" y="213" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#f4e8c6">PORTLAND BENEATH PORTLAND</text>
+  <text x="320" y="230" text-anchor="middle" font-family="Courier New,monospace" font-size="10" fill="#f4e8c6">ADVERTISEMENT • CLIP &amp; PASS IT ON</text>
+  <circle cx="439" cy="246" r="13" fill="none" stroke="#8c2118" stroke-width="4" opacity=".7"/>
+</svg>

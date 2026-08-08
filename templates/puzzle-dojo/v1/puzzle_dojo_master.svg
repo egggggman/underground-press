@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11in" height="34in" viewBox="0 0 792 2448" role="img" aria-labelledby="title desc">
+  <title id="title">Puzzle Dojo Master Template v1.0</title>
+  <desc id="desc">Empty editable two-page department shell. All labeled rectangles are externally populated drop zones.</desc>
+  <style>
+    .page{fill:#EDE0B3;stroke:#171812;stroke-width:1}.safe{fill:none;stroke:#8C2118;stroke-width:.75;stroke-dasharray:5 4}
+    .zone{fill:#D9C99B;fill-opacity:.26;stroke:#143F2C;stroke-width:1.25;stroke-dasharray:8 5}.furniture{fill:#8C2118;fill-opacity:.12}
+    .label{font:700 10px Arial,sans-serif;fill:#143F2C;letter-spacing:.5px}.meta{font:7px Arial,sans-serif;fill:#171812}
+  </style>
+  <g id="page-8" data-page="8" data-role="puzzle_workbench">
+    <rect class="page" width="792" height="1224"/>
+    <rect class="safe" x="18" y="18" width="756" height="1188"/>
+    <g id="page_8_issue_banner"><rect class="zone furniture" x="22" y="22" width="748" height="51"/><text class="label" x="32" y="51">PAGE FURNITURE / ISSUE BANNER</text></g>
+    <g id="crossword"><rect class="zone" x="22" y="85" width="450" height="368"/><text class="label" x="32" y="107">CROSSWORD</text></g>
+    <g id="clues"><rect class="zone" x="22" y="465" width="748" height="278"/><text class="label" x="32" y="487">CROSSWORD CLUES</text></g>
+    <g id="sudoku"><rect class="zone" x="22" y="755" width="230" height="230"/><text class="label" x="32" y="777">SUDOKU</text></g>
+    <g id="pizza_cipher"><rect class="zone" x="270" y="755" width="228" height="100"/><text class="label" x="280" y="777">PIZZA CIPHER</text></g>
+    <g id="neighborhood_search"><rect class="zone" x="516" y="755" width="254" height="230"/><text class="label" x="526" y="777">NEIGHBORHOOD SEARCH</text></g>
+    <g id="puzzle_tip"><rect class="zone" x="22" y="1001" width="360" height="145"/><text class="label" x="32" y="1023">PUZZLE TIP</text></g>
+    <g id="seagullotine"><rect class="zone" x="400" y="1001" width="370" height="145"/><text class="label" x="410" y="1023">SEAGULLOTINE</text></g>
+    <g id="page_8_footer"><rect class="zone furniture" x="22" y="1172" width="748" height="30"/><text class="label" x="32" y="1192">FOOTER / PAGE 8</text></g>
+  </g>
+  <g id="page-9" data-page="9" data-role="department_back_page" transform="translate(0 1224)">
+    <rect class="page" width="792" height="1224"/>
+    <rect class="safe" x="18" y="18" width="756" height="1188"/>
+    <g id="page_9_issue_banner"><rect class="zone furniture" x="22" y="22" width="748" height="51"/><text class="label" x="32" y="51">PAGE FURNITURE / ISSUE BANNER</text></g>
+    <g id="ad"><rect class="zone" x="22" y="102" width="476" height="280"/><text class="label" x="32" y="124">ADVERTISEMENT</text></g>
+    <g id="sewer_cap"><rect class="zone" x="510" y="102" width="260" height="280"/><text class="label" x="520" y="124">SEWER CAP</text></g>
+    <g id="page_9_puzzle_desk"><rect class="zone" x="22" y="400" width="476" height="258"/><text class="label" x="32" y="422">PUZZLE DESK</text></g>
+    <g id="page_9_seagullotine"><rect class="zone" x="22" y="676" width="476" height="470"/><text class="label" x="32" y="698">SEAGULLOTINE</text></g>
+    <g id="page_9_furniture"><rect class="zone furniture" x="510" y="400" width="260" height="524"/><text class="label" x="520" y="422">OPTIONAL PAGE FURNITURE</text></g>
+    <g id="page_9_footer"><rect class="zone furniture" x="22" y="1172" width="748" height="30"/><text class="label" x="32" y="1192">FOOTER / PAGE 9</text></g>
+  </g>
+</svg>
