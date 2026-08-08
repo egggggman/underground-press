@@ -21,7 +21,7 @@
 
 ## Components and editorial review
 
-- [ ] Tony's Pizza, Sewer Cap, Puzzle Desk, and Seagullotine resolve to manifest component IDs.
+- [ ] The Crust Bucket, Portland Sewer Cap, Puzzle Desk, and Seagullotine resolve to manifest component IDs.
 - [ ] Issue banner, footer, page numbers, issue date, and department name are correct.
 - [ ] Page 9 optional furniture has an editorial purpose or is deliberately left empty.
 - [ ] Spot colors and type follow `design-system/tokens/design_tokens.json`.

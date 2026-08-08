@@ -14,8 +14,8 @@
   },
   "component_ids": [
     "puzzle.crossword", "puzzle.crossword-clues", "puzzle.sudoku",
-    "puzzle.pizza-cipher", "puzzle.brain-bender",
-    "advertisement.tonys-pizza", "collectible.sewer-cap",
+    "puzzle.pizza-cipher", "puzzle.neighborhood-search", "puzzle.brain-bender",
+    "advertisement.crust-bucket", "collectible.sewer-cap",
     "puzzle-dojo.puzzle-tip", "puzzle-dojo.seagullotine-quote",
     "puzzle-dojo.puzzle-bench", "puzzle-dojo.cipher-corner",
     "puzzle-dojo.mini-ads", "puzzle-dojo.portland-memory",

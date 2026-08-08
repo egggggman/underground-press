@@ -6,12 +6,12 @@
   "missing_required": [],
   "assets": {
     "ad": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/tonys-pizza-issue-001.png",
-      "sha256": "ad3153499e15f575218911eff9092c3887cfaf333c68c9d0afefbd8a4b3265d5"
+      "path": "issues/issue_001/assets/puzzle-dojo/art/crust-bucket-issue-001.svg",
+      "sha256": "a7967f624c0e98760da4941cdbfc25b1bd26278a20cf4c3c0b8579135918ea5c"
     },
     "cipher_corner": {
       "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
-      "sha256": "9c6592bfae45026575282e6db47a86db4b51d67f1ee6e9fcedd895355fd3d34e"
+      "sha256": "ad0753e4c5bd7502316ada573e9f4221a81281c23e33374f1f39f2f100dc2009"
     },
     "clues": {
       "path": "issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
@@ -31,11 +31,11 @@
     },
     "mini_ads": {
       "path": "design-system/components/puzzle-dojo/mini_ads.svg",
-      "sha256": "ece54e8738e3a0d526eb01817fc1af6eccae5c94b8d4aca263c1adc39083409b"
+      "sha256": "f83e9a9163f0d86ac89f64ccbda5ecbbec54bef34931c9e0d9a4a6f6cb70d58e"
     },
     "neighborhood_search": {
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
-      "sha256": "b4df5405d5e5a2073da47f006db212840f36c53e6f206cb01da0795f261c8c35"
+      "sha256": "608b80cf0a1ee043c97b627657b48a450640b04540f145e2a3cd50d1a784696d"
     },
     "page_8_footer": {
       "path": "issues/issue_001/assets/puzzle-dojo/art/footer-page-8.svg",
@@ -74,8 +74,8 @@
       "sha256": "af71b6a5a8b23d6bdad6d7cb2a9a254b3639fc8d4c2ac9881e504f08f8c25efd"
     },
     "sewer_cap": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/sewer-cap-001.png",
-      "sha256": "653a7376d50eeb08cf25c4b755102bde87d1d27c4bfe7c96903303866574f9cc"
+      "path": "issues/issue_001/assets/puzzle-dojo/art/sewer-cap-portland-001.svg",
+      "sha256": "e126806650667a207c43dcd5b5ba88c78b6a81669bd0f235dd96e8f7f73394d2"
     },
     "sudoku": {
       "path": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
