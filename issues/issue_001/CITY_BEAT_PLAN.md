@@ -4,7 +4,7 @@
 
 **Department:** City Beat
 
-**Motto:** *For Those Who Found Their Way.*
+**Motto:** *We’re all looking for a place to land.*
 
 ## Editorial objective
 
@@ -21,7 +21,7 @@ The approved City Beat production template is preserved. This plan assigns edito
 3. **Utility rail:** Weather and Transit Watch, placed for fast scanning. These modules supply immediate neighbor value.
 4. **Community rail:** Community Calendar and Neighborhood Notes. Together they provide the secondary story and a welcoming route into the city.
 5. **Discovery pocket:** one small found item, margin note, or reported detail that rewards close reading without carrying essential facts.
-6. **Footer furniture:** issue marker, department slug, continuation directions if needed, and the motto, *For Those Who Found Their Way.*
+6. **Footer furniture:** issue marker, department slug, continuation directions if needed, and the motto, *We’re all looking for a place to land.*
 
 Reading order must remain obvious at arm's length: lead story, urgent utility, community entries, then discovery. No collage layer may interrupt that path.
 
@@ -127,7 +127,7 @@ Target total: approximately 1,150–1,500 words. Cut duplicate atmosphere and we
 - [ ] Use found-object collage with editorial purpose and restraint.
 - [ ] Confirm hierarchy at thumbnail size and body readability at final print size.
 - [ ] Keep the Living Masthead logo, typography, color, placement, and composition unchanged.
-- [ ] Include *For Those Who Found Their Way.* exactly as written.
+- [ ] Include *We’re all looking for a place to land.* exactly as written.
 
 ### Preflight
 
@@ -151,5 +151,6 @@ City Beat is accepted when:
 6. Reporting respects the Style Bible, Editorial Philosophy, Portland canon, Sliding Time, and the distinction between history, memory, rumor, legend, opinion, and advertising.
 7. Visual hierarchy remains readable; collage details deepen story and place without obscuring facts.
 8. The Living Masthead retains its immutable identity and any approved living detail stays subtle and subordinate.
-9. The tone is useful, curious, scrappy, affectionate, and alert to weirdness, and the motto appears exactly as *For Those Who Found Their Way.*
+9. The tone is useful, curious, scrappy, affectionate, and alert to weirdness, and the motto appears exactly as *We’re all looking for a place to land.*
 10. Markdown validation and `git diff --check` pass with no errors.
+
