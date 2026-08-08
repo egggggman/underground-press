@@ -10,13 +10,13 @@
     <rect class="page" width="792" height="1224"/>
     <rect class="safe" x="18" y="18" width="756" height="1188"/>
     <g id="page_8_issue_banner"><rect class="zone furniture" x="22" y="22" width="748" height="51"/><text class="label" x="32" y="51">PAGE FURNITURE / ISSUE BANNER</text></g>
-    <g id="crossword"><rect class="zone" x="22" y="94" width="450" height="560"/><text class="label" x="32" y="116">CROSSWORD</text></g>
-    <g id="clues"><rect class="zone" x="490" y="94" width="280" height="560"/><text class="label" x="500" y="116">CROSSWORD CLUES</text></g>
-    <g id="sudoku"><rect class="zone" x="22" y="684" width="230" height="240"/><text class="label" x="32" y="706">SUDOKU</text></g>
-    <g id="pizza_cipher"><rect class="zone" x="270" y="684" width="228" height="240"/><text class="label" x="280" y="706">PIZZA CIPHER</text></g>
-    <g id="brain_bender"><rect class="zone" x="516" y="684" width="254" height="240"/><text class="label" x="526" y="706">BRAIN BENDER</text></g>
-    <g id="puzzle_desk"><rect class="zone" x="22" y="946" width="360" height="200"/><text class="label" x="32" y="968">PUZZLE DESK</text></g>
-    <g id="seagullotine"><rect class="zone" x="400" y="946" width="370" height="200"/><text class="label" x="410" y="968">SEAGULLOTINE</text></g>
+    <g id="crossword"><rect class="zone" x="22" y="85" width="450" height="368"/><text class="label" x="32" y="107">CROSSWORD</text></g>
+    <g id="clues"><rect class="zone" x="22" y="465" width="748" height="278"/><text class="label" x="32" y="487">CROSSWORD CLUES</text></g>
+    <g id="sudoku"><rect class="zone" x="22" y="755" width="230" height="230"/><text class="label" x="32" y="777">SUDOKU</text></g>
+    <g id="pizza_cipher"><rect class="zone" x="270" y="755" width="228" height="100"/><text class="label" x="280" y="777">PIZZA CIPHER</text></g>
+    <g id="neighborhood_search"><rect class="zone" x="516" y="755" width="254" height="230"/><text class="label" x="526" y="777">NEIGHBORHOOD SEARCH</text></g>
+    <g id="puzzle_tip"><rect class="zone" x="22" y="1001" width="360" height="145"/><text class="label" x="32" y="1023">PUZZLE TIP</text></g>
+    <g id="seagullotine"><rect class="zone" x="400" y="1001" width="370" height="145"/><text class="label" x="410" y="1023">SEAGULLOTINE</text></g>
     <g id="page_8_footer"><rect class="zone furniture" x="22" y="1172" width="748" height="30"/><text class="label" x="32" y="1192">FOOTER / PAGE 8</text></g>
   </g>
   <g id="page-9" data-page="9" data-role="department_back_page" transform="translate(0 1224)">

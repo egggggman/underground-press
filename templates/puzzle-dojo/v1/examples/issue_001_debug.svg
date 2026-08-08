@@ -7,19 +7,19 @@
   <g id="page-8-debug" transform="translate(0 66) scale(.5)">
     <rect class="page" x="18" y="0" width="756" height="1152"/>
     <rect class="zone utility" x="22" y="22" width="748" height="51"/><text class="t" x="32" y="52">ISSUE BANNER</text>
-    <rect class="zone" x="22" y="94" width="450" height="560"/><text class="t" x="32" y="116">CROSSWORD</text>
-    <rect class="zone" x="490" y="94" width="280" height="560"/><text class="t" x="500" y="116">CLUES</text>
-    <rect class="zone" x="22" y="684" width="230" height="240"/><text class="t" x="32" y="706">SUDOKU</text>
-    <rect class="zone" x="270" y="684" width="228" height="240"/><text class="t" x="280" y="706">PIZZA CIPHER</text>
-    <rect class="zone" x="516" y="684" width="254" height="240"/><text class="t" x="526" y="706">BRAIN BENDER</text>
-    <rect class="zone" x="22" y="946" width="360" height="200"/><text class="t" x="32" y="968">PUZZLE DESK</text>
-    <rect class="zone" x="400" y="946" width="370" height="200"/><text class="t" x="410" y="968">SEAGULLOTINE</text>
+    <rect class="zone" x="22" y="85" width="450" height="368"/><text class="t" x="32" y="107">CROSSWORD</text>
+    <rect class="zone" x="22" y="465" width="748" height="278"/><text class="t" x="32" y="487">CLUES</text>
+    <rect class="zone" x="22" y="755" width="230" height="230"/><text class="t" x="32" y="777">SUDOKU</text>
+    <rect class="zone" x="270" y="755" width="228" height="100"/><text class="t" x="280" y="777">PIZZA CIPHER</text>
+    <rect class="zone" x="516" y="755" width="254" height="230"/><text class="t" x="526" y="777">NEIGHBORHOOD SEARCH</text>
+    <rect class="zone" x="22" y="1001" width="360" height="145"/><text class="t" x="32" y="1023">PUZZLE TIP</text>
+    <rect class="zone" x="400" y="1001" width="370" height="145"/><text class="t" x="410" y="1023">SEAGULLOTINE</text>
   </g>
   <g id="page-9-debug" transform="translate(396 66) scale(.5)">
     <rect class="page" x="18" y="0" width="756" height="1152"/>
     <rect class="zone utility" x="22" y="22" width="748" height="51"/><text class="t" x="32" y="52">ISSUE BANNER</text>
-    <rect class="zone" x="22" y="102" width="476" height="280"/><text class="t" x="32" y="124">TONY'S PIZZA AD</text>
-    <rect class="zone" x="510" y="102" width="260" height="280"/><text class="t" x="520" y="124">SEWER CAP</text>
+    <rect class="zone" x="22" y="102" width="476" height="280"/><text class="t" x="32" y="124">CRUST BUCKET AD</text>
+    <rect class="zone" x="510" y="102" width="260" height="280"/><text class="t" x="520" y="124">PORTLAND SEWER CAP</text>
     <rect class="zone" x="22" y="400" width="476" height="258"/><text class="t" x="32" y="422">PUZZLE DESK</text>
     <rect class="zone utility" x="510" y="400" width="260" height="524"/><text class="t" x="520" y="422">PAGE FURNITURE</text>
     <rect class="zone" x="22" y="676" width="476" height="470"/><text class="t" x="32" y="698">SEAGULLOTINE</text>
