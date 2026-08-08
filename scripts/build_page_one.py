@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import html
+import random
 import textwrap
 from pathlib import Path
 
@@ -13,7 +14,7 @@ from reportlab.lib.utils import ImageReader
 from reportlab.pdfgen import canvas
 
 ROOT = Path(__file__).resolve().parents[1]
-PHOTO = ROOT / "issues/issue_001/assets/page-one/art/waterfront-night-watch.png"
+PHOTO = ROOT / "issues/issue_001/assets/page-one/art/waterfront-night-watch-halftone-v2.png"
 MASTER = ROOT / "issues/issue_001/production/page-one/issue_001_page_one.svg"
 PROOF = ROOT / "output/pdf/issue_001_page_one_proof.pdf"
 W, H = 792, 1224
@@ -50,9 +51,10 @@ def build_svg() -> None:
     for x,y,w,title,big,small in utilities:
         parts += [f'<rect x="{x}" y="{y}" width="{w}" height="88" fill="none" stroke="{INK}" stroke-width="1.5"/>',f'<rect x="{x}" y="{y}" width="{w}" height="24" fill="{INK}"/>',svg_text(x+8,y+17,title,12,"Impact,'Arial Narrow',sans-serif","bold","#fff8df"),svg_text(x+w/2,y+55,big,16,"Impact,'Arial Narrow',sans-serif","bold",RED,"middle"),svg_text(x+w/2,y+75,small,8,"Arial,sans-serif","bold",INK,"middle")]
     parts += [f'<rect x="608" y="190" width="170" height="176" fill="none" stroke="{INK}" stroke-width="2" stroke-dasharray="5 3"/>', svg_text(693,213,"THE CRUST BUCKET",14,"Impact,'Arial Narrow',sans-serif","bold",GREEN,"middle"), svg_text(693,239,"MIDNIGHT SLICE",20,"Impact,'Arial Narrow',sans-serif","bold",RED,"middle"), svg_text(693,260,"CLIP THIS BOX",10,"Arial,sans-serif","bold",INK,"middle"), svg_text(693,288,"2 SLICES + SODA",13,"Georgia,serif","bold",INK,"middle"), svg_text(693,309,"ROTATING ISSUE OFFER",9,"Arial,sans-serif","bold",INK,"middle"), svg_text(693,340,"PORTLAND BENEATH PORTLAND",8,"Arial,sans-serif","bold",GREEN,"middle")]
+    parts += [f'<path d="M655 325 L691 286 Q716 302 728 327 Z" fill="{MUSTARD}" stroke="{INK}" stroke-width="2"/>', f'<path d="M691 286 Q714 294 728 308" fill="none" stroke="{RED}" stroke-width="8"/>', f'<circle cx="688" cy="312" r="4" fill="{RED}"/><circle cx="708" cy="318" r="4" fill="{RED}"/>']
     # lead package
     parts += [svg_text(16,334,"CRIME CLIMBS AS",50,"Impact,'Arial Narrow',sans-serif","bold"), svg_text(16,385,"BLACK-CLAD CREWS MOVE BELOW",42,"Impact,'Arial Narrow',sans-serif","bold"), svg_text(18,411,"Neighbors describe coordinated movement. The 'Foot Clan' name remains rumor, not newsroom-confirmed fact.",15,"Georgia,serif","bold")]
-    parts += [f'<image x="165" y="430" width="438" height="343" preserveAspectRatio="xMidYMid slice" href="../../assets/page-one/art/waterfront-night-watch.png" filter="url(#photo)"/>', f'<rect x="165" y="430" width="438" height="343" fill="none" stroke="{INK}" stroke-width="2"/>']
+    parts += [f'<image x="165" y="430" width="438" height="343" preserveAspectRatio="xMidYMid slice" href="../../assets/page-one/art/waterfront-night-watch-halftone-v2.png" filter="url(#photo)"/>', f'<rect x="165" y="430" width="438" height="343" fill="none" stroke="{INK}" stroke-width="2"/>']
     lead1="Calls logged across three below-street corridors have risen over the last two publication cycles, with residents describing thefts, damaged locks, and coordinated black-clad movement after midnight. No public source has identified a single group behind the incidents."
     lead2="Several neighbors used the name 'Foot Clan.' The Underground Press has not confirmed that claim. What is confirmed: shopkeepers are closing in pairs, delivery routes are changing, and ordinary errands now take a little more planning."
     parts += [svg_text(16,439,"THE LOCAL ANGLE",12,"Impact,'Arial Narrow',sans-serif","bold",RED), svg_lines(16,457,137,lead1,9,11), svg_lines(16,610,137,lead2,9,11), svg_text(16,752,"CONTINUED, PAGE 3",8,"Arial,sans-serif","bold",GREEN)]
@@ -83,6 +85,17 @@ def build_pdf() -> None:
     PROOF.parent.mkdir(parents=True, exist_ok=True)
     c=canvas.Canvas(str(PROOF), pagesize=(W,H), pageCompression=1)
     c.setFillColor(HexColor(PAPER)); c.rect(0,0,W,H,fill=1,stroke=0)
+    # Deterministic newsprint tooth and ink scuffs: visible, but never over copy.
+    rng = random.Random(1991)
+    c.saveState(); c.setFillAlpha(.10); c.setFillColor(HexColor("#6f5d37"))
+    for _ in range(950):
+        radius = rng.choice((.25, .35, .5, .7))
+        c.circle(rng.uniform(8, W-8), rng.uniform(8, H-8), radius, fill=1, stroke=0)
+    c.setStrokeAlpha(.08); c.setStrokeColor(HexColor(INK)); c.setLineWidth(.35)
+    for _ in range(45):
+        y = rng.uniform(10, H-10); x = rng.uniform(10, W-80)
+        c.line(x, y, x+rng.uniform(18, 70), y+rng.uniform(-.6, .6))
+    c.restoreState()
     c.setFillColor(HexColor(RED)); c.rect(14,H-37,764,27,fill=1,stroke=0)
     pdf_text(c,24,31,"FIRST EDITION!",16,"Helvetica-Bold","#fff8df"); pdf_text(c,280,31,"PORTLAND'S MOST INDEPENDENT NEWSPAPER",14,"Helvetica-Bold","#fff8df"); pdf_text(c,730,31,"50c",17,"Helvetica-Bold","#fff8df")
     pdf_text(c,24,105,"The",31,"Times-Bold"); pdf_text(c,102,122,"UNDERGROUND PRESS",55,"Helvetica-Bold"); pdf_text(c,255,151,"WE'RE ALL LOOKING FOR A PLACE TO LAND.",12,"Helvetica-Bold")
@@ -91,6 +104,9 @@ def build_pdf() -> None:
     for x,w,title,big in [(14,150,"HARBOR WEATHER","FOG / LIGHT RAIN"),(170,240,"NEIGHBORHOOD WATCH","3 REPORTS OVERNIGHT"),(416,184,"PRESS STATUS","FIRST RUN")]:
         c.rect(x,H-278,w,88,fill=0,stroke=1); c.setFillColor(HexColor(INK)); c.rect(x,H-214,w,24,fill=1,stroke=0); pdf_text(c,x+8,207,title,11,"Helvetica-Bold","#fff8df"); pdf_text(c,x+12,247,big,13,"Helvetica-Bold",RED)
     c.rect(608,H-366,170,176,fill=0,stroke=1); pdf_text(c,625,215,"THE CRUST BUCKET",12,"Helvetica-Bold",GREEN); pdf_text(c,626,243,"MIDNIGHT SLICE",17,"Helvetica-Bold",RED); pdf_text(c,635,286,"2 SLICES + SODA",11,"Times-Bold")
+    c.setFillColor(HexColor(MUSTARD)); c.setStrokeColor(HexColor(INK)); c.setLineWidth(2)
+    p=c.beginPath(); p.moveTo(654,H-340); p.lineTo(690,H-292); p.curveTo(708,H-300,722,H-310,730,H-327); p.close(); c.drawPath(p,fill=1,stroke=1)
+    c.setFillColor(HexColor(RED)); c.circle(688,H-316,4,fill=1,stroke=0); c.circle(708,H-323,4,fill=1,stroke=0)
     pdf_text(c,16,334,"CRIME CLIMBS AS",44,"Helvetica-Bold"); pdf_text(c,16,383,"BLACK-CLAD CREWS MOVE BELOW",29,"Helvetica-Bold"); pdf_text(c,18,409,"Neighbors describe coordinated movement. The 'Foot Clan' name remains rumor, not confirmed fact.",12,"Times-Bold")
     c.drawImage(ImageReader(str(PHOTO)),165,H-773,width=438,height=343,preserveAspectRatio=True,anchor='c',mask='auto')
     def para(x,top,w,text,size=8.5,leading=10.5,font="Times-Roman"):
