@@ -2,13 +2,34 @@
 
 ## Authority
 
-This document is the design constitution for The Underground Press. The approved Issue #1 front page is the official visual reference and the Gold Standard for every department.
+This document is the design constitution for The Underground Press. The exact, unmodified image at [`design-system/references/the-underground-press-golden-image.png`](../design-system/references/the-underground-press-golden-image.png) is the **GOLDEN IMAGE**: the visual North Star for the entire publication.
 
 Before approving any future page, ask:
 
-> **Would this page feel like it came off the same press as the approved front page?**
+> **Could this page have come off the same printing press as the GOLDEN IMAGE?**
 
 If the answer is no, revise the page. Do not lower the quality bar.
+
+The GOLDEN IMAGE governs visual language, not literal story or location canon. It is a reference, not a template to copy line for line. Preserve the source file byte-for-byte: do not alter, crop, recolor, recompress, regenerate, or otherwise modify it.
+
+### Visual language to inherit
+
+Every department and format—including Puzzle Dojo, City Beat, advertisements, classifieds, editorial, and Special Editions—must interpret the same visual DNA:
+
+- dense 1991 tabloid/newsprint composition that remains legible;
+- distressed warm paper and controlled halftone, ink wear, and print imperfection;
+- bold condensed headline hierarchy and vintage display typography;
+- black, oxblood, green, and mustard spot colors;
+- boxed modular sections, strong rules, and tightly packed page furniture;
+- photo-led reporting supported by captions, sidebars, and practical information modules;
+- illustrated local advertisements, stamps, seals, coupons, and other in-world details;
+- enough layered discovery that readers can keep finding details after the primary read.
+
+### Content details not to inherit
+
+New York, Manhattan, and subway-specific material in the GOLDEN IMAGE is **not** Portland canon and must not be copied literally. Its visible date, price, bylines, businesses, individual stories, and other textual details are also non-canonical reference content.
+
+The locked Portland, Maine world, anonymous newsroom, Sliding Time, current business canon, and motto **“We're all looking for a place to land.”** override every textual or factual detail visible in the image.
 
 ## Visual era
 
@@ -52,13 +73,25 @@ Recurring memories, traditions, inside jokes, and community stories should rewar
 
 A page is ready only when it:
 
-1. belongs visibly to the same publication as the approved Issue #1 front page;
+1. belongs visibly to the same publication as the GOLDEN IMAGE;
 2. uses hierarchy, typography, color, texture, and spacing intentionally;
 3. carries a primary story, a secondary story, and a discovery;
 4. feels rooted in 1991 without becoming illegible or costume-like;
 5. reflects the Portland world where appropriate;
 6. preserves approved content systems and live data;
 7. meets the existing quality bar rather than averaging down to unfinished pages.
+
+### GOLDEN IMAGE visual QA
+
+Compare every production proof directly against the GOLDEN IMAGE and confirm:
+
+- [ ] The proof reads as the same publication at first glance.
+- [ ] Headline hierarchy is bold, condensed, and unmistakable.
+- [ ] The page is densely modular and richly furnished without sacrificing legibility.
+- [ ] Warm distressed paper, spot colors, halftone, and ink wear feel printed rather than digitally polished.
+- [ ] Photography, illustrated local ads, practical modules, stamps/seals, and playful in-world details support the page where appropriate.
+- [ ] Portland canon, newsroom anonymity, Sliding Time, current businesses, and the locked motto prevail over all reference-image text.
+- [ ] No New York/Manhattan/subway-specific detail, visible date, price, byline, business, or story has been copied literally from the reference.
 
 ## Preservation rule
 
