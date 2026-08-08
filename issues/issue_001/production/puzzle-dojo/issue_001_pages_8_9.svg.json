@@ -79,6 +79,10 @@
     "sudoku": {
       "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\issues\\issue_001\\assets\\puzzle-dojo\\sudoku.svg",
       "sha256": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375"
+    },
+    "todays_training": {
+      "path": "C:\\Users\\ckytr\\Documents\\Codex\\2026-08-07\\referenced-chatgpt-conversation-this-is-an-4\\work\\underground-press\\design-system\\components\\puzzle-dojo\\todays_training.svg",
+      "sha256": "c0a5d3b0044a9833c8b0814f69355ce4f3a6fbbfa5d4bc1bea361b3d28b67bcc"
     }
   }
 }

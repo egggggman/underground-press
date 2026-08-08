@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 748 54" role="img" aria-labelledby="title desc">
+  <title id="title">Today's Training</title>
+  <desc id="desc">A completion strip for the Puzzle Dojo Big Four with a Found Your Way reward.</desc>
+  <rect x="1.5" y="1.5" width="745" height="51" rx="5" fill="#f3ead5" stroke="#173f34" stroke-width="3"/>
+  <rect x="8" y="8" width="132" height="38" rx="2" fill="#173f34"/>
+  <text x="74" y="24" fill="#f3ead5" font-family="Arial Narrow,Arial,sans-serif" font-size="14" font-weight="700" text-anchor="middle">TODAY'S</text>
+  <text x="74" y="40" fill="#f3ead5" font-family="Arial Narrow,Arial,sans-serif" font-size="16" font-weight="900" text-anchor="middle">TRAINING</text>
+  <g font-family="Arial Narrow,Arial,sans-serif" font-size="9" font-weight="700" fill="#173f34" text-anchor="middle">
+    <circle cx="174" cy="22" r="10" fill="none" stroke="#9f2d24" stroke-width="2" stroke-dasharray="2 1"/><text x="174" y="25">1</text><text x="174" y="43">CROSSWORD</text>
+    <path d="M190 22h14" stroke="#173f34" stroke-width="1.5"/><path d="M202 18l5 4-5 4" fill="none" stroke="#173f34" stroke-width="1.5"/>
+    <circle cx="226" cy="22" r="10" fill="none" stroke="#9f2d24" stroke-width="2" stroke-dasharray="2 1"/><text x="226" y="25">2</text><text x="226" y="43">SEARCH</text>
+    <path d="M242 22h14" stroke="#173f34" stroke-width="1.5"/><path d="M254 18l5 4-5 4" fill="none" stroke="#173f34" stroke-width="1.5"/>
+    <circle cx="278" cy="22" r="10" fill="none" stroke="#9f2d24" stroke-width="2" stroke-dasharray="2 1"/><text x="278" y="25">3</text><text x="278" y="43">CIPHER</text>
+    <path d="M294 22h14" stroke="#173f34" stroke-width="1.5"/><path d="M306 18l5 4-5 4" fill="none" stroke="#173f34" stroke-width="1.5"/>
+    <circle cx="330" cy="22" r="10" fill="none" stroke="#9f2d24" stroke-width="2" stroke-dasharray="2 1"/><text x="330" y="25">4</text><text x="330" y="43">SUDOKU</text>
+  </g>
+  <path d="M366 27c18-18 39-18 57 0s39 18 57 0" fill="none" stroke="#173f34" stroke-width="2" stroke-dasharray="4 3"/>
+  <path d="M480 27l-8-5v10z" fill="#173f34"/>
+  <g transform="translate(500 7)">
+    <path d="M19 1l17 12-6 20H8L2 13z" fill="none" stroke="#9f2d24" stroke-width="3"/>
+    <text x="50" y="15" fill="#9f2d24" font-family="Georgia,serif" font-size="10" font-weight="700">COMPLETE ALL FOUR</text>
+    <text x="50" y="32" fill="#173f34" font-family="Arial Narrow,Arial,sans-serif" font-size="17" font-weight="900">FOUND YOUR WAY</text>
+  </g>
+  <g transform="translate(700 8) rotate(-5 20 19)">
+    <ellipse cx="20" cy="19" rx="19" ry="17" fill="none" stroke="#9f2d24" stroke-width="2"/>
+    <text x="20" y="16" text-anchor="middle" fill="#9f2d24" font-family="Courier New,monospace" font-size="5" font-weight="700">APPROVED</text>
+    <text x="20" y="25" text-anchor="middle" fill="#9f2d24" font-family="Courier New,monospace" font-size="5.5" font-weight="700">BY MYRTLE</text>
+  </g>
+</svg>

@@ -4,6 +4,7 @@
   "sudoku": "sudoku.svg",
   "pizza_cipher": "pizza-cipher.svg",
   "neighborhood_search": "neighborhood-search.svg",
+  "todays_training": "../../../../design-system/components/puzzle-dojo/todays_training.svg",
   "ad": "art/tonys-pizza-issue-001.png",
   "sewer_cap": "art/sewer-cap-001.png",
   "puzzle_tip": "../../../../design-system/components/puzzle-dojo/puzzle_tip.svg",

@@ -13,6 +13,7 @@
 - [x] Every required contract zone is supplied.
 - [x] Crossword, clues, Sudoku, Pizza Cipher, and Neighborhood Search remain in reader-solving space.
 - [x] Puzzle Bench, Puzzle Tip, Cipher Corner, Seagullotine quote, Last Issue Solutions, collectible, ads, and Portland memory are present.
+- [x] Today's Training presents the permanent Big Four as a completion ritual without entering any solving area.
 - [x] Decorative additions are reusable SVG components where appropriate.
 - [x] Editorial modules do not overlap puzzle data zones.
 - [x] Page numbers and Issue #1 banners are present on both pages.
