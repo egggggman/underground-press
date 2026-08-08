@@ -98,6 +98,8 @@ def main(argv: list[str] | None = None) -> int:
         ("tools/build_editorial_inventory.py", ()),
         ("tools/validate_editorial_inventory.py", ()),
         ("tools/validate_puzzle_dojo.py", ()),
+        ("tools/validate_city_beat.py", ()),
+        ("tools/validate_page_three.py", ()),
     ]:
         try:
             run_python(root, command, *command_args)
