@@ -25,6 +25,8 @@ It is published from beneath Portland and covers the people, businesses, events,
 5. **Real Portland flavor is encouraged.**
 6. **The TMNT-inspired universe remains intact.**
 7. **The world is inspired by Portland, not constrained to perfectly replicate it.**
+8. **The TMNT world comes to Maine.** Portland stories grow from Maine's places, weather, infrastructure, culture, and neighborhood consequences; New York stories are not merely relocated.
+9. **Editorial geography follows the community.** Coverage may travel beyond Portland when relationships, consequences, or a natural story lead demand it.
 
 ## Creative boundary
 
@@ -44,6 +46,8 @@ The underground is an overlapping civic habitat rather than one continuous mappe
 
 Connections may be secret, unstable, repurposed, blocked, repaired, or known only to particular residents. Geography should serve story continuity without pretending to replicate real municipal infrastructure.
 
+Historic Portland-area forts may serve as plausible refuges, waypoints, or settings. Their use must not assert unsupported real tunnel connections between forts or between a fort and Portland's underground.
+
 ## Era and technology
 
 The visual and editorial present is rooted in 1991. Production choices, advertising rhythms, classifieds, community notices, and physical-media texture should support that era. The setting may bend reality in service of the TMNT-inspired universe, but it should not drift into generic contemporary digital culture without an explicit story reason.
@@ -62,6 +66,15 @@ The paper exists to celebrate:
 - continuity
 
 The tone is local, curious, scrappy, affectionate, and alert to weirdness.
+
+The neighborhood is the protagonist. Extraordinary events matter chiefly through their effects on neighbors, routines, businesses, routes, shared spaces, and collective memory.
+
+## Recurring personalities
+
+- **Seagullotine** is a recurring neighborhood voice and editorial personality.
+- **Cassiopeia** sincerely believes her repurposed garbage is better than everyone else's garbage. The conviction, not knowing irony, is the core running gag.
+- **Alice** is a harmless, bored black fly eavesdropper and gossip source.
+- **Myrtle** is the neighborhood hissy cat. Her ink mark is the paper's official authentication stamp.
 
 ## Permanent business canon
 
@@ -83,6 +96,7 @@ See `businesses/FLAGSHIP_BUSINESSES.md` for the canonical entries and `docs/BUSI
 5. Prefer evocative consistency over false real-world precision.
 6. A locked decision can be changed only by a later explicit locked decision.
 7. Published issue snapshots remain immutable.
+8. For non-foundational recurring features, canon follows publication: test the idea in an issue before locking it.
 
 ## Encyclopedia structure
 
@@ -107,3 +121,4 @@ See `businesses/FLAGSHIP_BUSINESSES.md` for the canonical entries and `docs/BUSI
 World consistency does not replace visual quality. The approved Issue #1 front page remains the Gold Standard. Every future page must answer yes to:
 
 > **Would this page feel like it came off the same press as the approved front page?**
+

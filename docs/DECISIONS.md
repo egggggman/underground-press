@@ -31,3 +31,19 @@ Font stacks are documented as tokens. Font binaries remain outside the repositor
 **Reason:** Portland provides a distinctive identity while preserving the TMNT-inspired underground setting.
 
 **Status:** **LOCKED**
+
+## D-008: Reader-facing time uses Sliding Time
+
+**Decision:** The Underground Press publishes on a biweekly cadence, while reader-facing issues display no calendar year or date. Continuity advances through publication order and story consequences rather than a visible dated calendar.
+
+**Reason:** Sliding Time preserves the rooted 1991 identity while allowing the neighborhood's ongoing story to breathe.
+
+**Status:** **LOCKED**
+
+## D-009: Canon follows publication
+
+**Decision:** Foundational rules may be locked editorially, but non-foundational recurring features earn canon through successful publication.
+
+**Reason:** Issue testing keeps promising ideas flexible until readers and editors have seen them function in the newspaper.
+
+**Status:** **LOCKED**
