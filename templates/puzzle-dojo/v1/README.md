@@ -10,7 +10,7 @@ Copy `assets.example.json`, replace its values with paths to approved SVG, PNG, 
 python templates/puzzle-dojo/v1/compose.py path/to/assets.json proofs/puzzle-dojo-proof.svg
 ```
 
-The asset map is resolved relative to the map file. The output links each source with `preserveAspectRatio="xMidYMid meet"`; it never crops, embeds, rewrites, or upscales the source. A JSON sidecar records each source path and SHA-256 hash. Composition fails if a required zone is missing, an unknown zone is supplied, or a source changes while the output is being built. Use `--allow-missing` only for layout debugging.
+The asset map is resolved relative to the map file. The output links each source with `preserveAspectRatio="xMidYMid meet"`; it never crops, embeds, rewrites, or upscales the source. A JSON sidecar records repository-relative source paths and SHA-256 hashes so the manifest is identical across machines. Composition fails if a required zone is missing, an unknown zone is supplied, or a source changes while the output is being built. Use `--allow-missing` only for layout debugging.
 
 Issue #1 production extends the master with reusable Puzzle Tip, Puzzle Bench, Cipher Corner, mini-ad, Portland memory, Seagullotine quote, and Last Issue Solutions components. These modules stay outside puzzle data and may be replaced issue by issue without changing the placement engine.
 

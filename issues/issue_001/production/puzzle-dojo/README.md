@@ -19,4 +19,4 @@ python templates/puzzle-dojo/v1/compose.py issues/issue_001/assets/puzzle-dojo/c
 python tools/validate_puzzle_dojo.py
 ```
 
-Generated output is deterministic apart from absolute paths recorded in the JSON sidecar. Review the SVG with all linked assets available at their repository-relative paths.
+Generated output and its sidecar are deterministic across repository locations. Review the SVG with all linked assets available at their repository-relative paths.

@@ -25,8 +25,25 @@ def sha256(path: Path) -> str:
 
 
 def load_json(path: Path) -> dict:
-    with path.open(encoding="utf-8") as stream:
-        return json.load(stream)
+    try:
+        with path.open(encoding="utf-8") as stream:
+            return json.load(stream)
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        raise ValueError(f"cannot read JSON {path}: {error}") from error
+
+
+def repository_root(path: Path) -> Path:
+    for parent in (path, *path.parents):
+        if (parent / ".git").exists():
+            return parent
+    raise ValueError(f"cannot locate repository root from {path}")
+
+
+def portable_path(path: Path, root: Path) -> str:
+    try:
+        return path.resolve().relative_to(root.resolve()).as_posix()
+    except ValueError as error:
+        raise ValueError(f"manifest path must remain inside repository: {path}") from error
 
 
 def zone_index(contract: dict) -> dict[str, tuple[int, dict]]:
@@ -40,6 +57,12 @@ def zone_index(contract: dict) -> dict[str, tuple[int, dict]]:
 
 
 def validate_contract(contract: dict) -> None:
+    if not isinstance(contract, dict):
+        raise ValueError("layout contract must be a JSON object")
+    if not isinstance(contract.get("coordinate_system"), dict):
+        raise ValueError("layout contract requires coordinate_system")
+    if not isinstance(contract.get("pages"), list) or not contract["pages"]:
+        raise ValueError("layout contract requires a non-empty pages array")
     coords = contract["coordinate_system"]
     width, height = coords["page_width"], coords["page_height"]
     if coords["origin"] != "bottom-left":
@@ -118,10 +141,12 @@ def compose(contract_path: Path, assets_path: Path, output: Path, allow_missing:
     if changed:
         output.unlink(missing_ok=True)
         raise RuntimeError(f"input assets changed during composition: {', '.join(changed)}")
+    root_path = repository_root(contract_path)
     report = {
         "template": contract["contract_id"], "version": contract["version"],
-        "output": str(output.resolve()), "missing_required": missing,
-        "assets": {zone_id: {"path": str(resolved[zone_id]), "sha256": before[zone_id]} for zone_id in sorted(resolved)}
+        "path_base": "repository-root",
+        "output": portable_path(output, root_path), "missing_required": missing,
+        "assets": {zone_id: {"path": portable_path(resolved[zone_id], root_path), "sha256": before[zone_id]} for zone_id in sorted(resolved)}
     }
     report_path = output.with_suffix(output.suffix + ".json")
     report_path.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
@@ -141,4 +166,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except (KeyError, TypeError, IndexError, OSError, RuntimeError, ValueError) as error:
+        print(f"Puzzle Dojo composition failed: {error}")
+        raise SystemExit(1)

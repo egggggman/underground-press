@@ -1,0 +1,20 @@
+{
+  "layout_contract": "../../../../templates/puzzle-dojo/v1/layout_contract.json",
+  "composition": "composition.json",
+  "proof": "../../production/puzzle-dojo/issue_001_pages_8_9.svg",
+  "neighborhood_search": "neighborhood-search.json",
+  "required_puzzles": ["crossword", "neighborhood_search", "pizza_cipher", "sudoku"],
+  "neighborhood_search_rules": {
+    "size": 15,
+    "hidden_answer": "FOUNDYOURWAY",
+    "minimum_distinct_rows": 8,
+    "minimum_distinct_columns": 8
+  },
+  "immutable_assets": {
+    "crossword.svg": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f",
+    "crossword-clues.svg": "1a6a3db6d9d171033dd86747ab96222c844e565d0fe048aae85d3f0407b7de51",
+    "sudoku.svg": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375",
+    "pizza-cipher.svg": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1",
+    "neighborhood-search.svg": "608b80cf0a1ee043c97b627657b48a450640b04540f145e2a3cd50d1a784696d"
+  }
+}
