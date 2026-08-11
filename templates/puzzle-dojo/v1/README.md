@@ -1,5 +1,7 @@
 # Puzzle Dojo Master Template v1.0
 
+**Status: BETA.** The composition contract and approved assets are locked, but the template is not press-final until every item in the Issue #1 Puzzle Dojo preflight record is complete.
+
 This is the first component-driven department template for *The Underground Press*. The editable SVG master contains measured drop zones but no puzzle data. Its two stacked artboards correspond to pages 8 and 9 of an 11 × 17 inch portrait spread.
 
 ## Compose a proof
