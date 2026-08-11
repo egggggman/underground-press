@@ -41,6 +41,24 @@ class ToolingTests(unittest.TestCase):
         for path in sorted((ROOT / "content").glob("*/inventory.json")):
             self.assertIsInstance(json.loads(path.read_text(encoding="utf-8")), list)
 
+    def test_visual_benchmark_registry_matches_files(self):
+        validator = load_module("repo_validator", ROOT / "tools/validate_repo.py")
+        registry = json.loads(
+            (ROOT / "design-system/references/visual_benchmarks.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(
+            {entry["id"] for entry in registry["benchmarks"]},
+            {"golden_image", "issue_001_page_one"},
+        )
+        for entry in registry["benchmarks"]:
+            self.assertEqual(validator.sha256(ROOT / entry["path"]), entry["sha256"])
+
+    def test_puzzle_dojo_is_beta(self):
+        manifest = json.loads(
+            (ROOT / "templates/puzzle-dojo/v1/manifest.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(manifest["status"], "beta")
+
 
 if __name__ == "__main__":
     unittest.main()
