@@ -1,8 +1,10 @@
 # Issue #1 Puzzle Dojo production spread
 
+**Status: BETA.** This spread is an approved production candidate, not a finished press page. The remaining print-operator checks are recorded in `PREFLIGHT.md` and must pass before release.
+
 This directory contains the production-linked Pages 8-9 SVG and its compositor sidecar. The spread uses Puzzle Dojo master contract v1 and the immutable compositor; source puzzles remain external, hash-locked assets.
 
-## Final page architecture
+## Locked BETA page architecture
 
 Page 8 is the solving workbench. It holds the approved Crossword and clues, Sudoku, Pizza Cipher, and Neighborhood Search, followed by a Puzzle Tip and Seagullotine quote. Page 9 is the department back page: approved advertisement art, Sewer Cap #001, Puzzle Bench, Cipher Corner, Seagullotine art, two mini advertisements, a labeled Portland memory fragment, and the Last Issue Solutions module.
 

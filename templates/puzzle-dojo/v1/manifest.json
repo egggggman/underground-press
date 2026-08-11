@@ -2,7 +2,7 @@
   "template_id": "puzzle-dojo.master",
   "name": "Puzzle Dojo Master Template",
   "version": "1.0.0",
-  "status": "production",
+  "status": "beta",
   "page_size": {"name": "11x17 portrait", "width_pt": 792, "height_pt": 1224, "page_count": 2},
   "master": "puzzle_dojo_master.svg",
   "layout_contract": "layout_contract.json",

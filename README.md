@@ -11,7 +11,7 @@ Committed files under `content/*/inventory.json` are the publication source of
 truth. `tools/build_editorial_inventory.py` is the reproducible generator: it
 checks for drift by default and writes only when invoked with `--write`.
 
-The Underground Press is a reusable **1991 mutant-subway tabloid publishing system**: a newsroom-in-a-box for producing recurring issues with a consistent editorial voice, visual language, advertisements, puzzles, characters, and production workflow.
+The Underground Press is a reusable **1991 Portland, Maine underground tabloid publishing system**: a newsroom-in-a-box for producing recurring issues with a consistent editorial voice, visual language, advertisements, puzzles, characters, and production workflow.
 
 It preserves the handmade energy of an underground newspaper while making every issue easier to assemble, revise, archive, and reproduce.
 
@@ -33,8 +33,8 @@ It preserves the handmade energy of an underground newspaper while making every 
 2. Keep source assets separate from generated exports.
 3. Preserve every published issue as an immutable snapshot.
 4. Track original work and documentation—never bundled font files.
-5. Make the paper feel like it came off a press in 1991 and out of a mutant subway newsroom.
+5. Make the paper feel like it came off a press in 1991 and out of Portland beneath Portland.
 
 ## Status
 
-Initial newsroom scaffold.
+Issue #1 production is active. Puzzle Dojo is **BETA** pending the press checks in its preflight record. Prototype 0.2 remains frozen and Prototype 0.3 remains unauthorized.
