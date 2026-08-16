@@ -21,6 +21,9 @@ class PuzzleSpec:
     columns: int
     source: Path
     source_hash: str
+    source_width: float
+    source_height: float
+    grid_box: tuple[float, float, float, float]
 
 
 @dataclass(frozen=True)
@@ -58,6 +61,9 @@ def load_contract(path: Path = CONTRACT) -> tuple[dict[str, PuzzleSpec], dict[st
             value["columns"],
             ROOT / value["source"],
             value["source_hash"],
+            value["source_width"],
+            value["source_height"],
+            tuple(value["grid_box"]),
         )
         for name, value in raw["puzzles"].items()
     }
@@ -95,6 +101,10 @@ def render(puzzle: PuzzleSpec, board: BoardConfig) -> str:
     ET.parse(puzzle.source)
     geometry = calculate_geometry(puzzle, board)
     href = puzzle.source.relative_to(ROOT).as_posix()
+    source_x, source_y, source_width, source_height = puzzle.grid_box
+    scale = geometry.grid_width / source_width
+    image_x = geometry.grid_x - source_x * scale
+    image_y = geometry.grid_y - source_y * scale
     cells = "\n".join(
         f'    <rect id="cell-r{row + 1}-c{column + 1}" data-row="{row + 1}" '
         f'data-column="{column + 1}" x="{geometry.grid_x + column * geometry.cell_size:.4f}" '
@@ -115,10 +125,13 @@ def render(puzzle: PuzzleSpec, board: BoardConfig) -> str:
   data-cell-size-pt="{geometry.cell_size:.4f}">
   <style>.board-boundary{{fill:none;stroke:#111;stroke-width:{board.thick_rule}}}
   .coordinate-map rect{{fill:none;stroke:none;pointer-events:none}}</style>
+  <defs><clipPath id="grid-clip"><rect x="{geometry.grid_x:.4f}" y="{geometry.grid_y:.4f}"
+    width="{geometry.grid_width:.4f}" height="{geometry.grid_height:.4f}"/></clipPath></defs>
 {boundary}  <g id="canonical-puzzle-layer">
-    <image href="../../../{href}" xlink:href="../../../{href}" x="{geometry.grid_x:.4f}"
-      y="{geometry.grid_y:.4f}" width="{geometry.grid_width:.4f}" height="{geometry.grid_height:.4f}"
-      preserveAspectRatio="xMidYMid meet"/>
+    <image href="../../../{href}" xlink:href="../../../{href}" x="{image_x:.4f}"
+      y="{image_y:.4f}" width="{puzzle.source_width * scale:.4f}"
+      height="{puzzle.source_height * scale:.4f}" preserveAspectRatio="none"
+      clip-path="url(#grid-clip)"/>
   </g>
   <g id="coordinate-map" class="coordinate-map" data-rows="{puzzle.rows}" data-columns="{puzzle.columns}">
 {cells}

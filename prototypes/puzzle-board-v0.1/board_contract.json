@@ -6,13 +6,19 @@
       "rows": 9,
       "columns": 9,
       "source": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
-      "source_hash": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375"
+      "source_hash": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375",
+      "source_width": 272,
+      "source_height": 323,
+      "grid_box": [24, 73, 224, 224]
     },
     "crossword": {
       "rows": 15,
       "columns": 15,
       "source": "issues/issue_001/assets/puzzle-dojo/crossword.svg",
-      "source_hash": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f"
+      "source_hash": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f",
+      "source_width": 468,
+      "source_height": 383,
+      "grid_box": [87, 79, 292, 292]
     }
   },
   "modes": {

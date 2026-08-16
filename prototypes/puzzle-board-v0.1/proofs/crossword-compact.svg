@@ -4,10 +4,13 @@
   data-cell-size-pt="15.6000">
   <style>.board-boundary{fill:none;stroke:#111;stroke-width:1.5}
   .coordinate-map rect{fill:none;stroke:none;pointer-events:none}</style>
+  <defs><clipPath id="grid-clip"><rect x="9.0000" y="27.0000"
+    width="234.0000" height="234.0000"/></clipPath></defs>
   <g id="canonical-puzzle-layer">
-    <image href="../../../issues/issue_001/assets/puzzle-dojo/crossword.svg" xlink:href="../../../issues/issue_001/assets/puzzle-dojo/crossword.svg" x="9.0000"
-      y="27.0000" width="234.0000" height="234.0000"
-      preserveAspectRatio="xMidYMid meet"/>
+    <image href="../../../issues/issue_001/assets/puzzle-dojo/crossword.svg" xlink:href="../../../issues/issue_001/assets/puzzle-dojo/crossword.svg" x="-60.7192"
+      y="-36.3082" width="375.0411"
+      height="306.9247" preserveAspectRatio="none"
+      clip-path="url(#grid-clip)"/>
   </g>
   <g id="coordinate-map" class="coordinate-map" data-rows="15" data-columns="15">
     <rect id="cell-r1-c1" data-row="1" data-column="1" x="9.0000" y="27.0000" width="15.6000" height="15.6000"/>

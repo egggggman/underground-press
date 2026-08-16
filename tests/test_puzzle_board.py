@@ -23,6 +23,7 @@ class PuzzleBoardTests(unittest.TestCase):
             self.assertEqual(root.attrib["data-source-sha256"], puzzle.source_hash)
             cells = root.findall(".//{http://www.w3.org/2000/svg}rect[@data-row]")
             self.assertEqual([(c.attrib["data-row"], c.attrib["data-column"]) for c in cells], [(str(r), str(c)) for r in range(1, 10) for c in range(1, 10)])
+            self.assertEqual(float(cells[1].attrib["x"]) - float(cells[0].attrib["x"]), float(root.attrib["data-cell-size-pt"]))
         self.assertEqual(normalized_hash(puzzle.source), puzzle.source_hash)
 
     def test_crossword_modes_preserve_grid_numbering_source_and_coordinates(self):
