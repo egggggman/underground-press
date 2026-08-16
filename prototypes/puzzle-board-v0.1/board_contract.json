@@ -1,0 +1,23 @@
+{
+  "version": "puzzle-board-v0.1",
+  "units": "points",
+  "puzzles": {
+    "sudoku": {
+      "rows": 9,
+      "columns": 9,
+      "source": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
+      "source_hash": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375"
+    },
+    "crossword": {
+      "rows": 15,
+      "columns": 15,
+      "source": "issues/issue_001/assets/puzzle-dojo/crossword.svg",
+      "source_hash": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f"
+    }
+  },
+  "modes": {
+    "compact": {"width": 252, "height": 282, "padding": 9, "header_allowance": 18, "minimum_cell": 14, "thin_rule": 0.5, "thick_rule": 1.5, "boundary": "open"},
+    "standard": {"width": 342, "height": 378, "padding": 12, "header_allowance": 24, "minimum_cell": 14, "thin_rule": 0.7, "thick_rule": 2, "boundary": "boxed"},
+    "feature": {"width": 468, "height": 522, "padding": 18, "header_allowance": 30, "minimum_cell": 14, "thin_rule": 0.9, "thick_rule": 2.5, "boundary": "boxed"}
+  }
+}
