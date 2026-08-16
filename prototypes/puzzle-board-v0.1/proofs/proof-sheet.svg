@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="860" viewBox="0 0 980 860">
+<rect width="980" height="860" fill="white"/>
+<text x="20" y="22" font-family="sans-serif" font-size="16">Puzzle Board v0.1 proof sheet</text>
+  <text x="20" y="25" font-family="sans-serif" font-size="13">sudoku / compact</text>
+  <image href="sudoku-compact.svg" x="20" y="35" width="300" height="385" preserveAspectRatio="xMidYMin meet"/>  <text x="340" y="25" font-family="sans-serif" font-size="13">sudoku / standard</text>
+  <image href="sudoku-standard.svg" x="340" y="35" width="300" height="385" preserveAspectRatio="xMidYMin meet"/>  <text x="660" y="25" font-family="sans-serif" font-size="13">sudoku / feature</text>
+  <image href="sudoku-feature.svg" x="660" y="35" width="300" height="385" preserveAspectRatio="xMidYMin meet"/>  <text x="20" y="445" font-family="sans-serif" font-size="13">crossword / compact</text>
+  <image href="crossword-compact.svg" x="20" y="455" width="300" height="385" preserveAspectRatio="xMidYMin meet"/>  <text x="340" y="445" font-family="sans-serif" font-size="13">crossword / standard</text>
+  <image href="crossword-standard.svg" x="340" y="455" width="300" height="385" preserveAspectRatio="xMidYMin meet"/>  <text x="660" y="445" font-family="sans-serif" font-size="13">crossword / feature</text>
+  <image href="crossword-feature.svg" x="660" y="455" width="300" height="385" preserveAspectRatio="xMidYMin meet"/></svg>

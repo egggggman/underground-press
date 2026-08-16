@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="252pt" height="282pt" viewBox="0 0 252 282"
+  data-puzzle="sudoku" data-mode="compact" data-source-sha256="0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375"
+  data-cell-size-pt="26.0000">
+  <style>.board-boundary{fill:none;stroke:#111;stroke-width:1.5}
+  .coordinate-map rect{fill:none;stroke:none;pointer-events:none}</style>
+  <defs><clipPath id="grid-clip"><rect x="9.0000" y="27.0000"
+    width="234.0000" height="234.0000"/></clipPath></defs>
+  <g id="canonical-puzzle-layer">
+    <image href="../../../issues/issue_001/assets/puzzle-dojo/sudoku.svg" xlink:href="../../../issues/issue_001/assets/puzzle-dojo/sudoku.svg" x="-16.0714"
+      y="-49.2589" width="284.1429"
+      height="337.4196" preserveAspectRatio="none"
+      clip-path="url(#grid-clip)"/>
+  </g>
+  <g id="coordinate-map" class="coordinate-map" data-rows="9" data-columns="9">
+    <rect id="cell-r1-c1" data-row="1" data-column="1" x="9.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c2" data-row="1" data-column="2" x="35.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c3" data-row="1" data-column="3" x="61.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c4" data-row="1" data-column="4" x="87.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c5" data-row="1" data-column="5" x="113.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c6" data-row="1" data-column="6" x="139.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c7" data-row="1" data-column="7" x="165.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c8" data-row="1" data-column="8" x="191.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r1-c9" data-row="1" data-column="9" x="217.0000" y="27.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c1" data-row="2" data-column="1" x="9.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c2" data-row="2" data-column="2" x="35.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c3" data-row="2" data-column="3" x="61.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c4" data-row="2" data-column="4" x="87.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c5" data-row="2" data-column="5" x="113.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c6" data-row="2" data-column="6" x="139.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c7" data-row="2" data-column="7" x="165.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c8" data-row="2" data-column="8" x="191.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r2-c9" data-row="2" data-column="9" x="217.0000" y="53.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c1" data-row="3" data-column="1" x="9.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c2" data-row="3" data-column="2" x="35.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c3" data-row="3" data-column="3" x="61.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c4" data-row="3" data-column="4" x="87.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c5" data-row="3" data-column="5" x="113.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c6" data-row="3" data-column="6" x="139.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c7" data-row="3" data-column="7" x="165.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c8" data-row="3" data-column="8" x="191.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r3-c9" data-row="3" data-column="9" x="217.0000" y="79.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c1" data-row="4" data-column="1" x="9.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c2" data-row="4" data-column="2" x="35.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c3" data-row="4" data-column="3" x="61.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c4" data-row="4" data-column="4" x="87.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c5" data-row="4" data-column="5" x="113.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c6" data-row="4" data-column="6" x="139.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c7" data-row="4" data-column="7" x="165.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c8" data-row="4" data-column="8" x="191.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r4-c9" data-row="4" data-column="9" x="217.0000" y="105.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c1" data-row="5" data-column="1" x="9.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c2" data-row="5" data-column="2" x="35.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c3" data-row="5" data-column="3" x="61.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c4" data-row="5" data-column="4" x="87.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c5" data-row="5" data-column="5" x="113.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c6" data-row="5" data-column="6" x="139.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c7" data-row="5" data-column="7" x="165.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c8" data-row="5" data-column="8" x="191.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r5-c9" data-row="5" data-column="9" x="217.0000" y="131.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c1" data-row="6" data-column="1" x="9.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c2" data-row="6" data-column="2" x="35.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c3" data-row="6" data-column="3" x="61.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c4" data-row="6" data-column="4" x="87.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c5" data-row="6" data-column="5" x="113.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c6" data-row="6" data-column="6" x="139.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c7" data-row="6" data-column="7" x="165.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c8" data-row="6" data-column="8" x="191.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r6-c9" data-row="6" data-column="9" x="217.0000" y="157.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c1" data-row="7" data-column="1" x="9.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c2" data-row="7" data-column="2" x="35.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c3" data-row="7" data-column="3" x="61.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c4" data-row="7" data-column="4" x="87.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c5" data-row="7" data-column="5" x="113.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c6" data-row="7" data-column="6" x="139.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c7" data-row="7" data-column="7" x="165.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c8" data-row="7" data-column="8" x="191.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r7-c9" data-row="7" data-column="9" x="217.0000" y="183.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c1" data-row="8" data-column="1" x="9.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c2" data-row="8" data-column="2" x="35.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c3" data-row="8" data-column="3" x="61.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c4" data-row="8" data-column="4" x="87.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c5" data-row="8" data-column="5" x="113.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c6" data-row="8" data-column="6" x="139.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c7" data-row="8" data-column="7" x="165.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c8" data-row="8" data-column="8" x="191.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r8-c9" data-row="8" data-column="9" x="217.0000" y="209.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c1" data-row="9" data-column="1" x="9.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c2" data-row="9" data-column="2" x="35.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c3" data-row="9" data-column="3" x="61.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c4" data-row="9" data-column="4" x="87.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c5" data-row="9" data-column="5" x="113.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c6" data-row="9" data-column="6" x="139.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c7" data-row="9" data-column="7" x="165.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c8" data-row="9" data-column="8" x="191.0000" y="235.0000" width="26.0000" height="26.0000"/>
+    <rect id="cell-r9-c9" data-row="9" data-column="9" x="217.0000" y="235.0000" width="26.0000" height="26.0000"/>
+  </g>
+</svg>
