@@ -2,6 +2,11 @@
   "layout_contract": "../../../../templates/puzzle-dojo/v1/layout_contract.json",
   "composition": "composition.json",
   "proof": "../../production/puzzle-dojo/issue_001_pages_8_9.svg",
+  "release_state": "BETA",
+  "physical_print_play_gate": {
+    "passed": false,
+    "required_for_release_candidate": true
+  },
   "neighborhood_search": "neighborhood-search.json",
   "required_puzzles": ["crossword", "neighborhood_search", "pizza_cipher", "sudoku"],
   "neighborhood_search_rules": {

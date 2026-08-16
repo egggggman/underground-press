@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="792" height="1224" viewBox="0 0 792 1224" role="img" aria-labelledby="title desc">
+  <title id="title">Page 9 newspaper underlay</title>
+  <desc id="desc">An independently readable Underground Press page of briefs, notices, mail, and Puzzle Desk business.</desc>
+  <defs><filter id="grain"><feTurbulence baseFrequency=".62" numOctaves="2" seed="9" type="fractalNoise"/><feColorMatrix values="0 0 0 0 0.18 0 0 0 0 0.14 0 0 0 0 0.08 0 0 0 .07 0"/></filter></defs>
+  <rect width="792" height="1224" fill="#ead9ad"/><rect width="792" height="1224" filter="url(#grain)" opacity=".26"/>
+  <path d="M18 20h756v1184H18z" fill="none" stroke="#17130f"/><path d="M20 80h752M20 1148h752" stroke="#17130f" stroke-width="2"/>
+  <text x="24" y="93" font-family="Arial,sans-serif" font-size="8" font-weight="700" letter-spacing="1.4">THE UNDERGROUND PRESS / PORTLAND BENEATH PORTLAND / ISSUE 001</text>
+  <text x="768" y="93" text-anchor="end" font-family="Arial,sans-serif" font-size="8" font-weight="700">SIDE QUESTS / BETA PROOF</text>
+  <g transform="translate(22 88)" visibility="hidden">
+    <rect width="748" height="154" fill="#173f32"/>
+    <text x="18" y="35" font-family="Impact,Arial Narrow,sans-serif" font-size="28" fill="#f4e8c6">THE PAGE AFTER THE PUZZLES STILL HAS NEWS</text>
+    <text x="18" y="63" font-family="Georgia,serif" font-size="11" fill="#fff5d8"><tspan x="18">The Puzzle Desk has received twelve folded answers, three questions, and a drawing of a ferry that may also be a shoe.</tspan><tspan x="18" dy="18">Issue #1 solutions return with Issue #2. Until then: clip the coupon, inspect the sewer cap, and leave room for the next reader.</tspan></text>
+    <text x="18" y="132" font-family="Courier New,monospace" font-size="8" font-weight="700" fill="#d4a92b">NEWSROOM CREDIT: ANONYMOUS BY HOUSE CONVENTION / NO PERMANENT DEPARTMENT CREATED</text>
+  </g>
+  <g transform="translate(22 254)" visibility="hidden">
+    <rect width="232" height="184" fill="#f3e3bc" stroke="#17130f" stroke-width="1.5"/>
+    <text x="12" y="26" font-family="Impact,Arial Narrow,sans-serif" font-size="18" fill="#8c2118">STAIRWELL BRIEFS</text>
+    <text x="12" y="50" font-family="Georgia,serif" font-size="9"><tspan x="12">A delivery convoy will occupy the east lane</tspan><tspan x="12" dy="15">shortly after dawn. Let riders exit first.</tspan><tspan x="12" dy="23">Bell testing between two and three may sound</tspan><tspan x="12" dy="15">like repeated arrivals. It is not a new route.</tspan><tspan x="12" dy="23">Loose papers near the fan grate were cleared.</tspan></text>
+  </g>
+  <g transform="translate(266 254)" visibility="hidden">
+    <rect width="232" height="184" fill="#ead9ad" stroke="#17130f" stroke-width="1.5"/>
+    <text x="12" y="26" font-family="Impact,Arial Narrow,sans-serif" font-size="18" fill="#173f32">CORRECTION</text>
+    <text x="12" y="50" font-family="Georgia,serif" font-size="9"><tspan x="12">The phrase “last clue” in an earlier field note</tspan><tspan x="12" dy="15">was not intended as a clue. Readers who found</tspan><tspan x="12" dy="15">three answers in it may keep them.</tspan></text>
+    <path d="M12 116h208" stroke="#8c2118" stroke-dasharray="4 4"/>
+    <text x="12" y="140" font-family="Arial,sans-serif" font-size="9" font-weight="700">PUZZLE DESK BUSINESS</text>
+    <text x="12" y="160" font-family="Georgia,serif" font-size="9">Answers stay covered until Issue #2.</text>
+  </g>
+  <g transform="translate(510 254)" visibility="hidden">
+    <rect width="260" height="184" fill="#f3e3bc" stroke="#8c2118" stroke-width="2" stroke-dasharray="7 4"/>
+    <text x="14" y="27" font-family="Impact,Arial Narrow,sans-serif" font-size="19" fill="#8c2118">CLIP &amp; CARRY</text>
+    <text x="14" y="54" font-family="Georgia,serif" font-size="10"><tspan x="14">Keep this panel behind the counter:</tspan><tspan x="14" dy="17">one pencil, one eraser, one neighbor</tspan><tspan x="14" dy="17">who promises not to shout answers.</tspan></text>
+    <text x="14" y="145" font-family="Courier New,monospace" font-size="9" font-weight="700">VALID UNTIL THE PAPER FALLS APART</text>
+    <path d="M228 120l5 13 14-4-8 11 11 9-14-1-3 14-5-13-14 4 8-11-11-9 14 1z" fill="#d4a92b"/>
+  </g>
+  <g transform="translate(22 450)" visibility="hidden">
+    <rect width="748" height="126" fill="#ead9ad" stroke="#17130f"/>
+    <text x="12" y="26" font-family="Impact,Arial Narrow,sans-serif" font-size="18" fill="#173f32">READER MAIL / SMALL LOCAL ODDITIES</text>
+    <text x="12" y="50" font-family="Georgia,serif" font-size="9"><tspan x="12">“Can a clue be correct for the wrong reason?” Yes. This is why crossings exist. / A gull carried off a classified clipping and returned the corner only.</tspan><tspan x="12" dy="16">The ad remains payable at the original rate. / Someone has numbered the third brick beside the west landing. The first two remain unidentified.</tspan></text>
+    <text x="736" y="108" text-anchor="end" font-family="Courier New,monospace" font-size="8" font-weight="700" fill="#8c2118">LETTERS MAY BE SHORTENED, FOLDED, OR COFFEE-STAINED.</text>
+  </g>
+  <g transform="translate(22 588)" visibility="hidden">
+    <rect width="476" height="258" fill="#f3e3bc" stroke="#17130f" stroke-width="1.5"/>
+    <text x="16" y="32" font-family="Impact,Arial Narrow,sans-serif" font-size="23" fill="#8c2118">PORTLAND BENEATH PORTLAND</text>
+    <text x="16" y="59" font-family="Georgia,serif" font-size="11"><tspan x="16">On wet mornings, the first puzzle copy curls at the harbor-facing corner.</tspan><tspan x="16" dy="18">Nobody remembers who began flattening it with the sugar jar, but everyone</tspan><tspan x="16" dy="18">remembers to move the jar before the next cup arrives.</tspan></text>
+    <path d="M16 132h444" stroke="#173f32" stroke-width="2"/>
+    <text x="16" y="159" font-family="Impact,Arial Narrow,sans-serif" font-size="18" fill="#173f32">NOTICE BOARD</text>
+    <text x="16" y="184" font-family="Georgia,serif" font-size="10"><tspan x="16">Rain arrives sideways after lunch. Newspaper carriers should use inner wrapping.</tspan><tspan x="16" dy="17">The green door is an exit during repairs, not a new shortcut.</tspan></text>
+    <circle cx="421" cy="207" r="29" fill="none" stroke="#8c2118" stroke-width="6" opacity=".38"/>
+    <text x="16" y="239" font-family="Arial,sans-serif" font-size="8" font-weight="700">A NEIGHBORHOOD RECOLLECTION, NOT A HISTORICAL CLAIM.</text>
+  </g>
+  <g transform="translate(510 588)" visibility="hidden">
+    <rect width="260" height="258" fill="#173f32" stroke="#17130f"/>
+    <text x="14" y="31" font-family="Impact,Arial Narrow,sans-serif" font-size="20" fill="#f4e8c6">CLASSIFIEDS</text>
+    <text x="14" y="58" font-family="Georgia,serif" font-size="9" fill="#fff5d8"><tspan x="14" font-weight="700">SEEKING:</tspan><tspan> patient clue trader.</tspan><tspan x="14" dy="16">Must tolerate eraser crumbs.</tspan><tspan x="14" dy="25" font-weight="700">FOUND:</tspan><tspan> one brass token, warm.</tspan><tspan x="14" dy="16">Describe the impossible side.</tspan><tspan x="14" dy="25" font-weight="700">OFFERED:</tspan><tspan> chair near the radiator.</tspan><tspan x="14" dy="16">Bring your own paper.</tspan></text>
+    <text x="14" y="236" font-family="Courier New,monospace" font-size="8" font-weight="700" fill="#d4a92b">RATES: TWO LINES / ONE FAVOR</text>
+  </g>
+  <g transform="translate(22 858)" visibility="hidden">
+    <rect width="748" height="282" fill="#f3e3bc" stroke="#17130f" stroke-width="1.5"/>
+    <rect width="748" height="38" fill="#8c2118"/><text x="16" y="27" font-family="Impact,Arial Narrow,sans-serif" font-size="22" fill="#f4e8c6">THE PUZZLE DESK LEDGER</text>
+    <text x="16" y="70" font-family="Georgia,serif" font-size="10"><tspan x="16">Received: folded grids, annotated menus, one careful argument for using ink first, and a request for larger margins.</tspan><tspan x="16" dy="18">Held for Issue #2: Crossword, Neighborhood Search, Pizza Cipher, and Sudoku solutions.</tspan><tspan x="16" dy="18">Returned: one sandwich, unopened.</tspan></text>
+    <path d="M16 135h716M16 178h716M16 221h716" stroke="#8d8068" stroke-dasharray="7 5"/>
+    <text x="18" y="158" font-family="Courier New,monospace" font-size="10">READER __________________________  CLUE QUESTION __________________________</text>
+    <text x="18" y="201" font-family="Courier New,monospace" font-size="10">NEIGHBORHOOD NOTE _______________________________________________________</text>
+    <text x="18" y="244" font-family="Courier New,monospace" font-size="10">DRAW A TINY MAP TO THE PUZZLE DESK _______________________________________</text>
+    <text x="730" y="268" text-anchor="end" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#8c2118">KEEP ANSWERS COVERED. PASS THE PAPER.</text>
+  </g>
+</svg>

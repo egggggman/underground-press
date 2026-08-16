@@ -28,3 +28,7 @@
 - [ ] Print operator: open the linked SVG with repository paths intact and inspect both pages at 100%.
 - [ ] Print operator: confirm minimum puzzle type size and line weight on the intended newsprint stock.
 - [x] Editorial: permanent Big Four locked as Crossword, Neighborhood Search, Pizza Cipher, and Sudoku; Brain Bender preserved as a reusable bonus puzzle.
+- [x] Digital: both pages pass the cover-the-puzzles test; see `QA_REPORT.md` for evidence.
+- [x] Digital: print-ready PDF is exactly two 792 x 1224 pt (11 x 17 inch) pages.
+- [ ] Physical: print both pages at 100% on intended stock and complete the pencil/playability gate.
+- [x] Release enforcement: Puzzle Dojo remains **BETA** while the physical gate is open.

@@ -37,6 +37,14 @@
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
       "sha256": "608b80cf0a1ee043c97b627657b48a450640b04540f145e2a3cd50d1a784696d"
     },
+    "newspaper_page_8": {
+      "path": "issues/issue_001/assets/puzzle-dojo/art/newspaper-page-8.svg",
+      "sha256": "aae08625036e11a36be36afb58631136273f741a443171fa9e66c66e4c3044b3"
+    },
+    "newspaper_page_9": {
+      "path": "issues/issue_001/assets/puzzle-dojo/art/newspaper-page-9.svg",
+      "sha256": "7a2c9c9444612391cc05e0de526b386f9d07d137784b69145e80772818806802"
+    },
     "page_8_footer": {
       "path": "issues/issue_001/assets/puzzle-dojo/art/footer-page-8.svg",
       "sha256": "552df527c82a77aac0ff869b9e3ff0956ddac1dd7dc6c5cd4a222e0c2bd6f169"
@@ -54,8 +62,8 @@
       "sha256": "1dec43694696c124418e079c25ac051acb9488aaf01d041107375d6f295bbe49"
     },
     "page_9_seagullotine": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
-      "sha256": "ffedc48bf4eae625daf1df85edefd2fc87a31b9129750f2c72c9772e98773759"
+      "path": "issues/issue_001/assets/puzzle-dojo/art/seagullotine-portland-issue-001.svg",
+      "sha256": "d9a8317798845f9cf709c0c413c6da3216f1b46585ffb7d8effda153eef28c78"
     },
     "pizza_cipher": {
       "path": "issues/issue_001/assets/puzzle-dojo/pizza-cipher.svg",
