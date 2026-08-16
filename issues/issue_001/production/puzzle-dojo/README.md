@@ -2,6 +2,18 @@
 
 This directory contains the production-linked Pages 8-9 SVG and its compositor sidecar. The spread uses Puzzle Dojo master contract v1 and the immutable compositor; source puzzles remain external, hash-locked assets.
 
+## Governing production principle
+
+**Puzzle Dojo Principle - The Newspaper Contains the Puzzles**
+
+Puzzle Dojo is not an activity-book insert styled to resemble *The Underground Press*. It consists of normal pages of *The Underground Press* in which playable puzzles naturally appear alongside advertisements, notices, neighborhood material, illustrations, recurring characters, editorial debris, and other newspaper content.
+
+Puzzle data and playable geometry remain visually clean and protected. The surrounding newspaper may be dense, distressed, irregular, humorous, and layered. A successful Puzzle Dojo page remains interesting even to a reader who does not solve the puzzles.
+
+The production proof is therefore built in two explicit layers: full-page newspaper underlays first, followed by immutable puzzle placements. The compositor owns placement only and may not alter puzzle data.
+
+> **Cover the puzzles. If what remains still looks and reads like The Underground Press, the page passes.**
+
 ## Final page architecture
 
 Page 8 is the solving workbench. It holds the approved Crossword and clues, Sudoku, Pizza Cipher, and Neighborhood Search, followed by a Puzzle Tip and Seagullotine quote. Page 9 is the department back page: approved advertisement art, Sewer Cap #001, Puzzle Bench, Cipher Corner, Seagullotine art, two mini advertisements, a labeled Portland memory fragment, and the Last Issue Solutions module.

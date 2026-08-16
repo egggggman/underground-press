@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="476" height="248" viewBox="0 0 476 248" role="img" aria-labelledby="title desc">
+  <title id="title">The Seagullotine Puzzle Desk panel</title>
+  <desc id="desc">The recurring gull puzzle editor at a Portland harbor desk, with an anonymous newsroom note.</desc>
+  <defs>
+    <pattern id="dots" width="5" height="5" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#173f32" opacity=".24"/></pattern>
+  </defs>
+  <rect width="476" height="248" fill="#ead9ad" stroke="#17130f" stroke-width="4"/>
+  <rect x="10" y="10" width="456" height="228" fill="url(#dots)" stroke="#8c2118" stroke-width="2"/>
+  <path d="M10 10h456v48H10z" fill="#173f32"/>
+  <text x="24" y="43" font-family="Impact,Arial Narrow,sans-serif" font-size="30" fill="#f4e8c6">THE SEAGULLOTINE</text>
+  <text x="452" y="40" text-anchor="end" font-family="Courier New,monospace" font-size="9" font-weight="700" fill="#d4a92b">PUZZLE EDITOR / HARBOR COPY</text>
+  <g transform="translate(22 73)" fill="none" stroke="#17130f" stroke-width="4" stroke-linejoin="round">
+    <path d="M12 100q27-45 61-34 16-35 46-28 33 8 38 43 8 52-51 58-67 6-94-39z" fill="#f3e3bc"/>
+    <path d="M55 64q31-31 75-8-44 5-69 29z" fill="#f4e8c6"/>
+    <path d="M153 75l37 13-39 12" fill="#d4a92b"/>
+    <circle cx="132" cy="72" r="4" fill="#17130f"/>
+    <path d="M25 39q30-26 63-2M31 34l-8-17M47 27l-2-20M66 27l7-18"/>
+    <path d="M45 123h105M76 139l-9 25M123 139l11 25"/>
+  </g>
+  <g transform="translate(218 76)">
+    <rect width="232" height="112" fill="#f3e3bc" stroke="#17130f" stroke-width="2"/>
+    <text x="14" y="25" font-family="Georgia,serif" font-size="15" font-style="italic"><tspan x="14">“A crossing is just two</tspan><tspan x="14" dy="21">answers agreeing on where</tspan><tspan x="14" dy="21">to meet.”</tspan></text>
+    <text x="218" y="100" text-anchor="end" font-family="Arial,sans-serif" font-size="8" font-weight="700" fill="#8c2118">- THE PUZZLE DESK</text>
+  </g>
+  <path d="M218 203h232" stroke="#8c2118" stroke-width="7"/>
+  <text x="218" y="226" font-family="Courier New,monospace" font-size="9" font-weight="700">KEEP YOUR PENCIL SHARP / PORTLAND BENEATH PORTLAND</text>
+</svg>
