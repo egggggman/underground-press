@@ -83,6 +83,20 @@ class PuzzleGrinderTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unsupported puzzle geometry"):
             geometry(unsupported, self.modes["standard"])
 
+        zero_grid = dict(self.puzzles["sudoku"])
+        zero_grid["rows"] = 0
+        with self.assertRaisesRegex(ValueError, "rows and columns must be positive"):
+            geometry(zero_grid, self.modes["standard"])
+
+        zero_panel = dict(self.puzzles["pizza_cipher"])
+        zero_panel["content_box"] = [0, 0, 0, 142]
+        with self.assertRaisesRegex(ValueError, "content_box"):
+            render("pizza_cipher", zero_panel, self.modes["standard"])
+
+        negative_board = Board("compact", -1, 282, 9, 18, 14, .5, 1.5, "open")
+        with self.assertRaisesRegex(ValueError, "dimensions must be positive"):
+            geometry(self.puzzles["sudoku"], negative_board)
+
     def test_rendered_grid_coordinates_match_calculated_geometry(self):
         for name in ("sudoku", "crossword", "neighborhood_search"):
             spec = self.puzzles[name]
