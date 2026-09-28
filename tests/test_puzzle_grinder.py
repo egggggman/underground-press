@@ -68,6 +68,45 @@ class PuzzleGrinderTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "undersized"):
             geometry(self.puzzles["pizza_cipher"], tiny)
 
+    def test_bad_geometry_contracts_fail_closed(self):
+        crossword = dict(self.puzzles["crossword"])
+        crossword["content_box"] = [460, 380, 20, 20]
+        with self.assertRaisesRegex(ValueError, "invalid content_box"):
+            render("crossword", crossword, self.modes["standard"])
+
+        no_area = Board("compact", 20, 20, 20, 20, 14, .5, 1.5, "open")
+        with self.assertRaisesRegex(ValueError, "no usable content area"):
+            geometry(self.puzzles["sudoku"], no_area)
+
+        unsupported = dict(self.puzzles["sudoku"])
+        unsupported["geometry"] = "hex"
+        with self.assertRaisesRegex(ValueError, "unsupported puzzle geometry"):
+            geometry(unsupported, self.modes["standard"])
+
+    def test_rendered_grid_coordinates_match_calculated_geometry(self):
+        for name in ("sudoku", "crossword", "neighborhood_search"):
+            spec = self.puzzles[name]
+            for board in self.modes.values():
+                g = geometry(spec, board)
+                root = ET.fromstring(render(name, spec, board))
+                cells = root.findall(".//{http://www.w3.org/2000/svg}rect[@data-row]")
+                first, last = cells[0], cells[-1]
+                expected_x = (board.width - g["w"]) / 2
+                expected_y = board.padding + board.header_allowance
+                self.assertAlmostEqual(float(first.attrib["x"]), expected_x, places=3)
+                self.assertAlmostEqual(float(first.attrib["y"]), expected_y, places=3)
+                self.assertAlmostEqual(float(first.attrib["width"]), g["cell"], places=3)
+                self.assertAlmostEqual(
+                    float(last.attrib["x"]) + float(last.attrib["width"]),
+                    expected_x + g["w"],
+                    places=3,
+                )
+                self.assertAlmostEqual(
+                    float(last.attrib["y"]) + float(last.attrib["height"]),
+                    expected_y + g["h"],
+                    places=3,
+                )
+
     def test_proof_generation_is_deterministic(self):
         with tempfile.TemporaryDirectory() as directory:
             a = Path(directory) / "a"
