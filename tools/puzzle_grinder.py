@@ -43,6 +43,8 @@ def geometry(spec: dict, board: Board) -> dict:
         raise ValueError(f"unsupported boundary: {board.boundary}")
     aw = board.width - 2 * board.padding
     ah = board.height - 2 * board.padding - board.header_allowance
+    if aw <= 0 or ah <= 0:
+        raise ValueError(f"{board.mode} board has no usable content area")
     if spec["geometry"] == "grid":
         cell = min(aw / spec["columns"], ah / spec["rows"])
         if cell < board.minimum_cell:
@@ -112,6 +114,8 @@ def render(name: str, spec: dict, board: Board) -> str:
     x = (board.width - g["w"]) / 2
     y = board.padding + board.header_allowance
     sx, sy, sw, sh = spec["content_box"]
+    if sw <= 0 or sh <= 0 or sx < 0 or sy < 0 or sx + sw > spec["source_width"] or sy + sh > spec["source_height"]:
+        raise ValueError(f"invalid content_box for {name}")
     scale = g["w"] / sw
     image_x, image_y = x - sx * scale, y - sy * scale
     href = source.relative_to(ROOT).as_posix()
