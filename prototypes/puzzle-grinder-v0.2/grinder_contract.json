@@ -1,0 +1,40 @@
+{
+  "version": "puzzle-grinder-v0.2",
+  "units": "points",
+  "lineage": "prototypes/puzzle-board-v0.1/board_contract.json",
+  "puzzles": {
+    "sudoku": {
+      "geometry": "grid", "rows": 9, "columns": 9,
+      "source": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
+      "source_hash": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375",
+      "source_width": 272, "source_height": 323, "content_box": [24, 73, 224, 224]
+    },
+    "crossword": {
+      "geometry": "grid", "rows": 15, "columns": 15,
+      "source": "issues/issue_001/assets/puzzle-dojo/crossword.svg",
+      "source_hash": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f",
+      "source_width": 468, "source_height": 383, "content_box": [87, 79, 292, 292]
+    },
+    "neighborhood_search": {
+      "geometry": "grid", "rows": 15, "columns": 15,
+      "source": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
+      "source_hash": "608b80cf0a1ee043c97b627657b48a450640b04540f145e2a3cd50d1a784696d",
+      "source_width": 508, "source_height": 480, "content_box": [18, 112, 304, 304],
+      "data": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.json",
+      "hidden_answer": "FOUNDYOURWAY"
+    },
+    "pizza_cipher": {
+      "geometry": "panel",
+      "source": "issues/issue_001/assets/puzzle-dojo/pizza-cipher.svg",
+      "source_hash": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1",
+      "source_width": 367, "source_height": 142,
+      "content_box": [0, 0, 367, 142],
+      "minimum_content_width": 216
+    }
+  },
+  "modes": {
+    "compact": {"width": 252, "height": 282, "padding": 9, "header_allowance": 18, "minimum_cell": 14, "thin_rule": 0.5, "thick_rule": 1.5, "boundary": "open"},
+    "standard": {"width": 342, "height": 378, "padding": 12, "header_allowance": 24, "minimum_cell": 14, "thin_rule": 0.7, "thick_rule": 2, "boundary": "boxed"},
+    "feature": {"width": 468, "height": 522, "padding": 18, "header_allowance": 30, "minimum_cell": 14, "thin_rule": 0.9, "thick_rule": 2.5, "boundary": "boxed"}
+  }
+}
