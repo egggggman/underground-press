@@ -1,0 +1,39 @@
+name: Puzzle Grinder Validation
+
+on:
+  pull_request:
+    paths:
+      - "tools/puzzle_grinder.py"
+      - "tests/test_puzzle_grinder.py"
+      - "prototypes/puzzle-grinder-v0.2/**"
+      - "issues/issue_001/assets/puzzle-dojo/**"
+      - ".github/workflows/puzzle-grinder-validation.yml"
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Compile generator and tests
+        run: python -m py_compile tools/puzzle_grinder.py tests/test_puzzle_grinder.py
+      - name: Run Puzzle Grinder tests
+        run: python -m unittest tests.test_puzzle_grinder -v
+      - name: Generate calibration proofs
+        run: python tools/puzzle_grinder.py --output /tmp/puzzle-grinder-proofs
+      - name: Parse generated SVG proofs
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from xml.etree import ElementTree as ET
+          proofs = sorted(Path("/tmp/puzzle-grinder-proofs").glob("*.svg"))
+          assert len(proofs) == 13, len(proofs)
+          for proof in proofs:
+              ET.parse(proof)
+          print(f"parsed {len(proofs)} SVG proofs")
+          PY
+      - name: Repository validation
+        run: python tools/validate_repo.py
