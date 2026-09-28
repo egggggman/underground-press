@@ -122,6 +122,32 @@ def write_proofs(output: Path, contract: Path = CONTRACT) -> list[Path]:
             path = output / f"{name.replace('_','-')}-{mode}.svg"
             path.write_text(render(name, spec, board), encoding="utf-8", newline="\n")
             written.append(path)
+    sheet = output / "proof-sheet.svg"
+    panel_w, panel_h, margin, label_h = 300, 350, 20, 42
+    panels = []
+    for row, (name, spec) in enumerate(puzzles.items()):
+        for column, (mode, board) in enumerate(modes.items()):
+            g = geometry(spec, board)
+            x = margin + column * (panel_w + margin)
+            y = 35 + row * (panel_h + label_h + margin)
+            proof = f"{name.replace('_','-')}-{mode}.svg"
+            measure = f"cell {g['cell']:.2f}pt" if g["cell"] is not None else f"content {g['w']:.1f}x{g['h']:.1f}pt"
+            panels.append(
+                f'<text x="{x}" y="{y}" font-family="sans-serif" font-size="12" font-weight="700">{name.replace("_"," ").title()} / {mode.title()}</text>'
+                f'<text x="{x}" y="{y+16}" font-family="sans-serif" font-size="10">module {board.width:g}x{board.height:g}pt | {measure} | PASS</text>'
+                f'<image href="{proof}" x="{x}" y="{y+label_h}" width="{panel_w}" height="{panel_h}" preserveAspectRatio="xMidYMin meet"/>'
+            )
+    sheet_w = margin + 3 * (panel_w + margin)
+    sheet_h = 35 + 4 * (panel_h + label_h + margin)
+    sheet.write_text(
+        f'<svg xmlns="http://www.w3.org/2000/svg" width="{sheet_w}" height="{sheet_h}" viewBox="0 0 {sheet_w} {sheet_h}">'
+        '<rect width="100%" height="100%" fill="white"/>'
+        '<text x="20" y="18" font-family="sans-serif" font-size="15" font-weight="700">Puzzle Grinder v0.2 — Big Four geometry proof</text>'
+        + "".join(panels) + "</svg>\n",
+        encoding="utf-8",
+        newline="\n",
+    )
+    written.append(sheet)
     return written
 
 
