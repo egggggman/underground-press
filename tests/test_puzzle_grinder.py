@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import tempfile
 import unittest
 from pathlib import Path
@@ -38,6 +39,19 @@ class PuzzleGrinderTests(unittest.TestCase):
 
     def test_neighborhood_search_semantics_are_locked(self):
         validate_neighborhood(self.puzzles["neighborhood_search"])
+
+    def test_neighborhood_search_data_actually_encodes_locked_words_and_message(self):
+        spec = self.puzzles["neighborhood_search"]
+        data = json.loads((ROOT / spec["data"]).read_text(encoding="utf-8"))
+        grid = data["grid"]
+        for placement in data["placements"]:
+            letters = "".join(
+                grid[placement["row"] - 1 + i * placement["dr"]][placement["col"] - 1 + i * placement["dc"]]
+                for i in range(len(placement["word"]))
+            )
+            self.assertEqual(letters, placement["word"])
+        cells = sorted(data["hidden_message"]["cells"])
+        self.assertEqual("".join(grid[r - 1][col - 1] for r, col in cells), "FOUNDYOURWAY")
 
     def test_pizza_cipher_uses_panel_geometry(self):
         spec = self.puzzles["pizza_cipher"]
