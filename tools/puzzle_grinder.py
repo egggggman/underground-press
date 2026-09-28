@@ -60,18 +60,45 @@ def geometry(spec: dict, board: Board) -> dict:
 
 def validate_neighborhood(spec: dict) -> None:
     data = json.loads((ROOT / spec["data"]).read_text(encoding="utf-8"))
-    if data["size"] != 15 or len(data["grid"]) != 15 or any(len(row) != 15 for row in data["grid"]):
+    size = data["size"]
+    grid = data["grid"]
+    if size != 15 or len(grid) != size or any(len(row) != size for row in grid):
         raise ValueError("Neighborhood Search must remain canonical 15x15")
     if len(data["placements"]) != 16:
         raise ValueError("Neighborhood Search must retain all 16 placements")
+
+    for placement in data["placements"]:
+        word = placement["word"]
+        row, col = placement["row"], placement["col"]
+        dr, dc = placement["dr"], placement["dc"]
+        if (dr, dc) == (0, 0) or dr not in {-1, 0, 1} or dc not in {-1, 0, 1}:
+            raise ValueError(f"invalid Neighborhood Search direction for {word}")
+        letters = []
+        for offset in range(len(word)):
+            r = row - 1 + offset * dr
+            c = col - 1 + offset * dc
+            if not (0 <= r < size and 0 <= c < size):
+                raise ValueError(f"Neighborhood Search placement out of bounds: {word}")
+            letters.append(grid[r][c])
+        if "".join(letters) != word:
+            raise ValueError(f"Neighborhood Search placement does not match grid: {word}")
+
     hidden = data["hidden_message"]
-    if hidden["answer"] != spec["hidden_answer"] or hidden["answer"] != "FOUNDYOURWAY":
+    answer = hidden["answer"]
+    if answer != spec["hidden_answer"] or answer != "FOUNDYOURWAY":
         raise ValueError("Neighborhood Search hidden answer changed")
     cells = hidden["cells"]
-    if len(cells) != len("FOUNDYOURWAY"):
+    if len(cells) != len(answer):
         raise ValueError("Neighborhood Search marked-cell count changed")
-    if len({r for r, _ in cells}) < 8 or len({c for _, c in cells}) < 8:
+    if len(set(map(tuple, cells))) != len(cells):
+        raise ValueError("Neighborhood Search marked cells must be unique")
+    if any(not (1 <= r <= size and 1 <= col <= size) for r, col in cells):
+        raise ValueError("Neighborhood Search marked cell is out of bounds")
+    if len({r for r, _ in cells}) < 8 or len({col for _, col in cells}) < 8:
         raise ValueError("Neighborhood Search marked cells are no longer dispersed")
+    extracted = "".join(grid[r - 1][col - 1] for r, col in sorted(cells))
+    if extracted != answer:
+        raise ValueError(f"Neighborhood Search marked cells spell {extracted}, expected {answer}")
 
 
 def render(name: str, spec: dict, board: Board) -> str:
