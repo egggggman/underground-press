@@ -61,7 +61,7 @@ class PuzzleGrinderTests(unittest.TestCase):
             first, second = write_proofs(a), write_proofs(b)
             self.assertEqual([p.name for p in first], [p.name for p in second])
             self.assertEqual([p.read_bytes() for p in first], [p.read_bytes() for p in second])
-            self.assertEqual(len(first), 12)
+            self.assertEqual(len(first), 13)\n            sheet = first[-1].read_text(encoding=\"utf-8\")\n            self.assertIn(\"Puzzle Grinder v0.2\", sheet)\n            self.assertEqual(sheet.count(\"| PASS</text>\"), 12)
 
 
 if __name__ == "__main__":
