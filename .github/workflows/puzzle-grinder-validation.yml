@@ -8,7 +8,6 @@ on:
       - "prototypes/puzzle-grinder-v0.2/**"
       - "issues/issue_001/assets/puzzle-dojo/**"
       - ".github/workflows/puzzle-grinder-validation.yml"
-  workflow_dispatch:
 
 jobs:
   validate:
