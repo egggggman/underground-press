@@ -41,17 +41,27 @@ def geometry(spec: dict, board: Board) -> dict:
         raise ValueError(f"unsupported Puzzle Grinder mode: {board.mode}")
     if board.boundary not in {"open", "boxed"}:
         raise ValueError(f"unsupported boundary: {board.boundary}")
+    if board.width <= 0 or board.height <= 0 or board.padding < 0 or board.header_allowance < 0:
+        raise ValueError(f"{board.mode} board dimensions must be positive and allowances non-negative")
+    if board.minimum_cell <= 0:
+        raise ValueError(f"{board.mode} minimum_cell must be positive")
     aw = board.width - 2 * board.padding
     ah = board.height - 2 * board.padding - board.header_allowance
     if aw <= 0 or ah <= 0:
         raise ValueError(f"{board.mode} board has no usable content area")
     if spec["geometry"] == "grid":
+        if spec["rows"] <= 0 or spec["columns"] <= 0:
+            raise ValueError("grid rows and columns must be positive")
         cell = min(aw / spec["columns"], ah / spec["rows"])
         if cell < board.minimum_cell:
             raise ValueError(f"{board.mode} grid is undersized: {cell:.2f}pt cells")
         return {"cell": cell, "w": cell * spec["columns"], "h": cell * spec["rows"]}
     if spec["geometry"] == "panel":
         _, _, cw, ch = spec["content_box"]
+        if cw <= 0 or ch <= 0:
+            raise ValueError("panel content_box dimensions must be positive")
+        if spec["minimum_content_width"] <= 0:
+            raise ValueError("panel minimum_content_width must be positive")
         scale = min(aw / cw, ah / ch)
         width, height = cw * scale, ch * scale
         if width < spec["minimum_content_width"]:
@@ -110,12 +120,14 @@ def render(name: str, spec: dict, board: Board) -> str:
     ET.parse(source)
     if name == "neighborhood_search":
         validate_neighborhood(spec)
+    sx, sy, sw, sh = spec["content_box"]
+    if spec["source_width"] <= 0 or spec["source_height"] <= 0:
+        raise ValueError(f"invalid source dimensions for {name}")
+    if sw <= 0 or sh <= 0 or sx < 0 or sy < 0 or sx + sw > spec["source_width"] or sy + sh > spec["source_height"]:
+        raise ValueError(f"invalid content_box for {name}")
     g = geometry(spec, board)
     x = (board.width - g["w"]) / 2
     y = board.padding + board.header_allowance
-    sx, sy, sw, sh = spec["content_box"]
-    if sw <= 0 or sh <= 0 or sx < 0 or sy < 0 or sx + sw > spec["source_width"] or sy + sh > spec["source_height"]:
-        raise ValueError(f"invalid content_box for {name}")
     scale = g["w"] / sw
     image_x, image_y = x - sx * scale, y - sy * scale
     href = source.relative_to(ROOT).as_posix()
