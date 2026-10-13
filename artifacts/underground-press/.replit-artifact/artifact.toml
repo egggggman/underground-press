@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "The Underground Press"
+description = "A ten-page newspaper production desk for Issue #1 of The Underground Press with editorial, puzzle, artwork, approval, proofing, and safe structured import/export workflows."
+version = "1.0.0"
+id = "artifacts/underground-press"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20909
+
+[services.development]
+run = "pnpm --filter @workspace/underground-press run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/underground-press", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/underground-press/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20909"
+BASE_PATH = "/"

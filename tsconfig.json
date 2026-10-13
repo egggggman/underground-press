@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./lib/replit-auth-web"
+    },
+    {
+      "path": "./lib/api-client-react"
+    }
+  ]
+}
