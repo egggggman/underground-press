@@ -1,0 +1,18 @@
+{
+  "name": "underground-press-gui-workspace",
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.26.1",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm --filter @workspace/api-server run build && PORT=${PORT:-4173} BASE_PATH=${BASE_PATH:-/} pnpm --filter @workspace/underground-press run build",
+    "test:sandbox": "pnpm --filter @workspace/api-server run test:sandbox && pnpm --filter @workspace/underground-press run test:sandbox",
+    "typecheck": "pnpm run typecheck:libs && pnpm --filter @workspace/api-server run typecheck && pnpm run typecheck:gui",
+    "typecheck:libs": "tsc --build --force",
+    "typecheck:gui": "pnpm --filter @workspace/underground-press run typecheck",
+    "dev:api": "pnpm --filter @workspace/api-server run dev",
+    "dev:gui": "PORT=${PORT:-5173} BASE_PATH=${BASE_PATH:-/} pnpm --filter @workspace/underground-press run dev"
+  }
+}
