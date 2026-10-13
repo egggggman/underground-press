@@ -193,7 +193,7 @@ function ExternalReferencePreview({
       rect.left - focusRingExtent < viewportLeft ||
       rect.right + focusRingExtent > viewportRight
     ) {
-      retryButton.scrollIntoView({ block: 'center', inline: 'nearest' });
+      retryButton.scrollIntoView?.({ block: 'center', inline: 'nearest' });
     }
   }, [failed, isRetrying]);
 
@@ -342,17 +342,21 @@ function ExternalReferencePreview({
   );
 }
 export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue: Issue }) {
-  const [failedReferenceImages, setFailedReferenceImages] = useState<string[]>([]);
+  const [failedCurrentReferenceImages, setFailedCurrentReferenceImages] = useState<string[]>([]);
+  const [failedHistoricalReferenceImages, setFailedHistoricalReferenceImages] = useState<string[]>([]);
   const [historicalImageAttempts, setHistoricalImageAttempts] = useState<Record<string, number>>({});
   const [historicalRetryInProgress, setHistoricalRetryInProgress] = useState<string[]>([]);
   const [historicalRetrySucceeded, setHistoricalRetrySucceeded] = useState<string[]>([]);
+  const [historicalRetryFailed, setHistoricalRetryFailed] = useState<string[]>([]);
   const [loadedReferenceImages, setLoadedReferenceImages] = useState<string[]>([]);
   const [pageOnePreviewAnnouncement, setPageOnePreviewAnnouncement] = useState('');
   const [historicalPreviewAnnouncement, setHistoricalPreviewAnnouncement] = useState('');
   const pendingFocusKey = useRef<string | null>(null);
   const pendingHideFocusKey = useRef<string | null>(null);
+  const pendingHistoricalRetryStartFocusKey = useRef<string | null>(null);
   const pendingHistoricalRetryFocusKey = useRef<string | null>(null);
   const loadButtonRefs = useRef(new Map<string, HTMLButtonElement>());
+  const historicalOriginalLinkRefs = useRef(new Map<string, HTMLAnchorElement>());
   const historicalRetryButtonRefs = useRef(new Map<string, HTMLButtonElement>());
   const direction = issue.artDirection;
   const changedKinds = staleReferenceKinds(asset.styleReview?.referenceIds ?? [], direction);
@@ -367,7 +371,7 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
     if (!key || loadedReferenceImages.includes(key)) return;
     const button = loadButtonRefs.current.get(key);
     button?.focus();
-    button?.scrollIntoView({ block: 'center', inline: 'nearest' });
+    button?.scrollIntoView?.({ block: 'center', inline: 'nearest' });
     pendingFocusKey.current = null;
   }, [loadedReferenceImages]);
 
@@ -376,19 +380,28 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
     if (!key || !loadedReferenceImages.includes(key)) return;
     const button = hideButtonRefs.current.get(key);
     button?.focus();
-    button?.scrollIntoView({ block: 'center' });
+    button?.scrollIntoView?.({ block: 'center' });
     pendingHideFocusKey.current = null;
   }, [loadedReferenceImages]);
 
   useEffect(() => {
     const key = pendingHistoricalRetryFocusKey.current;
-    if (!key || !failedReferenceImages.includes(key)) return;
+    if (!key || !failedHistoricalReferenceImages.includes(key)) return;
     const button = historicalRetryButtonRefs.current.get(key);
     if (!button) return;
     button.focus();
-    button.scrollIntoView({ block: 'center', inline: 'nearest' });
+    button.scrollIntoView?.({ block: 'center', inline: 'nearest' });
     pendingHistoricalRetryFocusKey.current = null;
-  }, [failedReferenceImages]);
+  }, [failedHistoricalReferenceImages]);
+
+  useEffect(() => {
+    const key = pendingHistoricalRetryStartFocusKey.current;
+    if (!key || !historicalRetryInProgress.includes(key)) return;
+    const link = historicalOriginalLinkRefs.current.get(key);
+    link?.focus();
+    link?.scrollIntoView?.({ block: 'center', inline: 'nearest' });
+    pendingHistoricalRetryStartFocusKey.current = null;
+  }, [historicalRetryInProgress]);
 
   const hideExternalPreview = (key: string, announcement?: { pageOne?: boolean; historicalLabel?: string }) => {
     pendingFocusKey.current = key;
@@ -400,9 +413,11 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
   };
 
   const retryHistoricalImage = (key: string) => {
+    pendingHistoricalRetryStartFocusKey.current = key;
     setHistoricalRetryInProgress((retrying) => retrying.includes(key) ? retrying : [...retrying, key]);
     setHistoricalRetrySucceeded((succeeded) => succeeded.filter((item) => item !== key));
-    setFailedReferenceImages((failed) => failed.filter((item) => item !== key));
+    setHistoricalRetryFailed((failed) => failed.filter((item) => item !== key));
+    setFailedHistoricalReferenceImages((failed) => failed.filter((item) => item !== key));
     setHistoricalImageAttempts((attempts) => ({ ...attempts, [key]: (attempts[key] ?? 0) + 1 }));
   };
 
@@ -438,7 +453,7 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
           const image = reference?.assetSnapshot;
           const hasReferenceImage = !!image?.objectPath && image.contentType?.startsWith('image/') && referenceWithAvailability?.imageAvailable !== false;
           const referenceKey = reference ? referencePreviewKey(reference) : '';
-          const referencePreviewFailed = failedReferenceImages.includes(referenceKey);
+          const referencePreviewFailed = failedCurrentReferenceImages.includes(referenceKey);
           const imageUnavailable = referenceWithAvailability?.imageAvailable === false ||
             (hasReferenceImage && referencePreviewFailed);
           const directImageUrl = reference ? isDirectImageUrl(reference.url) : false;
@@ -451,7 +466,7 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
           const historicalWithAvailability = historical as ArtReferenceWithAvailability | undefined;
           const historicalImage = historical?.assetSnapshot;
           const historicalKey = historical ? referencePreviewKey(historical) : '';
-          const historicalPreviewFailed = failedReferenceImages.includes(historicalKey);
+          const historicalPreviewFailed = failedHistoricalReferenceImages.includes(historicalKey);
           const historicalSavedImageFailed = !!historicalImage?.objectPath &&
             historicalImage.contentType?.startsWith('image/') &&
             historicalWithAvailability?.imageAvailable !== false &&
@@ -483,10 +498,21 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
                     role="status"
                     aria-live="polite"
                     aria-atomic="true"
+                    data-testid={`notice-historical-reference-retry-failure-${kind}`}
+                  >
+                    {historicalRetryFailed.includes(historicalKey)
+                      ? `Historical ${kind === 'front_page' ? 'front-page benchmark' : REFERENCE_LABELS[kind]} preview retry failed. The preview is still unavailable.`
+                      : ''}
+                  </p>
+                  <p
+                    className="sr-only"
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
                     data-testid={`notice-historical-reference-retry-success-${kind}`}
                   >
-                    {historicalRetrySucceeded.includes(historicalKey)
-                      ? `Historical ${REFERENCE_LABELS[kind]} preview loaded successfully.`
+                    {historical && historicalRetrySucceeded.includes(historicalKey)
+                      ? `Historical ${REFERENCE_LABELS[kind]} preview loaded successfully: ${historical.title}, version ${historical.version}.`
                       : ''}
                   </p>
                   {historical ? (
@@ -524,17 +550,32 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
                             onLoad={() => {
                               if (!historicalRetryInProgress.includes(historicalKey)) return;
                               setHistoricalRetryInProgress((retrying) => retrying.filter((item) => item !== historicalKey));
+                              setHistoricalRetryFailed((failed) => failed.filter((item) => item !== historicalKey));
                               setHistoricalRetrySucceeded((succeeded) => succeeded.includes(historicalKey) ? succeeded : [...succeeded, historicalKey]);
                             }}
                             onError={() => {
-                              if (historicalRetryInProgress.includes(historicalKey)) {
+                              const retryFailed = historicalRetryInProgress.includes(historicalKey);
+                              if (retryFailed) {
                                 pendingHistoricalRetryFocusKey.current = historicalKey;
+                                setHistoricalRetryFailed((failed) => failed.includes(historicalKey) ? failed : [...failed, historicalKey]);
                               }
                               setHistoricalRetryInProgress((retrying) => retrying.filter((item) => item !== historicalKey));
-                              setFailedReferenceImages((failed) => failed.includes(historicalKey) ? failed : [...failed, historicalKey]);
+                              setFailedHistoricalReferenceImages((failed) => failed.includes(historicalKey) ? failed : [...failed, historicalKey]);
                             }}
                           />
-                          <a className="underline text-xs preview-keyboard-control" href={`${storageBase}${historicalImage.objectPath}`} target="_blank" rel="noopener noreferrer">Inspect historical reference original</a>
+                          <a
+                            className="underline text-xs preview-keyboard-control"
+                            href={`${storageBase}${historicalImage.objectPath}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-testid={`link-inspect-historical-reference-original-${kind}`}
+                            ref={(link) => {
+                              if (link) historicalOriginalLinkRefs.current.set(historicalKey, link);
+                              else historicalOriginalLinkRefs.current.delete(historicalKey);
+                            }}
+                          >
+                            Inspect historical reference original
+                          </a>
                         </>
                       ) : historicalImage?.objectPath ? (
                         <p className="card-flat text-xs" role="status" data-testid={`notice-historical-reference-unavailable-${kind}`}>The historical reference has a saved file, but it is not an image preview.</p>
@@ -575,7 +616,7 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
                                   buttonRect.left - focusRingExtent < dialogRect.left ||
                                   buttonRect.right + focusRingExtent > dialogRect.right
                                 ) {
-                                  hideButton.scrollIntoView({ block: 'center', inline: 'nearest' });
+                                  hideButton.scrollIntoView?.({ block: 'center', inline: 'nearest' });
                                 }
                               }}
                               retryFailureAnnouncement={`Historical ${REFERENCE_LABELS[kind]} preview retry failed. The preview is still unavailable.`}
@@ -645,7 +686,7 @@ export function StyleReferenceComparison({ asset, issue }: { asset: Asset; issue
                             src={`${storageBase}${image.objectPath}`}
                             alt={`Current ${REFERENCE_LABELS[kind]}: ${reference.title}`}
                             data-testid={`img-comparison-reference-${kind}`}
-                            onError={() => setFailedReferenceImages((failed) => failed.includes(referenceKey) ? failed : [...failed, referenceKey])}
+                            onError={() => setFailedCurrentReferenceImages((failed) => failed.includes(referenceKey) ? failed : [...failed, referenceKey])}
                           />
                           <a className="underline text-xs" href={`${storageBase}${image.objectPath}`} target="_blank" rel="noopener noreferrer">Inspect current reference original</a>
                         </>
@@ -759,8 +800,8 @@ function isDirectImageUrl(value: string) {
   }
 }
 
-function referencePreviewKey(reference: Pick<ArtReference, 'id' | 'version' | 'url'>) {
-  return JSON.stringify([reference.id, reference.version, reference.url]);
+function referencePreviewKey(reference: Pick<ArtReference, 'kind' | 'id' | 'version' | 'url'>) {
+  return JSON.stringify([reference.kind, reference.id, reference.version, reference.url]);
 }
 export function StyleReviewDialog({ asset, issue, onClose }: { asset: Asset | null; issue: Issue; onClose: () => void }) {
   const { run, pending, auth, canWrite } = usePress();
@@ -798,11 +839,12 @@ export function StyleReviewDialog({ asset, issue, onClose }: { asset: Asset | nu
   };
   const actor = auth.user?.id;
   const currentReferences = issue.artDirection?.references ?? [];
+  const comparisonKey = asset ? JSON.stringify([asset.id, asset.styleReview]) : '';
   return (
     <Modal open={!!asset} title={`Style checklist: ${asset?.name ?? ''}`} onClose={onClose}>
       <div className="space-y-2 text-sm">
         <p className="card-flat text-xs">{PROVISIONAL}</p>
-        {asset && styleStatus(asset, issue.artDirection).stale && <StyleReferenceComparison asset={asset} issue={issue} />}
+        {asset && styleStatus(asset, issue.artDirection).stale && <StyleReferenceComparison key={comparisonKey} asset={asset} issue={issue} />}
         {asset && canWrite && asset.contentType?.startsWith('image/') && asset.objectPath && <div className="pd-frame press-preview inline-block"><img className="max-h-48" src={`${import.meta.env.BASE_URL}api/storage${asset.objectPath}`} alt={asset.caption || asset.name} /></div>}
         {refreshed && <p className="card-flat text-xs" role="status" data-testid="notice-style-checklist-refreshed">The issue changed while this checklist was open. It has been refreshed to revision {rev}. Compare the current reference artwork, then retry your review.</p>}
         <p className="card-flat text-xs">Checklist revision {rev}. The server records the signed-in account{actor ? ` (${actor})` : ''} as actor. This is separate from general asset review. {refsOk ? 'Both reference artworks are confirmed by Myrtle.' : 'Reference artwork not yet imported and confirmed: a pass is not possible, a failed review is allowed.'}</p>

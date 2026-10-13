@@ -152,7 +152,7 @@ importers:
 
   .: {}
 
-  apps/underground-press:
+  artifacts/underground-press:
     devDependencies:
       '@hookform/resolvers':
         specifier: ^3.10.0

@@ -36,7 +36,7 @@ const historicalImageUrl = params.has('historicalSvg')
 const externalFrontPageImageUrl = 'https://images.example.test/archive/front-page.webp?edition=6';
 const savedHistoricalImage = params.has('savedHistoricalImage');
 const savedHistoricalPageOne = params.has('savedHistoricalPageOne');
-
+const concurrentHistoricalRetries = params.has('concurrentHistoricalRetries');
 const direction = {
   references: [
     reference('golden-current', 'golden_image', externalImageUrl),
@@ -44,11 +44,17 @@ const direction = {
   ],
   history: [
     {
-      ...reference('golden-previous', 'golden_image', historicalImageUrl, 'Previous golden_image', 1),
+      ...reference(
+        'golden-previous',
+        'golden_image',
+        historicalImageUrl,
+        concurrentHistoricalRetries ? 'Archived Golden Image' : 'Previous golden_image',
+        1,
+      ),
       ...(savedHistoricalImage ? {
         assetSnapshot: {
           name: 'Historical cover',
-          objectPath: '/private/historical-reference.png',
+          objectPath: concurrentHistoricalRetries ? '/private/historical-golden.png' : '/private/historical-reference.png',
           contentType: 'image/png',
         } as Asset,
       } : {}),
@@ -58,7 +64,7 @@ const direction = {
       ...(savedHistoricalPageOne ? {
         assetSnapshot: {
           name: 'Archived Page 1 cover',
-          objectPath: '/private/historical-reference.png',
+          objectPath: '/private/historical-page-one.png',
           contentType: 'image/png',
         } as Asset,
       } : {}),
@@ -81,20 +87,36 @@ const asset = {
     referenceIds: ['golden-previous', 'front-page-previous'],
   },
 } as unknown as Asset;
+const secondSavedReview = {
+  ...asset,
+  id: 'browser-test-second-asset',
+  name: 'Second saved cover',
+} as Asset;
 const issue = { id: 'browser-test-issue', revision: 2, artDirection: direction } as unknown as Issue;
 
 function Fixture() {
   const focusTest = params.has('focusTest');
-  const [isOpen, setIsOpen] = useState(!focusTest);
+  const reviewSwitch = params.has('reviewSwitch');
+  const [selectedAsset, setSelectedAsset] = useState<Asset | null>(focusTest ? null : asset);
 
   return (
     <>
       {focusTest && (
-        <button type="button" onClick={() => setIsOpen(true)} data-testid="button-open-style-checklist">
+        <button type="button" onClick={() => setSelectedAsset(asset)} data-testid="button-open-style-checklist">
           Open style checklist
         </button>
       )}
-      <StyleReviewDialog asset={isOpen ? asset : null} issue={issue} onClose={() => setIsOpen(false)} />
+      {reviewSwitch && (
+        <div>
+          <button type="button" onClick={() => setSelectedAsset(asset)} data-testid="button-open-first-saved-review">
+            Open first saved review
+          </button>
+          <button type="button" onClick={() => setSelectedAsset(secondSavedReview)} data-testid="button-open-second-saved-review">
+            Open second saved review
+          </button>
+        </div>
+      )}
+      <StyleReviewDialog asset={selectedAsset} issue={issue} onClose={() => setSelectedAsset(null)} />
     </>
   );
 }

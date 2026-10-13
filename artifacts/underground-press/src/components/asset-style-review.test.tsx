@@ -45,6 +45,9 @@ const makeReference = (id: string, title: string, version: number, kind: ArtRefe
 beforeEach(() => {
   mocks.run.mockReset().mockResolvedValue(true);
   mocks.toast.mockReset();
+  if (!HTMLElement.prototype.scrollIntoView) {
+    HTMLElement.prototype.scrollIntoView = vi.fn();
+  }
   mocks.pressState = {
     run: mocks.run,
     pending: false,
@@ -296,6 +299,51 @@ describe('style state', () => {
     fireEvent.click(view.getByTestId('button-hide-historical-reference-preview-golden_image'));
     expect(announcement.textContent?.trim()).toBe('Historical Golden Image preview hidden.');
   });
+  it.each([
+    ['Page 1', 'button-load-reference-preview-front_page', 'img-comparison-reference-front_page', 'button-hide-reference-preview-front_page', 'notice-page-one-preview-hidden', 'Page 1 preview hidden.'],
+    ['historical', 'button-load-historical-reference-preview-golden_image', 'img-comparison-historical-reference-golden_image', 'button-hide-historical-reference-preview-golden_image', 'notice-historical-reference-preview-hidden', 'Historical Golden Image preview hidden.'],
+  ])('clears a %s hide announcement when the saved review changes and ignores a late image event', (_label, loadButtonId, imageId, hideButtonId, announcementId, announcementText) => {
+    const direction = ad(true);
+    direction.references[1] = { ...direction.references[1], url: 'https://images.example.org/page-1.png' };
+    direction.history.push({
+      ...ref('g-old', 'golden_image', false),
+      title: 'Archived Golden Image',
+      url: 'https://images.example.org/archive/golden-image.png',
+    }, {
+      ...ref('f-old', 'front_page', false),
+      title: 'Archived Page 1',
+    });
+    const firstReview = asset(['g-old', 'f-old'], 'failed');
+    const secondReview = {
+      ...firstReview,
+      styleReview: { ...firstReview.styleReview!, at: 'a different saved review' },
+    } as Asset;
+    const view = render(
+      <StyleReviewDialog
+        asset={firstReview}
+        issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+        onClose={vi.fn()}
+      />,
+    );
+
+    fireEvent.click(view.getByTestId(loadButtonId));
+    const oldPreview = view.getByTestId(imageId);
+    fireEvent.click(view.getByTestId(hideButtonId));
+    expect(view.getByTestId(announcementId).textContent?.trim()).toBe(announcementText);
+
+    view.rerender(
+      <StyleReviewDialog
+        asset={secondReview}
+        issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+        onClose={vi.fn()}
+      />,
+    );
+    const announcement = view.getByTestId(announcementId);
+    expect(announcement.textContent?.trim()).toBe('');
+
+    fireEvent.load(oldPreview);
+    expect(announcement.textContent?.trim()).toBe('');
+  });
   it('identifies both current and historical previews while loading and clears only the completed or failed preview status', () => {
     const direction = ad(true);
     direction.history.push({
@@ -320,21 +368,73 @@ describe('style state', () => {
     fireEvent.click(view.getByTestId('button-load-historical-reference-preview-golden_image'));
     fireEvent.click(view.getByTestId('button-load-reference-preview-golden_image'));
 
-    const historicalLoading = view.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const historicalLoading = view.getAllByTestId('img-comparison-historical-reference-golden_image-loading')
+      .find((status) => status.textContent?.includes('Loading external image preview'));
+    expect(historicalLoading).toBeTruthy();
     const currentLoading = view.getByTestId('img-comparison-reference-golden_image-loading');
-    expect(historicalLoading.textContent).toMatch(/historical Golden Image reference “Archived Golden Image”, version 1/i);
+    expect(historicalLoading?.textContent).toMatch(/historical Golden Image reference “Archived Golden Image”, version 1/i);
     expect(currentLoading.textContent).toMatch(/current Golden Image reference “Current Golden Image”, version 2/i);
-    expect(historicalLoading.textContent).not.toBe(currentLoading.textContent);
+    expect(historicalLoading?.textContent).not.toBe(currentLoading.textContent);
 
     fireEvent.load(view.getByTestId('img-comparison-reference-golden_image'));
     expect(view.queryByTestId('img-comparison-reference-golden_image-loading')).toBeNull();
-    expect(view.getByTestId('img-comparison-historical-reference-golden_image-loading').textContent).toMatch(/Archived Golden Image/);
+    expect(historicalLoading?.textContent).toMatch(/Archived Golden Image/);
 
     fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
-    expect(view.queryByTestId('img-comparison-historical-reference-golden_image-loading')).toBeNull();
+    expect(view.getAllByTestId('img-comparison-historical-reference-golden_image-loading')
+      .every((status) => !status.textContent)).toBe(true);
     expect(view.getByTestId('notice-historical-reference-unavailable-golden_image').textContent).toMatch(/external historical image preview is unavailable/i);
     expect(view.queryByTestId('img-comparison-reference-golden_image-loading')).toBeNull();
     expect(view.getByTestId('img-comparison-reference-golden_image')).toBeTruthy();
+  });
+  it('keeps concurrent archived image retry statuses tied to their own title and version', () => {
+    const direction = ad(true);
+    direction.history.push(
+      {
+        ...ref('g-old', 'golden_image', false),
+        title: 'Archived Golden Image',
+        version: 4,
+        assetSnapshot: { name: 'Golden archive.png', objectPath: '/private/golden.png', contentType: 'image/png' } as Asset,
+      },
+      {
+        ...ref('f-old', 'front_page', false),
+        title: 'Archived Page 1',
+        version: 7,
+        assetSnapshot: { name: 'Page 1 archive.png', objectPath: '/private/page-one.png', contentType: 'image/png' } as Asset,
+      },
+    );
+    const view = render(
+      <StyleReviewDialog
+        asset={asset(['g-old', 'f-old'], 'failed')}
+        issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+        onClose={vi.fn()}
+      />,
+    );
+
+    fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
+    fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+
+    const goldenLoading = view.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const pageOneLoading = view.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const goldenSuccess = view.getByTestId('notice-historical-reference-retry-success-golden_image');
+    const pageOneSuccess = view.getByTestId('notice-historical-reference-retry-success-front_page');
+    expect(goldenLoading.textContent).toBe('Loading historical Golden Image preview: Archived Golden Image, version 4.');
+    expect(pageOneLoading.textContent).toBe('Loading historical front-page benchmark preview: Archived Page 1, version 7.');
+    expect(goldenSuccess.textContent).toBe('');
+    expect(pageOneSuccess.textContent).toBe('');
+
+    fireEvent.load(view.getByTestId('img-comparison-historical-reference-front_page'));
+    expect(pageOneLoading.textContent).toBe('');
+    expect(pageOneSuccess.textContent).toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1, version 7.');
+    expect(goldenLoading.textContent).toBe('Loading historical Golden Image preview: Archived Golden Image, version 4.');
+    expect(goldenSuccess.textContent).toBe('');
+
+    fireEvent.load(view.getByTestId('img-comparison-historical-reference-golden_image'));
+    expect(goldenLoading.textContent).toBe('');
+    expect(goldenSuccess.textContent).toBe('Historical Golden Image preview loaded successfully: Archived Golden Image, version 4.');
+    expect(pageOneSuccess.textContent).toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1, version 7.');
   });
   it('announces a slow external preview while keeping the saved artwork and reference details available', () => {
     vi.useFakeTimers();
@@ -619,7 +719,9 @@ describe('style state', () => {
 
     fireEvent.click(view.getByTestId('button-load-historical-reference-preview-golden_image'));
     expect(view.getByTestId('img-comparison-historical-reference-golden_image').getAttribute('src')).toBe('https://images.example.test/archive/old-cover.webp');
-    expect(view.getByTestId('img-comparison-historical-reference-golden_image-loading').getAttribute('role')).toBe('status');
+    expect(view.getAllByTestId('img-comparison-historical-reference-golden_image-loading')
+      .some((status) => status.getAttribute('role') === 'status' &&
+        status.textContent?.includes('Loading external image preview'))).toBe(true);
     act(() => vi.advanceTimersByTime(8_000));
 
     const slowNotice = view.getByTestId('img-comparison-historical-reference-golden_image-slow');
@@ -631,7 +733,8 @@ describe('style state', () => {
     expect(view.getByTestId('button-hide-historical-reference-preview-golden_image')).toBeTruthy();
 
     fireEvent.load(view.getByTestId('img-comparison-historical-reference-golden_image'));
-    expect(view.queryByTestId('img-comparison-historical-reference-golden_image-loading')).toBeNull();
+    expect(view.getAllByTestId('img-comparison-historical-reference-golden_image-loading')
+      .every((status) => !status.textContent)).toBe(true);
     expect(view.queryByTestId('img-comparison-historical-reference-golden_image-slow')).toBeNull();
   });
   it('does not let a late archived image response replace a newer historical comparison choice', () => {
@@ -906,7 +1009,8 @@ describe('style state', () => {
 
     fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
     expect(view.queryByTestId('notice-historical-reference-unavailable-golden_image')).toBeNull();
-    expect(view.getByTestId('img-comparison-historical-reference-golden_image-loading').textContent).toMatch(/loading external image preview/i);
+    expect(view.getAllByTestId('img-comparison-historical-reference-golden_image-loading')
+      .some((status) => status.textContent?.match(/loading external image preview/i))).toBe(true);
     expect(view.getByTestId('img-comparison-historical-reference-golden_image').getAttribute('src')).toBe(sourceUrl);
     expect(view.getByTestId('button-hide-historical-reference-preview-golden_image')).toBeTruthy();
   });
@@ -945,7 +1049,80 @@ describe('style state', () => {
     const success = view.getByTestId('notice-historical-reference-retry-success-golden_image');
     expect(success.getAttribute('role')).toBe('status');
     expect(success.getAttribute('aria-live')).toBe('polite');
-    expect(success.textContent).toBe('Historical Golden Image preview loaded successfully.');
+    expect(success.textContent).toBe('Historical Golden Image preview loaded successfully: Archived Golden Image, version 1.');
+  });
+  it('keeps current Golden Image and saved historical Page 1 retry messages independent', () => {
+    const direction = ad(true);
+    direction.references[0] = {
+      ...direction.references[0],
+      title: 'Current Golden Image',
+      url: 'https://images.example.test/current-golden.png',
+    };
+    direction.history.push({
+      ...ref('g-old', 'golden_image', false),
+      title: 'Archived Golden Image',
+    });
+    direction.history.push({
+      ...ref('page-one-old', 'front_page', false),
+      title: 'Archived Page 1 cover',
+      assetSnapshot: {
+        name: 'archived-page-one.png',
+        objectPath: '/private/archived-page-one.png',
+        contentType: 'image/png',
+      } as Asset,
+      imageAvailable: true,
+    } as ArtReferenceWithAvailability);
+    const view = render(
+      <StyleReviewDialog
+        asset={asset(['g-old', 'page-one-old'], 'failed')}
+        issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+        onClose={vi.fn()}
+      />,
+    );
+
+    const currentLoad = view.getByTestId('button-load-reference-preview-golden_image');
+    fireEvent.click(currentLoad);
+    fireEvent.error(view.getByTestId('img-comparison-reference-golden_image'));
+    fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+
+    const currentFailure = view.getByTestId('img-comparison-reference-golden_image-retry-failed');
+    const historicalFailure = view.getByTestId('notice-historical-reference-retry-failure-front_page');
+    const currentSuccess = currentFailure;
+    const historicalSuccess = view.getByTestId('notice-historical-reference-retry-success-front_page');
+    fireEvent.click(view.getByTestId('button-retry-reference-preview-golden_image'));
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+    expect(view.getByTestId('img-comparison-reference-golden_image-loading').textContent)
+      .toBe('Loading external image preview for current Golden Image reference “Current Golden Image”, version 1.');
+    expect(view.getByTestId('img-comparison-historical-reference-front_page-loading').textContent)
+      .toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    expect(currentFailure.textContent).toBe('');
+    expect(historicalFailure.textContent).toBe('');
+
+    fireEvent.error(view.getByTestId('img-comparison-reference-golden_image'));
+    expect(currentFailure.textContent).toBe('Golden Image preview retry failed. The preview is still unavailable.');
+    expect(view.getByTestId('img-comparison-historical-reference-front_page-loading').textContent)
+      .toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    expect(historicalFailure.textContent).toBe('');
+
+    fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+    expect(historicalFailure.textContent)
+      .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    expect(currentFailure.textContent).toBe('Golden Image preview retry failed. The preview is still unavailable.');
+
+    fireEvent.click(view.getByTestId('button-retry-reference-preview-golden_image'));
+    fireEvent.load(view.getByTestId('img-comparison-reference-golden_image'));
+    expect(currentSuccess.textContent).toBe('Golden Image preview loaded successfully.');
+    expect(historicalFailure.textContent)
+      .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    expect(historicalSuccess.textContent).toBe('');
+
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+    expect(view.getByTestId('img-comparison-historical-reference-front_page-loading').textContent)
+      .toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    expect(currentSuccess.textContent).toBe('Golden Image preview loaded successfully.');
+    fireEvent.load(view.getByTestId('img-comparison-historical-reference-front_page'));
+    expect(historicalSuccess.textContent).toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    expect(currentSuccess.textContent).toBe('Golden Image preview loaded successfully.');
   });
   it('keeps a saved historical Page 1 first load silent and announces a later retry success', () => {
     const direction = ad(true);
@@ -987,7 +1164,437 @@ describe('style state', () => {
     expect(loading.textContent).toBe('');
     expect(success.getAttribute('role')).toBe('status');
     expect(success.getAttribute('aria-live')).toBe('polite');
-    expect(success.textContent).toBe('Historical front-page benchmark preview loaded successfully.');
+    expect(success.textContent).toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+  });
+  it('announces a saved historical Page 1 retry failure but not its first-load failure', () => {
+    const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+    Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+      configurable: true,
+      value: vi.fn(),
+    });
+    try {
+      const direction = ad(true);
+      direction.history.push({
+        ...ref('page-one-old', 'front_page', false),
+        title: 'Archived Page 1 cover',
+        version: 1,
+        assetSnapshot: {
+          name: 'archived-page-one.png',
+          objectPath: '/private/archived-page-one.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      } as ArtReference & { imageAvailable: boolean });
+      const view = render(
+        <StyleReviewDialog
+          asset={asset(['g', 'page-one-old'], 'failed')}
+          issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+          onClose={vi.fn()}
+        />,
+      );
+      const failure = view.getByTestId('notice-historical-reference-retry-failure-front_page');
+      expect(failure.getAttribute('role')).toBe('status');
+      expect(failure.getAttribute('aria-live')).toBe('polite');
+      expect(failure.textContent).toBe('');
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+      expect(failure.textContent).toBe('');
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+      expect(failure.textContent).toBe('');
+      expect(view.getByTestId('img-comparison-historical-reference-front_page-loading').textContent)
+        .toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+      expect(failure.textContent)
+        .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    } finally {
+      if (originalScrollIntoView) {
+        Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+          configurable: true,
+          value: originalScrollIntoView,
+        });
+      } else {
+        Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView');
+      }
+    }
+  });
+  it('clears a saved historical Page 1 retry failure when a later retry succeeds', () => {
+    const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+    Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+      configurable: true,
+      value: vi.fn(),
+    });
+    try {
+      const direction = ad(true);
+      direction.history.push({
+        ...ref('page-one-old', 'front_page', false),
+        title: 'Archived Page 1 cover',
+        version: 1,
+        assetSnapshot: {
+          name: 'archived-page-one.png',
+          objectPath: '/private/archived-page-one.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      } as ArtReference & { imageAvailable: boolean });
+      const view = render(
+        <StyleReviewDialog
+          asset={asset(['g', 'page-one-old'], 'failed')}
+          issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+          onClose={vi.fn()}
+        />,
+      );
+      const failure = view.getByTestId('notice-historical-reference-retry-failure-front_page');
+      const success = view.getByTestId('notice-historical-reference-retry-success-front_page');
+      const imageTestId = 'img-comparison-historical-reference-front_page';
+
+      fireEvent.error(view.getByTestId(imageTestId));
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+      fireEvent.error(view.getByTestId(imageTestId));
+      expect(failure.textContent)
+        .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+      expect(success.textContent).toBe('');
+
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+      expect(failure.textContent).toBe('');
+      expect(view.getByTestId(`${imageTestId}-loading`).textContent)
+        .toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+      expect(success.textContent).toBe('');
+
+      fireEvent.load(view.getByTestId(imageTestId));
+      expect(failure.textContent).toBe('');
+      expect(success.textContent)
+        .toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    } finally {
+      if (originalScrollIntoView) {
+        Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+          configurable: true,
+          value: originalScrollIntoView,
+        });
+      } else {
+        Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView');
+      }
+    }
+  });
+  it('keeps saved Golden Image and Page 1 retry announcements independent', () => {
+    const originalScrollIntoView = HTMLElement.prototype.scrollIntoView;
+    Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+      configurable: true,
+      value: vi.fn(),
+    });
+    try {
+      const direction = ad(true);
+      const sharedHistorical = {
+        id: 'shared-history-id',
+        version: 1,
+        assetId: '',
+        url: '',
+        sourceIdentity: 'archive',
+        at: '',
+        suppliedBy: '',
+        approval: null,
+        assetSnapshot: {
+          name: 'archived-reference.png',
+          objectPath: '/private/archived-reference.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      };
+      direction.history.push(
+        { ...sharedHistorical, kind: 'golden_image', title: 'Archived Golden Image' } as ArtReference & { imageAvailable: boolean },
+        { ...sharedHistorical, kind: 'front_page', title: 'Archived Page 1 cover' } as ArtReference & { imageAvailable: boolean },
+      );
+      const view = render(
+        <StyleReviewDialog
+          asset={asset(['shared-history-id', 'shared-history-id'], 'failed')}
+          issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+          onClose={vi.fn()}
+        />,
+      );
+
+      const goldenLoading = view.getByTestId('img-comparison-historical-reference-golden_image-loading');
+      const pageOneLoading = view.getByTestId('img-comparison-historical-reference-front_page-loading');
+      const goldenFailure = view.getByTestId('notice-historical-reference-retry-failure-golden_image');
+      const pageOneFailure = view.getByTestId('notice-historical-reference-retry-failure-front_page');
+      const goldenSuccess = view.getByTestId('notice-historical-reference-retry-success-golden_image');
+      const pageOneSuccess = view.getByTestId('notice-historical-reference-retry-success-front_page');
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+      expect(goldenLoading.textContent).toBe('Loading historical Golden Image preview: Archived Golden Image, version 1.');
+      expect(pageOneLoading.textContent).toBe('');
+      expect(pageOneFailure.textContent).toBe('');
+
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+      expect(goldenLoading.textContent).toBe('Loading historical Golden Image preview: Archived Golden Image, version 1.');
+      expect(pageOneLoading.textContent).toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+      expect(goldenFailure.textContent).toBe('');
+      expect(pageOneFailure.textContent).toBe('');
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
+      expect(goldenFailure.textContent)
+        .toBe('Historical Golden Image preview retry failed. The preview is still unavailable.');
+      expect(pageOneLoading.textContent).toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+      expect(pageOneFailure.textContent).toBe('');
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-front_page'));
+      expect(pageOneFailure.textContent)
+        .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+      expect(goldenFailure.textContent)
+        .toBe('Historical Golden Image preview retry failed. The preview is still unavailable.');
+
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+      fireEvent.load(view.getByTestId('img-comparison-historical-reference-golden_image'));
+      expect(goldenSuccess.textContent)
+        .toBe('Historical Golden Image preview loaded successfully: Archived Golden Image, version 1.');
+      expect(pageOneFailure.textContent)
+        .toBe('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+      expect(pageOneSuccess.textContent).toBe('');
+
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+      fireEvent.load(view.getByTestId('img-comparison-historical-reference-front_page'));
+      expect(pageOneSuccess.textContent)
+        .toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+      expect(goldenSuccess.textContent)
+        .toBe('Historical Golden Image preview loaded successfully: Archived Golden Image, version 1.');
+      expect(goldenFailure.textContent).toBe('');
+    } finally {
+      if (originalScrollIntoView) {
+        Object.defineProperty(HTMLElement.prototype, 'scrollIntoView', {
+          configurable: true,
+          value: originalScrollIntoView,
+        });
+      } else {
+        Reflect.deleteProperty(HTMLElement.prototype, 'scrollIntoView');
+      }
+    }
+  });
+  it('keeps concurrent saved historical image retry announcements tied to their own references', () => {
+    const direction = ad(true);
+    direction.history.push(
+      {
+        ...ref('g-old', 'golden_image', false),
+        title: 'Archived Golden Image',
+        version: 3,
+        assetSnapshot: {
+          name: 'archived-golden.png',
+          objectPath: '/private/archived-golden.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      } as ArtReferenceWithAvailability,
+      {
+        ...ref('f-old', 'front_page', false),
+        title: 'Archived Page 1 cover',
+        version: 5,
+        assetSnapshot: {
+          name: 'archived-page-one.png',
+          objectPath: '/private/archived-page-one.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      } as ArtReferenceWithAvailability,
+    );
+    const view = render(
+      <StyleReviewDialog
+        asset={asset(['g-old', 'f-old'], 'failed')}
+        issue={{ id: 'issue', revision: 2, artDirection: direction } as unknown as Issue}
+        onClose={vi.fn()}
+      />,
+    );
+
+    const goldenImage = view.getByTestId('img-comparison-historical-reference-golden_image');
+    const pageOneImage = view.getByTestId('img-comparison-historical-reference-front_page');
+    fireEvent.error(goldenImage);
+    fireEvent.error(pageOneImage);
+
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-front_page'));
+
+    const goldenLoading = view.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const pageOneLoading = view.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const goldenSuccess = view.getByTestId('notice-historical-reference-retry-success-golden_image');
+    const pageOneSuccess = view.getByTestId('notice-historical-reference-retry-success-front_page');
+    expect(goldenLoading.getAttribute('role')).toBe('status');
+    expect(goldenLoading.getAttribute('aria-live')).toBe('polite');
+    expect(goldenLoading.textContent).toBe('Loading historical Golden Image preview: Archived Golden Image, version 3.');
+    expect(pageOneLoading.getAttribute('role')).toBe('status');
+    expect(pageOneLoading.getAttribute('aria-live')).toBe('polite');
+    expect(pageOneLoading.textContent).toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 5.');
+    expect(goldenSuccess.textContent).toBe('');
+    expect(pageOneSuccess.textContent).toBe('');
+
+    fireEvent.load(view.getByTestId('img-comparison-historical-reference-golden_image'));
+
+    expect(goldenLoading.textContent).toBe('');
+    expect(goldenSuccess.getAttribute('role')).toBe('status');
+    expect(goldenSuccess.getAttribute('aria-live')).toBe('polite');
+    expect(goldenSuccess.textContent)
+      .toBe('Historical Golden Image preview loaded successfully: Archived Golden Image, version 3.');
+    expect(pageOneLoading.textContent).toBe('Loading historical front-page benchmark preview: Archived Page 1 cover, version 5.');
+    expect(pageOneSuccess.textContent).toBe('');
+
+    fireEvent.load(view.getByTestId('img-comparison-historical-reference-front_page'));
+
+    expect(pageOneLoading.textContent).toBe('');
+    expect(pageOneSuccess.getAttribute('role')).toBe('status');
+    expect(pageOneSuccess.getAttribute('aria-live')).toBe('polite');
+    expect(pageOneSuccess.textContent)
+      .toBe('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 5.');
+  });
+  it.each(['failure', 'success'] as const)(
+    'clears a historical retry %s when a different saved review is opened',
+    (outcome) => {
+      const direction = ad(true);
+      direction.history.push({
+        ...ref('g-old', 'golden_image', false),
+        title: 'Archived Golden Image',
+        assetSnapshot: {
+          name: 'archived-golden.png',
+          objectPath: '/private/archived-golden.png',
+          contentType: 'image/png',
+        } as Asset,
+        imageAvailable: true,
+      } as ArtReferenceWithAvailability);
+      const firstReview = {
+        ...asset(['g-old', 'f'], 'failed'),
+        name: 'First saved review',
+        objectPath: '/private/first-review.png',
+        contentType: 'image/png',
+      } as Asset;
+      const secondReview = {
+        ...firstReview,
+        id: 'second-review',
+        name: 'Second saved review',
+        objectPath: '/private/second-review.png',
+      } as Asset;
+      const issue = { id: 'issue', revision: 2, artDirection: direction } as unknown as Issue;
+      const view = render(<StyleReviewDialog asset={firstReview} issue={issue} onClose={vi.fn()} />);
+
+      fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
+      fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+      const retryImage = view.getByTestId('img-comparison-historical-reference-golden_image');
+      if (outcome === 'failure') fireEvent.error(retryImage);
+      else fireEvent.load(retryImage);
+
+      const announcementTestId = outcome === 'failure'
+        ? 'notice-historical-reference-retry-failure-golden_image'
+        : 'notice-historical-reference-retry-success-golden_image';
+      expect(view.getByTestId(announcementTestId).textContent).not.toBe('');
+
+      view.rerender(<StyleReviewDialog asset={secondReview} issue={issue} onClose={vi.fn()} />);
+
+      expect(view.getByTestId('notice-historical-reference-retry-failure-golden_image').textContent).toBe('');
+      expect(view.getByTestId('notice-historical-reference-retry-success-golden_image').textContent).toBe('');
+      expect(view.getByTestId('comparison-saved-artwork-second-review')).toBeTruthy();
+    },
+  );
+  it('ignores a late historical image event from the previous saved review', () => {
+    const direction = ad(true);
+    direction.history.push({
+      ...ref('g-old', 'golden_image', false),
+      title: 'Archived Golden Image',
+      assetSnapshot: {
+        name: 'archived-golden.png',
+        objectPath: '/private/archived-golden.png',
+        contentType: 'image/png',
+      } as Asset,
+      imageAvailable: true,
+    } as ArtReferenceWithAvailability);
+    const firstReview = {
+      ...asset(['g-old', 'f'], 'failed'),
+      name: 'First saved review',
+      objectPath: '/private/first-review.png',
+      contentType: 'image/png',
+    } as Asset;
+    const secondReview = { ...firstReview, id: 'second-review', name: 'Second saved review' } as Asset;
+    const issue = { id: 'issue', revision: 2, artDirection: direction } as unknown as Issue;
+    const view = render(<StyleReviewDialog asset={firstReview} issue={issue} onClose={vi.fn()} />);
+
+    fireEvent.error(view.getByTestId('img-comparison-historical-reference-golden_image'));
+    fireEvent.click(view.getByTestId('button-retry-historical-reference-preview-golden_image'));
+    const pendingImage = view.getByTestId('img-comparison-historical-reference-golden_image');
+
+    view.rerender(<StyleReviewDialog asset={secondReview} issue={issue} onClose={vi.fn()} />);
+    fireEvent.error(pendingImage);
+    fireEvent.load(pendingImage);
+
+    expect(view.getByTestId('notice-historical-reference-retry-failure-golden_image').textContent).toBe('');
+    expect(view.getByTestId('notice-historical-reference-retry-success-golden_image').textContent).toBe('');
+    expect(view.getByTestId('img-comparison-historical-reference-golden_image')).toBeTruthy();
+  });
+  it.each(['failure', 'success'] as const)(
+    'clears a current Page 1 retry %s when a different saved review is opened',
+    (outcome) => {
+      const direction = ad(true);
+      direction.references[1] = {
+        ...direction.references[1],
+        title: 'Current Page 1',
+        url: 'https://images.example.test/current-page-one.webp',
+      };
+      direction.history.push(ref('f-old', 'front_page', false));
+      const firstReview = {
+        ...asset(['g', 'f-old'], 'failed'),
+        name: 'First saved review',
+      } as Asset;
+      const secondReview = {
+        ...firstReview,
+        id: 'second-review',
+        name: 'Second saved review',
+      } as Asset;
+      const issue = { id: 'issue', revision: 2, artDirection: direction } as unknown as Issue;
+      const view = render(<StyleReviewDialog asset={firstReview} issue={issue} onClose={vi.fn()} />);
+
+      fireEvent.click(view.getByTestId('button-load-reference-preview-front_page'));
+      fireEvent.error(view.getByTestId('img-comparison-reference-front_page'));
+      fireEvent.click(view.getByTestId('button-retry-reference-preview-front_page'));
+      const retryImage = view.getByTestId('img-comparison-reference-front_page');
+      if (outcome === 'failure') fireEvent.error(retryImage);
+      else fireEvent.load(retryImage);
+
+      const retryStatus = view.getByTestId('img-comparison-reference-front_page-retry-failed');
+      expect(retryStatus.textContent).toBe(
+        outcome === 'failure'
+          ? 'Page 1 preview retry failed. The preview is still unavailable.'
+          : 'Page 1 preview loaded successfully.',
+      );
+
+      view.rerender(<StyleReviewDialog asset={secondReview} issue={issue} onClose={vi.fn()} />);
+
+      expect(view.queryByTestId('img-comparison-reference-front_page-retry-failed')).toBeNull();
+      expect(view.getByTestId('notice-reference-preview-pending-front_page')).toBeTruthy();
+      expect(view.getByTestId('comparison-saved-artwork-second-review')).toBeTruthy();
+    },
+  );
+  it('ignores a late current Page 1 image event from the previous saved review', () => {
+    const direction = ad(true);
+    direction.references[1] = {
+      ...direction.references[1],
+      title: 'Current Page 1',
+      url: 'https://images.example.test/current-page-one.webp',
+    };
+    direction.history.push(ref('f-old', 'front_page', false));
+    const firstReview = {
+      ...asset(['g', 'f-old'], 'failed'),
+      name: 'First saved review',
+    } as Asset;
+    const secondReview = { ...firstReview, id: 'second-review', name: 'Second saved review' } as Asset;
+    const issue = { id: 'issue', revision: 2, artDirection: direction } as unknown as Issue;
+    const view = render(<StyleReviewDialog asset={firstReview} issue={issue} onClose={vi.fn()} />);
+
+    fireEvent.click(view.getByTestId('button-load-reference-preview-front_page'));
+    fireEvent.error(view.getByTestId('img-comparison-reference-front_page'));
+    fireEvent.click(view.getByTestId('button-retry-reference-preview-front_page'));
+    const pendingImage = view.getByTestId('img-comparison-reference-front_page');
+
+    view.rerender(<StyleReviewDialog asset={secondReview} issue={issue} onClose={vi.fn()} />);
+    fireEvent.error(pendingImage);
+    fireEvent.load(pendingImage);
+
+    expect(view.queryByTestId('img-comparison-reference-front_page-retry-failed')).toBeNull();
+    expect(view.getByTestId('notice-reference-preview-pending-front_page')).toBeTruthy();
+    expect(view.getByTestId('comparison-saved-artwork-second-review')).toBeTruthy();
   });
   it('reports a current reference image that fails to load', () => {
     const direction = ad(true);

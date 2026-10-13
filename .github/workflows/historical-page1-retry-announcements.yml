@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - .github/workflows/historical-page1-retry-announcements.yml
-      - apps/underground-press/**
+      - artifacts/underground-press/**
       - lib/api-client-react/**
       - lib/replit-auth-web/**
       - package.json

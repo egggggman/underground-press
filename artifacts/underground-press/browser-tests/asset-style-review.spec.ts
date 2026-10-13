@@ -59,11 +59,14 @@ const frontPageSourceUrl = 'https://images.example.test/archive/front-page.webp?
 const savedArtworkUrl = '/api/storage/private/saved-cover.png'
 ;
 
+const historicalPageOneArtworkUrl = '/api/storage/private/historical-page-one.png';
+
 
 const historicalArtworkUrl = '/api/storage/private/historical-reference.png'
 ;
 
-
+const historicalGoldenArtworkUrl = '/api/storage/private/historical-golden.png'
+;
 const onePixelPng = Buffer.from(
   'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jK5kAAAAASUVORK5CYII=',
   'base64',
@@ -1699,7 +1702,7 @@ test('a failed external historical preview focuses Retry and recovers without ch
 ;
 
   await expect(retryAnnouncement)
-    .toHaveText('Historical Golden Image preview loaded successfully.')
+    .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.')
 ;
 
   await expect(retryAnnouncement).toHaveAttribute('role', 'status')
@@ -2107,7 +2110,7 @@ for (const key of ['Enter', 'Space'] as const)
 
 
     await expect(retrySuccessAnnouncement)
-      .toHaveText('Historical Golden Image preview loaded successfully.')
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.')
 ;
 
 
@@ -10035,7 +10038,7 @@ test('historical preview Retry recovers after a second failure at actual Firefox
   }
 });
 
-test('protected historical image Retry remains focused and visibly outlined after three failures at actual Firefox 400% page zoom in forced-colors mode', async ({}, testInfo) => {
+test('protected historical image Retry recovers after three failures at actual Firefox 400% page zoom in forced-colors mode', async ({}, testInfo) => {
   test.skip(testInfo.project.name !== 'firefox', 'This check requires native Firefox page zoom');
   const baseURL = testInfo.project.use.baseURL;
   if (typeof baseURL !== 'string') {
@@ -10045,7 +10048,7 @@ test('protected historical image Retry remains focused and visibly outlined afte
   const userDataDir = await mkdtemp(path.join(os.tmpdir(), 'protected-historical-firefox-retry-failure-zoom-'));
   let context: Awaited<ReturnType<typeof firefox.launchPersistentContext>> | undefined;
   let historicalRequests = 0;
-  const retryGates = Array.from({ length: 2 }, () => {
+  const retryGates = Array.from({ length: 3 }, () => {
     let release!: () => void;
     let notifyStarted!: () => void;
     return {
@@ -10087,12 +10090,19 @@ test('protected historical image Retry remains focused and visibly outlined afte
           retryGate.notifyStarted();
           await retryGate.response;
         }
-        await route.fulfill({
-          status: 503,
-          contentType: 'text/plain',
-          headers: { 'cache-control': 'no-store' },
-          body: 'Temporary protected storage failure',
-        });
+        await route.fulfill(historicalRequests === 4
+          ? {
+            status: 200,
+            contentType: 'image/png',
+            headers: { 'cache-control': 'no-store' },
+            body: onePixelPng,
+          }
+          : {
+            status: 503,
+            contentType: 'text/plain',
+            headers: { 'cache-control': 'no-store' },
+            body: 'Temporary protected storage failure',
+          });
         return;
       }
 
@@ -10190,6 +10200,33 @@ test('protected historical image Retry remains focused and visibly outlined afte
     // Firefox keeps the original screenshot bitmap size but maps page content in CSS pixels.
     await expectForcedColorsFocusPainted(retry, 1);
     expect(historicalRequests).toBe(3);
+
+    const successfulRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+    );
+    await page.keyboard.press('Enter');
+    await Promise.all([retryGates[2].started, successfulRetryRequest]);
+
+    const historicalImage = page.getByTestId('img-comparison-historical-reference-golden_image');
+    const originalLink = page.getByRole('link', { name: 'Inspect historical reference original' });
+    await expect(historicalImage).toHaveAttribute('src', /\/api\/storage\/private\/historical-reference\.png$/);
+    await expect(originalLink).toHaveAttribute('href', /\/api\/storage\/private\/historical-reference\.png$/);
+    await expect(historicalImage).toHaveJSProperty('naturalWidth', 0);
+    await expect(originalLink).toBeFocused();
+    await expectVisibleForcedColorsFocus(originalLink);
+    await expectKeyboardFocusWithinViewport(originalLink);
+    await expectForcedColorsFocusPainted(originalLink, 1);
+    expect(historicalRequests).toBe(4);
+
+    retryGates[2].release();
+    await expectLoadedImage(historicalImage);
+    await expect(historicalImage).toBeVisible();
+    await expect(page.getByTestId('notice-historical-reference-unavailable-golden_image')).toHaveCount(0);
+    await expect(retry).toHaveCount(0);
+    await expect(originalLink).toBeFocused();
+    await expectVisibleForcedColorsFocus(originalLink);
+    await expectKeyboardFocusWithinViewport(originalLink);
+    await expectForcedColorsFocusPainted(originalLink, 1);
   } finally {
     retryGates.forEach((retryGate) => retryGate.release());
     await context?.close();
@@ -10433,6 +10470,140 @@ test('historical preview Retry remains focused and visibly outlined when its sec
   await expectLoadedImage(historicalImage);
   await expect(unavailableNotice).toHaveCount(0);
   expect(historicalRequests).toBe(3);
+});
+
+test('protected historical image Retry stays visible and focused after an interrupted transfer', async ({ page }) => {
+  let historicalRequests = 0;
+  const partialAttempts: {
+    started: Promise<void>;
+    notifyStarted: () => void;
+    interrupt?: () => void;
+  }[] = [];
+  const partialImageBytes = onePixelPng.subarray(0, 24);
+  const imageHost = createServer((request, response) => {
+    if (new URL(request.url ?? '/', 'http://127.0.0.1').pathname !== '/historical.png') {
+      response.writeHead(404).end();
+      return;
+    }
+
+    historicalRequests += 1;
+    if (historicalRequests <= 2) {
+      let notifyStarted!: () => void;
+      const started = new Promise<void>((resolve) => {
+        notifyStarted = resolve;
+      });
+      const attempt = { started, notifyStarted } as (typeof partialAttempts)[number];
+      partialAttempts.push(attempt);
+      response.writeHead(200, {
+        'content-type': 'image/png',
+        'cache-control': 'no-store',
+        'content-length': onePixelPng.length + 128,
+      });
+      response.write(partialImageBytes, () => {
+        attempt.notifyStarted();
+        attempt.interrupt = () => response.socket?.destroy();
+      });
+      return;
+    }
+
+    response.writeHead(200, {
+      'content-type': 'image/png',
+      'cache-control': 'no-store',
+    });
+    response.end(onePixelPng);
+  });
+
+  await new Promise<void>((resolve, reject) => {
+    imageHost.once('error', reject);
+    imageHost.listen(0, '127.0.0.1', () => resolve());
+  });
+
+  try {
+    const address = imageHost.address();
+    if (!address || typeof address === 'string') throw new Error('The controlled image host did not start.');
+    const imageOrigin = `http://127.0.0.1:${address.port}`;
+    const historicalUrl = new URL('/historical.png', imageOrigin).href;
+    await page.route('**/*', async (route) => {
+      const url = new URL(route.request().url());
+      if (url.pathname === historicalArtworkUrl) {
+        await route.fulfill({
+          status: 302,
+          headers: {
+            'cache-control': 'no-store',
+            location: historicalUrl,
+          },
+        });
+      } else if (url.pathname === savedArtworkUrl) {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+        await route.continue();
+      } else if (url.hostname === 'images.example.test') {
+        await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+      } else {
+        await route.abort();
+      }
+    });
+
+    const initialInterruptedTransfer = page.waitForEvent(
+      'requestfailed',
+      (request) => request.url() === historicalUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalImage=1', { waitUntil: 'domcontentloaded' });
+    await expect.poll(() => partialAttempts.length).toBe(1);
+    await partialAttempts[0].started;
+    expect(partialImageBytes.byteLength).toBeGreaterThan(0);
+    partialAttempts[0].interrupt?.();
+    const initialFailure = await initialInterruptedTransfer;
+    expect(initialFailure.failure()).not.toBeNull();
+    await expect(page.getByTestId('notice-historical-reference-unavailable-golden_image'))
+      .toContainText('unavailable from protected storage');
+
+    const retry = page.getByTestId('button-retry-historical-reference-preview-golden_image');
+    await expect(retry).toBeVisible();
+    await expect(retry).toBeEnabled();
+    await focusByTab(page, 'button-retry-historical-reference-preview-golden_image');
+
+    const retryTransfer = page.waitForEvent(
+      'requestfailed',
+      (request) => request.url() === historicalUrl,
+    );
+    await page.keyboard.press('Enter');
+    await expect.poll(() => partialAttempts.length).toBe(2);
+    await partialAttempts[1].started;
+    const historicalImage = page.getByTestId('img-comparison-historical-reference-golden_image');
+    await expect(historicalImage).toHaveCount(1);
+    await expect(historicalImage).toHaveJSProperty('naturalWidth', 0);
+    await expect(retry).toHaveCount(0);
+    partialAttempts[1].interrupt?.();
+    const retryFailure = await retryTransfer;
+    expect(retryFailure.failure()).not.toBeNull();
+
+    await expect(page.getByTestId('notice-historical-reference-unavailable-golden_image'))
+      .toContainText('unavailable from protected storage');
+    await expect(retry).toBeVisible();
+    await expect(retry).toBeEnabled();
+    await expect(retry).toBeFocused();
+    expect(historicalRequests).toBe(2);
+
+    const recoveredResponse = page.waitForResponse(
+      (response) => response.url() === historicalUrl && response.status() === 200,
+    );
+    await page.keyboard.press('Enter');
+    await recoveredResponse;
+    await expectLoadedImage(historicalImage);
+    await expect(retry).toHaveCount(0);
+    expect(historicalRequests).toBe(3);
+  } finally {
+    partialAttempts.forEach((attempt) => attempt.interrupt?.());
+    await new Promise<void>((resolve, reject) => {
+      imageHost.close((error) => error ? reject(error) : resolve());
+    });
+  }
 });
 
 test('a hidden historical preview stays hidden when its partial image transfer fails', async ({ page }) => {
@@ -11371,6 +11542,69 @@ test('saved historical image Retry keeps visible keyboard focus in forced-colors
   expect(historicalImageRequests).toBe(1);
 });
 
+test('protected historical image Retry remains focused and fully outlined after a second failure at a narrow viewport in forced-colors mode', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 900 });
+  await page.emulateMedia({ forcedColors: 'active', reducedMotion: 'reduce' });
+
+  let historicalImageRequests = 0;
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalArtworkUrl) {
+      historicalImageRequests += 1;
+      await route.abort('failed');
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else if (url.hostname === 'images.example.test') {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else {
+      await route.abort();
+    }
+  });
+
+  const firstFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+  );
+  await page.goto('/browser-tests/fixture.html?savedHistoricalImage=1');
+  await expect(page.getByRole('dialog', { name: 'Style checklist: Saved cover' })).toBeVisible();
+  expect(await page.evaluate(() => matchMedia('(forced-colors: active)').matches)).toBe(true);
+  await firstFailure;
+  await expect(page.getByTestId('notice-historical-reference-unavailable-golden_image'))
+    .toContainText('unavailable from protected storage');
+
+  await page.setViewportSize({ width: 101, height: 900 });
+  expect(await page.evaluate(() => window.visualViewport?.width)).toBe(101);
+  const retry = page.getByTestId('button-retry-historical-reference-preview-golden_image');
+  await expect(retry).toBeVisible();
+  await expect(retry).toBeEnabled();
+  await focusByTab(page, 'button-retry-historical-reference-preview-golden_image');
+  await expect(retry).toBeFocused();
+  await expectVisibleForcedColorsFocus(retry);
+  await expectKeyboardFocusWithinViewport(retry);
+
+  const secondFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+  );
+  const retryRequest = page.waitForRequest(
+    (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+  );
+  await page.keyboard.press('Enter');
+  await Promise.all([secondFailure, retryRequest]);
+
+  await expect(page.getByTestId('notice-historical-reference-unavailable-golden_image'))
+    .toContainText('unavailable from protected storage');
+  await expect(retry).toBeVisible();
+  await expect(retry).toBeEnabled();
+  await expect(retry).toBeFocused();
+  await expectVisibleForcedColorsFocus(retry);
+  await expectKeyboardFocusWithinViewport(retry);
+  await expectForcedColorsFocusPainted(retry);
+  expect(historicalImageRequests).toBe(2);
+});
+
 test('Retry recovers the Golden Image after its first image request is aborted', async ({ page }) => {
   let requests = 0;
   await page.route('**/*', async (route) => {
@@ -11461,6 +11695,120 @@ test('Retry loads the Golden Image after its external host recovers', async ({ p
     await new Promise<void>((resolve, reject) => {
       imageHost.close((error) => error ? reject(error) : resolve());
     });
+  }
+});
+
+test('concurrent saved historical retries announce and clear only their own references', async ({ page }) => {
+  let goldenRequests = 0;
+  let pageOneRequests = 0;
+  let notifyGoldenRetryStarted!: () => void;
+  let notifyPageOneRetryStarted!: () => void;
+  let releaseGoldenRetry!: () => void;
+  let releasePageOneRetry!: () => void;
+  const goldenRetryStarted = new Promise<void>((resolve) => {
+    notifyGoldenRetryStarted = resolve;
+  });
+  const pageOneRetryStarted = new Promise<void>((resolve) => {
+    notifyPageOneRetryStarted = resolve;
+  });
+  const goldenRetryGate = new Promise<void>((resolve) => {
+    releaseGoldenRetry = resolve;
+  });
+  const pageOneRetryGate = new Promise<void>((resolve) => {
+    releasePageOneRetry = resolve;
+  });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalArtworkUrl) {
+      goldenRequests += 1;
+      if (goldenRequests === 1) {
+        await route.abort('failed');
+      } else {
+        notifyGoldenRetryStarted();
+        await goldenRetryGate;
+        await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+      }
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      pageOneRequests += 1;
+      if (pageOneRequests === 1) {
+        await route.abort('failed');
+      } else {
+        notifyPageOneRetryStarted();
+        await pageOneRetryGate;
+        await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+      }
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const goldenInitialFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+    );
+    const pageOneInitialFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalImage=1&savedHistoricalPageOne=1');
+    await Promise.all([goldenInitialFailure, pageOneInitialFailure]);
+
+    const goldenUnavailable = page.getByTestId('notice-historical-reference-unavailable-golden_image');
+    const pageOneUnavailable = page.getByTestId('notice-historical-reference-unavailable-front_page');
+    const goldenRetry = page.getByTestId('button-retry-historical-reference-preview-golden_image');
+    const pageOneRetry = page.getByTestId('button-retry-historical-reference-preview-front_page');
+    await expect(goldenUnavailable).toContainText('unavailable from protected storage');
+    await expect(pageOneUnavailable).toContainText('unavailable from protected storage');
+    await expect(page.getByTestId('comparison-historical-reference-golden_image'))
+      .toContainText('Previous golden_image · v1 · saved predecessor');
+    await expect(page.getByTestId('comparison-historical-reference-front_page'))
+      .toContainText('Archived Page 1 cover · v1 · saved predecessor');
+
+    const goldenRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+    );
+    const pageOneRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await goldenRetry.click();
+    await pageOneRetry.click();
+    await Promise.all([goldenRetryRequest, pageOneRetryRequest, goldenRetryStarted, pageOneRetryStarted]);
+
+    const goldenLoading = page.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const pageOneLoading = page.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const goldenSuccess = page.getByTestId('notice-historical-reference-retry-success-golden_image');
+    const pageOneSuccess = page.getByTestId('notice-historical-reference-retry-success-front_page');
+    await expect(goldenLoading).toHaveText('Loading historical Golden Image preview: Previous golden_image, version 1.');
+    await expect(pageOneLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(goldenSuccess).toHaveAttribute('aria-live', 'polite');
+    await expect(pageOneSuccess).toHaveAttribute('aria-live', 'polite');
+    await expect(goldenSuccess).toHaveText('');
+    await expect(pageOneSuccess).toHaveText('');
+
+    releaseGoldenRetry();
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-golden_image'));
+    await expect(goldenLoading).toHaveText('');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.');
+    await expect(pageOneLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(pageOneSuccess).toHaveText('');
+
+    releasePageOneRetry();
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+    await expect(pageOneLoading).toHaveText('');
+    await expect(pageOneSuccess)
+      .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    expect(goldenRequests).toBe(2);
+    expect(pageOneRequests).toBe(2);
+  } finally {
+    releaseGoldenRetry();
+    releasePageOneRetry();
   }
 });
 
@@ -11709,6 +12057,134 @@ test('Retry keeps the Golden Image unavailable and retryable when its host fails
   }
 });
 
+test('saved historical Golden Image and Page 1 retry statuses stay independent in the same dialog', async ({ page }) => {
+  const requestCounts = new Map<string, number>();
+  let releaseGoldenRetry: (() => void) | undefined;
+  let releasePageOneFailure: (() => void) | undefined;
+  let releasePageOneSuccess: (() => void) | undefined;
+  let notifyGoldenRetry: (() => void) | undefined;
+  let notifyPageOneFailure: (() => void) | undefined;
+  let notifyPageOneSuccess: (() => void) | undefined;
+  const goldenRetry = new Promise<void>((resolve) => { releaseGoldenRetry = resolve; });
+  const pageOneFailure = new Promise<void>((resolve) => { releasePageOneFailure = resolve; });
+  const pageOneSuccess = new Promise<void>((resolve) => { releasePageOneSuccess = resolve; });
+  const goldenRetryStarted = new Promise<void>((resolve) => { notifyGoldenRetry = resolve; });
+  const pageOneFailureStarted = new Promise<void>((resolve) => { notifyPageOneFailure = resolve; });
+  const pageOneSuccessStarted = new Promise<void>((resolve) => { notifyPageOneSuccess = resolve; });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalArtworkUrl || url.pathname === historicalPageOneArtworkUrl) {
+      const count = (requestCounts.get(url.pathname) ?? 0) + 1;
+      requestCounts.set(url.pathname, count);
+      if (count === 1) {
+        await route.abort();
+      } else if (url.pathname === historicalArtworkUrl) {
+        notifyGoldenRetry?.();
+        await goldenRetry;
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      } else if (count === 2) {
+        notifyPageOneFailure?.();
+        await pageOneFailure;
+        await route.abort();
+      } else {
+        notifyPageOneSuccess?.();
+        await pageOneSuccess;
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const initialFailures = Promise.all([
+      page.waitForEvent('requestfailed', (request) => new URL(request.url()).pathname === historicalArtworkUrl),
+      page.waitForEvent('requestfailed', (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl),
+    ]);
+    await page.goto('/browser-tests/fixture.html?savedHistoricalImage=1&savedHistoricalPageOne=1');
+    await initialFailures;
+
+    const goldenRetryButton = page.getByTestId('button-retry-historical-reference-preview-golden_image');
+    const pageOneRetryButton = page.getByTestId('button-retry-historical-reference-preview-front_page');
+    const goldenLoading = page.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const pageOneLoading = page.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const goldenFailure = page.getByTestId('notice-historical-reference-retry-failure-golden_image');
+    const pageOneFailureNotice = page.getByTestId('notice-historical-reference-retry-failure-front_page');
+    const goldenSuccess = page.getByTestId('notice-historical-reference-retry-success-golden_image');
+    const pageOneSuccessNotice = page.getByTestId('notice-historical-reference-retry-success-front_page');
+
+    const goldenRequest = page.waitForRequest((request) => new URL(request.url()).pathname === historicalArtworkUrl);
+    await goldenRetryButton.click();
+    await Promise.all([goldenRetryStarted, goldenRequest]);
+    await expect(goldenLoading)
+      .toHaveText('Loading historical Golden Image preview: Previous golden_image, version 1.');
+    await expect(pageOneLoading).toHaveText('');
+
+    const pageOneFailingRequest = page.waitForRequest((request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl);
+    await pageOneRetryButton.click();
+    await Promise.all([pageOneFailureStarted, pageOneFailingRequest]);
+    await expect(goldenLoading)
+      .toHaveText('Loading historical Golden Image preview: Previous golden_image, version 1.');
+    await expect(pageOneLoading)
+      .toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+
+    releaseGoldenRetry?.();
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-golden_image'));
+    await expect(goldenLoading).toHaveText('');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.');
+    await expect(pageOneLoading)
+      .toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(pageOneFailureNotice).toHaveText('');
+
+    const pageOneRetryFailed = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    releasePageOneFailure?.();
+    await pageOneRetryFailed;
+    await expect(pageOneFailureNotice)
+      .toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.');
+    await expect(goldenFailure).toHaveText('');
+
+    const pageOneSuccessRequest = page.waitForRequest((request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl);
+    await pageOneRetryButton.click();
+    await Promise.all([pageOneSuccessStarted, pageOneSuccessRequest]);
+    await expect(pageOneLoading)
+      .toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.');
+
+    releasePageOneSuccess?.();
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+    await expect(pageOneSuccessNotice)
+      .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Previous golden_image, version 1.');
+  } finally {
+    releaseGoldenRetry?.();
+    releasePageOneFailure?.();
+    releasePageOneSuccess?.();
+  }
+});
+
 test('saved historical Page 1 retry announces its title and version while the protected image is loading', async ({ page }) => {
   let historicalRequests = 0;
   let releaseRetryResponse: (() => void) | undefined;
@@ -11724,7 +12200,7 @@ test('saved historical Page 1 retry announces its title and version while the pr
     const url = new URL(route.request().url());
     if (url.pathname === savedArtworkUrl) {
       await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
-    } else if (url.pathname === historicalArtworkUrl) {
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
       historicalRequests += 1;
       if (historicalRequests === 1) {
         await route.abort();
@@ -11748,7 +12224,7 @@ test('saved historical Page 1 retry announces its title and version while the pr
   try {
     const firstRequestFailed = page.waitForEvent(
       'requestfailed',
-      (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
     );
     await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1');
     await firstRequestFailed;
@@ -11759,7 +12235,7 @@ test('saved historical Page 1 retry announces its title and version while the pr
     await expect(retry).toBeVisible();
 
     const retryRequest = page.waitForRequest(
-      (request) => new URL(request.url()).pathname === historicalArtworkUrl,
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
     );
     await retry.click();
     await Promise.all([retryStarted, retryRequest]);
@@ -11778,18 +12254,147 @@ test('saved historical Page 1 retry announces its title and version while the pr
     releaseRetryResponse?.();
     await expectLoadedImage(image);
     await expect(loading).toHaveText('');
-    await expect(success).toHaveText('Historical front-page benchmark preview loaded successfully.');
+    await expect(success).toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
     await expect(success).toHaveAttribute('role', 'status');
     await expect(success).toHaveAttribute('aria-live', 'polite');
   } finally {
     releaseRetryResponse?.();
   }
 });
+test('current Golden Image and saved historical Page 1 retry messages remain separate while retries overlap', async ({ page }) => {
+  let currentRequests = 0;
+  let historicalRequests = 0;
+  let releaseCurrentFailure: (() => void) | undefined;
+  let releaseCurrentSuccess: (() => void) | undefined;
+  let releaseHistoricalFailure: (() => void) | undefined;
+  let releaseHistoricalSuccess: (() => void) | undefined;
+  const currentFailureResponse = new Promise<void>((resolve) => { releaseCurrentFailure = resolve; });
+  const currentSuccessResponse = new Promise<void>((resolve) => { releaseCurrentSuccess = resolve; });
+  const historicalFailureResponse = new Promise<void>((resolve) => { releaseHistoricalFailure = resolve; });
+  const historicalSuccessResponse = new Promise<void>((resolve) => { releaseHistoricalSuccess = resolve; });
 
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.href === sourceUrl) {
+      currentRequests += 1;
+      if (currentRequests === 1) {
+        await route.abort();
+      } else if (currentRequests === 2) {
+        await currentFailureResponse;
+        await route.abort();
+      } else {
+        await currentSuccessResponse;
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      historicalRequests += 1;
+      if (historicalRequests === 1) {
+        await route.abort();
+      } else if (historicalRequests === 2) {
+        await historicalFailureResponse;
+        await route.abort();
+      } else {
+        await historicalSuccessResponse;
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const historicalFirstFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1');
+    await historicalFirstFailure;
+
+    const currentFirstFailure = page.waitForEvent('requestfailed', (request) => request.url() === sourceUrl);
+    await page.getByTestId('button-load-reference-preview-golden_image').click();
+    await currentFirstFailure;
+
+    const currentRetry = page.getByTestId('button-retry-reference-preview-golden_image');
+    const historicalRetry = page.getByTestId('button-retry-historical-reference-preview-front_page');
+    const currentLoading = page.getByTestId('img-comparison-reference-golden_image-loading');
+    const historicalLoading = page.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const currentStatus = page.getByTestId('img-comparison-reference-golden_image-retry-failed');
+    const historicalFailure = page.getByTestId('notice-historical-reference-retry-failure-front_page');
+    const historicalSuccess = page.getByTestId('notice-historical-reference-retry-success-front_page');
+
+    const currentRetryRequest = page.waitForRequest((request) => request.url() === sourceUrl);
+    const historicalRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await currentRetry.click();
+    await historicalRetry.click();
+    await Promise.all([currentRetryRequest, historicalRetryRequest]);
+    await expect(currentLoading).toHaveText('Loading external image preview for current Golden Image reference “Current golden_image”, version 2.');
+    await expect(historicalLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(currentStatus).toHaveText('');
+    await expect(historicalFailure).toHaveText('');
+
+    const currentRetryFailed = page.waitForEvent('requestfailed', (request) => request.url() === sourceUrl);
+    releaseCurrentFailure?.();
+    await currentRetryFailed;
+    await expect(currentStatus).toHaveText('Golden Image preview retry failed. The preview is still unavailable.');
+    await expect(historicalLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(historicalFailure).toHaveText('');
+
+    const historicalRetryFailed = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    releaseHistoricalFailure?.();
+    await historicalRetryFailed;
+    await expect(historicalFailure).toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    await expect(currentStatus).toHaveText('Golden Image preview retry failed. The preview is still unavailable.');
+
+    const currentSuccessRequest = page.waitForRequest((request) => request.url() === sourceUrl);
+    await currentRetry.click();
+    await currentSuccessRequest;
+    await expect(historicalFailure).toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    releaseCurrentSuccess?.();
+    await expectLoadedImage(page.getByTestId('img-comparison-reference-golden_image'));
+    await expect(currentStatus).toHaveText('Golden Image preview loaded successfully.');
+    await expect(historicalFailure).toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+
+    const historicalSuccessRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await historicalRetry.click();
+    await historicalSuccessRequest;
+    await expect(historicalLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(currentStatus).toHaveText('Golden Image preview loaded successfully.');
+    releaseHistoricalSuccess?.();
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+    await expect(historicalSuccess).toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    await expect(currentStatus).toHaveText('Golden Image preview loaded successfully.');
+  } finally {
+    releaseCurrentFailure?.();
+    releaseCurrentSuccess?.();
+    releaseHistoricalFailure?.();
+    releaseHistoricalSuccess?.();
+  }
+});
 test('saved historical Page 1 first-load success stays silent and a later retry announces success', async ({ page }) => {
   await page.route('**/*', async (route) => {
     const url = new URL(route.request().url());
-    if (url.pathname === savedArtworkUrl || url.pathname === historicalArtworkUrl) {
+    if (url.pathname === savedArtworkUrl || url.pathname === historicalPageOneArtworkUrl) {
       await route.fulfill({
         status: 200,
         contentType: 'image/png',
@@ -11820,7 +12425,653 @@ test('saved historical Page 1 first-load success stays silent and a later retry 
   await retry.click();
   await expectLoadedImage(image);
 
-  await expect(success).toHaveText('Historical front-page benchmark preview loaded successfully.');
+  await expect(success)
+    .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
   await expect(success).toHaveAttribute('role', 'status');
   await expect(success).toHaveAttribute('aria-live', 'polite');
+});
+
+test('saved historical Page 1 first-load failure stays out of retry status until Retry fails', async ({ page }) => {
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      await route.abort();
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  const firstRequestFailed = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1');
+  await firstRequestFailed;
+
+  const retryFailure = page.getByTestId('notice-historical-reference-retry-failure-front_page');
+  await expect(retryFailure).toHaveAttribute('role', 'status');
+  await expect(retryFailure).toHaveAttribute('aria-live', 'polite');
+  await expect(retryFailure).toHaveText('');
+
+  const retry = page.getByTestId('button-retry-historical-reference-preview-front_page');
+  await expect(retry).toBeVisible();
+  const retryRequestFailed = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await retry.click();
+  await retryRequestFailed;
+
+  await expect(page.getByTestId('button-retry-historical-reference-preview-front_page')).toBeVisible();
+  await expect(retryFailure)
+    .toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+});
+
+test('saved historical Page 1 retry failure clears when a later retry succeeds', async ({ page }) => {
+  let historicalRequests = 0;
+  let releaseSuccessfulRetry: (() => void) | undefined;
+  let notifySuccessfulRetryStarted: (() => void) | undefined;
+  const successfulRetryResponse = new Promise<void>((resolve) => {
+    releaseSuccessfulRetry = resolve;
+  });
+  const successfulRetryStarted = new Promise<void>((resolve) => {
+    notifySuccessfulRetryStarted = resolve;
+  });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      historicalRequests += 1;
+      if (historicalRequests <= 2) {
+        await route.abort('failed');
+        return;
+      }
+      notifySuccessfulRetryStarted?.();
+      await successfulRetryResponse;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        headers: { 'cache-control': 'no-store' },
+        body: onePixelPng,
+      });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const firstRequestFailed = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1');
+    await firstRequestFailed;
+
+    const retryFailure = page.getByTestId('notice-historical-reference-retry-failure-front_page');
+    const retry = page.getByTestId('button-retry-historical-reference-preview-front_page');
+    const image = page.getByTestId('img-comparison-historical-reference-front_page');
+    const success = page.getByTestId('notice-historical-reference-retry-success-front_page');
+    const failedRetry = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await retry.click();
+    await failedRetry;
+
+    await expect(retryFailure)
+      .toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+    await expect(success).toHaveText('');
+
+    const successfulRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await retry.click();
+    await Promise.all([successfulRetryStarted, successfulRetryRequest]);
+
+    const loading = page.getByTestId('img-comparison-historical-reference-front_page-loading');
+    await expect(retryFailure).toHaveText('');
+    await expect(success).toHaveText('');
+    await expect(loading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(image).toHaveJSProperty('naturalWidth', 0);
+    expect(historicalRequests).toBe(3);
+
+    releaseSuccessfulRetry?.();
+    await expectLoadedImage(image);
+    await expect(retryFailure).toHaveText('');
+    await expect(success)
+      .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+  } finally {
+    releaseSuccessfulRetry?.();
+  }
+});
+test('concurrent archived Golden Image and Page 1 retries keep independent title, version, and success messages', async ({ page }) => {
+  let goldenRequests = 0;
+  let pageOneRequests = 0;
+  let releaseGoldenResponse: (() => void) | undefined;
+  let releasePageOneResponse: (() => void) | undefined;
+  const goldenRetryResponse = new Promise<void>((resolve) => {
+    releaseGoldenResponse = resolve;
+  });
+  const pageOneRetryResponse = new Promise<void>((resolve) => {
+    releasePageOneResponse = resolve;
+  });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalGoldenArtworkUrl) {
+      goldenRequests += 1;
+      if (goldenRequests === 1) {
+        await route.abort();
+        return;
+      }
+      await goldenRetryResponse;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        headers: { 'cache-control': 'no-store' },
+        body: onePixelPng,
+      });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      pageOneRequests += 1;
+      if (pageOneRequests === 1) {
+        await route.abort();
+        return;
+      }
+      await pageOneRetryResponse;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        headers: { 'cache-control': 'no-store' },
+        body: onePixelPng,
+      });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const firstGoldenFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalGoldenArtworkUrl,
+    );
+    const firstPageOneFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalImage=1&savedHistoricalPageOne=1&concurrentHistoricalRetries=1');
+    await Promise.all([firstGoldenFailure, firstPageOneFailure]);
+
+    await expect(page.getByTestId('comparison-historical-reference-golden_image'))
+      .toContainText('Archived Golden Image · v1 · saved predecessor');
+    await expect(page.getByTestId('comparison-historical-reference-front_page'))
+      .toContainText('Archived Page 1 cover · v1 · saved predecessor');
+    const goldenRetry = page.getByTestId('button-retry-historical-reference-preview-golden_image');
+    const pageOneRetry = page.getByTestId('button-retry-historical-reference-preview-front_page');
+    await expect(goldenRetry).toBeVisible();
+    await expect(pageOneRetry).toBeVisible();
+
+    const goldenRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalGoldenArtworkUrl,
+    );
+    const pageOneRetryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await goldenRetry.click();
+    await pageOneRetry.click();
+    await Promise.all([goldenRetryRequest, pageOneRetryRequest]);
+
+    const goldenLoading = page.getByTestId('img-comparison-historical-reference-golden_image-loading');
+    const pageOneLoading = page.getByTestId('img-comparison-historical-reference-front_page-loading');
+    const goldenSuccess = page.getByTestId('notice-historical-reference-retry-success-golden_image');
+    const pageOneSuccess = page.getByTestId('notice-historical-reference-retry-success-front_page');
+    const goldenImage = page.getByTestId('img-comparison-historical-reference-golden_image');
+    const pageOneImage = page.getByTestId('img-comparison-historical-reference-front_page');
+
+    await expect(goldenLoading).toHaveAttribute('role', 'status');
+    await expect(goldenLoading).toHaveAttribute('aria-live', 'polite');
+    await expect(goldenLoading).toHaveText('Loading historical Golden Image preview: Archived Golden Image, version 1.');
+    await expect(pageOneLoading).toHaveAttribute('role', 'status');
+    await expect(pageOneLoading).toHaveAttribute('aria-live', 'polite');
+    await expect(pageOneLoading).toHaveText('Loading historical front-page benchmark preview: Archived Page 1 cover, version 1.');
+    await expect(goldenSuccess).toHaveText('');
+    await expect(pageOneSuccess).toHaveText('');
+    expect(goldenRequests).toBe(2);
+    expect(pageOneRequests).toBe(2);
+
+    releasePageOneResponse?.();
+    await expectLoadedImage(pageOneImage);
+    await expect(pageOneLoading).toHaveText('');
+    await expect(pageOneSuccess)
+      .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+    await expect(goldenLoading)
+      .toHaveText('Loading historical Golden Image preview: Archived Golden Image, version 1.');
+    await expect(goldenSuccess).toHaveText('');
+
+    releaseGoldenResponse?.();
+    await expectLoadedImage(goldenImage);
+    await expect(goldenLoading).toHaveText('');
+    await expect(goldenSuccess)
+      .toHaveText('Historical Golden Image preview loaded successfully: Archived Golden Image, version 1.');
+    await expect(pageOneSuccess)
+      .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+  } finally {
+    releaseGoldenResponse?.();
+    releasePageOneResponse?.();
+  }
+});
+
+test('closing a saved review clears its historical retry failure before another review opens', async ({ page }) => {
+  let historicalRequests = 0;
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      historicalRequests += 1;
+      if (historicalRequests <= 2) {
+        await route.abort('failed');
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  const firstFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+  await firstFailure;
+
+  const retryFailure = page.getByTestId('notice-historical-reference-retry-failure-front_page');
+  const retryFailureRequest = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await page.getByTestId('button-retry-historical-reference-preview-front_page').click();
+  await retryFailureRequest;
+  await expect(retryFailure)
+    .toHaveText('Historical front-page benchmark preview retry failed. The preview is still unavailable.');
+
+  await page.getByTestId('button-close-dialog').click();
+  await page.getByTestId('button-open-second-saved-review').click();
+  await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+  await expect(page.getByTestId('notice-historical-reference-retry-failure-front_page')).toHaveText('');
+  await expect(page.getByTestId('notice-historical-reference-retry-success-front_page')).toHaveText('');
+  await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+});
+
+test('closing a saved review clears its historical retry success before another review opens', async ({ page }) => {
+  let historicalRequests = 0;
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      historicalRequests += 1;
+      if (historicalRequests === 1) {
+        await route.abort('failed');
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  const firstFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+  await firstFailure;
+
+  const retryRequest = page.waitForRequest(
+    (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+  );
+  await page.getByTestId('button-retry-historical-reference-preview-front_page').click();
+  await retryRequest;
+  const success = page.getByTestId('notice-historical-reference-retry-success-front_page');
+  await expect(success)
+    .toHaveText('Historical front-page benchmark preview loaded successfully: Archived Page 1 cover, version 1.');
+
+  await page.getByTestId('button-close-dialog').click();
+  await page.getByTestId('button-open-second-saved-review').click();
+  await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+  await expect(page.getByTestId('notice-historical-reference-retry-failure-front_page')).toHaveText('');
+  await expect(page.getByTestId('notice-historical-reference-retry-success-front_page')).toHaveText('');
+  await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+});
+
+test('a late historical image response from another saved review cannot set its retry status', async ({ page }) => {
+  let historicalRequests = 0;
+  let releaseFirstRetry: (() => void) | undefined;
+  const delayedRetryResponse = new Promise<void>((resolve) => {
+    releaseFirstRetry = resolve;
+  });
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.pathname === historicalPageOneArtworkUrl) {
+      historicalRequests += 1;
+      if (historicalRequests === 1) {
+        await route.abort('failed');
+      } else if (historicalRequests === 2) {
+        await delayedRetryResponse;
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    const firstFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+    await firstFailure;
+
+    const retryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    await page.getByTestId('button-retry-historical-reference-preview-front_page').click();
+    await retryRequest;
+
+    await page.getByTestId('button-close-dialog').click();
+    await page.getByTestId('button-open-second-saved-review').click();
+    await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+
+    const retryFinished = page.waitForEvent(
+      'requestfinished',
+      (request) => new URL(request.url()).pathname === historicalPageOneArtworkUrl,
+    );
+    releaseFirstRetry?.();
+    await retryFinished;
+    await expectLoadedImage(page.getByTestId('img-comparison-historical-reference-front_page'));
+    await expect(page.getByTestId('notice-historical-reference-retry-failure-front_page')).toHaveText('');
+    await expect(page.getByTestId('notice-historical-reference-retry-success-front_page')).toHaveText('');
+    expect(historicalRequests).toBeGreaterThanOrEqual(2);
+  } finally {
+    releaseFirstRetry?.();
+  }
+});
+test('closing a saved review clears its current Page 1 retry failure before another review opens', async ({ page }) => {
+  let currentPageOneRequests = 0;
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === new URL(frontPageSourceUrl).pathname) {
+      currentPageOneRequests += 1;
+      await route.abort('failed');
+    } else if (url.pathname === savedArtworkUrl || url.pathname === historicalPageOneArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+  const firstFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+  );
+  await page.getByTestId('button-load-reference-preview-front_page').click();
+  await firstFailure;
+
+  const retryFailure = page.getByTestId('img-comparison-reference-front_page-retry-failed');
+  const retryFailedRequest = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+  );
+  await page.getByTestId('button-retry-reference-preview-front_page').click();
+  await retryFailedRequest;
+  await expect(retryFailure).toHaveText('Page 1 preview retry failed. The preview is still unavailable.');
+  expect(currentPageOneRequests).toBe(2);
+
+  await page.getByTestId('button-close-dialog').click();
+  await page.getByTestId('button-open-second-saved-review').click();
+  await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+  await expect(page.getByTestId('img-comparison-reference-front_page-retry-failed')).toHaveCount(0);
+  await expect(page.getByTestId('notice-reference-preview-pending-front_page')).toBeVisible();
+});
+
+test('closing a saved review clears its current Page 1 retry success before another review opens', async ({ page }) => {
+  let currentPageOneRequests = 0;
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === new URL(frontPageSourceUrl).pathname) {
+      currentPageOneRequests += 1;
+      if (currentPageOneRequests === 1) {
+        await route.abort('failed');
+      } else {
+        await route.fulfill({
+          status: 200,
+          contentType: 'image/png',
+          headers: { 'cache-control': 'no-store' },
+          body: onePixelPng,
+        });
+      }
+    } else if (url.pathname === savedArtworkUrl || url.pathname === historicalPageOneArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+  const firstFailure = page.waitForEvent(
+    'requestfailed',
+    (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+  );
+  await page.getByTestId('button-load-reference-preview-front_page').click();
+  await firstFailure;
+
+  const retryRequest = page.waitForRequest(
+    (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+  );
+  await page.getByTestId('button-retry-reference-preview-front_page').click();
+  await retryRequest;
+  await expect(page.getByTestId('img-comparison-reference-front_page-retry-failed'))
+    .toHaveText('Page 1 preview loaded successfully.');
+  expect(currentPageOneRequests).toBe(2);
+
+  await page.getByTestId('button-close-dialog').click();
+  await page.getByTestId('button-open-second-saved-review').click();
+  await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+  await expect(page.getByTestId('img-comparison-reference-front_page-retry-failed')).toHaveCount(0);
+  await expect(page.getByTestId('notice-reference-preview-pending-front_page')).toBeVisible();
+});
+
+test('a late current Page 1 retry error from another saved review cannot set its retry status', async ({ page }) => {
+  let currentPageOneRequests = 0;
+  let releaseRetryError: (() => void) | undefined;
+  let notifyRetryStarted: (() => void) | undefined;
+  const delayedRetry = new Promise<void>((resolve) => {
+    releaseRetryError = resolve;
+  });
+  const retryStarted = new Promise<void>((resolve) => {
+    notifyRetryStarted = resolve;
+  });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === new URL(frontPageSourceUrl).pathname) {
+      currentPageOneRequests += 1;
+      if (currentPageOneRequests === 1) {
+        await route.abort('failed');
+      } else {
+        notifyRetryStarted?.();
+        await delayedRetry;
+        await route.abort('failed');
+      }
+    } else if (url.pathname === savedArtworkUrl || url.pathname === historicalPageOneArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    await page.goto('/browser-tests/fixture.html?savedHistoricalPageOne=1&reviewSwitch=1');
+    const firstFailure = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+    );
+    await page.getByTestId('button-load-reference-preview-front_page').click();
+    await firstFailure;
+
+    const retryRequest = page.waitForRequest(
+      (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+    );
+    await page.getByTestId('button-retry-reference-preview-front_page').click();
+    await Promise.all([retryStarted, retryRequest]);
+
+    await page.getByTestId('button-close-dialog').click();
+    await page.getByTestId('button-open-second-saved-review').click();
+    await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+    const retryFailure = page.getByTestId('img-comparison-reference-front_page-retry-failed');
+    await expect(retryFailure).toHaveCount(0);
+
+    const delayedRequestFailed = page.waitForEvent(
+      'requestfailed',
+      (request) => new URL(request.url()).pathname === new URL(frontPageSourceUrl).pathname,
+    );
+    releaseRetryError?.();
+    await delayedRequestFailed;
+    await expect(retryFailure).toHaveCount(0);
+    await expect(page.getByTestId('notice-reference-preview-pending-front_page')).toBeVisible();
+    expect(currentPageOneRequests).toBe(2);
+  } finally {
+    releaseRetryError?.();
+  }
+});
+
+test('switching saved reviews clears Page 1 and historical hide announcements before late previews finish', async ({ page }) => {
+  let releasePageOneResponse: (() => void) | undefined;
+  let releaseHistoricalResponse: (() => void) | undefined;
+  const delayedPageOneResponse = new Promise<void>((resolve) => {
+    releasePageOneResponse = resolve;
+  });
+  const delayedHistoricalResponse = new Promise<void>((resolve) => {
+    releaseHistoricalResponse = resolve;
+  });
+
+  await page.route('**/*', async (route) => {
+    const url = new URL(route.request().url());
+    if (url.pathname === savedArtworkUrl) {
+      await route.fulfill({ status: 200, contentType: 'image/png', body: onePixelPng });
+    } else if (url.href === frontPageSourceUrl) {
+      await delayedPageOneResponse;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        headers: { 'cache-control': 'no-store' },
+        body: onePixelPng,
+      });
+    } else if (url.href === historicalSourceUrl) {
+      await delayedHistoricalResponse;
+      await route.fulfill({
+        status: 200,
+        contentType: 'image/png',
+        headers: { 'cache-control': 'no-store' },
+        body: onePixelPng,
+      });
+    } else if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
+
+  try {
+    await page.goto('/browser-tests/fixture.html?reviewSwitch=1');
+    const pageOneRequest = page.waitForRequest((request) => request.url() === frontPageSourceUrl);
+    await page.getByTestId('button-load-reference-preview-front_page').click();
+    await pageOneRequest;
+
+    const historicalRequest = page.waitForRequest((request) => request.url() === historicalSourceUrl);
+    await page.getByTestId('button-load-historical-reference-preview-golden_image').click();
+    await historicalRequest;
+
+    const pageOneAnnouncement = page.getByTestId('notice-page-one-preview-hidden');
+    const historicalAnnouncement = page.getByTestId('notice-historical-reference-preview-hidden');
+    await page.getByTestId('button-hide-reference-preview-front_page').click();
+    await expect(pageOneAnnouncement).toHaveText('Page 1 preview hidden.');
+    await page.getByTestId('button-hide-historical-reference-preview-golden_image').click();
+    await expect(historicalAnnouncement).toHaveText('Historical Golden Image preview hidden.');
+
+    await page.getByTestId('button-close-dialog').click();
+    await expect(page.getByRole('dialog')).toHaveCount(0);
+    await page.getByTestId('button-open-second-saved-review').click();
+    await expect(page.getByRole('dialog')).toContainText('Second saved cover');
+    await expect(pageOneAnnouncement).toHaveText('');
+    await expect(historicalAnnouncement).toHaveText('');
+
+    const pageOneFinished = page.waitForEvent(
+      'requestfinished',
+      (request) => request.url() === frontPageSourceUrl,
+    );
+    const historicalFinished = page.waitForEvent(
+      'requestfinished',
+      (request) => request.url() === historicalSourceUrl,
+    );
+    releasePageOneResponse?.();
+    releaseHistoricalResponse?.();
+    await Promise.all([pageOneFinished, historicalFinished]);
+    await expect(pageOneAnnouncement).toHaveText('');
+    await expect(historicalAnnouncement).toHaveText('');
+  } finally {
+    releasePageOneResponse?.();
+    releaseHistoricalResponse?.();
+  }
 });

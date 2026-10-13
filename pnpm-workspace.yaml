@@ -1,5 +1,5 @@
 packages:
-  - apps/underground-press
+  - artifacts/underground-press
   - lib/api-client-react
   - lib/replit-auth-web
 
