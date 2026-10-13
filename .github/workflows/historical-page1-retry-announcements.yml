@@ -1,0 +1,49 @@
+name: Historical Page 1 retry announcements
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/historical-page1-retry-announcements.yml'
+      - 'gui-workspace/**'
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  retry-announcements:
+    name: Page 1 retry announcements (${{ matrix.browser }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [firefox, webkit]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: gui-workspace/pnpm-lock.yaml
+      - name: Install GUI workspace dependencies
+        working-directory: gui-workspace
+        run: pnpm install --filter @workspace/underground-press... --frozen-lockfile
+      - name: Install browser and operating-system dependencies
+        working-directory: gui-workspace
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps ${{ matrix.browser }}
+      - name: Run saved historical Page 1 announcement tests
+        working-directory: gui-workspace
+        run: pnpm --filter @workspace/underground-press exec playwright test --config browser-tests/playwright.config.ts --project=${{ matrix.browser }} --grep='saved historical Page 1'
+      - name: Preserve failure artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: page1-retry-${{ matrix.browser }}
+          path: gui-workspace/artifacts/underground-press/browser-tests/test-results
+          if-no-files-found: ignore
