@@ -1,0 +1,94 @@
+name: Historical Page 1 retry announcements
+
+on:
+  pull_request:
+    branches: [main]
+types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - .github/workflows/historical-page1-retry-announcements.yml
+      - gui-workspace/**
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: historical-page1-retry-${{ github.event.pull_request.head.sha || github.sha }}
+  cancel-in-progress: true
+
+jobs:
+  firefox:
+    name: Historical Page 1 retry announcement / Firefox
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: gui-workspace
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 10.26.1
+          run_install: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: gui-workspace/pnpm-lock.yaml
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install Firefox and its system dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps firefox
+      - name: Run the saved historical Page 1 announcement test
+        run: >-
+          pnpm --filter @workspace/underground-press exec playwright test
+          --config browser-tests/playwright.config.ts
+          --project=firefox
+          --grep="saved historical Page 1 first-load success stays silent and a later retry announces success"
+      - name: Record tested commit
+        if: always()
+        env:
+          TESTED_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
+
+  webkit:
+    name: Historical Page 1 retry announcement / WebKit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: gui-workspace
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name || github.repository }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+        with:
+          version: 10.26.1
+          run_install: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: gui-workspace/pnpm-lock.yaml
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Install WebKit and its system dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps webkit
+      - name: Run the saved historical Page 1 announcement test
+        run: >-
+          pnpm --filter @workspace/underground-press exec playwright test
+          --config browser-tests/playwright.config.ts
+          --project=webkit
+          --grep="saved historical Page 1 first-load success stays silent and a later retry announces success"
+      - name: Record tested commit
+        if: always()
+        env:
+          TESTED_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
