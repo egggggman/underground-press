@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "benchmarks": [
+    {
+      "id": "golden_image",
+      "role": "Publication-wide visual canon; textual content is not story or location canon.",
+      "path": "design-system/references/the-underground-press-golden-image.png",
+      "sha256": "d424a2885e763f6bd42e84603004b039931b9576df667eeb720bd996b95f39d9"
+    },
+    {
+      "id": "issue_001_page_one",
+      "role": "Exact approved execution benchmark for Issue #1 Page One.",
+      "path": "issues/issue_001/production/page-one/issue_001_page_one_polished_press_v3.png",
+      "sha256": "07d4e8332880a23b947d49ea4ea813ae558f4ada220529d63e5d37cd5bc43691"
+    }
+  ]
+}

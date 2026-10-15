@@ -4,6 +4,8 @@
 
 This document is the design constitution for The Underground Press. The exact, unmodified image at [`design-system/references/the-underground-press-golden-image.png`](../design-system/references/the-underground-press-golden-image.png) is the **GOLDEN IMAGE**: the visual North Star for the entire publication.
 
+The Golden Image and the exact Issue #1 Page One execution benchmark have different jobs and must not be conflated. Their canonical paths, roles, and required SHA-256 hashes are recorded in [`design-system/references/visual_benchmarks.json`](../design-system/references/visual_benchmarks.json). The Golden Image governs publication-wide visual DNA; the Page One benchmark locks the approved Issue #1 Page One execution.
+
 Before approving any future page, ask:
 
 > **Could this page have come off the same printing press as the GOLDEN IMAGE?**
