@@ -53,7 +53,8 @@ jobs:
         if: always()
         env:
           TESTED_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
 
   webkit:
     name: Historical Page 1 retry announcement / WebKit
@@ -91,4 +92,5 @@ jobs:
         if: always()
         env:
           TESTED_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
-        run: echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
+        run: |
+          echo "Tested commit: ${TESTED_COMMIT}" >> "$GITHUB_STEP_SUMMARY"
