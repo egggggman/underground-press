@@ -3,7 +3,7 @@ name: Historical Page 1 retry announcements
 on:
   pull_request:
     branches: [main]
-types: [opened, synchronize, reopened, ready_for_review]
+    types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - .github/workflows/historical-page1-retry-announcements.yml
       - gui-workspace/**
