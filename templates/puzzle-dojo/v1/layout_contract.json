@@ -24,6 +24,7 @@
       "page": 8,
       "role": "puzzle_workbench",
       "zones": [
+        {"id": "newspaper_page_8", "component_id": "newspaper.page-8-underlay", "kind": "newspaper_underlay", "x": 0, "y": 0, "width": 792, "height": 1224, "required": true},
         {"id": "page_8_issue_banner", "component_id": "page-furniture.issue-banner", "kind": "page_furniture", "x": 22, "y": 1151, "width": 748, "height": 51, "required": true},
         {"id": "crossword", "component_id": "puzzle.crossword", "kind": "puzzle_asset", "x": 22, "y": 771, "width": 450, "height": 368, "required": true},
         {"id": "clues", "component_id": "puzzle.crossword-clues", "kind": "puzzle_asset", "x": 22, "y": 481, "width": 748, "height": 278, "required": true},
@@ -39,6 +40,7 @@
       "page": 9,
       "role": "department_back_page",
       "zones": [
+        {"id": "newspaper_page_9", "component_id": "newspaper.page-9-underlay", "kind": "newspaper_underlay", "x": 0, "y": 0, "width": 792, "height": 1224, "required": true},
         {"id": "page_9_issue_banner", "component_id": "page-furniture.issue-banner", "kind": "page_furniture", "x": 22, "y": 1151, "width": 748, "height": 51, "required": true},
         {"id": "ad", "component_id": "advertisement.crust-bucket", "kind": "component", "x": 22, "y": 842, "width": 476, "height": 280, "required": true},
         {"id": "sewer_cap", "component_id": "collectible.sewer-cap", "kind": "component", "x": 510, "y": 842, "width": 260, "height": 280, "required": true},

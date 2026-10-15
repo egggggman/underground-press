@@ -69,6 +69,12 @@ def main(argv: list[str] | None = None) -> int:
     search_path = resolve_from_manifest(manifest_path, manifest["neighborhood_search"])
     locked = manifest["immutable_assets"]
     required_puzzles = set(manifest["required_puzzles"])
+    release_state = manifest["release_state"]
+    physical_gate = manifest["physical_print_play_gate"]
+    if release_state not in {"BETA", "RELEASE CANDIDATE"}:
+        fail(f"invalid Puzzle Dojo release state: {release_state}")
+    if release_state == "RELEASE CANDIDATE" and not physical_gate.get("passed"):
+        fail("Puzzle Dojo cannot become RELEASE CANDIDATE before the physical print/play gate passes")
     rules = manifest["neighborhood_search_rules"]
     contract = load_object(contract_path)
     composition = load_object(composition_path)
@@ -152,7 +158,7 @@ def main(argv: list[str] | None = None) -> int:
         resolved = ROOT / asset_path
         if not resolved.is_file() or digest(resolved) != record.get("sha256"):
             fail(f"sidecar asset integrity mismatch: {zone_id}")
-    print(f"Puzzle Dojo validation passed: {len(zones)} zones, {len(images)} linked assets, {len(locked)} immutable puzzle sources.")
+    print(f"Puzzle Dojo validation passed: {len(zones)} zones, {len(images)} linked assets, {len(locked)} immutable puzzle sources; release state {release_state}.")
     return 0
 
 
