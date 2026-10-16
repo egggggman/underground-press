@@ -7,7 +7,7 @@ content, production data, credentials, or uploaded files.
 
 ## Requirements
 
-- Node.js 20 or newer
+- Node.js 24 or newer (validated CI runtime: Node.js 24)
 - pnpm 10.26.1
 - PostgreSQL for running the API against a local database
 
