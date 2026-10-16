@@ -4,7 +4,7 @@
   "private": true,
   "packageManager": "pnpm@10.26.1",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "scripts": {
     "build": "pnpm --filter @workspace/api-server run build && PORT=${PORT:-4173} BASE_PATH=${BASE_PATH:-/} pnpm --filter @workspace/underground-press run build",
