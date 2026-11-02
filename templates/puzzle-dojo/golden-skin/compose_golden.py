@@ -67,7 +67,7 @@ def q(tag: str) -> str:
 
 def paper_layer(page: int) -> ET.Element:
     group = ET.Element(q("g"), {"id": f"paper-{page}"})
-    ET.SubElement(group, q("rect"), {"width": "792", "height": "1224", "fill": "#E9D6A4"})
+    ET.SubElement(group, q("rect"), {"width": "792", "height": "1224", "fill": "#EBE0C2"})
     ET.SubElement(group, q("rect"), {"width": "792", "height": "1224", "filter": "url(#stain)"})
     ET.SubElement(group, q("rect"), {"width": "792", "height": "1224", "filter": "url(#fiber)", "opacity": "0.18"})
     ET.SubElement(group, q("rect"), {"width": "792", "height": "1224", "fill": "url(#vignette)"})
@@ -91,7 +91,16 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         + PAPER_DEFS.format(seed=seed, seed2=seed + 7, seed3=seed + 13, seed4=seed + 29)
         + "</defs>"
     )
+    defs.append(ET.fromstring(
+        f'<filter xmlns="{SVG_NS}" id="lift" color-interpolation-filters="sRGB">'
+        '<feColorMatrix type="matrix" values="1.10 0 0 0 0  0 1.19 0 0 0  0 0 1.52 0 0  0 0 0 1 0"/></filter>'))
     root.insert(2, defs)
+    # Locked puzzle files carry a tan page background (#e8d6a8). Lift it to white here so the
+    # multiply blend lets the paper show through; source files stay untouched.
+    for img in root.iter(q("image")):
+        href = img.get("href") or ""
+        if "/art/" not in href and href.endswith(".svg") and "puzzle-dojo" in href and "golden-skin" not in href and not href.startswith("components/"):
+            img.set("filter", "url(#lift)")
     for page_group in [g for g in root if g.tag == q("g") and g.get("id", "").startswith("page-")]:
         page = page_group.get("id").split("-")[1]
         children = list(page_group)

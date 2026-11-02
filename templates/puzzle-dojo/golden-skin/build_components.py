@@ -63,7 +63,7 @@ def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
         )
     body = "\n".join(cells)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
+<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
 <rect x="1.5" y="1.5" width="{width - 3}" height="28" fill="#173f32"/>
 <text x="{width / 2}" y="21" text-anchor="middle" font-family="{DISPLAY}" font-size="15" fill="#f4e8c6" textLength="150" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
 {body}
@@ -89,7 +89,7 @@ def scorecard(puzzles: list[str], width: int = 368, height: int = 287) -> str:
     body = "\n".join(rows)
     base = 66 + len(puzzles) * gap
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-<rect x="2" y="2" width="{width - 4}" height="{height - 4}" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
+<rect x="2" y="2" width="{width - 4}" height="{height - 4}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
 <rect x="2" y="2" width="{width - 4}" height="36" fill="#173f32"/>
 <text x="{width / 2}" y="27" text-anchor="middle" font-family="{DISPLAY}" font-size="20" fill="#f4e8c6" textLength="200" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
 <text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF}" font-size="11.5" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>

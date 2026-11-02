@@ -71,7 +71,7 @@
     },
     "scorecard": {
       "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
-      "sha256": "44e15d53c5e6b4b8a88f470928fb6c3889922864f3bfe0ea4aa10c6274644c96"
+      "sha256": "f8f920a853e6c7deec687816f454d25837708d020ec60e34e74eebf2cc09c8de"
     },
     "seagullotine": {
       "path": "design-system/components/puzzle-dojo/seagullotine_quote.svg",
