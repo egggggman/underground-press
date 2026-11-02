@@ -21,9 +21,9 @@ python templates/puzzle-dojo/golden-skin/render.py proofs/puzzle-dojo-golden.svg
 
 For a new issue: copy `issue_001_furniture.json`, copy `assets.golden.json` and repoint the puzzle and art entries at the new issue's assets, and change `--seed` so the paper stock differs each week.
 
-## Layout contract v1.1
+## Layout contract v1.2
 
-`layout_contract.golden.json` is v1 plus one zone: `scorecard`, filling the 288 x 368 pt gap beside the crossword on page 8. Every v1 zone is unchanged.
+`layout_contract.golden.json` keeps every v1 zone ID and adds `scorecard`. Page 8 is re-packed so the page has no dead space: crossword and sudoku side by side, full-width clues (kept at legible size), then Pizza Cipher beside Neighborhood Search, then tip, Seagullotine quote and a compact scorecard. The validator checks that all v1 zone IDs exist, every zone is inside the page and no zones overlap.
 
 ## Notes
 

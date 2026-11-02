@@ -65,11 +65,19 @@ def validate_golden_skin(v1_zones: dict, composition: dict, manifest_path: Path)
     for page in golden["pages"]:
         for zone in page["zones"]:
             gzones[zone["id"]] = zone
-    for zone_id, zone in v1_zones.items():
-        if zone_id not in gzones:
-            fail(f"golden contract dropped v1 zone: {zone_id}")
-        if any(gzones[zone_id][key] != zone[key] for key in ("x", "y", "width", "height")):
-            fail(f"golden contract moved v1 zone: {zone_id}")
+    missing = set(v1_zones) - set(gzones)
+    if missing:
+        fail(f"golden contract dropped v1 zones: {sorted(missing)}")
+    coords = golden["coordinate_system"]
+    for page in golden["pages"]:
+        zs = page["zones"]
+        for zone in zs:
+            if zone["x"] < 0 or zone["y"] < 0 or zone["x"] + zone["width"] > coords["page_width"] or zone["y"] + zone["height"] > coords["page_height"]:
+                fail(f"golden zone out of bounds: {zone['id']}")
+        for i, a in enumerate(zs):
+            for b in zs[i + 1:]:
+                if a["x"] < b["x"] + b["width"] and b["x"] < a["x"] + a["width"] and a["y"] < b["y"] + b["height"] and b["y"] < a["y"] + a["height"]:
+                    fail(f"golden zones overlap: {a['id']} / {b['id']}")
     extra = set(gzones) - set(v1_zones)
     assets = load_object(skin / "assets.golden.json")
     required = {key for key, value in gzones.items() if value.get("required")}

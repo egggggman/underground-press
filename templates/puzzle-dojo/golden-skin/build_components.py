@@ -52,27 +52,53 @@ def footer(text: str) -> str:
 """
 
 
-def scorecard(puzzles: list[str]) -> str:
-    rows = []
+def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
+    cells = []
     for index, name in enumerate(puzzles):
-        y = 66 + index * 40
+        x = 12 + (index % 2) * (width // 2 - 4)
+        y = 44 + (index // 2) * 26
+        cells.append(
+            f'<rect x="{x}" y="{y}" width="14" height="14" fill="#f1e4bd" stroke="#171812" stroke-width="1.6"/>'
+            f'<text x="{x + 20}" y="{y + 12}" font-family="{DISPLAY}" font-size="11.5" fill="#171812" textLength="{min(len(name) * 6.2, width // 2 - 34):.0f}" lengthAdjust="spacingAndGlyphs">{escape(name.upper())}</text>'
+        )
+    body = "\n".join(cells)
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
+<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
+<rect x="1.5" y="1.5" width="{width - 3}" height="28" fill="#173f32"/>
+<text x="{width / 2}" y="21" text-anchor="middle" font-family="{DISPLAY}" font-size="15" fill="#f4e8c6" textLength="150" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
+{body}
+<path d="M12 {height - 30}H{width - 12}" stroke="#171812" stroke-width="1.5"/>
+<text x="12" y="{height - 12}" font-family="{SANS}" font-size="9.5" font-weight="bold" fill="#171812">TIME ________   STUCK ON ______________</text>
+</svg>
+"""
+
+
+def scorecard(puzzles: list[str], width: int = 368, height: int = 287) -> str:
+    if height < 150:
+        return scorecard_compact(puzzles, width, height)
+    rows = []
+    gap = (height - 150) / max(len(puzzles), 1)
+    for index, name in enumerate(puzzles):
+        y = 66 + index * gap
+        label_w = len(name) * 9.6
         rows.append(
-            f'<rect x="16" y="{y}" width="20" height="20" fill="#f1e4bd" stroke="#171812" stroke-width="2"/>'
-            f'<text x="46" y="{y + 16}" font-family="{DISPLAY}" font-size="17" fill="#171812" textLength="{len(name) * 9.4:.0f}" lengthAdjust="spacingAndGlyphs">{escape(name.upper())}</text>'
-            f'<path d="M{46 + len(name) * 9.4 + 8:.0f} {y + 17}H272" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>'
+            f'<rect x="18" y="{y:.0f}" width="22" height="22" fill="#f1e4bd" stroke="#171812" stroke-width="2"/>'
+            f'<text x="52" y="{y + 18:.0f}" font-family="{DISPLAY}" font-size="18" fill="#171812" textLength="{label_w:.0f}" lengthAdjust="spacingAndGlyphs">{escape(name.upper())}</text>'
+            f'<path d="M{52 + label_w + 10:.0f} {y + 19:.0f}H{width - 18}" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>'
         )
     body = "\n".join(rows)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="288" height="368" viewBox="0 0 288 368">
-<rect x="2" y="2" width="284" height="364" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
-<rect x="2" y="2" width="284" height="34" fill="#173f32"/>
-<text x="144" y="26" text-anchor="middle" font-family="{DISPLAY}" font-size="19" fill="#f4e8c6" textLength="190" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
-<text x="144" y="54" text-anchor="middle" font-family="{SERIF}" font-size="11" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>
+    base = 66 + len(puzzles) * gap
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
+<rect x="2" y="2" width="{width - 4}" height="{height - 4}" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
+<rect x="2" y="2" width="{width - 4}" height="36" fill="#173f32"/>
+<text x="{width / 2}" y="27" text-anchor="middle" font-family="{DISPLAY}" font-size="20" fill="#f4e8c6" textLength="200" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
+<text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF}" font-size="11.5" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>
 {body}
-<path d="M16 {66 + len(puzzles) * 40 + 4}H272" stroke="#171812" stroke-width="2"/>
-<text x="16" y="{66 + len(puzzles) * 40 + 30}" font-family="{SANS}" font-size="11" font-weight="bold" fill="#171812">TOTAL TIME ____________</text>
-<text x="16" y="{66 + len(puzzles) * 40 + 56}" font-family="{SANS}" font-size="11" font-weight="bold" fill="#171812">STUCK ON ____________________</text>
-<g transform="rotate(-6 214 {66 + len(puzzles) * 40 + 92})"><rect x="150" y="{66 + len(puzzles) * 40 + 74}" width="118" height="36" fill="none" stroke="#8c2118" stroke-width="3"/>
-<text x="209" y="{66 + len(puzzles) * 40 + 98}" text-anchor="middle" font-family="{DISPLAY}" font-size="17" fill="#8c2118" textLength="98" lengthAdjust="spacingAndGlyphs">SOLVED IT!</text></g>
+<path d="M18 {base:.0f}H{width - 18}" stroke="#171812" stroke-width="2"/>
+<text x="18" y="{base + 24:.0f}" font-family="{SANS}" font-size="11.5" font-weight="bold" fill="#171812">TOTAL TIME ____________</text>
+<text x="18" y="{base + 46:.0f}" font-family="{SANS}" font-size="11.5" font-weight="bold" fill="#171812">STUCK ON ______________________</text>
+<g transform="rotate(-6 {width - 74} {base + 36:.0f})"><rect x="{width - 140}" y="{base + 16:.0f}" width="120" height="38" fill="none" stroke="#8c2118" stroke-width="3"/>
+<text x="{width - 80}" y="{base + 42:.0f}" text-anchor="middle" font-family="{DISPLAY}" font-size="18" fill="#8c2118" textLength="100" lengthAdjust="spacingAndGlyphs">SOLVED IT!</text></g>
 </svg>
 """
 
