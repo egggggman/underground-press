@@ -14,7 +14,7 @@
     <circle cx="65" cy="52" r="10" fill="#8c2118"/><circle cx="106" cy="43" r="10" fill="#8c2118"/><circle cx="91" cy="84" r="9" fill="#173f32"/>
     <path d="M56 98q29 21 58-2" fill="none" stroke="#17130f" stroke-width="4"/>
   </g>
-  <text x="206" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#173f32">HOT PIE. LOCAL GOSSIP.</text>
+  <text x="206" y="110" font-family="Georgia,serif" font-size="22" font-weight="700" fill="#173f32" textLength="244" lengthAdjust="spacingAndGlyphs">HOT PIE. LOCAL GOSSIP.</text>
   <text x="206" y="141" font-family="Georgia,serif" font-size="17" fill="#17130f">Rotating coupons. No fixed clock.</text>
   <text x="206" y="166" font-family="Georgia,serif" font-size="17" fill="#17130f">Ask what came out of the oven.</text>
   <rect x="202" y="190" width="236" height="49" fill="#173f32" stroke="#17130f" stroke-width="2"/>

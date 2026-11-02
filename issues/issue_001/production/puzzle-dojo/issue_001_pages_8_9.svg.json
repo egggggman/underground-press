@@ -7,7 +7,7 @@
   "assets": {
     "ad": {
       "path": "issues/issue_001/assets/puzzle-dojo/art/crust-bucket-issue-001.svg",
-      "sha256": "a7967f624c0e98760da4941cdbfc25b1bd26278a20cf4c3c0b8579135918ea5c"
+      "sha256": "c16951192154a8677d208fa767bd949c5cdf7d5f356776fc95c7f3bc2aa9f498"
     },
     "cipher_corner": {
       "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
@@ -75,7 +75,7 @@
     },
     "sewer_cap": {
       "path": "issues/issue_001/assets/puzzle-dojo/art/sewer-cap-portland-001.svg",
-      "sha256": "e126806650667a207c43dcd5b5ba88c78b6a81669bd0f235dd96e8f7f73394d2"
+      "sha256": "1c7ef3a3943494326dd220ac785ad8a395928e558f4e0a1c97220479e26cff92"
     },
     "sudoku": {
       "path": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
