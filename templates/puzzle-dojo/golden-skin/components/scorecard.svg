@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="288" height="368" viewBox="0 0 288 368">
+<rect x="2" y="2" width="284" height="364" fill="#ead8ad" stroke="#171812" stroke-width="3"/>
+<rect x="2" y="2" width="284" height="34" fill="#173f32"/>
+<text x="144" y="26" text-anchor="middle" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="19" fill="#f4e8c6" textLength="190" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
+<text x="144" y="54" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="11" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>
+<rect x="16" y="66" width="20" height="20" fill="#f1e4bd" stroke="#171812" stroke-width="2"/><text x="46" y="82" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="17" fill="#171812" textLength="85" lengthAdjust="spacingAndGlyphs">CROSSWORD</text><path d="M139 83H272" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="16" y="106" width="20" height="20" fill="#f1e4bd" stroke="#171812" stroke-width="2"/><text x="46" y="122" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="17" fill="#171812" textLength="179" lengthAdjust="spacingAndGlyphs">NEIGHBORHOOD SEARCH</text><path d="M233 123H272" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="16" y="146" width="20" height="20" fill="#f1e4bd" stroke="#171812" stroke-width="2"/><text x="46" y="162" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="17" fill="#171812" textLength="113" lengthAdjust="spacingAndGlyphs">PIZZA CIPHER</text><path d="M167 163H272" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>
+<rect x="16" y="186" width="20" height="20" fill="#f1e4bd" stroke="#171812" stroke-width="2"/><text x="46" y="202" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="17" fill="#171812" textLength="56" lengthAdjust="spacingAndGlyphs">SUDOKU</text><path d="M110 203H272" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>
+<path d="M16 230H272" stroke="#171812" stroke-width="2"/>
+<text x="16" y="256" font-family="'Arial Narrow',Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#171812">TOTAL TIME ____________</text>
+<text x="16" y="282" font-family="'Arial Narrow',Arial,Helvetica,sans-serif" font-size="11" font-weight="bold" fill="#171812">STUCK ON ____________________</text>
+<g transform="rotate(-6 214 318)"><rect x="150" y="300" width="118" height="36" fill="none" stroke="#8c2118" stroke-width="3"/>
+<text x="209" y="324" text-anchor="middle" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="17" fill="#8c2118" textLength="98" lengthAdjust="spacingAndGlyphs">SOLVED IT!</text></g>
+</svg>

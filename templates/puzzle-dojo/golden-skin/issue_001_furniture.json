@@ -1,0 +1,10 @@
+{
+  "issue_label": "FIRST EDITION!",
+  "page_8_title": "PUZZLE DOJO",
+  "page_8_tagline": "Train your mind. Sharpen your skills.",
+  "page_9_title": "DOJO SIDE QUESTS",
+  "page_9_tagline": "Collect. Clip. Question.",
+  "page_8_footer": "KEEP TRAINING • ANSWERS RETURN NEXT ISSUE • PUZZLE DOJO / 8",
+  "page_9_footer": "KEEP TRAINING • ANSWERS RETURN NEXT ISSUE • PUZZLE DOJO / 9",
+  "puzzles": ["Crossword", "Neighborhood Search", "Pizza Cipher", "Sudoku"]
+}

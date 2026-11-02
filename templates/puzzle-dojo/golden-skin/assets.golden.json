@@ -1,0 +1,22 @@
+{
+  "crossword": "../../../issues/issue_001/assets/puzzle-dojo/crossword.svg",
+  "clues": "../../../issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
+  "sudoku": "../../../issues/issue_001/assets/puzzle-dojo/sudoku.svg",
+  "pizza_cipher": "../../../issues/issue_001/assets/puzzle-dojo/pizza-cipher.svg",
+  "neighborhood_search": "../../../issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
+  "ad": "../../../issues/issue_001/assets/puzzle-dojo/art/crust-bucket-issue-001.svg",
+  "sewer_cap": "../../../issues/issue_001/assets/puzzle-dojo/art/sewer-cap-portland-001.svg",
+  "puzzle_tip": "../../../design-system/components/puzzle-dojo/puzzle_tip.svg",
+  "seagullotine": "../../../design-system/components/puzzle-dojo/seagullotine_quote.svg",
+  "page_8_issue_banner": "components/masthead-p8.svg",
+  "page_8_footer": "components/footer-p8.svg",
+  "page_9_issue_banner": "components/masthead-p9.svg",
+  "puzzle_bench": "../../../design-system/components/puzzle-dojo/puzzle_bench.svg",
+  "cipher_corner": "../../../design-system/components/puzzle-dojo/cipher_corner.svg",
+  "page_9_seagullotine": "../../../issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
+  "mini_ads": "../../../design-system/components/puzzle-dojo/mini_ads.svg",
+  "memory_fragment": "../../../design-system/components/puzzle-dojo/portland_memory.svg",
+  "last_issue_solutions": "../../../design-system/components/puzzle-dojo/last_issue_solutions.svg",
+  "page_9_footer": "components/footer-p9.svg",
+  "scorecard": "components/scorecard.svg"
+}
