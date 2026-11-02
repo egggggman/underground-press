@@ -7,7 +7,7 @@
   "assets": {
     "ad": {
       "path": "issues/issue_001/assets/puzzle-dojo/art/crust-bucket-issue-001.svg",
-      "sha256": "c16951192154a8677d208fa767bd949c5cdf7d5f356776fc95c7f3bc2aa9f498"
+      "sha256": "21385bf8b24df07643b0be557126de4fee96986bd2cdfc329514f9334b6c2d31"
     },
     "cipher_corner": {
       "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
