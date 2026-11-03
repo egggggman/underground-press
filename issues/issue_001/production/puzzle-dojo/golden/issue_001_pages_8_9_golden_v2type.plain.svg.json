@@ -1,0 +1,89 @@
+{
+  "template": "puzzle-dojo.golden.v1.2",
+  "version": "1.2.0",
+  "path_base": "repository-root",
+  "output": "issues/issue_001/production/puzzle-dojo/golden/issue_001_pages_8_9_golden_v2type.plain.svg",
+  "missing_required": [],
+  "assets": {
+    "ad": {
+      "path": "templates/puzzle-dojo/golden-skin/components/ad-slot.svg",
+      "sha256": "943c62b0e80e50478d61a92eb20b709b136c370dada09a7e5a52459b5d5c2a52"
+    },
+    "cipher_corner": {
+      "path": "templates/puzzle-dojo/golden-skin/components/cipher-corner.svg",
+      "sha256": "c4bd174f7b98d480d16770ea4baf709b1f4bd2062ec71c2047c91eb8664646fe"
+    },
+    "clues": {
+      "path": "issues/issue_001/assets/puzzle-dojo/v2/crossword-clues.svg",
+      "sha256": "80aa0d85d87affe95faba0f7573aea53535a15fc4a28af0ec5029b56b6635497"
+    },
+    "crossword": {
+      "path": "issues/issue_001/assets/puzzle-dojo/v2/crossword.svg",
+      "sha256": "a78d91ee52de80c9051b0121950e9aeb193b9916a5ea0e428e23a4e0084a31f2"
+    },
+    "last_issue_solutions": {
+      "path": "templates/puzzle-dojo/golden-skin/components/last-solutions.svg",
+      "sha256": "79e4fbe853d459a0e9445d586d7ef3b2723fe082c1ee3755d98cbb017e5d4762"
+    },
+    "memory_fragment": {
+      "path": "templates/puzzle-dojo/golden-skin/components/portland-memory.svg",
+      "sha256": "56174932def67862a9fa0c8d384ef8ec81ead6455028c7503befe314b70c9b8b"
+    },
+    "mini_ads": {
+      "path": "templates/puzzle-dojo/golden-skin/components/mini-slot.svg",
+      "sha256": "d1c0170faceb0d6899aa9483b1cf0a67ea27345f132578f6ec26c753e8ac51c3"
+    },
+    "neighborhood_search": {
+      "path": "issues/issue_001/assets/puzzle-dojo/v2/neighborhood-search.svg",
+      "sha256": "6bc21d7bd1164ef509f139ab1fcc399ac53ef39ad38d537efb09dc6be30f358e"
+    },
+    "page_8_footer": {
+      "path": "templates/puzzle-dojo/golden-skin/components/footer-p8.svg",
+      "sha256": "18af1c1fcbbbd60bb3badc38bbbeff20621dc142a25683dc07d7799be0ed5a43"
+    },
+    "page_8_issue_banner": {
+      "path": "templates/puzzle-dojo/golden-skin/components/masthead-p8.svg",
+      "sha256": "62bc6a5837a1b58a29973de5b16203761c5e61308145ca7448fbdf8d324927f3"
+    },
+    "page_9_footer": {
+      "path": "templates/puzzle-dojo/golden-skin/components/footer-p9.svg",
+      "sha256": "0d4500b55991b6eb637ae5d11a4906fb6b98e479a9afadfadf4a9c248b0311f5"
+    },
+    "page_9_issue_banner": {
+      "path": "templates/puzzle-dojo/golden-skin/components/masthead-p9.svg",
+      "sha256": "fc9378be057147266b0a24213d1fb1649feb176dbca3344ae23ccb836c2725eb"
+    },
+    "page_9_seagullotine": {
+      "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-panel.svg",
+      "sha256": "bca1f3bd7bea55524f2dc52811fb48136423ae6f245f8d2ba6d17f82a65025a3"
+    },
+    "pizza_cipher": {
+      "path": "issues/issue_001/assets/puzzle-dojo/v2/pizza-cipher.svg",
+      "sha256": "b7966daed6d55e8cabcc6fa2df2633f99d6cef50eedab005f8af824bcc6c4239"
+    },
+    "puzzle_bench": {
+      "path": "templates/puzzle-dojo/golden-skin/components/puzzle-bench.svg",
+      "sha256": "e0484e5f1aaef49d3dd54a0055f27659466d4eb0dce99139c36576733a214577"
+    },
+    "puzzle_tip": {
+      "path": "templates/puzzle-dojo/golden-skin/components/puzzle-tip.svg",
+      "sha256": "11348229bf0a319fd08d9f16b88aa26f73dbcbc0eab58daf4270df20483c0442"
+    },
+    "scorecard": {
+      "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
+      "sha256": "bf2901219e6ca54b8bc1b46fa09ad8e2ecc470e35c34f3ae89c0700a8e1dcea4"
+    },
+    "seagullotine": {
+      "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-says.svg",
+      "sha256": "b590bf8aead31afd52db209c27e4cda646ba0fea8191c9c772b77e645ba8027b"
+    },
+    "sewer_cap": {
+      "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",
+      "sha256": "762be1e789b35557c24df209ccffa306d1fecd70ae2f812a58114ef3eb9ea759"
+    },
+    "sudoku": {
+      "path": "issues/issue_001/assets/puzzle-dojo/v2/sudoku.svg",
+      "sha256": "b19017cd53432601d9390b15634b14e990224183b0ce10bd6b985810a5a91357"
+    }
+  }
+}

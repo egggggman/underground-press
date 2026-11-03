@@ -1,0 +1,22 @@
+{
+  "crossword": "../../../issues/issue_001/assets/puzzle-dojo/v2/crossword.svg",
+  "clues": "../../../issues/issue_001/assets/puzzle-dojo/v2/crossword-clues.svg",
+  "sudoku": "../../../issues/issue_001/assets/puzzle-dojo/v2/sudoku.svg",
+  "pizza_cipher": "../../../issues/issue_001/assets/puzzle-dojo/v2/pizza-cipher.svg",
+  "neighborhood_search": "../../../issues/issue_001/assets/puzzle-dojo/v2/neighborhood-search.svg",
+  "ad": "components/ad-slot.svg",
+  "sewer_cap": "components/sewer-cap.svg",
+  "puzzle_tip": "components/puzzle-tip.svg",
+  "seagullotine": "components/seagullotine-says.svg",
+  "page_8_issue_banner": "components/masthead-p8.svg",
+  "page_8_footer": "components/footer-p8.svg",
+  "page_9_issue_banner": "components/masthead-p9.svg",
+  "puzzle_bench": "components/puzzle-bench.svg",
+  "cipher_corner": "components/cipher-corner.svg",
+  "page_9_seagullotine": "components/seagullotine-panel.svg",
+  "mini_ads": "components/mini-slot.svg",
+  "memory_fragment": "components/portland-memory.svg",
+  "last_issue_solutions": "components/last-solutions.svg",
+  "page_9_footer": "components/footer-p9.svg",
+  "scorecard": "components/scorecard.svg"
+}

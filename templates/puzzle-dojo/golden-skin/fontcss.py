@@ -11,12 +11,14 @@ FACES = {  # family -> (file, css extras)
     "Bebas Neue": ("BebasNeue-Regular-ascii.woff", ""),
     "PT Serif": ("PTSerif-Regular-ascii.woff", ""),
     "PT Serif Italic": ("PTSerif-Italic-ascii.woff", ""),
+    "PT Sans Narrow": ("PTSansNarrow-Regular-ascii.woff", ""),
+    "PT Sans Narrow Bold": ("PTSansNarrow-Bold-ascii.woff", ""),
 }
 HEAD = "Bangers,Impact,'Arial Narrow Bold',sans-serif"   # page titles, box headers, comic lettering
 STRIP = "'Bebas Neue','Arial Narrow',sans-serif"          # header strip, footer, small labels
 SERIF = "'PT Serif',Georgia,serif"                        # body text
 SERIF_I = "'PT Serif Italic','PT Serif',Georgia,serif"    # italic body (own face: SVG-as-image keeps it simple)
-ALL = tuple(FACES)
+ALL = ("Bangers", "Bebas Neue", "PT Serif", "PT Serif Italic")  # default page-furniture set
 
 
 def css(*families: str) -> str:

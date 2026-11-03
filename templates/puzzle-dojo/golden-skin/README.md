@@ -58,3 +58,12 @@ python compose_golden.py assets.golden.json out.svg --seed 1991 --decor decor.is
 ```
 Props are generic objects, not characters, and sit in the page margins and gaps. They never overlap puzzle grids, clues or approved ad art.
 
+## Puzzle fonts (v2 proposal)
+
+`assets.golden.v2type.json` maps the five puzzle zones to the re-typeset copies in `issues/issue_001/assets/puzzle-dojo/v2/` (see its README). Build the review proof with:
+
+```
+python compose_golden.py assets.golden.v2type.json ../../../issues/issue_001/production/puzzle-dojo/golden/issue_001_pages_8_9_golden_v2type.svg --seed 1991 --decor decor.issue_001.json
+```
+The default `assets.golden.json` still uses the locked originals.
+
