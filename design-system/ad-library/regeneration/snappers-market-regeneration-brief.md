@@ -4,9 +4,12 @@ Status: **needed, not yet produced.** HQ (2026-11-02) rejected the v3 cleanup as
 
 Claude's workspace has no image-generation model, so this brief is for whoever regenerates it (the ad was originally made with ChatGPT image generation).
 
-## Reference images (attach all three)
-1. `approved_sheets/five_new_ads_approved_sheet.png`, bottom-middle panel (the approved design).
-2. `approved_v2/snappers-market-v2.png` (the same panel, tight crop).
+## This is a restoration, not a redesign
+HQ (2026-11-03): the next master is a faithful regeneration of the approved Snapper's Market advertisement. Only the lettering, border defects and resolution are corrected. Do not redesign the business. Two attempts have already been rejected for doing so (`candidates/snappers-market-alt-turtle.png`: turtle grocer, new copy; `rejected/snappers-market-attempt-nyc-2026-11-03.png`: one lobster, New York, invented copy, TMNT logo).
+
+## Reference images (attach all three; the approved panel is the primary reference)
+1. **Primary:** `approved_v2/snappers-market-v2.png`, the approved Snapper's panel as a tight crop. Match its composition, characters, colors and style.
+2. `approved_sheets/five_new_ads_approved_sheet.png`, bottom-middle panel (the same design in context).
 3. `revisions/snappers-market-v3-lettering.png` (shows the defects and the partial fix; do not copy its M).
 
 ## Keep (do not change)
@@ -14,9 +17,18 @@ Claude's workspace has no image-generation model, so this brief is for whoever r
 - Colors, 1991 gritty newspaper-ad print texture, cream aged paper, red/white checkerboard border, heavy black outlines.
 - Copy, exactly (straight apostrophe, no extra words): **The Snapper's Market** / FRESH PRODUCE / GROCERIES / COLD DRINKS / LOCAL GOODS / **GOOD FOOD FOR PORTLAND PEOPLE.**
 
+## Do NOT (explicit exclusions)
+- No New York imagery (no NYC skyline, bridge, "New York" copy). The setting is Portland, Maine.
+- No TMNT trademark lettering or logo, and no manhole-cover logo.
+- No new advertising copy, slogans, speech bubbles or taglines. Only the copy listed above, exactly.
+- Do not replace or reduce the two lobster grocers; do not swap in a turtle or any other character.
+- No "TM" marks, no comic-cover framing, no new scene elements.
+- Keep the red/white checkerboard border and the white bottom banner.
+
 ## Fix
 - "The Snapper's Market" fully legible: every letter complete, the "M" of "Market" a clean letterform in the same brush-script weight, nothing smearing across the chef hat or the letters.
 - Lettering must not overlap the checker border: leave clear paper between the title and the border squares.
+- Keep the Portland lighthouse and skyline strip, the product list, and the bottom banner "GOOD FOOD FOR PORTLAND PEOPLE." exactly as in the approved panel.
 - Single advertisement only: full plaque with its own border, no neighbouring panels, no dark gutter, no sheet edge.
 
 ## Deliverable spec (see `PRINT_RESOLUTION.md`)

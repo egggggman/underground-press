@@ -70,7 +70,12 @@ def main() -> int:
             with Image.open(cp) as im:
                 if (im.width, im.height) != (cand["width_px"], cand["height_px"]):
                     errors.append(f"candidate dimension mismatch: {cand['file']}")
-    for folder in ("approved", "approved_sheets", "approved_v2", "revisions", "candidates", "previous_versions"):
+    for rej in data.get("rejected_attempts", []):
+        listed.add(rej["file"])
+        rp = LIB / rej["file"]
+        if not rp.is_file() or digest(rp) != rej["sha256"]:
+            errors.append(f"rejected-attempt record missing or changed: {rej['file']}")
+    for folder in ("approved", "approved_sheets", "approved_v2", "revisions", "candidates", "rejected", "previous_versions"):
         for f in (LIB / folder).glob("*"):
             if f.is_file() and f"{folder}/{f.name}" not in listed:
                 errors.append(f"file not recorded in ad_library.json: {folder}/{f.name}")

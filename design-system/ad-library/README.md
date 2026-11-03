@@ -42,3 +42,7 @@ Review notes before any placement (nothing was edited):
 ## Candidates (not approved)
 
 `candidates/snappers-market-alt-turtle.png` is HQ's regenerated Snapper's Market, kept as an **alternate concept**, not a replacement. It fixes the lettering and border overlap but changes the character (red-masked turtle instead of the two lobsters), the copy and the composition, and still has a dark band along its top edge. The approved lobster ad is unchanged. Details and open issues: `candidates` in `ad_library.json`.
+
+## Rejected attempts (evidence only)
+
+`rejected/` keeps regeneration attempts HQ rejected, with hashes and reasons in `rejected_attempts` in `ad_library.json`. They are never used in layouts or the rotation pool.

@@ -588,7 +588,10 @@
       "regeneration": {
         "status": "candidate received 2026-11-02: candidates/snappers-market-alt-turtle.png is an alternate concept (turtle, not lobster), pending HQ decision; approved lobster ad unchanged",
         "brief": "regeneration/snappers-market-regeneration-brief.md",
-        "candidate": "candidates/snappers-market-alt-turtle.png"
+        "candidate": "candidates/snappers-market-alt-turtle.png",
+        "rejected_attempts": [
+          "rejected/snappers-market-attempt-nyc-2026-11-03.png"
+        ]
       }
     },
     {
@@ -695,6 +698,29 @@
         "publication": "pending",
         "print_proof": "pending"
       }
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "id": "snappers-market-attempt-nyc-2026-11-03",
+      "business": "The Snapper's Market",
+      "file": "rejected/snappers-market-attempt-nyc-2026-11-03.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "a53567f8f2d5873ba7933170037de1cd44ad8dc690aef2c2be10bc0951f9f875",
+      "source": "HQ-supplied regeneration attempt, original output file as received (2026-11-03)",
+      "status": "REJECTED by HQ (2026-11-03). Historical evidence only; never use in layouts or rotation.",
+      "findings": [
+        "one lobster instead of two lobster grocers",
+        "copy replaced: 'FRESH FISH! SHELLFISH! LOCAL CATCH! TURTLE APPROVED!' and 'SNAPPER'S MARKET—THE MUTANT SEAFOOD DESTINATION!' instead of the approved product list and 'GOOD FOOD FOR PORTLAND PEOPLE.' banner",
+        "invented copy: 'IN THE HEART OF NEW YORK CITY...' and 'FRESH SEAFOOD FROM THE SEWERS TO THE SURFACE!'",
+        "New York skyline and bridge instead of the Portland lighthouse and skyline strip",
+        "title reads 'SNAPPER'S MARKET' with a TM mark, no 'The'",
+        "green 'TMNT' manhole-cover logo: franchise trademark lettering on a business ad",
+        "no checkerboard border or plaque frame; comic-cover look, not the 1991 newspaper-ad style",
+        "resolution adequate (about 279 ppi in the large slot, about 683 ppi in a mini slot) but moot"
+      ],
+      "rejection_reason": "Departs from the approved ad's characters, copy, Portland setting and newspaper aesthetic; a redesign, not a faithful regeneration."
     }
   ]
 }
