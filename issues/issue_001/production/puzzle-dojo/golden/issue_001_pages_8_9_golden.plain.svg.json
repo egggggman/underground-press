@@ -11,7 +11,7 @@
     },
     "cipher_corner": {
       "path": "templates/puzzle-dojo/golden-skin/components/cipher-corner.svg",
-      "sha256": "c4bd174f7b98d480d16770ea4baf709b1f4bd2062ec71c2047c91eb8664646fe"
+      "sha256": "59bbc2887c5c155d62cc8acbc758ea45d2f7842a89a0d4618edd760d1f8a4fd7"
     },
     "clues": {
       "path": "issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
@@ -23,7 +23,7 @@
     },
     "last_issue_solutions": {
       "path": "templates/puzzle-dojo/golden-skin/components/last-solutions.svg",
-      "sha256": "79e4fbe853d459a0e9445d586d7ef3b2723fe082c1ee3755d98cbb017e5d4762"
+      "sha256": "bbfa7e05122a5f1731825fd95e2bb9a4df96936373647871b6fde589e03ebca3"
     },
     "memory_fragment": {
       "path": "templates/puzzle-dojo/golden-skin/components/portland-memory.svg",
@@ -63,19 +63,19 @@
     },
     "puzzle_bench": {
       "path": "templates/puzzle-dojo/golden-skin/components/puzzle-bench.svg",
-      "sha256": "e0484e5f1aaef49d3dd54a0055f27659466d4eb0dce99139c36576733a214577"
+      "sha256": "43236cfd1a1e0af51b9854426d534f63cad0cd9b11bd020a3b2350c78a987c13"
     },
     "puzzle_tip": {
       "path": "templates/puzzle-dojo/golden-skin/components/puzzle-tip.svg",
-      "sha256": "11348229bf0a319fd08d9f16b88aa26f73dbcbc0eab58daf4270df20483c0442"
+      "sha256": "92be941ab3da0a08d8bd287975aa9c49bda37d211676fc9a1d13a3a1d0b3b301"
     },
     "scorecard": {
       "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
-      "sha256": "bf2901219e6ca54b8bc1b46fa09ad8e2ecc470e35c34f3ae89c0700a8e1dcea4"
+      "sha256": "ae92f76c510b27cc9331ebb8e3b033dd069232118748c4f4474611126a9896ed"
     },
     "seagullotine": {
       "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-says.svg",
-      "sha256": "b590bf8aead31afd52db209c27e4cda646ba0fea8191c9c772b77e645ba8027b"
+      "sha256": "92b8c832839b5299538422adff5491e9ef307fedbed9dea27522e4eeedfffe85"
     },
     "sewer_cap": {
       "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",

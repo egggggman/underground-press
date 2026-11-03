@@ -149,7 +149,89 @@ def caption(x, y, size=18, rot=-3, text="", fill=RED, **_):
                          f'stroke="{INK}" stroke-width="{size * .05:.1f}" paint-order="stroke">{escape(text)}</text>')
 
 
-MAKERS = {"pizza_whole": pizza_whole, "bridge": bridge, "caption": caption, "pencil": pencil, "bulb": bulb, "shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
+PAPER = "#f6ecca"
+
+
+def _txt(x, y, size, t, fill=INK):
+    return (f'<text x="{x:.1f}" y="{y:.1f}" text-anchor="middle" font-family="{HEAD}" font-size="{size:.1f}" fill="{fill}">{escape(t)}</text>')
+
+
+def crossword_icon(x, y, r=22, rot=0, **_):
+    """Mini crossword: 5x5 with black squares, numbers and two letters."""
+    n, c = 5, r * 2 / 5
+    o = -r
+    blacks = {(0, 2), (1, 2), (2, 0), (3, 3), (4, 3), (2, 4)}
+    cells = "".join(f'<rect x="{o + i * c:.1f}" y="{o + j * c:.1f}" width="{c:.1f}" height="{c:.1f}" fill="{INK if (i, j) in blacks else PAPER}" stroke="{INK}" stroke-width="1.1"/>'
+                    for j in range(n) for i in range(n))
+    body = (f'<rect x="{o - 2:.1f}" y="{o - 2:.1f}" width="{2 * r + 4:.1f}" height="{2 * r + 4:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="{SW}"/>{cells}'
+            + _txt(o + c * .5, o + c * .82, c * .8, "P") + _txt(o + c * 1.5, o + c * 1.82, c * .8, "Z")
+            + f'<text x="{o + 1.5:.1f}" y="{o + 5.2:.1f}" font-family="{HEAD}" font-size="4.5" fill="{INK}">1</text>')
+    return _g(x, y, rot, body)
+
+
+def sudoku_icon(x, y, r=22, rot=0, **_):
+    """Mini sudoku: 3x3 of 3x3, heavy box lines and a few digits."""
+    c = r * 2 / 9
+    o = -r
+    thin = "".join(f'<path d="M{o + k * c:.1f} {o:.1f}v{2 * r:.1f}M{o:.1f} {o + k * c:.1f}h{2 * r:.1f}" stroke="{INK}" stroke-width=".8"/>' for k in range(1, 9))
+    thick = "".join(f'<path d="M{o + k * 3 * c:.1f} {o:.1f}v{2 * r:.1f}M{o:.1f} {o + k * 3 * c:.1f}h{2 * r:.1f}" stroke="{INK}" stroke-width="1.8"/>' for k in (1, 2))
+    digs = [(0, 0, "5"), (1, 0, "3"), (4, 0, "7"), (0, 1, "6"), (3, 1, "1"), (4, 1, "9"), (5, 1, "5"), (1, 2, "9"), (2, 2, "8"), (7, 2, "6")]
+    nums = "".join(_txt(o + (i + .5) * c, o + (j + .5) * c + c * .3, c * .95, d) for i, j, d in digs)
+    body = (f'<rect x="{o:.1f}" y="{o:.1f}" width="{2 * r:.1f}" height="{2 * r:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="{SW}"/>{thin}{thick}{nums}')
+    return _g(x, y, rot, body)
+
+
+def magnifier(x, y, r=22, rot=0, **_):
+    """Magnifying glass over word-search letters."""
+    lens = r * .62
+    body = (f'<rect x="{lens * .5:.1f}" y="{lens * .9:.1f}" width="{r * .22:.1f}" height="{r * .9:.1f}" rx="{r * .08:.1f}" fill="#8a5a2b" stroke="{INK}" stroke-width="{SW}" transform="rotate(-42 {lens * .6:.1f} {lens * .9:.1f})"/>'
+            f'<circle r="{lens:.1f}" fill="#cfe9f2" stroke="{INK}" stroke-width="{SW + .6:.1f}"/>'
+            f'<circle r="{lens * .82:.1f}" fill="none" stroke="#fff" stroke-width="1.4" stroke-dasharray="{lens * .9:.1f} {lens * 4:.1f}" transform="rotate(200)"/>'
+            + _txt(-lens * .35, -lens * .05, lens * .75, "P") + _txt(lens * .3, -lens * .05, lens * .75, "I") + _txt(-lens * .35, lens * .6, lens * .75, "Z") + _txt(lens * .3, lens * .6, lens * .75, "A", RED))
+    return _g(x, y, rot, body)
+
+
+def jigsaw(x, y, r=20, rot=0, fill="#d9a441", **_):
+    s = r * 2
+    h, k = s / 2, s / 6
+    d = (f"M{-h:.1f} {-h:.1f} H{-k:.1f} A{k:.1f} {k:.1f} 0 1 1 {k:.1f} {-h:.1f} H{h:.1f} V{-k:.1f} A{k:.1f} {k:.1f} 0 1 1 {h:.1f} {k:.1f} "
+         f"V{h:.1f} H{k:.1f} A{k:.1f} {k:.1f} 0 1 0 {-k:.1f} {h:.1f} H{-h:.1f} V{k:.1f} A{k:.1f} {k:.1f} 0 1 0 {-h:.1f} {-k:.1f} Z")
+    body = (f'<path d="{d}" fill="{fill}" stroke="{INK}" stroke-width="{SW}" stroke-linejoin="round"/>'
+            f'<path d="M{-h * .6:.1f} {-h * .55:.1f} q{h * .3:.1f} {-h * .15:.1f} {h * .6:.1f} {-h * .05:.1f}" fill="none" stroke="#fff3c8" stroke-width="2" stroke-linecap="round"/>')
+    return _g(x, y, rot, body)
+
+
+def decoder(x, y, r=26, rot=0, **_):
+    """Cipher disc: ring of letters, inner dial with +3."""
+    letters = "ABCDEFGHIJKL"
+    ring = "".join(f'<text x="0" y="{-r * .78:.1f}" text-anchor="middle" font-family="{HEAD}" font-size="{r * .26:.1f}" fill="{INK}" transform="rotate({i * 30})">{ch}</text>'
+                   for i, ch in enumerate(letters))
+    body = (f'<circle r="{r:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="{SW}"/>{ring}'
+            f'<circle r="{r * .62:.1f}" fill="{RED}" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<circle r="{r * .24:.1f}" fill="{PAPER}" stroke="{INK}" stroke-width="1.6"/>'
+            + _txt(0, r * .1, r * .3, "+3")
+            + f'<path d="M{r * .62:.1f} 0l{r * .2:.1f} {-r * .1:.1f}v{r * .2:.1f}z" fill="{INK}"/>')
+    return _g(x, y, rot, body)
+
+
+def stopwatch(x, y, r=18, rot=0, **_):
+    ticks = "".join(f'<path d="M0 {-r * .82:.1f}v{r * .12:.1f}" stroke="{INK}" stroke-width="1.6" transform="rotate({a})"/>' for a in range(0, 360, 30))
+    body = (f'<rect x="{-r * .18:.1f}" y="{-r * 1.3:.1f}" width="{r * .36:.1f}" height="{r * .3:.1f}" fill="#9a9ca3" stroke="{INK}" stroke-width="2"/>'
+            f'<circle r="{r:.1f}" fill="#f6ecca" stroke="{INK}" stroke-width="{SW}"/>{ticks}'
+            f'<path d="M0 0L{r * .45:.1f} {-r * .4:.1f}" stroke="{RED}" stroke-width="2.6" stroke-linecap="round"/><circle r="2.4" fill="{INK}"/>')
+    return _g(x, y, rot, body)
+
+
+def eraser(x, y, r=16, rot=0, **_):
+    w, h = r * 2, r * .9
+    body = (f'<rect x="{-w / 2:.1f}" y="{-h / 2:.1f}" width="{w:.1f}" height="{h:.1f}" rx="{h * .2:.1f}" fill="#e8858f" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<rect x="{-w * .1:.1f}" y="{-h / 2:.1f}" width="{w * .6:.1f}" height="{h:.1f}" rx="{h * .15:.1f}" fill="#3f6fa0" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<path d="M{-w * .4:.1f} {-h * .15:.1f}h{w * .2:.1f}" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/>')
+    return _g(x, y, rot, body)
+
+
+MAKERS = {"crossword": crossword_icon, "sudoku": sudoku_icon, "magnifier": magnifier, "jigsaw": jigsaw, "decoder": decoder,
+          "stopwatch": stopwatch, "eraser": eraser, "pizza_whole": pizza_whole, "bridge": bridge, "caption": caption, "pencil": pencil, "bulb": bulb, "shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
 
 
 def layer(items: list[dict]) -> str:

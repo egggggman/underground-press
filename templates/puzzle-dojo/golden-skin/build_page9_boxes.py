@@ -27,7 +27,7 @@ def frame(w: int, h: int, title: str, bar: str, tw: int, size: int = 25) -> str:
         f'<rect x="7" y="7" width="{w - 14}" height="34" fill="{bar}"/>'
         f'<path d="M7 41H{w - 7}" stroke="{INK}" stroke-width="2"/>'
         f'<text x="19" y="33" font-family="{DISPLAY}" font-size="{size}" fill="{CREAM}" letter-spacing="1.5">{escape(title)}</text>'
-        + comic.shuriken(w - 24, 24, 12, 15, fill="#cfc4a0")
+        + comic.jigsaw(w - 24, 24, 9.5, 12, fill="#cfc4a0")
     )
 
 

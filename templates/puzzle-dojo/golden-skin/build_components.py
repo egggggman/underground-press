@@ -71,7 +71,7 @@ def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
 <rect x="5.5" y="5.5" width="{width - 11}" height="28" fill="#173f32"/>
 <path d="M5.5 33.5H{width - 5.5}" stroke="{INK}" stroke-width="1.8"/>
 <text x="16" y="28" font-family="{DISPLAY}" font-size="21" letter-spacing="1.5" fill="#f4e8c6">SOLVER’S SCORECARD</text>
-{comic.shuriken(width - 20, 20, 10, 15, fill="#cfc4a0")}
+{comic.jigsaw(width - 20, 19, 8, 12, fill="#cfc4a0")}
 {body}
 <path d="M14 {height - 24}H{width - 14}" stroke="{INK}" stroke-width="1.2"/>
 <text x="14" y="{height - 11}" font-family="{SANS}" font-size="12" letter-spacing="0.6" fill="{INK}">TIME _______  STUCK ON _______</text>
