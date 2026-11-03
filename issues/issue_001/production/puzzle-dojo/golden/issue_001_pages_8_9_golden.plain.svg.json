@@ -10,8 +10,8 @@
       "sha256": "e7d2ae556ffbee6d3778367174944cd200e54329b0f070c3ff35466894e73b0a"
     },
     "cipher_corner": {
-      "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
-      "sha256": "ad0753e4c5bd7502316ada573e9f4221a81281c23e33374f1f39f2f100dc2009"
+      "path": "templates/puzzle-dojo/golden-skin/components/cipher-corner.svg",
+      "sha256": "2d15961b0df7ea43426e1cacdf6f412c3434b468f8c94b0b59e5472a7bdd3374"
     },
     "clues": {
       "path": "issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
@@ -22,12 +22,12 @@
       "sha256": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f"
     },
     "last_issue_solutions": {
-      "path": "design-system/components/puzzle-dojo/last_issue_solutions.svg",
-      "sha256": "838152d56442bffda0ceb50e420cc7aab44b7a01c23f757201b9c361740ab5c4"
+      "path": "templates/puzzle-dojo/golden-skin/components/last-solutions.svg",
+      "sha256": "4bc86b63cfdd491b57501e32c49ddb26af550f5f99ad2d09b5d41133894a0068"
     },
     "memory_fragment": {
-      "path": "design-system/components/puzzle-dojo/portland_memory.svg",
-      "sha256": "4b28a092fb79da481f479344890fc56c0e9890171f563109b02c386791f70533"
+      "path": "templates/puzzle-dojo/golden-skin/components/portland-memory.svg",
+      "sha256": "afb7d9587b28f5234973c28dd9689ee2455accf85bff45e70dbbb255793afa01"
     },
     "mini_ads": {
       "path": "templates/puzzle-dojo/golden-skin/components/mini-slot.svg",
@@ -62,8 +62,8 @@
       "sha256": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1"
     },
     "puzzle_bench": {
-      "path": "design-system/components/puzzle-dojo/puzzle_bench.svg",
-      "sha256": "6889fbd3911017dd4ed7f549f1c44aa70970df50fbeb4e683f32fc0fb3dbee4f"
+      "path": "templates/puzzle-dojo/golden-skin/components/puzzle-bench.svg",
+      "sha256": "83bc2efb4bbde2909624da6070d73c091b73d1ef73b37a8c8f3c37d372271a6c"
     },
     "puzzle_tip": {
       "path": "design-system/components/puzzle-dojo/puzzle_tip.svg",

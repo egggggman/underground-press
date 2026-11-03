@@ -123,7 +123,7 @@
       "business": "The Gull & Ladle",
       "kind": "ad",
       "artwork_status": "Approved simplified logo",
-      "art_direction": "Bold gull chef; home of the $1 whoopie; best soup du jour",
+      "art_direction": "Bold gull chef; HOME OF THE $1.00 WHOOPIE / AND THE BEST SOUP DU JOUR!",
       "file": "approved/gull-ladle.png",
       "source_filename": "a_bold_vintage_distressed_retro_logo_poster_with.png",
       "width_px": 1536,
@@ -136,7 +136,7 @@
         "AND THE BEST SOUP DU JOUR!"
       ],
       "canon": "not in canon docs (advertising concept)",
-      "notes": "BLOCKER (wording): README gives the copy as “Home of the $1 Whoopie” and “Best Soup du Jour”; the approved image reads “$1.00” and “AND THE BEST SOUP DU JOUR!”. Image kept as is; editorial to confirm.",
+      "notes": "Wording resolved by HQ editorial (2026-11-02): keep the approved image as is. Exact copy is “HOME OF THE $1.00 WHOOPIE / AND THE BEST SOUP DU JOUR!”. The handoff README paraphrase (“$1 Whoopie”, “Best Soup du Jour”) is superseded.",
       "previous_versions": [
         {
           "file": "previous_versions/gull-ladle-detailed.png",
@@ -200,8 +200,8 @@
         "QUALITY CUTS",
         "BARBERSHOP"
       ],
-      "canon": "Partnered with Quality Shop (Italian sandwich shop, Shamos family); the two businesses are run by a brother and sister who are twins (editorial confirmation from the project owner, 2026-11-02). Not yet written into world/businesses/FLAGSHIP_BUSINESSES.md.",
-      "notes": "Name resemblance to Quality Shop is intentional (partner businesses). Canon docs not yet updated: pending editorial decision on how to record it.",
+      "canon": "Not in canon docs (advertising concept). A possible partnership with Quality Shop and a Shamos-sibling identity for the barber are an editorial idea only; HOLD per HQ editorial 2026-11-02.",
+      "notes": "Do not state the Quality Shop partnership or sibling relationship as fact in ads, captions or canon until HQ explicitly approves the identities and relationship.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved (2026-11-02 handoff)",

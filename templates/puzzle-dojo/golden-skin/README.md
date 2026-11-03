@@ -42,3 +42,7 @@ The approved PNGs are embedded byte-for-byte and fitted proportionally inside a 
 - The skin applies a multiply blend to the page content, so white puzzle cells take the paper tone. No source file is edited; check `validate_puzzle_dojo.py` for the v1 hash locks.
 - Banner and footer text is width-locked with `textLength`, so layout holds whichever condensed face the operator has installed (Impact, Haettenschweiler, Arial Narrow).
 - Chromium rasterizes the filters. Review PNG proofs at 100% before sending to press.
+
+## Page-9 boxes
+
+`build_page9_boxes.py components` writes newspaper-style Puzzle Bench, Cipher Corner, Portland Memory and Last Issue Solutions boxes (same wording and sizes as the design-system components, which stay unmodified). Visual restyle only; not print approval.

@@ -15,8 +15,8 @@ Artwork approval is not canon approval, publication approval or print proofing (
 
 ## Open editorial items
 
-- **Quality Cuts and Quality Shop (resolved in conversation, not yet in canon docs):** the barbershop is partnered with the Quality Shop; the two are run by a brother and sister who are twins. `world/businesses/FLAGSHIP_BUSINESSES.md` does not record this yet.
-- **Gull & Ladle wording:** the handoff README gives "Home of the $1 Whoopie" / "Best Soup du Jour"; the approved image reads "HOME OF THE $1.00 WHOOPIE" / "AND THE BEST SOUP DU JOUR!".
+- **Quality Cuts and Quality Shop (HOLD):** a partnership and a Shamos-sibling barber are an editorial idea only. HQ has not approved the identities or relationship, so nothing is recorded as fact and `world/businesses/FLAGSHIP_BUSINESSES.md` is unchanged.
+- **Gull & Ladle wording (resolved):** HQ kept the approved image as is: "HOME OF THE $1.00 WHOOPIE / AND THE BEST SOUP DU JOUR!". The handoff README paraphrase is superseded.
 - **Not in canon docs:** every business except The Crust Bucket and Tony's Donuts is an advertising concept only.
 - **Illustration-only art:** Tony's Donuts and Myrtle St. Suds contain no lettering; the slot adds the business name only.
 - **Deez Bait coupon:** perforations are drawn, not physical; print needs guidance.
