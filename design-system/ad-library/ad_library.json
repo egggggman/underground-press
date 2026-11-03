@@ -361,6 +361,209 @@
         "publication": "pending",
         "print_proof": "pending"
       }
+    },
+    {
+      "id": "portland-pipe-drain",
+      "business": "Portland Pipe & Drain Co.",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Turtle plumber in a manhole with a thumbs-up, brick sewer arch, Portland skyline",
+      "file": "approved/portland-pipe-drain.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 750,
+      "height_px": 478,
+      "sha256": "85d8debf4b8c709cc7250729d63f1ab6bb7a2f51e17809f858403d9fe34fbb4f",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          8,
+          5
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Portland PIPE & DRAIN CO.",
+        "DRAIN CLEANING",
+        "PIPE REPAIR",
+        "SEWER LINE SERVICE",
+        "24-HOUR CALLS",
+        "KEEPING PORTLAND FLOWING—ABOVE AND BELOW!"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "coastal-byte",
+      "business": "Coastal Byte Computers",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Pixel-art beige PC with a green turtle-shell screen, neon brick wall, space-invader icons",
+      "file": "approved/coastal-byte.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 762,
+      "height_px": 478,
+      "sha256": "0f83ff61271451a390645517e0b565595a961dabec30e45a81f5d8edc9c2de3d",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          766,
+          5
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "COASTAL BYTE COMPUTERS",
+        "PC REPAIR & UPGRADES",
+        "NETWORK SETUP",
+        "USED SYSTEMS",
+        "GAME INSTALLS",
+        "REAL TECH FOR A REAL WORLD."
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "maine-comics",
+      "business": "Maine Comics & Collectibles",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Purple masked ninja reading a TURTLES comic in a shop, comic-burst lettering",
+      "file": "approved/maine-comics.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 497,
+      "height_px": 528,
+      "sha256": "50c0ec7fab69e3aaca02b30669e54cc69f84faa91b4f7565615c4efa4d5c947e",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          8,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Maine Comics & Collectibles",
+        "COMICS! CARDS! TOYS! ZINES! & MORE!",
+        "PORTLAND'S POP CULTURE HIDEOUT!",
+        "TURTLES (comic cover)"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "snappers-market",
+      "business": "The Snapper's Market",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Two lobster grocers in chef hats with a produce crate, checkerboard border",
+      "file": "approved/snappers-market.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 508,
+      "height_px": 528,
+      "sha256": "f298287b1da2bfd87b5b46b6edaf934ec62920508f4bc5a31794a622f56a7754",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          510,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "The Snapper's Market",
+        "FRESH PRODUCE",
+        "GROCERIES",
+        "COLD DRINKS",
+        "LOCAL GOODS",
+        "GOOD FOOD FOR PORTLAND PEOPLE."
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "brine-grinder",
+      "business": "Brine & Grinder Records",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Vinyl record cresting a wave with a lighthouse and skyline",
+      "file": "approved/brine-grinder.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 505,
+      "height_px": 528,
+      "sha256": "f45130d36908f3dfe50a86b0fc550d7fcd8ff1f597527b3157ffb87d27873938",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          1023,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Brine & Grinder RECORDS",
+        "VINYL",
+        "CDs",
+        "TAPES",
+        "LOCAL BANDS",
+        "SPECIAL ORDERS",
+        "MUSIC FROM ABOVE & BELOW PORTLAND, ME"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "file": "approved_sheets/five_new_ads_approved_sheet.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+      "note": "Original approved five-ad composition, byte-for-byte; the creative source of truth. Never edit."
     }
   ]
 }

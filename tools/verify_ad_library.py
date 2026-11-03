@@ -21,7 +21,14 @@ def main() -> int:
     errors: list[str] = []
     data = json.loads((LIB / "ad_library.json").read_text(encoding="utf-8"))
     manifest = {r["filename"]: r for r in csv.DictReader((LIB / "handoff_2026-11-02/ASSET_MANIFEST.csv").open(encoding="utf-8-sig"))}
-    listed = set()
+    # Second handoff (five new ads): manifest rows are keyed by path, not filename.
+    for r in csv.DictReader((LIB / "handoff_2026-11-02_five_new/ASSET_MANIFEST.csv").open(encoding="utf-8-sig")):
+        manifest[Path(r["path"]).name] = {"sha256": r["sha256"]}
+    for sheet in data.get("sheets", []):
+        sp = LIB / sheet["file"]
+        if not sp.is_file() or digest(sp) != sheet["sha256"] or manifest.get(sp.name, {}).get("sha256") != sheet["sha256"]:
+            errors.append(f"approved sheet missing, changed or not in manifest: {sheet['file']}")
+    listed = {s["file"] for s in data.get("sheets", [])}
     try:
         from PIL import Image
     except ImportError:
@@ -46,11 +53,11 @@ def main() -> int:
             p = LIB / prev["file"]
             if not p.is_file() or digest(p) != prev["sha256"]:
                 errors.append(f"previous version missing or changed: {prev['file']}")
-    for folder in ("approved", "previous_versions"):
+    for folder in ("approved", "approved_sheets", "previous_versions"):
         for f in (LIB / folder).glob("*"):
             if f.is_file() and f"{folder}/{f.name}" not in listed:
                 errors.append(f"file not recorded in ad_library.json: {folder}/{f.name}")
-    if set(manifest) != {Path(a["file"]).name for a in data["ads"]}:
+    if set(manifest) != {Path(a["file"]).name for a in data["ads"]} | {Path(s["file"]).name for s in data.get("sheets", [])}:
         errors.append("handoff manifest and ad_library.json list different files")
     if errors:
         print("\n".join(f"- {e}" for e in errors))
