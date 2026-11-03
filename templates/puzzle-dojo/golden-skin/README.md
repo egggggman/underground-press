@@ -21,9 +21,18 @@ python templates/puzzle-dojo/golden-skin/render.py proofs/puzzle-dojo-golden.svg
 
 For a new issue: copy `issue_001_furniture.json`, copy `assets.golden.json` and repoint the puzzle and art entries at the new issue's assets, and change `--seed` so the paper stock differs each week.
 
-## Ads and fonts
+## Ad library and rotation
 
-`build_ads.py` builds the big ad, the mini ads and the sewer cap into `components/` (`python build_ads.py <issue crust-bucket art> components`). It reuses the painted cook from the issue's ad art. Fonts are embedded subsets of Bebas Neue and Alfa Slab One (SIL OFL, licences in `fonts/`), so the look does not depend on what is installed at press. For a new issue, change the copy in `build_ads.py` and swap in new painted art; the `ad`, `mini_ads` and `sewer_cap` entries in `assets.golden.json` point at these files.
+`ad_library.py` holds a dozen local-business ads as data (`ADS`). Each keeps its own lettering and art (slab, diner script, stencil, blackletter, deco...) but shares the paper's frame: ink border, dashed accent rule, paper dots, house palette and an ADVERTISEMENT footer. Every ad renders in two sizes: `big` (476 x 280) and `mini` (236 x 104).
+
+Per issue, copy `ads_rotation.issue_001.json` and pick which ads run: one `big`, two `mini`. Then:
+
+```
+python build_ads.py <chef art> components            # sewer cap
+python ad_library.py <chef art> components --rotation ads_rotation.issue_NNN.json
+```
+
+This writes `components/ads/*` (the whole library) plus `components/crust-bucket.svg` and `components/mini-ads.svg` (the two slots `assets.golden.json` points at). To add an ad, add an entry to `ADS` with its fonts, panel colour, motif and copy. Business names in the library are drafts and need editorial sign-off. Fonts are embedded subsets of open (SIL OFL) typefaces, licences in `fonts/`.
 
 ## Layout contract v1.2
 
