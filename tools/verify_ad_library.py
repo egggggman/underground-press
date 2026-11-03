@@ -29,10 +29,7 @@ def main() -> int:
         if not sp.is_file() or digest(sp) != sheet["sha256"] or manifest.get(sp.name, {}).get("sha256") != sheet["sha256"]:
             errors.append(f"approved sheet missing, changed or not in manifest: {sheet['file']}")
     listed = {s["file"] for s in data.get("sheets", [])}
-    try:
-        from PIL import Image
-    except ImportError:
-        Image = None
+    from PIL import Image
     for ad in data["ads"]:
         path = LIB / ad["file"]
         listed.add(ad["file"])
@@ -48,12 +45,23 @@ def main() -> int:
             with Image.open(path) as im:
                 if f"{im.width}x{im.height}" != f"{ad['width_px']}x{ad['height_px']}":
                     errors.append(f"dimension mismatch: {ad['file']}")
+        for key in ("tight_crop_v2", "lettering_revision"):
+            rev = ad.get(key)
+            if rev:
+                listed.add(rev["file"])
+                rp = LIB / rev["file"]
+                if not rp.is_file() or digest(rp) != rev["sha256"]:
+                    errors.append(f"{key} missing or changed: {rev['file']}")
+                else:
+                    with Image.open(rp) as im:
+                        if (im.width, im.height) != (rev["width_px"], rev["height_px"]):
+                            errors.append(f"{key} dimension mismatch: {rev['file']}")
         for prev in ad["previous_versions"]:
             listed.add(prev["file"])
             p = LIB / prev["file"]
             if not p.is_file() or digest(p) != prev["sha256"]:
                 errors.append(f"previous version missing or changed: {prev['file']}")
-    for folder in ("approved", "approved_sheets", "previous_versions"):
+    for folder in ("approved", "approved_sheets", "approved_v2", "revisions", "previous_versions"):
         for f in (LIB / folder).glob("*"):
             if f.is_file() and f"{folder}/{f.name}" not in listed:
                 errors.append(f"file not recorded in ad_library.json: {folder}/{f.name}")

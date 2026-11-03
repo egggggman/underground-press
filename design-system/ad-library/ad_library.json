@@ -392,14 +392,29 @@
         "KEEPING PORTLAND FLOWING—ABOVE AND BELOW!"
       ],
       "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
-      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved as part of the five-ad sheet",
         "canon": "pending editorial",
         "publication": "pending",
         "print_proof": "pending"
-      }
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/portland-pipe-drain-v2.png",
+        "width_px": 772,
+        "height_px": 481,
+        "sha256": "e32cac0b7b80a88b34da52d3b3bd30531caf8e610215e4e08b10f77720c62c95",
+        "box_px": [
+          11,
+          6,
+          782,
+          486
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      },
+      "v1_crop_defect": "v1 crop (x 8-757) cut ~25 px off the plaque's right edge and Coastal Byte's v1 crop included that strip; the v2 crops fix both."
     },
     {
       "id": "coastal-byte",
@@ -431,13 +446,27 @@
         "REAL TECH FOR A REAL WORLD."
       ],
       "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
-      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved as part of the five-ad sheet",
         "canon": "pending editorial",
         "publication": "pending",
         "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/coastal-byte-v2.png",
+        "width_px": 734,
+        "height_px": 478,
+        "sha256": "eae986fef8ae6bb7dac5adb2ad64dad6561784c278cff2a16d77caaaf7e31936",
+        "box_px": [
+          792,
+          5,
+          1525,
+          482
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
       }
     },
     {
@@ -468,13 +497,27 @@
         "TURTLES (comic cover)"
       ],
       "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
-      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved as part of the five-ad sheet",
         "canon": "pending editorial",
         "publication": "pending",
         "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/maine-comics-v2.png",
+        "width_px": 500,
+        "height_px": 521,
+        "sha256": "20887404b76aadaff8538617817f61fbdd55ee20ad365960c2875f3a832fdaf7",
+        "box_px": [
+          5,
+          496,
+          504,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
       }
     },
     {
@@ -507,13 +550,40 @@
         "GOOD FOOD FOR PORTLAND PEOPLE."
       ],
       "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
-      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved as part of the five-ad sheet",
         "canon": "pending editorial",
         "publication": "pending",
         "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/snappers-market-v2.png",
+        "width_px": 502,
+        "height_px": 522,
+        "sha256": "2cff424309357ac2d3cd873fcbb5b8b9e393bfc9893f8ec8032cf36af5abc72f",
+        "box_px": [
+          514,
+          495,
+          1015,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      },
+      "lettering_revision": {
+        "file": "revisions/snappers-market-v3-lettering.png",
+        "width_px": 502,
+        "height_px": 522,
+        "sha256": "b1680b06a822a3e8adf7e585a179b2ba82e76e5798967c14425f4e74db81c591",
+        "based_on": "approved_v2/snappers-market-v2.png",
+        "script": "tools/repair_snappers_lettering.py",
+        "status": "proposed, NOT approved: conservative cleanup, the M's left stroke is restored from its own smear but is not a full letterform; pixel-level edit of approved art",
+        "changes": [
+          "clipped 'M' of 'Market': dark-red smear recoloured to ink, olive haze restored to paper",
+          "checker border: squares crowding 'The'/'s' removed (left of the claw only)"
+        ]
       }
     },
     {
@@ -547,13 +617,27 @@
         "MUSIC FROM ABOVE & BELOW PORTLAND, ME"
       ],
       "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
-      "notes": "Derived crop, not a separately approved print master. Crop includes sliver(s) of the neighbouring panel or sheet gutter at its edges; see README review notes before use. Rotation pool only; not placed in Issue 1.",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
       "previous_versions": [],
       "approvals": {
         "artwork": "approved as part of the five-ad sheet",
         "canon": "pending editorial",
         "publication": "pending",
         "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/brine-grinder-v2.png",
+        "width_px": 506,
+        "height_px": 522,
+        "sha256": "abe32d507857b42df94894dacc13555b3c9017272b1a0d1613a65fc85e2588de",
+        "box_px": [
+          1025,
+          495,
+          1530,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
       }
     }
   ],
@@ -565,5 +649,6 @@
       "sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
       "note": "Original approved five-ad composition, byte-for-byte; the creative source of truth. Never edit."
     }
-  ]
+  ],
+  "print_requirements": "design-system/ad-library/PRINT_RESOLUTION.md"
 }

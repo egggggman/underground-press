@@ -32,3 +32,9 @@ Review notes before any placement (nothing was edited):
 - **Typography:** The Snapper's Market's "M" in "Market" is clipped by a scratch/overlap in the original art, and "The" overlaps the checker border. Spelling in the manifest is "Snapper’s" with a curly apostrophe; the art uses a straight one. Portland Pipe & Drain's "Portland" script sits tight to the top rim.
 - **IP flavour:** the Portland Pipe & Drain turtle mascot, Coastal Byte's turtle-shell screen and Maine Comics' purple masked ninja plus a "TURTLES" comic cover are TMNT references. That is on-theme for this fan project but HQ may want to review it before publication.
 - **Canon:** none of the five is in the business bible; placement needs a separate editorial decision.
+
+## Checkpoint revisions (HQ 2026-11-02, proposals pending approval)
+
+- `approved_v2/`: tight crops of the five-ad sheet (plaque bounding box, exact pixel slices). The v1 crops in `approved/` stay as historical evidence. The v1 Portland crop had cut ~25 px off the plaque's right edge, and the v1 Coastal Byte crop carried that strip; both are fixed in v2.
+- `revisions/snappers-market-v3-lettering.png`: separate artwork revision made by `tools/repair_snappers_lettering.py`. It is a conservative cleanup (the M's smeared left stroke recoloured to ink, haze removed, crowding border squares cleared), not a redrawn letterform, so it is **not approved** and print needs a clean master.
+- `PRINT_RESOLUTION.md`: minimum masters from the real slot sizes. Print approval stays blocked; none of the five is print-ready.
