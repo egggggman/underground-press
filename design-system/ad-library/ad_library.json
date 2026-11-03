@@ -586,8 +586,9 @@
         ]
       },
       "regeneration": {
-        "status": "needed: candidate replacement master, requires visual approval before promotion",
-        "brief": "regeneration/snappers-market-regeneration-brief.md"
+        "status": "candidate received 2026-11-02: candidates/snappers-market-alt-turtle.png is an alternate concept (turtle, not lobster), pending HQ decision; approved lobster ad unchanged",
+        "brief": "regeneration/snappers-market-regeneration-brief.md",
+        "candidate": "candidates/snappers-market-alt-turtle.png"
       }
     },
     {
@@ -654,5 +655,46 @@
       "note": "Original approved five-ad composition, byte-for-byte; the creative source of truth. Never edit."
     }
   ],
-  "print_requirements": "design-system/ad-library/PRINT_RESOLUTION.md"
+  "print_requirements": "design-system/ad-library/PRINT_RESOLUTION.md",
+  "candidates": [
+    {
+      "id": "snappers-market-alt-turtle",
+      "business": "The Snapper's Market",
+      "kind": "ad-candidate",
+      "file": "candidates/snappers-market-alt-turtle.png",
+      "width_px": 1312,
+      "height_px": 1199,
+      "sha256": "a08ce5caca45306c7405f28558bd8ac319e50597fcf8d091ed4591552773cf1d",
+      "source": "HQ-supplied regeneration (2026-11-02, original output file as received)",
+      "relation": "alternate concept for snappers-market; NOT a replacement and NOT approved",
+      "status": "candidate: pending HQ decision on character design; no print or library promotion",
+      "copy_in_art": [
+        "The Snapper's Market",
+        "NEIGHBORHOOD GROCERIES & FRESH PRODUCE!"
+      ],
+      "differences_from_approved": [
+        "character: a red-masked turtle grocer (reads as a specific TMNT character) replaces the two lobster grocers",
+        "copy: approved COLD DRINKS, LOCAL GOODS, FRESH PRODUCE/GROCERIES list and banner 'GOOD FOOD FOR PORTLAND PEOPLE.' are gone; new burst copy 'NEIGHBORHOOD GROCERIES & FRESH PRODUCE!'",
+        "composition: harbor lighthouse/skyline strip and bottom banner removed; wider aspect (1312x1199)",
+        "finish: heavier grain/halftone texture, more muted palette than the approved art"
+      ],
+      "corrections_verified": [
+        "lettering 'The Snapper's Market' complete and legible, straight apostrophe",
+        "no checker-border overlap",
+        "no neighbouring advertisement"
+      ],
+      "open_issues": [
+        "a dark band about 12 px tall remains along the top edge (gutter/neighbouring-panel remnant), so 'no gutters' is not fully met; not edited",
+        "resolution 1312x1199: about 327 ppi in the large slot, about 800 ppi in a mini slot at fitted size, below the 2,400x2,500 brief but adequate for the large slot at 300 ppi only because the new art is wider and fits shorter",
+        "final proof at actual dimensions still required",
+        "IP/editorial review of the TMNT-character likeness before external publication"
+      ],
+      "approvals": {
+        "artwork": "pending HQ visual approval",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    }
+  ]
 }

@@ -61,7 +61,16 @@ def main() -> int:
             p = LIB / prev["file"]
             if not p.is_file() or digest(p) != prev["sha256"]:
                 errors.append(f"previous version missing or changed: {prev['file']}")
-    for folder in ("approved", "approved_sheets", "approved_v2", "revisions", "previous_versions"):
+    for cand in data.get("candidates", []):
+        listed.add(cand["file"])
+        cp = LIB / cand["file"]
+        if not cp.is_file() or digest(cp) != cand["sha256"]:
+            errors.append(f"candidate missing or changed: {cand['file']}")
+        else:
+            with Image.open(cp) as im:
+                if (im.width, im.height) != (cand["width_px"], cand["height_px"]):
+                    errors.append(f"candidate dimension mismatch: {cand['file']}")
+    for folder in ("approved", "approved_sheets", "approved_v2", "revisions", "candidates", "previous_versions"):
         for f in (LIB / folder).glob("*"):
             if f.is_file() and f"{folder}/{f.name}" not in listed:
                 errors.append(f"file not recorded in ad_library.json: {folder}/{f.name}")

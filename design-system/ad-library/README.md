@@ -38,3 +38,7 @@ Review notes before any placement (nothing was edited):
 - `approved_v2/`: tight crops of the five-ad sheet (plaque bounding box, exact pixel slices). The v1 crops in `approved/` stay as historical evidence. The v1 Portland crop had cut ~25 px off the plaque's right edge, and the v1 Coastal Byte crop carried that strip; both are fixed in v2.
 - `revisions/snappers-market-v3-lettering.png`: separate artwork revision made by `tools/repair_snappers_lettering.py`. It is a conservative cleanup (the M's smeared left stroke recoloured to ink, haze removed, crowding border squares cleared), not a redrawn letterform, so it is **not approved** and print needs a clean master.
 - `PRINT_RESOLUTION.md`: minimum masters from the real slot sizes. Print approval stays blocked; none of the five is print-ready.
+
+## Candidates (not approved)
+
+`candidates/snappers-market-alt-turtle.png` is HQ's regenerated Snapper's Market, kept as an **alternate concept**, not a replacement. It fixes the lettering and border overlap but changes the character (red-masked turtle instead of the two lobsters), the copy and the composition, and still has a dark band along its top edge. The approved lobster ad is unchanged. Details and open issues: `candidates` in `ad_library.json`.
