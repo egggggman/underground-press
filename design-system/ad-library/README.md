@@ -15,7 +15,7 @@ Artwork approval is not canon approval, publication approval or print proofing (
 
 ## Open editorial items
 
-- **Quality Cuts vs Quality Shop:** canon has Quality Shop (Italian sandwich shop, Shamos family); Quality Cuts is a barbershop with a similar name.
+- **Quality Cuts and Quality Shop (resolved in conversation, not yet in canon docs):** the barbershop is partnered with the Quality Shop; the two are run by a brother and sister who are twins. `world/businesses/FLAGSHIP_BUSINESSES.md` does not record this yet.
 - **Gull & Ladle wording:** the handoff README gives "Home of the $1 Whoopie" / "Best Soup du Jour"; the approved image reads "HOME OF THE $1.00 WHOOPIE" / "AND THE BEST SOUP DU JOUR!".
 - **Not in canon docs:** every business except The Crust Bucket and Tony's Donuts is an advertising concept only.
 - **Illustration-only art:** Tony's Donuts and Myrtle St. Suds contain no lettering; the slot adds the business name only.
