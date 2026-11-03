@@ -16,9 +16,22 @@ BEBAS = "'Bebas Neue','League Gothic',Impact,'Arial Narrow',sans-serif"
 SLAB = "'Alfa Slab One','Rockwell','Georgia',serif"
 
 
-def font_style() -> str:
+FACES = {
+    "Bebas Neue": "BebasNeue-subset.woff",
+    "Alfa Slab One": "AlfaSlabOne-subset.woff",
+    "Lobster": "Lobster-Regular-subset.woff",
+    "Patua One": "PatuaOne-Regular-subset.woff",
+    "Stardos Stencil": "StardosStencil-Bold-subset.woff",
+}
+LOBSTER = "Lobster,'Brush Script MT',cursive"
+PATUA = "'Patua One','Rockwell',Georgia,serif"
+STENCIL = "'Stardos Stencil','Courier New',monospace"
+
+
+def font_style(families=("Bebas Neue", "Alfa Slab One")) -> str:
     faces = []
-    for family, name in (("Bebas Neue", "BebasNeue-subset.woff"), ("Alfa Slab One", "AlfaSlabOne-subset.woff")):
+    for family in families:
+        name = FACES[family]
         data = base64.b64encode((HERE / "fonts" / name).read_bytes()).decode()
         faces.append(f"@font-face{{font-family:'{family}';src:url(data:font/woff;base64,{data}) format('woff');}}")
     return "<style>" + "".join(faces) + "</style>"
@@ -29,10 +42,10 @@ def chef_data(source: Path) -> str:
     return re.search(r"base64,([A-Za-z0-9+/=]+)", source.read_text()).group(1)
 
 
-def wrap(w: int, h: int, title: str, body: str) -> str:
+def wrap(w: int, h: int, title: str, body: str, families=("Bebas Neue", "Alfa Slab One")) -> str:
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {w} {h}" '
-        f'role="img" aria-label="{title}"><title>{title}</title>{font_style()}'
+        f'role="img" aria-label="{title}"><title>{title}</title>{font_style(families)}'
         '<defs><pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#17130f" opacity=".13"/></pattern>'
         '<pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><path d="M0 0v4" stroke="#17130f" stroke-width=".8" opacity=".45"/></pattern>'
         '<linearGradient id="fy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
@@ -82,7 +95,7 @@ def donut(cx, cy, r):
 
 
 def mini_ads(data: str) -> str:
-    return wrap(260, 248, "Two mini advertisements", f'''
+    return wrap(260, 248, "Two mini advertisements", families=("Bebas Neue", "Alfa Slab One", "Lobster", "Patua One"), body=f'''
 <rect x="2" y="2" width="256" height="244" fill="#efe2bd" stroke="{INK}" stroke-width="4"/>
 <g transform="translate(12 12)">
  <rect width="236" height="104" fill="#f3e6c4" stroke="{OX}" stroke-width="2.5" stroke-dasharray="7 4"/><rect width="236" height="104" fill="url(#dots)"/>
@@ -97,9 +110,9 @@ def mini_ads(data: str) -> str:
 <g transform="translate(12 132)">
  <rect width="236" height="104" fill="{GREEN}" stroke="{INK}" stroke-width="3"/><rect width="236" height="104" fill="url(#dots)" opacity=".5"/>
  <rect x="5" y="5" width="226" height="94" fill="none" stroke="{MUSTARD}" stroke-width="1.5" stroke-dasharray="5 3"/>
- <text x="14" y="34" font-family="{SLAB}" font-size="21" fill="{CREAM}" textLength="140" lengthAdjust="spacingAndGlyphs">Tony’s Donuts</text>
- <text x="14" y="56" font-family="{BEBAS}" font-size="19" fill="{MUSTARD}" letter-spacing="1">MORNING BOXES.</text>
- <text x="14" y="74" font-family="{BEBAS}" font-size="19" fill="{CREAM}" letter-spacing="1">WARM COFFEE.</text>
+ <text x="14" y="36" font-family="{LOBSTER}" font-size="28" fill="{CREAM}" textLength="138" lengthAdjust="spacingAndGlyphs" transform="rotate(-3 14 36)">Tony’s Donuts</text>
+ <text x="14" y="56" font-family="{PATUA}" font-size="14" fill="{MUSTARD}">Morning boxes.</text>
+ <text x="14" y="74" font-family="{PATUA}" font-size="14" fill="{CREAM}">Warm coffee.</text>
  <text x="14" y="92" font-family="'Courier New',monospace" font-size="7" font-weight="700" fill="{MUSTARD}">ADVERTISEMENT • OPEN MORNINGS</text>
  {donut(186, 62, 40)}
 </g>
@@ -123,14 +136,14 @@ def sewer_cap() -> str:
         x2, y2 = cx + math.cos(a) * ln * 1.2, cy + math.sin(a) * ln * 1.2
         lines.append(f'<path d="M{cx} {cy}L{x2:.1f} {y2:.1f}" stroke="{col}" stroke-width="3.2" stroke-linecap="round"/>')
         nodes.append(f'<circle cx="{x2:.1f}" cy="{y2:.1f}" r="4" fill="{CREAM}" stroke="{INK}" stroke-width="1.6"/>')
-    return wrap(260, 280, "Portland Sewer Cap number 001", f'''
+    return wrap(260, 280, "Portland Sewer Cap number 001", families=("Stardos Stencil",), body=f'''
 <rect x="2" y="2" width="256" height="276" fill="#e6d4a6" stroke="{INK}" stroke-width="4"/>
 <rect x="12" y="12" width="236" height="256" fill="url(#dots)" stroke="{OX}" stroke-width="2" stroke-dasharray="7 4"/>
 <rect x="20" y="20" width="220" height="48" fill="{INK}"/>
 <path d="M30 42l2.6 5.4 6 .8-4.4 4.2 1.1 5.9-5.3-2.9-5.3 2.9 1.1-5.9-4.4-4.2 6-.8z" fill="{MUSTARD}" transform="translate(-4 -12) scale(.9)"/>
 <path d="M30 42l2.6 5.4 6 .8-4.4 4.2 1.1 5.9-5.3-2.9-5.3 2.9 1.1-5.9-4.4-4.2 6-.8z" fill="{MUSTARD}" transform="translate(190 -12) scale(.9)"/>
-<text x="130" y="38" text-anchor="middle" font-family="{BEBAS}" font-size="18" fill="{CREAM}" letter-spacing="3">THIS WEEK’S</text>
-<text x="130" y="61" text-anchor="middle" font-family="{BEBAS}" font-size="25" fill="{CREAM}" letter-spacing="3">SEWER CAP</text>
+<text x="130" y="38" text-anchor="middle" font-family="{STENCIL}" font-size="15" fill="{CREAM}" letter-spacing="3" textLength="120" lengthAdjust="spacingAndGlyphs">THIS WEEK’S</text>
+<text x="130" y="61" text-anchor="middle" font-family="{STENCIL}" font-size="24" fill="{CREAM}" letter-spacing="2" textLength="150" lengthAdjust="spacingAndGlyphs">SEWER CAP</text>
 {specks}
 <circle cx="{cx}" cy="{cy+3}" r="{R}" fill="#3a3326"/>
 <circle cx="{cx}" cy="{cy}" r="{R}" fill="#6f664f" stroke="{INK}" stroke-width="6"/>
@@ -141,11 +154,11 @@ def sewer_cap() -> str:
 {"".join(lines)}{"".join(nodes)}
 <circle cx="{cx}" cy="{cy}" r="19" fill="{MUSTARD}" stroke="{INK}" stroke-width="3"/>
 <path d="M{cx-9} {cy-8}L{cx+9} {cy-8} {cx} {cy+11}z" fill="#f4e8c6" stroke="{INK}" stroke-width="1.6"/><circle cx="{cx-2}" cy="{cy-3}" r="1.8" fill="{OX}"/><circle cx="{cx+3}" cy="{cy}" r="1.5" fill="{OX}"/>
-<text x="{cx}" y="{cy+56}" text-anchor="middle" font-family="{BEBAS}" font-size="13" fill="{INK}" letter-spacing="1">No. 001</text>
+<text x="{cx}" y="{cy+56}" text-anchor="middle" font-family="{STENCIL}" font-size="12" fill="{INK}" letter-spacing="1">No. 001</text>
 <g transform="rotate(-4 {cx} {cy-30}) translate(0 10)"><path d="M{cx-46} {cy-30}q46 -20 92 0v-18q-46 -20 -92 0z" fill="{GREEN}" stroke="{INK}" stroke-width="2.5"/>
-<text x="{cx}" y="{cy-35}" text-anchor="middle" font-family="{SLAB}" font-size="13" fill="{CREAM}" textLength="70" lengthAdjust="spacingAndGlyphs">PORTLAND</text></g>
-<text x="{cx}" y="250" text-anchor="middle" font-family="{BEBAS}" font-size="19" fill="{INK}" letter-spacing="2.5">CUT • COLLECT • TRADE</text>
-<text x="{cx}" y="264" text-anchor="middle" font-family="{BEBAS}" font-size="12" fill="{OX}" letter-spacing="3">DO NOT FLUSH</text>
+<text x="{cx}" y="{cy-35}" text-anchor="middle" font-family="{STENCIL}" font-size="13" fill="{CREAM}" textLength="70" lengthAdjust="spacingAndGlyphs">PORTLAND</text></g>
+<text x="{cx}" y="250" text-anchor="middle" font-family="{STENCIL}" font-size="16" fill="{INK}" textLength="200" lengthAdjust="spacingAndGlyphs">CUT • COLLECT • TRADE</text>
+<text x="{cx}" y="264" text-anchor="middle" font-family="{STENCIL}" font-size="11" fill="{OX}" textLength="110" lengthAdjust="spacingAndGlyphs">DO NOT FLUSH</text>
 ''')
 
 

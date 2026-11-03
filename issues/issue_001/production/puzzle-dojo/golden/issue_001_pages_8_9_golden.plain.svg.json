@@ -31,7 +31,7 @@
     },
     "mini_ads": {
       "path": "templates/puzzle-dojo/golden-skin/components/mini-ads.svg",
-      "sha256": "48bf5d59c108e5857730bfc1617684d78630ea1b732a73af15b71a5df52f17e8"
+      "sha256": "ac78d5d23f62312292dc66e0c5544e7608ca790c465bc971870d629d13461118"
     },
     "neighborhood_search": {
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
@@ -79,7 +79,7 @@
     },
     "sewer_cap": {
       "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",
-      "sha256": "de922032e683fed1a2187992ab2a81d2fac4f2e5de7c8e641cf21f9a44ea40cb"
+      "sha256": "762be1e789b35557c24df209ccffa306d1fecd70ae2f812a58114ef3eb9ea759"
     },
     "sudoku": {
       "path": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
