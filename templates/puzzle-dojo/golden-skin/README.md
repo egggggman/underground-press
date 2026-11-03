@@ -21,6 +21,10 @@ python templates/puzzle-dojo/golden-skin/render.py proofs/puzzle-dojo-golden.svg
 
 For a new issue: copy `issue_001_furniture.json`, copy `assets.golden.json` and repoint the puzzle and art entries at the new issue's assets, and change `--seed` so the paper stock differs each week.
 
+## Ads and fonts
+
+`build_ads.py` builds the big ad, the mini ads and the sewer cap into `components/` (`python build_ads.py <issue crust-bucket art> components`). It reuses the painted cook from the issue's ad art. Fonts are embedded subsets of Bebas Neue and Alfa Slab One (SIL OFL, licences in `fonts/`), so the look does not depend on what is installed at press. For a new issue, change the copy in `build_ads.py` and swap in new painted art; the `ad`, `mini_ads` and `sewer_cap` entries in `assets.golden.json` point at these files.
+
 ## Layout contract v1.2
 
 `layout_contract.golden.json` keeps every v1 zone ID and adds `scorecard`. Page 8 is re-packed so the page has no dead space: crossword and sudoku side by side, full-width clues (kept at legible size), then Pizza Cipher beside Neighborhood Search, then tip, Seagullotine quote and a compact scorecard. The validator checks that all v1 zone IDs exist, every zone is inside the page and no zones overlap.

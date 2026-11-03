@@ -6,8 +6,8 @@
   "missing_required": [],
   "assets": {
     "ad": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/crust-bucket-issue-001.svg",
-      "sha256": "21385bf8b24df07643b0be557126de4fee96986bd2cdfc329514f9334b6c2d31"
+      "path": "templates/puzzle-dojo/golden-skin/components/crust-bucket.svg",
+      "sha256": "1cf3ffe6a986dcdb0436fa8360e8a0970cdfab913c0e3acedb77292a3f50a7cf"
     },
     "cipher_corner": {
       "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
@@ -30,8 +30,8 @@
       "sha256": "4b28a092fb79da481f479344890fc56c0e9890171f563109b02c386791f70533"
     },
     "mini_ads": {
-      "path": "design-system/components/puzzle-dojo/mini_ads.svg",
-      "sha256": "f83e9a9163f0d86ac89f64ccbda5ecbbec54bef34931c9e0d9a4a6f6cb70d58e"
+      "path": "templates/puzzle-dojo/golden-skin/components/mini-ads.svg",
+      "sha256": "48bf5d59c108e5857730bfc1617684d78630ea1b732a73af15b71a5df52f17e8"
     },
     "neighborhood_search": {
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
@@ -78,8 +78,8 @@
       "sha256": "af71b6a5a8b23d6bdad6d7cb2a9a254b3639fc8d4c2ac9881e504f08f8c25efd"
     },
     "sewer_cap": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/sewer-cap-portland-001.svg",
-      "sha256": "1c7ef3a3943494326dd220ac785ad8a395928e558f4e0a1c97220479e26cff92"
+      "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",
+      "sha256": "de922032e683fed1a2187992ab2a81d2fac4f2e5de7c8e641cf21f9a44ea40cb"
     },
     "sudoku": {
       "path": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
