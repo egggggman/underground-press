@@ -93,39 +93,46 @@
     "rot": -12
    },
    {
-    "type": "burst",
-    "x": 430,
+    "type": "pizza_whole",
+    "x": 448,
     "y": 850,
-    "r": 33,
-    "rot": 7,
-    "text": "DECODE!"
-   },
-   {
-    "type": "shuriken",
-    "x": 532,
-    "y": 1062,
-    "r": 21,
-    "rot": 8
-   },
-   {
-    "type": "sparkle",
-    "x": 544,
-    "y": 1112,
-    "r": 7
-   },
-   {
-    "type": "pizza",
-    "x": 742,
-    "y": 1068,
-    "r": 22,
+    "r": 30,
     "rot": 14
    },
    {
-    "type": "canister",
-    "x": 738,
-    "y": 1118,
-    "r": 14.3,
-    "rot": -8
+    "type": "caption",
+    "x": 352,
+    "y": 876,
+    "size": 15,
+    "rot": -4,
+    "text": "3 SLICES BACK!"
+   },
+   {
+    "type": "bridge",
+    "x": 420,
+    "y": 140,
+    "r": 42
+   },
+   {
+    "type": "caption",
+    "x": 396,
+    "y": 744,
+    "size": 18,
+    "rot": -2,
+    "text": "NO PEEKING AT THE ANSWERS!"
+   },
+   {
+    "type": "pencil",
+    "x": 742,
+    "y": 386,
+    "r": 16,
+    "rot": -28
+   },
+   {
+    "type": "sparkle",
+    "x": 536,
+    "y": 387,
+    "r": 6
    }
   ],
   "9": [

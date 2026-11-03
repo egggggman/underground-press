@@ -14,6 +14,7 @@ from xml.sax.saxutils import escape
 
 from fontcss import HEAD, SERIF, SERIF_I, STRIP, style
 
+INK = "#171812"
 DISPLAY = HEAD
 SANS = STRIP
 MOTTO = "WE’RE ALL LOOKING FOR A PLACE TO LAND"
@@ -54,22 +55,27 @@ def footer(text: str) -> str:
 
 
 def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
+    """Illustrated Solver's Scorecard sized for its zone (no downscaling)."""
+    import comic
     cells = []
     for index, name in enumerate(puzzles):
-        x = 12 + (index % 2) * (width // 2 - 4)
-        y = 44 + (index // 2) * 26
+        x = 14 + (index % 2) * (width // 2 - 16)
+        y = 44 + (index // 2) * 22
         cells.append(
-            f'<rect x="{x}" y="{y}" width="14" height="14" fill="#f1e4bd" stroke="#171812" stroke-width="1.6"/>'
-            f'<text x="{x + 20}" y="{y + 12}" font-family="{DISPLAY}" font-size="11.5" fill="#171812">{escape(name.upper())}</text>'
-        )
+            f'<rect x="{x}" y="{y}" width="13" height="13" fill="#f1e4bd" stroke="{INK}" stroke-width="1.8"/>'
+            f'<text x="{x + 19}" y="{y + 11.5}" font-family="{SANS}" font-size="11.5" letter-spacing="0.6" fill="{INK}">{escape(name.upper())}</text>')
     body = "\n".join(cells)
     return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style()}
-<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
-<rect x="1.5" y="1.5" width="{width - 3}" height="28" fill="#173f32"/>
-<text x="{width / 2}" y="21" text-anchor="middle" font-family="{DISPLAY}" font-size="15" fill="#f4e8c6">SOLVER’S SCORECARD</text>
+<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="none" stroke="{INK}" stroke-width="3"/>
+<rect x="5.5" y="5.5" width="{width - 11}" height="{height - 11}" fill="none" stroke="{INK}" stroke-width="0.8"/>
+<rect x="5.5" y="5.5" width="{width - 11}" height="28" fill="#173f32"/>
+<path d="M5.5 33.5H{width - 5.5}" stroke="{INK}" stroke-width="1.8"/>
+<text x="16" y="28" font-family="{DISPLAY}" font-size="21" letter-spacing="1.5" fill="#f4e8c6">SOLVER’S SCORECARD</text>
+{comic.shuriken(width - 20, 20, 10, 15, fill="#cfc4a0")}
 {body}
-<path d="M12 {height - 30}H{width - 12}" stroke="#171812" stroke-width="1.5"/>
-<text x="12" y="{height - 12}" font-family="{SANS}" font-size="13" letter-spacing="0.8" fill="#171812">TIME ________   STUCK ON ______________</text>
+<path d="M14 {height - 24}H{width - 14}" stroke="{INK}" stroke-width="1.2"/>
+<text x="14" y="{height - 11}" font-family="{SANS}" font-size="12" letter-spacing="0.6" fill="{INK}">TIME _______  STUCK ON _______</text>
+{comic.burst(width - 33, height - 29, 17, -8, "DONE!", spikes=9)}
 </svg>
 """
 
@@ -116,7 +122,7 @@ def main() -> int:
         "masthead-p9.svg": masthead(cfg["page_9_title"], cfg["page_9_tagline"], 9, cfg["issue_label"]),
         "footer-p8.svg": footer(cfg["page_8_footer"]),
         "footer-p9.svg": footer(cfg["page_9_footer"]),
-        "scorecard.svg": scorecard(cfg["puzzles"]),
+        "scorecard.svg": scorecard(cfg["puzzles"], 268, 111),
     }
     for name, text in files.items():
         (args.outdir / name).write_text(text, encoding="utf-8")

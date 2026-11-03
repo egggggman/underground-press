@@ -118,7 +118,38 @@ def bulb(x, y, r=12, rot=0, **_):
     return _g(x, y, rot, body)
 
 
-MAKERS = {"pencil": pencil, "bulb": bulb, "shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
+def pizza_whole(x, y, r=30, rot=0, **_):
+    """Whole pie, eight slices, one slice nudged out; reads as 'slices' for the Pizza Cipher."""
+    cuts = "".join(f'<path d="M0 0L{r * math.sin(a):.1f} {-r * math.cos(a):.1f}" stroke="{INK}" stroke-width="1.6"/>'
+                   for a in [math.pi * k / 4 + math.pi / 8 for k in range(8)])
+    peps = "".join(f'<circle cx="{r * d * math.sin(a):.1f}" cy="{-r * d * math.cos(a):.1f}" r="{r * .1:.1f}" fill="{RED}" stroke="{INK}" stroke-width="1.3"/>'
+                   for a, d in [(.3, .55), (1.1, .62), (1.9, .5), (2.7, .6), (3.6, .55), (4.4, .62), (5.2, .5), (5.9, .6), (0, 0)])
+    body = (f'<circle r="{r:.1f}" fill="{CRUST}" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<circle r="{r * .86:.1f}" fill="{CHEESE}" stroke="{INK}" stroke-width="1.4"/>{cuts}{peps}'
+            f'<path d="M{-r * .3:.1f} {-r * .55:.1f} q{r * .15:.1f} {-r * .12:.1f} {r * .3:.1f} {-r * .04:.1f}" fill="none" stroke="#fff3c8" stroke-width="2" stroke-linecap="round"/>')
+    return _g(x, y, rot, body)
+
+
+def bridge(x, y, r=50, rot=0, **_):
+    """Cartoon suspension bridge over water (r = half width), for 'The Bridge Builder'."""
+    w, h = r, r * .62
+    body = (f'<path d="M{-w:.1f} {h * .2:.1f} q{w * .5:.1f} {-h * 1.5:.1f} {w * .5:.1f} {-h * .85:.1f}" fill="none" stroke="{INK}" stroke-width="2"/>'
+            f'<path d="M{-w * .5:.1f} {-h * .65:.1f} q{w * .5:.1f} {h * .9:.1f} {w:.1f} 0" fill="none" stroke="{INK}" stroke-width="2"/>'
+            f'<path d="M{w * .5:.1f} {-h * .65:.1f} q{w * .5:.1f} {-h * .65:.1f} {w * .5:.1f} {h * .85:.1f}" fill="none" stroke="{INK}" stroke-width="2"/>'
+            + "".join(f'<path d="M{xx:.1f} {-h * .3:.1f}v{h * .5:.1f}" stroke="{INK}" stroke-width="1"/>' for xx in (-w * .3, -w * .1, w * .1, w * .3))
+            + f'<rect x="{-w * .56:.1f}" y="{-h * .8:.1f}" width="{w * .12:.1f}" height="{h * 1.2:.1f}" fill="#8b7a5a" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<rect x="{w * .44:.1f}" y="{-h * .8:.1f}" width="{w * .12:.1f}" height="{h * 1.2:.1f}" fill="#8b7a5a" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<rect x="{-w:.1f}" y="{h * .2:.1f}" width="{w * 2:.1f}" height="{h * .16:.1f}" fill="{RED}" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<path d="M{-w:.1f} {h * .62:.1f} q{w * .12:.1f} {-h * .12:.1f} {w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0 t{w * .25:.1f} 0" fill="none" stroke="#2f6f8f" stroke-width="2.4" stroke-linecap="round"/>')
+    return _g(x, y, rot, body)
+
+
+def caption(x, y, size=18, rot=-3, text="", fill=RED, **_):
+    return _g(x, y, rot, f'<text text-anchor="middle" font-family="{HEAD}" font-size="{size}" letter-spacing="1.2" fill="{fill}" '
+                         f'stroke="{INK}" stroke-width="{size * .05:.1f}" paint-order="stroke">{escape(text)}</text>')
+
+
+MAKERS = {"pizza_whole": pizza_whole, "bridge": bridge, "caption": caption, "pencil": pencil, "bulb": bulb, "shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
 
 
 def layer(items: list[dict]) -> str:
