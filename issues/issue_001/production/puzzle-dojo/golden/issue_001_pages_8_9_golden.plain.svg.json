@@ -1,0 +1,89 @@
+{
+  "template": "puzzle-dojo.golden.v1.2",
+  "version": "1.2.0",
+  "path_base": "repository-root",
+  "output": "issues/issue_001/production/puzzle-dojo/golden/issue_001_pages_8_9_golden.plain.svg",
+  "missing_required": [],
+  "assets": {
+    "ad": {
+      "path": "templates/puzzle-dojo/golden-skin/components/crust-bucket.svg",
+      "sha256": "d6581fa9675ca910546837ab92ec212997cca10c361fcf5fdd1546d82994dffd"
+    },
+    "cipher_corner": {
+      "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
+      "sha256": "ad0753e4c5bd7502316ada573e9f4221a81281c23e33374f1f39f2f100dc2009"
+    },
+    "clues": {
+      "path": "issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
+      "sha256": "1a6a3db6d9d171033dd86747ab96222c844e565d0fe048aae85d3f0407b7de51"
+    },
+    "crossword": {
+      "path": "issues/issue_001/assets/puzzle-dojo/crossword.svg",
+      "sha256": "a38e947c768cc280d1f24d71fa70da34b1defc19b440aae7796d7dcfbb68bb9f"
+    },
+    "last_issue_solutions": {
+      "path": "design-system/components/puzzle-dojo/last_issue_solutions.svg",
+      "sha256": "838152d56442bffda0ceb50e420cc7aab44b7a01c23f757201b9c361740ab5c4"
+    },
+    "memory_fragment": {
+      "path": "design-system/components/puzzle-dojo/portland_memory.svg",
+      "sha256": "4b28a092fb79da481f479344890fc56c0e9890171f563109b02c386791f70533"
+    },
+    "mini_ads": {
+      "path": "templates/puzzle-dojo/golden-skin/components/mini-ads.svg",
+      "sha256": "713a939cd14efb68807424581a07cde4bf15ad6c96882f4946439b21baf52090"
+    },
+    "neighborhood_search": {
+      "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
+      "sha256": "608b80cf0a1ee043c97b627657b48a450640b04540f145e2a3cd50d1a784696d"
+    },
+    "page_8_footer": {
+      "path": "templates/puzzle-dojo/golden-skin/components/footer-p8.svg",
+      "sha256": "986e718b89667838191b9e5a99eba5fc211990e0e8cb8aa26a87bd18cf4268fb"
+    },
+    "page_8_issue_banner": {
+      "path": "templates/puzzle-dojo/golden-skin/components/masthead-p8.svg",
+      "sha256": "9c58f0bebc10bf3fcf88284aa7f882de4c220111021f5509b9e58fc9381983bd"
+    },
+    "page_9_footer": {
+      "path": "templates/puzzle-dojo/golden-skin/components/footer-p9.svg",
+      "sha256": "b868386f33ac063b0d0a8c2061983047628c2f129173c3065495381be32d5b74"
+    },
+    "page_9_issue_banner": {
+      "path": "templates/puzzle-dojo/golden-skin/components/masthead-p9.svg",
+      "sha256": "046e48a1954713f34285ae3985e1a5d978a2d6904dce39dedad3c884fb8bd631"
+    },
+    "page_9_seagullotine": {
+      "path": "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
+      "sha256": "ffedc48bf4eae625daf1df85edefd2fc87a31b9129750f2c72c9772e98773759"
+    },
+    "pizza_cipher": {
+      "path": "issues/issue_001/assets/puzzle-dojo/pizza-cipher.svg",
+      "sha256": "aeb98f3d6f6ddf2f390899bb71f528329adb205907854fdedcd28e074d2b07a1"
+    },
+    "puzzle_bench": {
+      "path": "design-system/components/puzzle-dojo/puzzle_bench.svg",
+      "sha256": "6889fbd3911017dd4ed7f549f1c44aa70970df50fbeb4e683f32fc0fb3dbee4f"
+    },
+    "puzzle_tip": {
+      "path": "design-system/components/puzzle-dojo/puzzle_tip.svg",
+      "sha256": "7cf4eeb896ddf805bacf37f335fc125698638b219a5b8b9ae7c72d564d59100e"
+    },
+    "scorecard": {
+      "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
+      "sha256": "f8f920a853e6c7deec687816f454d25837708d020ec60e34e74eebf2cc09c8de"
+    },
+    "seagullotine": {
+      "path": "design-system/components/puzzle-dojo/seagullotine_quote.svg",
+      "sha256": "af71b6a5a8b23d6bdad6d7cb2a9a254b3639fc8d4c2ac9881e504f08f8c25efd"
+    },
+    "sewer_cap": {
+      "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",
+      "sha256": "762be1e789b35557c24df209ccffa306d1fecd70ae2f812a58114ef3eb9ea759"
+    },
+    "sudoku": {
+      "path": "issues/issue_001/assets/puzzle-dojo/sudoku.svg",
+      "sha256": "0e9adf56396e614b17ee1a7a977093c805b82f3ad95ed30dc3a088c3b898f375"
+    }
+  }
+}

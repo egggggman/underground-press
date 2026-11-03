@@ -55,6 +55,49 @@ def resolve_from_manifest(manifest_path: Path, value: str) -> Path:
     return path
 
 
+def validate_golden_skin(v1_zones: dict, composition: dict, manifest_path: Path) -> str:
+    """Check the golden skin keeps every v1 zone and the same locked puzzle sources."""
+    skin = ROOT / "templates/puzzle-dojo/golden-skin"
+    if not skin.is_dir():
+        return ""
+    golden = load_object(skin / "layout_contract.golden.json")
+    gzones = {}
+    for page in golden["pages"]:
+        for zone in page["zones"]:
+            gzones[zone["id"]] = zone
+    missing = set(v1_zones) - set(gzones)
+    if missing:
+        fail(f"golden contract dropped v1 zones: {sorted(missing)}")
+    coords = golden["coordinate_system"]
+    for page in golden["pages"]:
+        zs = page["zones"]
+        for zone in zs:
+            if zone["x"] < 0 or zone["y"] < 0 or zone["x"] + zone["width"] > coords["page_width"] or zone["y"] + zone["height"] > coords["page_height"]:
+                fail(f"golden zone out of bounds: {zone['id']}")
+        for i, a in enumerate(zs):
+            for b in zs[i + 1:]:
+                if a["x"] < b["x"] + b["width"] and b["x"] < a["x"] + a["width"] and a["y"] < b["y"] + b["height"] and b["y"] < a["y"] + a["height"]:
+                    fail(f"golden zones overlap: {a['id']} / {b['id']}")
+    extra = set(gzones) - set(v1_zones)
+    assets = load_object(skin / "assets.golden.json")
+    required = {key for key, value in gzones.items() if value.get("required")}
+    if required - assets.keys():
+        fail(f"golden asset map is missing zones: {sorted(required - assets.keys())}")
+    if assets.keys() - gzones.keys():
+        fail(f"golden asset map has unknown zones: {sorted(assets.keys() - gzones.keys())}")
+    base = manifest_path.parent
+    for zone_id, relative in assets.items():
+        target = (skin / relative).resolve()
+        if not target.is_file():
+            fail(f"golden asset missing for {zone_id}: {relative}")
+        if relative.endswith(".svg"):
+            ET.parse(target)
+        if zone_id in composition and zone_id in ("crossword", "clues", "sudoku", "pizza_cipher", "neighborhood_search"):
+            if digest(target) != digest((base / composition[zone_id]).resolve()):
+                fail(f"golden skin swapped a locked puzzle source: {zone_id}")
+    return f" Golden skin: {len(gzones)} zones ({len(extra)} added), {len(assets)} assets."
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--manifest", type=Path, default=DEFAULT_MANIFEST)
@@ -152,7 +195,8 @@ def main(argv: list[str] | None = None) -> int:
         resolved = ROOT / asset_path
         if not resolved.is_file() or digest(resolved) != record.get("sha256"):
             fail(f"sidecar asset integrity mismatch: {zone_id}")
-    print(f"Puzzle Dojo validation passed: {len(zones)} zones, {len(images)} linked assets, {len(locked)} immutable puzzle sources.")
+    note = validate_golden_skin(zones, composition, manifest_path)
+    print(f"Puzzle Dojo validation passed: {len(zones)} zones, {len(images)} linked assets, {len(locked)} immutable puzzle sources.{note}")
     return 0
 
 

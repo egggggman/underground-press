@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="748" height="51" viewBox="0 0 748 51">
+<rect width="748" height="13" fill="#8c2118"/>
+<text x="8" y="10" font-family="'Arial Narrow',Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="0.6">FIRST EDITION!</text>
+<text x="374" y="10" text-anchor="middle" font-family="'Arial Narrow',Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="1.1">WE’RE ALL LOOKING FOR A PLACE TO LAND</text>
+<text x="740" y="10" text-anchor="end" font-family="'Arial Narrow',Arial,Helvetica,sans-serif" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="0.6">PAGE 9</text>
+<text x="9" y="42" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="30" fill="#7a6a4a" fill-opacity="0.55" textLength="243" lengthAdjust="spacingAndGlyphs">DOJO SIDE QUESTS</text>
+<text x="7" y="40" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="30" fill="#171812" textLength="243" lengthAdjust="spacingAndGlyphs">DOJO SIDE QUESTS</text>
+<g transform="translate(690 28)"><circle r="15" fill="#2a2418" stroke="#171812" stroke-width="1.2"/><circle r="12.8" fill="none" stroke="#c9b27c" stroke-width="0.9" stroke-dasharray="2 1.6"/><circle r="10" fill="none" stroke="#c9b27c" stroke-width="0.7"/><text y="4.2" text-anchor="middle" font-family="Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif" font-size="12.8" fill="#e9d6a4">UP</text></g>
+<text x="668" y="33" text-anchor="end" font-family="Georgia,'Times New Roman',serif" font-size="10.5" font-style="italic" fill="#143f2c">Collect. Clip. Question.</text>
+<path d="M0 46H748" stroke="#171812" stroke-width="2.4"/><path d="M0 49.5H748" stroke="#171812" stroke-width="0.8"/>
+</svg>
