@@ -12,9 +12,11 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-DISPLAY = "Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif"
-SERIF = "Georgia,'Times New Roman',serif"
-SANS = "'Arial Narrow',Arial,Helvetica,sans-serif"
+from fontcss import HEAD, SERIF, SERIF_I, STRIP, style
+
+INK = "#171812"
+DISPLAY = HEAD
+SANS = STRIP
 MOTTO = "WE’RE ALL LOOKING FOR A PLACE TO LAND"
 
 
@@ -28,47 +30,52 @@ def seal(cx: float, cy: float, r: float) -> str:
 
 
 def masthead(title: str, tagline: str, page: int, issue_label: str) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="51" viewBox="0 0 748 51">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="51" viewBox="0 0 748 51">{style()}
 <rect width="748" height="13" fill="#8c2118"/>
-<text x="8" y="10" font-family="{SANS}" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="0.6">{escape(issue_label)}</text>
-<text x="374" y="10" text-anchor="middle" font-family="{SANS}" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="1.1">{escape(MOTTO)}</text>
-<text x="740" y="10" text-anchor="end" font-family="{SANS}" font-size="9" font-weight="bold" fill="#f4e8c6" letter-spacing="0.6">PAGE {page}</text>
-<text x="9" y="42" font-family="{DISPLAY}" font-size="30" fill="#7a6a4a" fill-opacity="0.55" textLength="{len(title) * 15.2:.0f}" lengthAdjust="spacingAndGlyphs">{escape(title)}</text>
-<text x="7" y="40" font-family="{DISPLAY}" font-size="30" fill="#171812" textLength="{len(title) * 15.2:.0f}" lengthAdjust="spacingAndGlyphs">{escape(title)}</text>
+<text x="8" y="10.6" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="1.6">{escape(issue_label)}</text>
+<text x="374" y="10" text-anchor="middle" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="2.4">{escape(MOTTO)}</text>
+<text x="740" y="10" text-anchor="end" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="1.6">PAGE {page}</text>
+<text x="8.6" y="43" font-family="{DISPLAY}" font-size="35" fill="#7a6a4a" fill-opacity="0.5" letter-spacing="1.2">{escape(title)}</text>
+<text x="7" y="41.4" font-family="{DISPLAY}" font-size="35" fill="#171812" letter-spacing="1.2">{escape(title)}</text>
 {seal(690, 28, 15)}
-<text x="668" y="33" text-anchor="end" font-family="{SERIF}" font-size="10.5" font-style="italic" fill="#143f2c">{escape(tagline)}</text>
+<text x="668" y="33" text-anchor="end" font-family="{SERIF_I}" font-size="10.5" fill="#143f2c">{escape(tagline)}</text>
 <path d="M0 46H748" stroke="#171812" stroke-width="2.4"/><path d="M0 49.5H748" stroke="#171812" stroke-width="0.8"/>
 </svg>
 """
 
 
 def footer(text: str) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="30" viewBox="0 0 748 30">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="30" viewBox="0 0 748 30">{style()}
 <rect width="748" height="30" fill="#171812"/><rect width="30" height="30" fill="#8c2118"/><rect x="718" width="30" height="30" fill="#8c2118"/>
 <path d="M15 6l3 7 7 .6-5.4 4.6 1.8 7-6.4-4-6.4 4 1.8-7L5 13.600 12 13z" fill="#f4e8c6" transform="translate(0 -1)"/>
 <path d="M733 6l3 7 7 .6-5.4 4.6 1.8 7-6.4-4-6.4 4 1.8-7L723 13.600 730 13z" fill="#f4e8c6" transform="translate(0 -1)"/>
-<text x="374" y="20" text-anchor="middle" font-family="{DISPLAY}" font-size="14" fill="#f4e8c6" textLength="610" lengthAdjust="spacingAndGlyphs">{escape(text)}</text>
+<text x="374" y="21.5" text-anchor="middle" font-family="{STRIP}" font-size="19" fill="#f4e8c6" letter-spacing="3.2">{escape(text)}</text>
 </svg>
 """
 
 
 def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
+    """Illustrated Solver's Scorecard sized for its zone (no downscaling)."""
+    import comic
     cells = []
     for index, name in enumerate(puzzles):
-        x = 12 + (index % 2) * (width // 2 - 4)
-        y = 44 + (index // 2) * 26
+        x = 14 + (index % 2) * (width // 2 - 16)
+        y = 44 + (index // 2) * 22
         cells.append(
-            f'<rect x="{x}" y="{y}" width="14" height="14" fill="#f1e4bd" stroke="#171812" stroke-width="1.6"/>'
-            f'<text x="{x + 20}" y="{y + 12}" font-family="{DISPLAY}" font-size="11.5" fill="#171812" textLength="{min(len(name) * 6.2, width // 2 - 34):.0f}" lengthAdjust="spacingAndGlyphs">{escape(name.upper())}</text>'
-        )
+            f'<rect x="{x}" y="{y}" width="13" height="13" fill="#f1e4bd" stroke="{INK}" stroke-width="1.8"/>'
+            f'<text x="{x + 19}" y="{y + 11.5}" font-family="{SANS}" font-size="11.5" letter-spacing="0.6" fill="{INK}">{escape(name.upper())}</text>')
     body = "\n".join(cells)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
-<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
-<rect x="1.5" y="1.5" width="{width - 3}" height="28" fill="#173f32"/>
-<text x="{width / 2}" y="21" text-anchor="middle" font-family="{DISPLAY}" font-size="15" fill="#f4e8c6" textLength="150" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style()}
+<rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="none" stroke="{INK}" stroke-width="3"/>
+<rect x="5.5" y="5.5" width="{width - 11}" height="{height - 11}" fill="none" stroke="{INK}" stroke-width="0.8"/>
+<rect x="5.5" y="5.5" width="{width - 11}" height="28" fill="#173f32"/>
+<path d="M5.5 33.5H{width - 5.5}" stroke="{INK}" stroke-width="1.8"/>
+<text x="16" y="28" font-family="{DISPLAY}" font-size="21" letter-spacing="1.5" fill="#f4e8c6">SOLVER’S SCORECARD</text>
+{comic.jigsaw(width - 20, 19, 8, 12, fill="#cfc4a0")}
 {body}
-<path d="M12 {height - 30}H{width - 12}" stroke="#171812" stroke-width="1.5"/>
-<text x="12" y="{height - 12}" font-family="{SANS}" font-size="9.5" font-weight="bold" fill="#171812">TIME ________   STUCK ON ______________</text>
+<path d="M14 {height - 24}H{width - 14}" stroke="{INK}" stroke-width="1.2"/>
+<text x="14" y="{height - 11}" font-family="{SANS}" font-size="12" letter-spacing="0.6" fill="{INK}">TIME _______  STUCK ON _______</text>
+{comic.burst(width - 33, height - 29, 17, -8, "DONE!", spikes=9)}
 </svg>
 """
 
@@ -83,22 +90,22 @@ def scorecard(puzzles: list[str], width: int = 368, height: int = 287) -> str:
         label_w = len(name) * 9.6
         rows.append(
             f'<rect x="18" y="{y:.0f}" width="22" height="22" fill="#f1e4bd" stroke="#171812" stroke-width="2"/>'
-            f'<text x="52" y="{y + 18:.0f}" font-family="{DISPLAY}" font-size="18" fill="#171812" textLength="{label_w:.0f}" lengthAdjust="spacingAndGlyphs">{escape(name.upper())}</text>'
+            f'<text x="52" y="{y + 18:.0f}" font-family="{DISPLAY}" font-size="18" fill="#171812">{escape(name.upper())}</text>'
             f'<path d="M{52 + label_w + 10:.0f} {y + 19:.0f}H{width - 18}" stroke="#171812" stroke-width="1" stroke-dasharray="3 3"/>'
         )
     body = "\n".join(rows)
     base = 66 + len(puzzles) * gap
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style()}
 <rect x="2" y="2" width="{width - 4}" height="{height - 4}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
 <rect x="2" y="2" width="{width - 4}" height="36" fill="#173f32"/>
-<text x="{width / 2}" y="27" text-anchor="middle" font-family="{DISPLAY}" font-size="20" fill="#f4e8c6" textLength="200" lengthAdjust="spacingAndGlyphs">SOLVER’S SCORECARD</text>
-<text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF}" font-size="11.5" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>
+<text x="{width / 2}" y="27" text-anchor="middle" font-family="{DISPLAY}" font-size="20" fill="#f4e8c6">SOLVER’S SCORECARD</text>
+<text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF_I}" font-size="11.5" fill="#171812">Check them off in pencil. Ink comes later.</text>
 {body}
 <path d="M18 {base:.0f}H{width - 18}" stroke="#171812" stroke-width="2"/>
-<text x="18" y="{base + 24:.0f}" font-family="{SANS}" font-size="11.5" font-weight="bold" fill="#171812">TOTAL TIME ____________</text>
-<text x="18" y="{base + 46:.0f}" font-family="{SANS}" font-size="11.5" font-weight="bold" fill="#171812">STUCK ON ______________________</text>
+<text x="18" y="{base + 24:.0f}" font-family="{SANS}" font-size="15" letter-spacing="1" fill="#171812">TOTAL TIME ____________</text>
+<text x="18" y="{base + 46:.0f}" font-family="{SANS}" font-size="15" letter-spacing="1" fill="#171812">STUCK ON ______________________</text>
 <g transform="rotate(-6 {width - 74} {base + 36:.0f})"><rect x="{width - 140}" y="{base + 16:.0f}" width="120" height="38" fill="none" stroke="#8c2118" stroke-width="3"/>
-<text x="{width - 80}" y="{base + 42:.0f}" text-anchor="middle" font-family="{DISPLAY}" font-size="18" fill="#8c2118" textLength="100" lengthAdjust="spacingAndGlyphs">SOLVED IT!</text></g>
+<text x="{width - 80}" y="{base + 42:.0f}" text-anchor="middle" font-family="{DISPLAY}" font-size="18" fill="#8c2118">SOLVED IT!</text></g>
 </svg>
 """
 
@@ -115,7 +122,7 @@ def main() -> int:
         "masthead-p9.svg": masthead(cfg["page_9_title"], cfg["page_9_tagline"], 9, cfg["issue_label"]),
         "footer-p8.svg": footer(cfg["page_8_footer"]),
         "footer-p9.svg": footer(cfg["page_9_footer"]),
-        "scorecard.svg": scorecard(cfg["puzzles"]),
+        "scorecard.svg": scorecard(cfg["puzzles"], 268, 111),
     }
     for name, text in files.items():
         (args.outdir / name).write_text(text, encoding="utf-8")

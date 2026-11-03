@@ -1,0 +1,726 @@
+{
+  "library": "The Underground Press approved advertising art",
+  "handoff": "2026-11-02",
+  "rules": [
+    "Use approved/ files unchanged: no AI redraw, recolor, rewording or stretching.",
+    "Resize proportionally; crop only with editorial approval.",
+    "previous_versions/ is provenance only, never production art.",
+    "Artwork approval is not canon, publication or print approval."
+  ],
+  "ads": [
+    {
+      "id": "tonys-donuts",
+      "business": "Tony’s Donuts",
+      "kind": "ad",
+      "artwork_status": "Approved illustration",
+      "art_direction": "Three frosted sprinkled donuts, one bitten, with steaming diner mug",
+      "file": "approved/tonys-donuts.png",
+      "source_filename": "a_vintage_comic_style_ink_illustration_on_a_flat_c.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "8d09b0a506000df4b1c91b3cf385ccf1325de9176f2405db7daa69cd31c58bb5",
+      "lettering": "illustration-only",
+      "copy_in_art": [],
+      "canon": "flagship: Tony’s Donuts (world/businesses/FLAGSHIP_BUSINESSES.md)",
+      "notes": "No lettering in the art; layout must add the business name only (no invented copy).",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "myrtle-suds",
+      "business": "Myrtle St. Suds",
+      "kind": "ad",
+      "artwork_status": "Approved revised illustration",
+      "art_direction": "Washing machine and real Myrtle-inspired tortoiseshell cat",
+      "file": "approved/myrtle-suds.png",
+      "source_filename": "a_vintage_comic_ink_illustration_in_the_same_gritt.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "b71b279fa49a95b437d3d89100242d9463f76db835377d8f187d260b4b7131d1",
+      "lettering": "illustration-only",
+      "copy_in_art": [],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Cat is modeled on the real Myrtle (tortoiseshell, green eyes): keep her face and coat. No lettering in the art; layout must add the business name only.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "foghorn-tapes",
+      "business": "Foghorn Tapes",
+      "kind": "ad",
+      "artwork_status": "Approved logo",
+      "art_direction": "Foghorn / nautical music-store logo and tagline",
+      "file": "approved/foghorn-tapes.png",
+      "source_filename": "a_detailed_vintage_gritty_comic_ink_style_logo_il.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "ef1f728879b2a8ca2c22fb4369cd837afd8ee74007a5eddf148b7538d36dd4e6",
+      "lettering": "complete",
+      "copy_in_art": [
+        "FOGHORN TAPES",
+        "RECORDS • TAPES • LOCAL SOUNDS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Logo with tagline, not a still life.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "harbor-heights-hardware",
+      "business": "Harbor Heights Hardware",
+      "kind": "ad",
+      "artwork_status": "Approved renamed/revised logo",
+      "art_direction": "Gritty pirate mascot and harbor",
+      "file": "approved/harbor-heights-hardware.png",
+      "source_filename": "gritty_vintage_distressed_ink_screenprint_logo_po.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "1a3caf44d25781f0efeb41a21a393451699960f9cf1b48beec546595edc361e1",
+      "lettering": "complete",
+      "copy_in_art": [
+        "HARBOR HEIGHTS HARDWARE"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Renamed from Harbor Lantern Hardware: use the final name.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/harbor-heights-early-logo.png",
+          "sha256": "b4d61a2ebb7a1fbf2cd300d47d2056f5689af0265e3a314fa8a9034e61db9dea"
+        },
+        {
+          "file": "previous_versions/harbor-heights-pirate-variant.png",
+          "sha256": "376a55099d6a309f6199c02013f1b3c7b6b74f49882d0f495ce004d18902e4f0"
+        },
+        {
+          "file": "previous_versions/harbor-lantern-original.png",
+          "sha256": "df5db0d1d1f9bba0d303a85de230b75e302d2921719895dfc6a502c2e51c340f"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "gull-ladle",
+      "business": "The Gull & Ladle",
+      "kind": "ad",
+      "artwork_status": "Approved simplified logo",
+      "art_direction": "Bold gull chef; HOME OF THE $1.00 WHOOPIE / AND THE BEST SOUP DU JOUR!",
+      "file": "approved/gull-ladle.png",
+      "source_filename": "a_bold_vintage_distressed_retro_logo_poster_with.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "acc7698077f46cc91f1cb8393b8fefe4d886c927220d265fe8a6ea310f1386be",
+      "lettering": "complete",
+      "copy_in_art": [
+        "THE GULL & LADLE",
+        "HOME OF THE $1.00 WHOOPIE",
+        "AND THE BEST SOUP DU JOUR!"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Wording resolved by HQ editorial (2026-11-02): keep the approved image as is. Exact copy is “HOME OF THE $1.00 WHOOPIE / AND THE BEST SOUP DU JOUR!”. The handoff README paraphrase (“$1 Whoopie”, “Best Soup du Jour”) is superseded.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/gull-ladle-detailed.png",
+          "sha256": "dfd406e453063dab7691c9ae5ad5e5df56dcbde89acc803dbcc0ed89e6ed8fc8"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "cassiopeia-books",
+      "business": "Cassiopeia Books",
+      "kind": "ad",
+      "artwork_status": "Approved Portland revision",
+      "art_direction": "Worn book-cover composition with Portland waterfront skyline and black cat",
+      "file": "approved/cassiopeia-books.png",
+      "source_filename": "a_vintage_worn_book_cover_design_for_cassiopeia_b.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "f382aab4053cf0c1a7ebc2b519bedd01bf5f24be4ede8b67dba834776f316557",
+      "lettering": "complete",
+      "copy_in_art": [
+        "CASSIOPEIA BOOKS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Book-cover composition; Portland waterfront revision approved, not the earlier skyline.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/cassiopeia-earlier-book-cover.png",
+          "sha256": "59f964d3ff8978fe7ab0009403803688060793a6922ffe70127e21a8a0c47203"
+        },
+        {
+          "file": "previous_versions/cassiopeia-earlier-logo.png",
+          "sha256": "b15cf20621be5798c440972ca4230b239a2c452d14d4dfccf53fe4c50eabeffe"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "quality-cuts",
+      "business": "Quality Cuts",
+      "kind": "ad",
+      "artwork_status": "Approved logo",
+      "art_direction": "Simple barber pole and comb logo",
+      "file": "approved/quality-cuts.png",
+      "source_filename": "a_vintage_distressed_sign_logo_on_aged_stained_be.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "fd39cc7165ccd0a266c8feaecdfb40f231d99fa9e642c9dd4ca6c9f62e9cf9c7",
+      "lettering": "complete",
+      "copy_in_art": [
+        "QUALITY CUTS",
+        "BARBERSHOP"
+      ],
+      "canon": "Not in canon docs (advertising concept). A possible partnership with Quality Shop and a Shamos-sibling identity for the barber are an editorial idea only; HOLD per HQ editorial 2026-11-02.",
+      "notes": "Do not state the Quality Shop partnership or sibling relationship as fact in ads, captions or canon until HQ explicitly approves the identities and relationship.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "deez-bait",
+      "business": "Deez Bait",
+      "kind": "ad",
+      "artwork_status": "Approved renamed logo",
+      "art_direction": "Chum bucket with worms and fish emblem",
+      "file": "approved/deez-bait.png",
+      "source_filename": "a_vintage_distressed_bold_graphic_logo_sign_on_a.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "e7ce287e429f17fb56392a4e25b967193d013581d276975f8f2f7d06066ffbbf",
+      "lettering": "complete",
+      "copy_in_art": [
+        "DEEZ BAIT"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Renamed from Ferry Fare Bait: use the final name.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "deez-bait-coupon",
+      "business": "Deez Bait",
+      "kind": "coupon",
+      "artwork_status": "Approved coupon",
+      "art_direction": "Perforated coupon: BUY 2 GET NONE FREE!",
+      "file": "approved/deez-bait-coupon.png",
+      "source_filename": "a_vintage_distressed_coupon_ticket_design_with_rou.png",
+      "width_px": 1774,
+      "height_px": 887,
+      "sha256": "868a1aef5e435b237d42e624b848f199b274137718704c19d664f2490882c77e",
+      "lettering": "complete",
+      "copy_in_art": [
+        "COUPON",
+        "BUY 2 GET NONE FREE!",
+        "DEEZ BAIT"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Joke wording is intentional. Perforations are drawn only: physical perforation needs print guidance.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "alice-alterations",
+      "business": "Alice’s Alterations",
+      "kind": "ad",
+      "artwork_status": "Approved final revision",
+      "art_direction": "Whimsical elderly seamstress with tiny bifocals trying to thread split thread",
+      "file": "approved/alice-alterations.png",
+      "source_filename": "vintage_comic_retro_sign_style_illustration_wit.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "898e3e6ebaa217bc12805fba5384858d5a1ca2eb3f804feaab04d4ed35f8df55",
+      "lettering": "complete",
+      "copy_in_art": [
+        "ALICE’S ALTERATIONS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Final whimsical revision.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/alice-earlier-seamstress.png",
+          "sha256": "26ffbe5ff4ae3c97cd09c8ed54d4208c8825f74c9e4006a3c9eda2b42eb391be"
+        },
+        {
+          "file": "previous_versions/alice-earlier-sewing-machine.png",
+          "sha256": "fe2b1205a39aeac36ed91fabaf3aabd78076a3be600e37f974e828924ff6e081"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "gull-taxi",
+      "business": "Seagull Cab Co.",
+      "kind": "ad",
+      "artwork_status": "Approved final cigarette revision",
+      "art_direction": "Yellow checkered cab with gull driver and cigarette",
+      "file": "approved/gull-taxi.png",
+      "source_filename": "a_vintage_distressed_comic_sign_illustration_lik.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "023365b3d708ade74bcf1bd7a27184d86e648ea878b7024d07b355f660a88f69",
+      "lettering": "complete",
+      "copy_in_art": [
+        "SEAGULL CAB CO.",
+        "TAXI"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Lit cigarette in the gull’s beak: the revision is approved.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/gull-taxi-before-cigarette.png",
+          "sha256": "346013f38bff43545ad7e2cddf4cfb04ce395a7a04bd89db96f52d4719d36fef"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "crust-bucket",
+      "business": "The Crust Bucket",
+      "kind": "ad",
+      "artwork_status": "Approved final SNES revision",
+      "art_direction": "Pizza-crust bucket mascot, arcade machines, SNES-era pixel art; Any Pizza is Good Pizza!",
+      "file": "approved/crust-bucket.png",
+      "source_filename": "a_pixel_art_snes_16_bit_style_retro_advertisement.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "8610597f366d9a7caada7048f38d0c69c45fb1c4999b2a11cd621a4916166ed9",
+      "lettering": "complete",
+      "copy_in_art": [
+        "THE CRUST BUCKET",
+        "“ANY PIZZA IS GOOD PIZZA!”"
+      ],
+      "canon": "flagship: The Crust Bucket (replaces Tony’s Pizza)",
+      "notes": "SNES-era pixel art is an approved, intentional exception to the halftone style.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/crust-bucket-arcade-before-pixel.png",
+          "sha256": "3f20cf8bddfbb581a88b6a9c39e1d5249876175896fe33efdf074f47f63043df"
+        },
+        {
+          "file": "previous_versions/crust-bucket-original.png",
+          "sha256": "f61db442a5bab2f08706938d60b15bb872dc24ede9fe3fe549f8b6626357197d"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "portland-pipe-drain",
+      "business": "Portland Pipe & Drain Co.",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Turtle plumber in a manhole with a thumbs-up, brick sewer arch, Portland skyline",
+      "file": "approved/portland-pipe-drain.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 750,
+      "height_px": 478,
+      "sha256": "85d8debf4b8c709cc7250729d63f1ab6bb7a2f51e17809f858403d9fe34fbb4f",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          8,
+          5
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Portland PIPE & DRAIN CO.",
+        "DRAIN CLEANING",
+        "PIPE REPAIR",
+        "SEWER LINE SERVICE",
+        "24-HOUR CALLS",
+        "KEEPING PORTLAND FLOWING—ABOVE AND BELOW!"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/portland-pipe-drain-v2.png",
+        "width_px": 772,
+        "height_px": 481,
+        "sha256": "e32cac0b7b80a88b34da52d3b3bd30531caf8e610215e4e08b10f77720c62c95",
+        "box_px": [
+          11,
+          6,
+          782,
+          486
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      },
+      "v1_crop_defect": "v1 crop (x 8-757) cut ~25 px off the plaque's right edge and Coastal Byte's v1 crop included that strip; the v2 crops fix both."
+    },
+    {
+      "id": "coastal-byte",
+      "business": "Coastal Byte Computers",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Pixel-art beige PC with a green turtle-shell screen, neon brick wall, space-invader icons",
+      "file": "approved/coastal-byte.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 762,
+      "height_px": 478,
+      "sha256": "0f83ff61271451a390645517e0b565595a961dabec30e45a81f5d8edc9c2de3d",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          766,
+          5
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "COASTAL BYTE COMPUTERS",
+        "PC REPAIR & UPGRADES",
+        "NETWORK SETUP",
+        "USED SYSTEMS",
+        "GAME INSTALLS",
+        "REAL TECH FOR A REAL WORLD."
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/coastal-byte-v2.png",
+        "width_px": 734,
+        "height_px": 478,
+        "sha256": "eae986fef8ae6bb7dac5adb2ad64dad6561784c278cff2a16d77caaaf7e31936",
+        "box_px": [
+          792,
+          5,
+          1525,
+          482
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      }
+    },
+    {
+      "id": "maine-comics",
+      "business": "Maine Comics & Collectibles",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Purple masked ninja reading a TURTLES comic in a shop, comic-burst lettering",
+      "file": "approved/maine-comics.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 497,
+      "height_px": 528,
+      "sha256": "50c0ec7fab69e3aaca02b30669e54cc69f84faa91b4f7565615c4efa4d5c947e",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          8,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Maine Comics & Collectibles",
+        "COMICS! CARDS! TOYS! ZINES! & MORE!",
+        "PORTLAND'S POP CULTURE HIDEOUT!",
+        "TURTLES (comic cover)"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/maine-comics-v2.png",
+        "width_px": 500,
+        "height_px": 521,
+        "sha256": "20887404b76aadaff8538617817f61fbdd55ee20ad365960c2875f3a832fdaf7",
+        "box_px": [
+          5,
+          496,
+          504,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      }
+    },
+    {
+      "id": "snappers-market",
+      "business": "The Snapper's Market",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Two lobster grocers in chef hats with a produce crate, checkerboard border",
+      "file": "approved/snappers-market.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 508,
+      "height_px": 528,
+      "sha256": "f298287b1da2bfd87b5b46b6edaf934ec62920508f4bc5a31794a622f56a7754",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          510,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "The Snapper's Market",
+        "FRESH PRODUCE",
+        "GROCERIES",
+        "COLD DRINKS",
+        "LOCAL GOODS",
+        "GOOD FOOD FOR PORTLAND PEOPLE."
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/snappers-market-v2.png",
+        "width_px": 502,
+        "height_px": 522,
+        "sha256": "2cff424309357ac2d3cd873fcbb5b8b9e393bfc9893f8ec8032cf36af5abc72f",
+        "box_px": [
+          514,
+          495,
+          1015,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      },
+      "lettering_revision": {
+        "file": "revisions/snappers-market-v3-lettering.png",
+        "width_px": 502,
+        "height_px": 522,
+        "sha256": "b1680b06a822a3e8adf7e585a179b2ba82e76e5798967c14425f4e74db81c591",
+        "based_on": "approved_v2/snappers-market-v2.png",
+        "script": "tools/repair_snappers_lettering.py",
+        "status": "documented experiment only (HQ 2026-11-02): not promoted to the approved library; incomplete M",
+        "changes": [
+          "clipped 'M' of 'Market': dark-red smear recoloured to ink, olive haze restored to paper",
+          "checker border: squares crowding 'The'/'s' removed (left of the claw only)"
+        ]
+      },
+      "regeneration": {
+        "status": "candidate received 2026-11-02: candidates/snappers-market-alt-turtle.png is an alternate concept (turtle, not lobster), pending HQ decision; approved lobster ad unchanged",
+        "brief": "regeneration/snappers-market-regeneration-brief.md",
+        "candidate": "candidates/snappers-market-alt-turtle.png",
+        "rejected_attempts": [
+          "rejected/snappers-market-attempt-nyc-2026-11-03.png"
+        ]
+      }
+    },
+    {
+      "id": "brine-grinder",
+      "business": "Brine & Grinder Records",
+      "kind": "ad",
+      "artwork_status": "Approved (five-ad sheet, 2026-11-02 fresh handoff)",
+      "art_direction": "Vinyl record cresting a wave with a lighthouse and skyline",
+      "file": "approved/brine-grinder.png",
+      "source_filename": "five_new_ads_approved_sheet.png",
+      "width_px": 505,
+      "height_px": 528,
+      "sha256": "f45130d36908f3dfe50a86b0fc550d7fcd8ff1f597527b3157ffb87d27873938",
+      "derived_from": {
+        "sheet": "approved_sheets/five_new_ads_approved_sheet.png",
+        "sheet_sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+        "origin_px": [
+          1023,
+          490
+        ],
+        "exact_pixel_slice": true
+      },
+      "lettering": "in-art",
+      "copy_in_art": [
+        "Brine & Grinder RECORDS",
+        "VINYL",
+        "CDs",
+        "TAPES",
+        "LOCAL BANDS",
+        "SPECIAL ORDERS",
+        "MUSIC FROM ABOVE & BELOW PORTLAND, ME"
+      ],
+      "canon": "none: advertising concept only; permanent business-bible placement needs a separate editorial decision",
+      "notes": "Derived crop, not a separately approved print master. v1 crop includes neighbouring-panel slivers/gutter; use tight_crop_v2 once approved. Rotation pool only; not placed in Issue 1.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved as part of the five-ad sheet",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      },
+      "tight_crop_v2": {
+        "file": "approved_v2/brine-grinder-v2.png",
+        "width_px": 506,
+        "height_px": 522,
+        "sha256": "abe32d507857b42df94894dacc13555b3c9017272b1a0d1613a65fc85e2588de",
+        "box_px": [
+          1025,
+          495,
+          1530,
+          1016
+        ],
+        "status": "proposed for HQ approval; replaces nothing (v1 crop kept as evidence)",
+        "method": "bounding box of the plaque (non-gutter region) on the approved sheet; exact pixel slice, no resampling"
+      }
+    }
+  ],
+  "sheets": [
+    {
+      "file": "approved_sheets/five_new_ads_approved_sheet.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "f13ce968fe2e3ee9a9b3384a0b947e6520d7b82294277f6d4f81c62cca1feec4",
+      "note": "Original approved five-ad composition, byte-for-byte; the creative source of truth. Never edit."
+    }
+  ],
+  "print_requirements": "design-system/ad-library/PRINT_RESOLUTION.md",
+  "candidates": [
+    {
+      "id": "snappers-market-alt-turtle",
+      "business": "The Snapper's Market",
+      "kind": "ad-candidate",
+      "file": "candidates/snappers-market-alt-turtle.png",
+      "width_px": 1312,
+      "height_px": 1199,
+      "sha256": "a08ce5caca45306c7405f28558bd8ac319e50597fcf8d091ed4591552773cf1d",
+      "source": "HQ-supplied regeneration (2026-11-02, original output file as received)",
+      "relation": "alternate concept for snappers-market; NOT a replacement and NOT approved",
+      "status": "candidate: pending HQ decision on character design; no print or library promotion",
+      "copy_in_art": [
+        "The Snapper's Market",
+        "NEIGHBORHOOD GROCERIES & FRESH PRODUCE!"
+      ],
+      "differences_from_approved": [
+        "character: a red-masked turtle grocer (reads as a specific TMNT character) replaces the two lobster grocers",
+        "copy: approved COLD DRINKS, LOCAL GOODS, FRESH PRODUCE/GROCERIES list and banner 'GOOD FOOD FOR PORTLAND PEOPLE.' are gone; new burst copy 'NEIGHBORHOOD GROCERIES & FRESH PRODUCE!'",
+        "composition: harbor lighthouse/skyline strip and bottom banner removed; wider aspect (1312x1199)",
+        "finish: heavier grain/halftone texture, more muted palette than the approved art"
+      ],
+      "corrections_verified": [
+        "lettering 'The Snapper's Market' complete and legible, straight apostrophe",
+        "no checker-border overlap",
+        "no neighbouring advertisement"
+      ],
+      "open_issues": [
+        "a dark band about 12 px tall remains along the top edge (gutter/neighbouring-panel remnant), so 'no gutters' is not fully met; not edited",
+        "resolution 1312x1199: about 327 ppi in the large slot, about 800 ppi in a mini slot at fitted size, below the 2,400x2,500 brief but adequate for the large slot at 300 ppi only because the new art is wider and fits shorter",
+        "final proof at actual dimensions still required",
+        "IP/editorial review of the TMNT-character likeness before external publication"
+      ],
+      "approvals": {
+        "artwork": "pending HQ visual approval",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    }
+  ],
+  "rejected_attempts": [
+    {
+      "id": "snappers-market-attempt-nyc-2026-11-03",
+      "business": "The Snapper's Market",
+      "file": "rejected/snappers-market-attempt-nyc-2026-11-03.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "a53567f8f2d5873ba7933170037de1cd44ad8dc690aef2c2be10bc0951f9f875",
+      "source": "HQ-supplied regeneration attempt, original output file as received (2026-11-03)",
+      "status": "REJECTED by HQ (2026-11-03). Historical evidence only; never use in layouts or rotation.",
+      "findings": [
+        "one lobster instead of two lobster grocers",
+        "copy replaced: 'FRESH FISH! SHELLFISH! LOCAL CATCH! TURTLE APPROVED!' and 'SNAPPER'S MARKET—THE MUTANT SEAFOOD DESTINATION!' instead of the approved product list and 'GOOD FOOD FOR PORTLAND PEOPLE.' banner",
+        "invented copy: 'IN THE HEART OF NEW YORK CITY...' and 'FRESH SEAFOOD FROM THE SEWERS TO THE SURFACE!'",
+        "New York skyline and bridge instead of the Portland lighthouse and skyline strip",
+        "title reads 'SNAPPER'S MARKET' with a TM mark, no 'The'",
+        "green 'TMNT' manhole-cover logo: franchise trademark lettering on a business ad",
+        "no checkerboard border or plaque frame; comic-cover look, not the 1991 newspaper-ad style",
+        "resolution adequate (about 279 ppi in the large slot, about 683 ppi in a mini slot) but moot"
+      ],
+      "rejection_reason": "Departs from the approved ad's characters, copy, Portland setting and newspaper aesthetic; a redesign, not a faithful regeneration."
+    }
+  ]
+}

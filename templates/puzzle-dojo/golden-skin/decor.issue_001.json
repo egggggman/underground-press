@@ -1,0 +1,162 @@
+{
+ "note": "Comic puzzle props for Issue 1 (original vector art; page points, origin top-left). Edit per issue.",
+ "pages": {
+  "8": [
+   {
+    "type": "crossword",
+    "x": 62,
+    "y": 200,
+    "r": 21,
+    "rot": -6
+   },
+   {
+    "type": "sparkle",
+    "x": 92,
+    "y": 162,
+    "r": 8
+   },
+   {
+    "type": "burst",
+    "x": 62,
+    "y": 290,
+    "r": 30,
+    "rot": -8,
+    "text": "AHA!"
+   },
+   {
+    "type": "magnifier",
+    "x": 62,
+    "y": 388,
+    "r": 22,
+    "rot": 10
+   },
+   {
+    "type": "sparkle",
+    "x": 36,
+    "y": 432,
+    "r": 6
+   },
+   {
+    "type": "jigsaw",
+    "x": 446,
+    "y": 232,
+    "r": 19,
+    "rot": 12
+   },
+   {
+    "type": "sparkle",
+    "x": 472,
+    "y": 192,
+    "r": 8
+   },
+   {
+    "type": "stopwatch",
+    "x": 446,
+    "y": 338,
+    "r": 16,
+    "rot": -8
+   },
+   {
+    "type": "pencil",
+    "x": 446,
+    "y": 418,
+    "r": 20,
+    "rot": -60
+   },
+   {
+    "type": "burst",
+    "x": 566,
+    "y": 444,
+    "r": 31,
+    "rot": -6,
+    "text": "?!"
+   },
+   {
+    "type": "sudoku",
+    "x": 652,
+    "y": 444,
+    "r": 22,
+    "rot": 5
+   },
+   {
+    "type": "eraser",
+    "x": 724,
+    "y": 442,
+    "r": 16,
+    "rot": -14
+   },
+   {
+    "type": "pencil",
+    "x": 742,
+    "y": 386,
+    "r": 16,
+    "rot": -28
+   },
+   {
+    "type": "sparkle",
+    "x": 536,
+    "y": 387,
+    "r": 6
+   },
+   {
+    "type": "pencil",
+    "x": 52,
+    "y": 741,
+    "r": 13,
+    "rot": -20
+   },
+   {
+    "type": "eraser",
+    "x": 742,
+    "y": 741,
+    "r": 11,
+    "rot": 8
+   },
+   {
+    "type": "decoder",
+    "x": 452,
+    "y": 852,
+    "r": 29,
+    "rot": 14
+   },
+   {
+    "type": "caption",
+    "x": 356,
+    "y": 876,
+    "size": 15,
+    "rot": -4,
+    "text": "3 SLICES BACK!"
+   },
+   {
+    "type": "bridge",
+    "x": 420,
+    "y": 140,
+    "r": 42
+   },
+   {
+    "type": "caption",
+    "x": 396,
+    "y": 744,
+    "size": 18,
+    "rot": -2,
+    "text": "NO PEEKING AT THE ANSWERS!"
+   }
+  ],
+  "9": [
+   {
+    "type": "pencil",
+    "x": 452,
+    "y": 624,
+    "r": 15,
+    "rot": -18
+   },
+   {
+    "type": "jigsaw",
+    "x": 406,
+    "y": 625,
+    "r": 12,
+    "rot": 14
+   }
+  ]
+ }
+}

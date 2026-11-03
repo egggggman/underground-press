@@ -83,7 +83,14 @@ def finish_layer(page: int) -> ET.Element:
     return group, wear
 
 
-def dress(plain: Path, out: Path, seed: int) -> None:
+APPROVED_ART_ZONES = ("ad", "mini_ads")  # approved raster ad art: never redrawn, filtered or recoloured by default
+
+
+import comic
+import fontcss
+
+
+def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful", decor: dict | None = None) -> None:
     tree = ET.parse(plain)
     root = tree.getroot()
     defs = ET.fromstring(
@@ -101,6 +108,8 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         f'<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="{seed + 11}" result="n"/>'
         '<feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -18 0 0 0 13.9" result="keep"/>'
         '<feComposite in="shaped" in2="keep" operator="in"/></filter>'))
+    if decor:
+        defs.append(ET.fromstring(f'<style xmlns="{SVG_NS}">{fontcss.css("Bangers")}</style>'))
     root.insert(2, defs)
     # Locked puzzle files carry a tan page background (#e8d6a8). Lift it to white here so the
     # multiply blend lets the paper show through; source files stay untouched.
@@ -108,22 +117,43 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         href = img.get("href") or ""
         if "/art/" not in href and href.endswith(".svg") and "puzzle-dojo" in href and "golden-skin" not in href and not href.startswith("components/"):
             img.set("filter", "url(#lift)")
-        elif img.get("id") in ("ad", "mini_ads", "sewer_cap"):
-            img.set("filter", "url(#press)")  # newsprint look: wobbly edges, ink dropout
+        elif img.get("id") == "sewer_cap":
+            img.set("filter", "url(#press)")  # newsprint look for our own vector art only; approved ad art is never filtered
     for page_group in [g for g in root if g.tag == q("g") and g.get("id", "").startswith("page-")]:
         page = page_group.get("id").split("-")[1]
         children = list(page_group)
         flat = children[0]  # v1's hard-coded cream rect
         content = children[1:]
+        approved = []
+        if ad_treatment == "faithful":
+            approved = [c for c in content if c.get("id") in APPROVED_ART_ZONES]
+            content = [c for c in content if c not in approved]
         for child in children:
             page_group.remove(child)
         page_group.append(paper_layer(page))
         inked = ET.SubElement(page_group, q("g"), {"id": f"ink-{page}", "filter": "url(#bleed)", "style": "mix-blend-mode:multiply"})
         for child in content:
             inked.append(child)
+        # Locked puzzle panels are crops with open edges. Draw one consistent frame over each zone,
+        # on top of the untouched asset (sources are never modified).
+        frames = ET.SubElement(inked, q("g"), {"id": f"frames-{page}"})
+        for child in content:
+            href = child.get("href") or ""
+            if child.tag == q("image") and "assets/puzzle-dojo/" in href and href.endswith(".svg"):
+                x, y, w, h = (float(child.get(k)) for k in ("x", "y", "width", "height"))
+                ET.SubElement(frames, q("rect"), {"x": f"{x + 1.5:.1f}", "y": f"{y + 1.5:.1f}", "width": f"{w - 3:.1f}", "height": f"{h - 3:.1f}",
+                                                  "fill": "none", "stroke": "#171812", "stroke-width": "3"})
+        items = (decor or {}).get("pages", {}).get(str(page), [])
+        if items:  # original comic props, inked into the page like everything else
+            props = ET.fromstring(f'<g xmlns="{SVG_NS}" id="comic-{page}">' + comic.layer(items) + "</g>")
+            inked.append(props)
         multiply, wear = finish_layer(page)
         page_group.append(multiply)
         page_group.append(wear)
+        if approved:  # on top of every skin layer, so the art keeps its exact supplied colours
+            group = ET.SubElement(page_group, q("g"), {"id": f"approved-art-{page}"})
+            for child in approved:
+                group.append(child)
     out.parent.mkdir(parents=True, exist_ok=True)
     tree.write(out, encoding="utf-8", xml_declaration=True)
 
@@ -133,11 +163,15 @@ def main() -> int:
     parser.add_argument("assets", type=Path, help="zone-to-asset JSON map (see assets.golden.json)")
     parser.add_argument("output", type=Path, help="dressed spread SVG")
     parser.add_argument("--seed", type=int, default=1991, help="paper texture seed (change per issue)")
+    parser.add_argument("--ad-treatment", choices=("faithful", "print"), default="faithful",
+                        help="faithful: approved ad art untouched on top of the page (default); print: sits under the paper grain like the rest of the page")
+    parser.add_argument("--decor", type=Path, help="comic props JSON (see decor.issue_001.json)")
     args = parser.parse_args()
     v1 = load_v1()
     plain = args.output.with_name(args.output.stem + ".plain.svg")
     v1.compose((HERE / "layout_contract.golden.json").resolve(), args.assets.resolve(), plain.resolve(), False)
-    dress(plain, args.output, args.seed)
+    decor = json.loads(args.decor.read_text(encoding="utf-8")) if args.decor else None
+    dress(plain, args.output, args.seed, args.ad_treatment, decor)
     print(json.dumps({"plain": str(plain), "dressed": str(args.output), "seed": args.seed}, indent=2))
     return 0
 
