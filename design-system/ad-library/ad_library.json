@@ -579,11 +579,15 @@
         "sha256": "b1680b06a822a3e8adf7e585a179b2ba82e76e5798967c14425f4e74db81c591",
         "based_on": "approved_v2/snappers-market-v2.png",
         "script": "tools/repair_snappers_lettering.py",
-        "status": "proposed, NOT approved: conservative cleanup, the M's left stroke is restored from its own smear but is not a full letterform; pixel-level edit of approved art",
+        "status": "documented experiment only (HQ 2026-11-02): not promoted to the approved library; incomplete M",
         "changes": [
           "clipped 'M' of 'Market': dark-red smear recoloured to ink, olive haze restored to paper",
           "checker border: squares crowding 'The'/'s' removed (left of the claw only)"
         ]
+      },
+      "regeneration": {
+        "status": "needed: candidate replacement master, requires visual approval before promotion",
+        "brief": "regeneration/snappers-market-regeneration-brief.md"
       }
     },
     {
