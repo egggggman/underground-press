@@ -235,6 +235,7 @@ def big(ad, chef) -> str:
 
 
 def svg(w, h, title, body, fonts) -> str:
+    title = esc(title).replace("\"", "&quot;")
     return (f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {w} {h}" role="img" aria-label="{title}"><title>{title}</title>{style(fonts)}'
             '<defs><pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#17130f" opacity=".13"/></pattern>'
             '<pattern id="screen" width="3.2" height="3.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="1.6" cy="1.6" r=".75" fill="#efe2bd" opacity=".42"/></pattern>'
