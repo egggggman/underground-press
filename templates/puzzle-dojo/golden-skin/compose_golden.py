@@ -94,6 +94,13 @@ def dress(plain: Path, out: Path, seed: int) -> None:
     defs.append(ET.fromstring(
         f'<filter xmlns="{SVG_NS}" id="lift" color-interpolation-filters="sRGB">'
         '<feColorMatrix type="matrix" values="1.10 0 0 0 0  0 1.19 0 0 0  0 0 1.52 0 0  0 0 0 1 0"/></filter>'))
+    defs.append(ET.fromstring(
+        f'<filter xmlns="{SVG_NS}" id="press" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">'
+        f'<feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="{seed + 3}" result="wob"/>'
+        '<feDisplacementMap in="SourceGraphic" in2="wob" scale="2.2" xChannelSelector="R" yChannelSelector="G" result="shaped"/>'
+        f'<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="{seed + 11}" result="n"/>'
+        '<feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -18 0 0 0 13.9" result="keep"/>'
+        '<feComposite in="shaped" in2="keep" operator="in"/></filter>'))
     root.insert(2, defs)
     # Locked puzzle files carry a tan page background (#e8d6a8). Lift it to white here so the
     # multiply blend lets the paper show through; source files stay untouched.
@@ -101,6 +108,8 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         href = img.get("href") or ""
         if "/art/" not in href and href.endswith(".svg") and "puzzle-dojo" in href and "golden-skin" not in href and not href.startswith("components/"):
             img.set("filter", "url(#lift)")
+        elif img.get("id") in ("ad", "mini_ads", "sewer_cap"):
+            img.set("filter", "url(#press)")  # newsprint look: wobbly edges, ink dropout
     for page_group in [g for g in root if g.tag == q("g") and g.get("id", "").startswith("page-")]:
         page = page_group.get("id").split("-")[1]
         children = list(page_group)

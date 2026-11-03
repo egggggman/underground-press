@@ -137,31 +137,31 @@ MOTIFS = {"donut": m_donut, "washer": m_washer, "cassette": m_cassette, "lightho
 # ---------- the library: edit here ----------
 # panel: paper | green | ink | ox ; band/band2: accent colours ; lines: up to 2 short lines
 ADS = [
-    dict(id="crust-bucket", name="The Crust Bucket", tag="HOT PIE.", lines=["Rotating coupons.", "No fixed clock."], foot="CLIP & SAVE",
+    dict(id="crust-bucket", phone="207-555-0142", name="The Crust Bucket", tag="HOT PIE.", lines=["Rotating coupons.", "No fixed clock."], foot="CLIP & SAVE",
          display="slab", tagf="bebas", bodyf="serif", panel="paper", band=OX, band2=GREEN, motif="chef", variant="A", accent=OX),
-    dict(id="tonys-donuts", name="Tony’s Donuts", tag="Morning boxes.", lines=["Warm coffee.", "Open at dawn."], foot="OPEN MORNINGS",
+    dict(id="tonys-donuts", phone="207-555-0177", name="Tony’s Donuts", tag="Morning boxes.", lines=["Warm coffee.", "Open at dawn."], foot="OPEN MORNINGS",
          display="lobster", tagf="patua", bodyf="patua", panel="green", band=None, band2=None, motif="donut", variant="A", accent=MUSTARD, mc=OX),
-    dict(id="myrtle-suds", name="Myrtle St. Suds", tag="OPEN LATE.", lines=["Wash, dry, fold.", "Quarters inside."], foot="24 HOURS ON FRIDAYS",
+    dict(id="myrtle-suds", phone="207-555-0123", name="Myrtle St. Suds", tag="OPEN LATE.", lines=["Wash, dry, fold.", "Quarters inside."], foot="24 HOURS ON FRIDAYS",
          display="bungee", tagf="bungee", bodyf="serif", panel="paper", band=GREEN, band2=OX, motif="washer", variant="B", accent=GREEN, mc=OX),
-    dict(id="foghorn-tapes", name="Foghorn Tapes", tag="USED & LOUD.", lines=["Cassettes, 45s, posters.", "We buy collections."], foot="TRADE-INS WELCOME",
+    dict(id="foghorn-tapes", phone="207-555-0188", name="Foghorn Tapes", tag="USED & LOUD.", lines=["Cassettes, 45s, posters.", "We buy collections."], foot="TRADE-INS WELCOME",
          display="righteous", tagf="righteous", bodyf="serif", panel="ink", band=MUSTARD, band2=OX, motif="cassette", variant="A", accent=MUSTARD, mc=OX),
-    dict(id="harbor-lantern", name="Harbor Lantern Hardware", tag="WE KEEP THE LIGHTS ON.", lines=["Bulbs, rope, nails.", "Ask for Dot."], foot="SINCE 1948",
+    dict(id="harbor-lantern", phone="207-555-0109", name="Harbor Lantern Hardware", tag="WE KEEP THE LIGHTS ON.", lines=["Bulbs, rope, nails.", "Ask for Dot."], foot="SINCE 1948",
          display="anton", tagf="stencil", bodyf="serif", panel="paper", band=INK, band2=OX, motif="lighthouse", variant="B", accent=OX, mc=OX),
-    dict(id="gull-ladle", name="The Gull & Ladle", tag="CHOWDER.", lines=["Hot bowls. Cold harbor.", "Bring your own spoon."], foot="CASH ONLY",
+    dict(id="gull-ladle", phone="207-555-0164", name="The Gull & Ladle", tag="CHOWDER.", lines=["Hot bowls. Cold harbor.", "Bring your own spoon."], foot="CASH ONLY",
          display="rye", tagf="rye", bodyf="serif", panel="ox", band=INK, band2=MUSTARD, motif="bowl", variant="A", accent=MUSTARD, mc=MUSTARD),
-    dict(id="cassiopeia-books", name="Cassiopeia Books", tag="Used. Odd. Mapped.", lines=["Charts, atlases, paperbacks.", "Browse till the fog lifts."], foot="STAIRS TO THE LEFT",
+    dict(id="cassiopeia-books", phone="207-555-0131", name="Cassiopeia Books", tag="Used. Odd. Mapped.", lines=["Charts, atlases, paperbacks.", "Browse till the fog lifts."], foot="STAIRS TO THE LEFT",
          display="fell", tagf="fell", bodyf="fell", panel="paper", band=GREEN, band2=MUSTARD, motif="book", variant="B", accent=GREEN, mc=OX),
-    dict(id="quality-cuts", name="Quality Cuts", tag="TRIM • SHAVE • GOSSIP", lines=["Walk-ins welcome.", "Ask about the ferry."], foot="OLD PORT",
+    dict(id="quality-cuts", phone="207-555-0156", name="Quality Cuts", tag="TRIM • SHAVE • GOSSIP", lines=["Walk-ins welcome.", "Ask about the ferry."], foot="OLD PORT",
          display="limelight", tagf="anton", bodyf="serif", panel="green", band=None, band2=None, motif="barber", variant="A", accent=MUSTARD, mc=OX),
-    dict(id="ferry-bait", name="Ferry Fare Bait", tag="Live bait. Hot coffee.", lines=["Worms, minnows, doughnuts.", "Dock-side at 5 a.m."], foot="NO REFUNDS ON FISH",
+    dict(id="ferry-bait", phone="207-555-0120", name="Ferry Fare Bait", tag="Live bait. Hot coffee.", lines=["Worms, minnows, doughnuts.", "Dock-side at 5 a.m."], foot="NO REFUNDS ON FISH",
          display="pirata", tagf="pirata", bodyf="serif", panel="paper", band=OX, band2=GREEN, motif="fish", variant="A", accent=OX, mc=GREEN),
-    dict(id="alice-alterations", name="Alice’s Alterations", tag="Hems, zips & mending.", lines=["Same-day if you ask nicely.", "Buttons by the jar."], foot="MYRTLE STREET",
+    dict(id="alice-alterations", phone="207-555-0195", name="Alice’s Alterations", tag="Hems, zips & mending.", lines=["Same-day if you ask nicely.", "Buttons by the jar."], foot="MYRTLE STREET",
          display="playball", tagf="playball", bodyf="serif", panel="ox", band=None, band2=None, motif="thimble", variant="B", accent=CREAM, mc=MUSTARD),
-    dict(id="gull-taxi", name="Seagull Cab Co.", tag="RIDES BY WING.", lines=["Fares as the crow flies.", "Never a straight line."], foot="CALL THE HARBOR",
+    dict(id="gull-taxi", phone="207-555-0100", name="Seagull Cab Co.", tag="RIDES BY WING.", lines=["Fares as the crow flies.", "Never a straight line."], foot="CALL THE HARBOR",
          display="stencil", tagf="stencil", bodyf="serif", panel="ink", band=MUSTARD, band2=OX, motif="gull", variant="B", accent=MUSTARD, mc=OX),
 ]
 
-PANELS = {"paper": ("#f3e6c4", INK, OX), "green": (GREEN, CREAM, MUSTARD), "ink": ("#211c16", CREAM, MUSTARD), "ox": (OX, CREAM, MUSTARD)}
+PANELS = {"paper": ("#ffffff", INK, OX), "green": (GREEN, CREAM, MUSTARD), "ink": ("#211c16", CREAM, MUSTARD), "ox": (OX, CREAM, MUSTARD)}
 
 
 def esc(t: str) -> str:
@@ -187,7 +187,7 @@ def mini(ad, chef) -> str:
     tx, tw = (14, 140) if A else (84, 134)
     mx = 190 if A else 40
     ns = fit(ad["display"], ad["name"], tw, 26)
-    parts = [f'<rect width="236" height="104" fill="{fill}" stroke="{INK}" stroke-width="3"/><rect width="236" height="104" fill="url(#dots)" opacity="{.6 if ad["panel"] != "paper" else 1}"/>',
+    parts = [f'<rect width="236" height="104" fill="{fill}" stroke="{INK}" stroke-width="3"/><rect width="236" height="104" fill="url({"#dots" if ad["panel"] == "paper" else "#screen"})"/>',
              f'<rect x="5" y="5" width="226" height="94" fill="none" stroke="{accent if ad["panel"] != "paper" else ad["accent"]}" stroke-width="1.6" stroke-dasharray="6 3"/>']
     if ad["band"]:
         parts.append(f'<path d="M{tx - 8} 12L{tx + tw + 4} 9 {tx + tw + 8} 34 {tx - 8} 38z" fill="{ad["band"]}"/>')
@@ -200,7 +200,10 @@ def mini(ad, chef) -> str:
     for i, line in enumerate(ad["lines"][:2]):
         s = fit(ad["bodyf"], line, tw, 12)
         parts.append(f'<text x="{tx}" y="{70 + i * 14}" font-family="{css(ad["bodyf"])}" font-size="{s:.1f}" fill="{text}">{esc(line)}</text>')
-    parts.append(f'<text x="{tx}" y="97" font-family="{MONO}" font-size="6.5" font-weight="700" fill="{accent if ad["panel"] != "paper" else INK}">ADVERTISEMENT • {esc(ad["foot"])}</text>')
+    foot = f'TEL. {ad["phone"]}'
+    fs = 8
+    parts.append(f'<text x="{tx}" y="97" font-family="{MONO}" font-size="{fs:.1f}" font-weight="700" fill="{accent if ad["panel"] != "paper" else INK}">{esc(foot)}</text>')
+    parts.append(f'<text x="226" y="16" text-anchor="end" font-family="{MONO}" font-size="4.6" letter-spacing=".6" fill="{text}" opacity=".7">ADVERTISEMENT</text>')
     parts.append(art(ad, chef, mx, 62, 0.62 if ad["motif"] != "chef" else 0.62))
     return "".join(parts)
 
@@ -212,7 +215,7 @@ def big(ad, chef) -> str:
     acc = accent if dark else ad["accent"]
     name_fill = CREAM if (ad["band"] in (OX, GREEN, INK) or (not ad["band"] and dark)) else INK
     ns = fit(ad["display"], ad["name"], 330, 46)
-    p = [f'<rect x="2" y="2" width="472" height="276" fill="{fill if dark else PAPER}" stroke="{INK}" stroke-width="4"/><rect x="12" y="12" width="452" height="256" fill="url(#dots)" stroke="{acc}" stroke-width="2.5" stroke-dasharray="9 5"/>']
+    p = [f'<rect x="2" y="2" width="472" height="276" fill="{fill}" stroke="{INK}" stroke-width="4"/><rect x="12" y="12" width="452" height="256" fill="url({"#dots" if not dark else "#screen"})" stroke="{acc}" stroke-width="2.5" stroke-dasharray="9 5"/>']
     if ad["band"]:
         p.append(f'<path d="M16 20L300 14 456 22 440 56 22 76z" fill="{ad["band"]}"/>')
         if ad["band2"]:
@@ -227,13 +230,14 @@ def big(ad, chef) -> str:
         s = fit(ad["bodyf"], line, tw, 19)
         p.append(f'<text x="{tx}" y="{150 + i * 26}" font-family="{css(ad["bodyf"])}" font-size="{s:.1f}" fill="{text}">{esc(line)}</text>')
     p.append(f'<rect x="16" y="236" width="444" height="28" fill="{ad["band2"] or acc}" stroke="{INK}" stroke-width="2"/>'
-             f'<text x="238" y="255" text-anchor="middle" font-family="{MONO}" font-size="11" font-weight="700" letter-spacing="1.5" fill="{CREAM if (ad["band2"] or acc) in (OX, GREEN, INK) else INK}">ADVERTISEMENT • {esc(ad["foot"])}</text>')
+             f'<text x="238" y="255" text-anchor="middle" font-family="{MONO}" font-size="11" font-weight="700" letter-spacing="1.5" fill="{CREAM if (ad["band2"] or acc) in (OX, GREEN, INK) else INK}">ADVERTISEMENT • {esc(ad["foot"])} • {ad["phone"]}</text>')
     return "".join(p)
 
 
 def svg(w, h, title, body, fonts) -> str:
     return (f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {w} {h}" role="img" aria-label="{title}"><title>{title}</title>{style(fonts)}'
             '<defs><pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r=".8" fill="#17130f" opacity=".13"/></pattern>'
+            '<pattern id="screen" width="3.2" height="3.2" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><circle cx="1.6" cy="1.6" r=".75" fill="#efe2bd" opacity=".42"/></pattern>'
             '<pattern id="hatch" width="4" height="4" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><path d="M0 0v4" stroke="#17130f" stroke-width=".8" opacity=".45"/></pattern>'
             '<linearGradient id="fy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".08" stop-color="#fff"/><stop offset=".78" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
             '<linearGradient id="fx" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".07" stop-color="#fff"/><stop offset=".93" stop-color="#fff"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>'
