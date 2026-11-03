@@ -164,6 +164,28 @@ ADS = [
 PANELS = {"paper": ("#ffffff", INK, OX), "green": (GREEN, CREAM, MUSTARD), "ink": ("#211c16", CREAM, MUSTARD), "ox": (OX, CREAM, MUSTARD)}
 
 
+def load_art(path: Path):
+    """Painted ad art -> (base64 PNG, aspect). Paper-coloured background is knocked out so the page paper shows through."""
+    from PIL import Image
+    import io
+    import numpy as np
+
+    im = Image.open(path).convert("RGB")
+    im.thumbnail((640, 640))
+    a = np.asarray(im).astype(float)
+    corners = np.concatenate([a[:6, :6].reshape(-1, 3), a[:6, -6:].reshape(-1, 3), a[-6:, :6].reshape(-1, 3), a[-6:, -6:].reshape(-1, 3)])
+    bg = np.median(corners, axis=0)
+    dist = np.sqrt(((a - bg) ** 2).sum(axis=2))
+    alpha = np.clip((dist - 22) / 38, 0, 1)  # soft edge between paper and ink
+    out = Image.fromarray(np.dstack([a, alpha * 255]).astype("uint8"), "RGBA")
+    buf = io.BytesIO()
+    out.save(buf, "PNG", optimize=True)
+    return base64.b64encode(buf.getvalue()).decode(), im.height / im.width
+
+
+ART: dict = {}  # ad id -> (base64 png, aspect), filled by build() from the issue's ad-art folder
+
+
 def esc(t: str) -> str:
     return t.replace("&", "&amp;")
 
@@ -173,6 +195,13 @@ def css(key: str) -> str:
 
 
 def art(ad, chef, x, y, scale):
+    if ad["id"] in ART:
+        data, ratio = ART[ad["id"]]
+        box_w, box_h = 112 * scale, 90 * scale
+        w = min(box_w, box_h / ratio)
+        h = w * ratio
+        return (f'<image x="{x - w / 2:.1f}" y="{y - h / 2:.1f}" width="{w:.1f}" height="{h:.1f}" preserveAspectRatio="xMidYMid meet" '
+                f'href="data:image/png;base64,{data}"/>')
     if ad["motif"] == "chef":
         w = 120 * scale
         return (f'<g mask="url(#my)"><image mask="url(#mx)" x="{x - w / 2:.1f}" y="{y - w * .26:.1f}" width="{w:.1f}" height="{w * 475 / 935:.1f}" preserveAspectRatio="xMidYMid slice" '
@@ -222,7 +251,7 @@ def big(ad, chef) -> str:
             p.append(f'<path d="M110 66L460 44 456 80 90 86z" fill="{ad["band2"]}"/>')
     p.append(f'<text x="28" y="62" font-family="{css(ad["display"])}" font-size="{ns:.1f}" fill="{name_fill}" stroke="{INK}" stroke-width="{1.3 if ad["band"] else 0}" paint-order="stroke" transform="rotate(-2 28 62)">{esc(ad["name"])}</text>')
     A = ad["variant"] == "A"
-    ax, tx, tw = (122, 254, 196) if A else (352, 26, 236)
+    ax, tx, tw = (122, 254, 196) if A else (356, 26, 214)
     p.append(art(ad, chef, ax, 160, 1.9 if ad["motif"] != "chef" else 1.9))
     tgs = fit(ad["tagf"], ad["tag"], tw, 40)
     p.append(f'<text x="{tx}" y="124" font-family="{css(ad["tagf"])}" font-size="{tgs:.1f}" fill="{acc if dark else INK}">{esc(ad["tag"])}</text>')
@@ -254,7 +283,14 @@ def by_id(i):
     return next(a for a in ADS if a["id"] == i)
 
 
-def build(chef_source: Path, outdir: Path, rotation: Path | None) -> None:
+def build(chef_source: Path, outdir: Path, rotation: Path | None, art_dir: Path | None = None) -> None:
+    if art_dir and art_dir.is_dir():
+        for ad in ADS:
+            for ext in ("png", "jpg", "jpeg", "webp"):
+                f = art_dir / f"{ad['id']}.{ext}"
+                if f.exists():
+                    ART[ad["id"]] = load_art(f)
+                    break
     chef = re.search(r"base64,([A-Za-z0-9+/=]+)", chef_source.read_text()).group(1)
     (outdir / "ads").mkdir(parents=True, exist_ok=True)
     for ad in ADS:
@@ -274,9 +310,10 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("chef_source", type=Path)
     ap.add_argument("outdir", type=Path)
+    ap.add_argument("--art-dir", type=Path, help="folder of painted art named <ad-id>.png (optional; falls back to the vector motif)")
     ap.add_argument("--rotation", type=Path, help='JSON like {"big": "crust-bucket", "mini": ["myrtle-suds", "tonys-donuts"]}')
     a = ap.parse_args()
-    build(a.chef_source, a.outdir, a.rotation)
+    build(a.chef_source, a.outdir, a.rotation, a.art_dir)
     return 0
 
 

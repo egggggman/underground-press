@@ -32,7 +32,7 @@ python build_ads.py <chef art> components            # sewer cap
 python ad_library.py <chef art> components --rotation ads_rotation.issue_NNN.json
 ```
 
-This writes `components/ads/*` (the whole library) plus `components/crust-bucket.svg` and `components/mini-ads.svg` (the two slots `assets.golden.json` points at). To add an ad, add an entry to `ADS` with its fonts, panel colour, motif and copy. Business names in the library are drafts and need editorial sign-off. Fonts are embedded subsets of open (SIL OFL) typefaces, licences in `fonts/`.
+This writes `components/ads/*` (the whole library) plus `components/crust-bucket.svg` and `components/mini-ads.svg` (the two slots `assets.golden.json` points at). Painted art: drop `<ad-id>.png` files in the issue's `ad-art/` folder and add `--art-dir` to the command; see `ads/ART-PROMPTS.md` for ready-made prompts. To add an ad, add an entry to `ADS` with its fonts, panel colour, motif and copy. Business names in the library are drafts and need editorial sign-off. Fonts are embedded subsets of open (SIL OFL) typefaces, licences in `fonts/`.
 
 ## Layout contract v1.2
 
