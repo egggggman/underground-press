@@ -90,7 +90,35 @@ def burst(x, y, r=30, rot=-6, text="POW!", fill=RED, ink=CREAM, spikes=11, **_):
     return _g(x, y, rot, body)
 
 
-MAKERS = {"shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
+def pencil(x, y, r=40, rot=-35, **_):
+    """Detailed comic pencil, length about 2r, centred on (x, y)."""
+    L, w = r * 2.0, r * 0.3
+    x0 = -L / 2
+    body = (
+        f'<rect x="{x0:.1f}" y="{-w / 2:.1f}" width="{L * .1:.1f}" height="{w:.1f}" rx="{w * .35:.1f}" fill="#e8858f" stroke="{INK}" stroke-width="{SW}"/>'
+        f'<rect x="{x0 + L * .1:.1f}" y="{-w / 2:.1f}" width="{L * .13:.1f}" height="{w:.1f}" fill="#b9bcc2" stroke="{INK}" stroke-width="{SW}"/>'
+        f'<path d="M{x0 + L * .145:.1f} {-w / 2:.1f}v{w:.1f}M{x0 + L * .185:.1f} {-w / 2:.1f}v{w:.1f}" stroke="{INK}" stroke-width="1.2"/>'
+        f'<rect x="{x0 + L * .23:.1f}" y="{-w / 2:.1f}" width="{L * .5:.1f}" height="{w:.1f}" fill="{CHEESE}" stroke="{INK}" stroke-width="{SW}"/>'
+        f'<path d="M{x0 + L * .25:.1f} {-w * .18:.1f}h{L * .46:.1f}" stroke="#fff0a8" stroke-width="2.2" stroke-linecap="round"/>'
+        f'<path d="M{x0 + L * .25:.1f} {w * .3:.1f}h{L * .46:.1f}" stroke="#b07b12" stroke-width="1.6"/>'
+        f'<path d="M{x0 + L * .73:.1f} {-w / 2:.1f}L{x0 + L:.1f} 0L{x0 + L * .73:.1f} {w / 2:.1f}z" fill="#e8c48a" stroke="{INK}" stroke-width="{SW}" stroke-linejoin="round"/>'
+        f'<path d="M{x0 + L * .9:.1f} {-w * .17:.1f}L{x0 + L:.1f} 0L{x0 + L * .9:.1f} {w * .17:.1f}z" fill="{INK}"/>'
+    )
+    return _g(x, y, rot, body)
+
+
+def bulb(x, y, r=12, rot=0, **_):
+    """Idea bulb with rays."""
+    rays = "".join(f'<path d="M0 {-r * 1.35:.1f}v{-r * .45:.1f}" stroke="{INK}" stroke-width="2" stroke-linecap="round" transform="rotate({a})"/>'
+                   for a in (-70, -35, 0, 35, 70))
+    body = (f'{rays}<circle r="{r}" fill="#ffe27a" stroke="{INK}" stroke-width="{SW}"/>'
+            f'<path d="M{-r * .45:.1f} {-r * .3:.1f} q{r * .1:.1f} {-r * .35:.1f} {r * .4:.1f} {-r * .4:.1f}" fill="none" stroke="#fffbe0" stroke-width="2.2" stroke-linecap="round"/>'
+            f'<rect x="{-r * .5:.1f}" y="{r * .85:.1f}" width="{r:.1f}" height="{r * .5:.1f}" rx="2" fill="#9a9ca3" stroke="{INK}" stroke-width="1.8"/>'
+            f'<path d="M{-r * .25:.1f} {r * .3:.1f}l{r * .25:.1f} {-r * .35:.1f}l{r * .25:.1f} {r * .35:.1f}" fill="none" stroke="{RED}" stroke-width="1.6"/>')
+    return _g(x, y, rot, body)
+
+
+MAKERS = {"pencil": pencil, "bulb": bulb, "shuriken": shuriken, "pizza": pizza, "canister": canister, "sparkle": sparkle, "speed": speed, "burst": burst}
 
 
 def layer(items: list[dict]) -> str:

@@ -15,6 +15,7 @@ from fontcss import HEAD, SERIF, SERIF_I, STRIP, style
 DISPLAY = HEAD
 SANS = "'Arial Narrow',Arial,Helvetica,sans-serif"
 MONO = "'Courier New',Courier,monospace"
+HERE = Path(__file__).resolve().parent
 INK, RED, GREEN, CREAM = "#171812", "#8c2118", "#173f32", "#f4e8c6"
 
 
@@ -118,22 +119,30 @@ def last_issue_solutions() -> str:
 def puzzle_tip() -> str:
     w, h = 230, 130
     b = frame(w, h, "PUZZLE TIP", GREEN, 0, 21)
-    b += (f'<text font-family="{SERIF}" font-size="13.5" fill="{INK}">'
-          f'<tspan x="18" y="62">Start with the surest answer.</tspan><tspan x="18" y="79">Crossing letters turn guesses</tspan>'
-          f'<tspan x="18" y="96">into evidence.</tspan></text>'
-          f'<path d="M176 100l12-9 12 9-4 14h-16z" fill="none" stroke="{RED}" stroke-width="2.6"/>'
-          f'<text x="18" y="114" font-family="{STRIP}" font-size="12" letter-spacing="1" fill="{RED}">PENCIL FIRST. INK LATER.</text>')
+    b += (f'<text font-family="{SERIF}" font-size="11.8" fill="{INK}">'
+          f'<tspan x="16" y="62">Start with the surest answer.</tspan><tspan x="16" y="77">Crossing letters turn guesses</tspan>'
+          f'<tspan x="16" y="92">into evidence.</tspan></text>'
+          f'<text x="16" y="116" font-family="{STRIP}" font-size="12" letter-spacing="1" fill="{RED}">PENCIL FIRST. INK LATER.</text>')
+    # detailed pencil + idea bulb on the right
+    b += comic.pencil(194, 96, 34, -38) + comic.bulb(200, 68, 10.5)
     return wrap(w, h, "Puzzle Tip", b)
 
 
 def seagullotine_says() -> str:
+    import base64
     w, h = 230, 130
+    png = HERE.parents[2] / "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png"
+    uri = base64.b64encode(png.read_bytes()).decode()
     b = frame(w, h, "SEAGULLOTINE SAYS", RED, 0, 21)
-    b += (f'<text font-family="{SERIF_I}" font-size="14" fill="{INK}">'
-          f'<tspan x="18" y="62">“A blank square isn\'t empty.</tspan><tspan x="18" y="79">It\'s waiting for you to make</tspan>'
-          f'<tspan x="18" y="96">the first move.”</tspan></text>'
-          f'<path d="M18 108q20-7 40 0t40 0" fill="none" stroke="{GREEN}" stroke-width="2"/>'
-          f'<text x="212" y="114" text-anchor="end" font-family="{STRIP}" font-size="12" letter-spacing="1" fill="{GREEN}">CLIPPED FOR LATER</text>')
+    b += (f'<text font-family="{SERIF_I}" font-size="12" fill="{INK}">'
+          f'<tspan x="16" y="60">“A blank square</tspan><tspan x="16" y="75">isn\'t empty. It\'s waiting</tspan>'
+          f'<tspan x="16" y="90">for you to make the</tspan><tspan x="16" y="105">first move.”</tspan></text>'
+          f'<text x="16" y="118" font-family="{STRIP}" font-size="11.5" letter-spacing="1" fill="{GREEN}">CLIPPED FOR LATER</text>')
+    # window onto the paper's own Seagullotine art (full PNG embedded unchanged; viewBox does the framing)
+    x0, y0, ww, hh = 150, 49, 66, 72
+    b += (f'<svg x="{x0}" y="{y0}" width="{ww}" height="{hh}" viewBox="130 170 510 556" preserveAspectRatio="xMidYMid slice">'
+          f'<image width="1536" height="1024" href="data:image/png;base64,{uri}"/></svg>'
+          f'<rect x="{x0}" y="{y0}" width="{ww}" height="{hh}" fill="none" stroke="{INK}" stroke-width="2.4"/>')
     return wrap(w, h, "Seagullotine quote", b)
 
 

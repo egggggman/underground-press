@@ -67,7 +67,7 @@
     },
     "puzzle_tip": {
       "path": "templates/puzzle-dojo/golden-skin/components/puzzle-tip.svg",
-      "sha256": "93faa922815892ae44d47f5ea2f91eff3fbe06fa1a1a5c45a469623e57532426"
+      "sha256": "11348229bf0a319fd08d9f16b88aa26f73dbcbc0eab58daf4270df20483c0442"
     },
     "scorecard": {
       "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
@@ -75,7 +75,7 @@
     },
     "seagullotine": {
       "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-says.svg",
-      "sha256": "b5dc73683e656bcb528bc949befa2a63c2c7a864c6e909a67b8d37103f60747b"
+      "sha256": "b590bf8aead31afd52db209c27e4cda646ba0fea8191c9c772b77e645ba8027b"
     },
     "sewer_cap": {
       "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",
