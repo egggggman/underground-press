@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 from functools import lru_cache
 from pathlib import Path
@@ -47,7 +48,7 @@ def load_library() -> dict:
     return {a["id"]: a for a in data["ads"]}
 
 
-def cell(ad: dict, x: float, y: float, w: float, h: float, pad: float = 7) -> tuple[str, set]:
+def cell(ad: dict, x: float, y: float, w: float, h: float, pad: float = 7, base: Path | None = None) -> tuple[str, set]:
     """One matted frame holding one approved ad, fitted proportionally."""
     illustration_only = ad["lettering"] == "illustration-only"
     strip = 24 if illustration_only else 0
@@ -56,15 +57,18 @@ def cell(ad: dict, x: float, y: float, w: float, h: float, pad: float = 7) -> tu
     iw = min(box_w, box_h / ratio)
     ih = iw * ratio
     ix, iy = x + (w - iw) / 2, y + pad + (box_h - ih) / 2
-    data = base64.b64encode((LIB / ad["file"]).read_bytes()).decode()
-    parts = [f'<rect x="{x + 1.5}" y="{y + 1.5}" width="{w - 3}" height="{h - 3}" fill="none" stroke="{INK}" stroke-width="3"/>',
+    data = base64.b64encode(((base / "design-system/ad-library" / ad["file"]).resolve() if base else LIB / ad["file"]).read_bytes()).decode()
+    # Ink matte fills the cell edge to edge so the frame lines up with every other box on the page;
+    # the approved art sits on it unchanged (never cropped, stretched or filtered).
+    parts = [f'<rect x="{x + 1.5}" y="{y + 1.5}" width="{w - 3}" height="{h - 3}" fill="{INK}" stroke="{INK}" stroke-width="3"/>',
+             f'<rect x="{x + 5}" y="{y + 5}" width="{w - 10}" height="{h - 10}" fill="none" stroke="#c9b27c" stroke-width="0.8"/>',
              f'<image data-ad="{ad["id"]}" data-sha256="{ad["sha256"]}" x="{ix:.1f}" y="{iy:.1f}" width="{iw:.1f}" height="{ih:.1f}" '
              f'preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,{data}"/>']
     fonts = set()
     if illustration_only:
         family, fname, css, label = NAME_FONTS[ad["id"]]
         size = fit_size(fname, label, w - 40, 20)
-        parts.append(f'<text x="{x + w / 2}" y="{y + h - pad - 6}" text-anchor="middle" font-family="{css}" font-size="{size:.1f}" fill="{INK}">{label}</text>')
+        parts.append(f'<text x="{x + w / 2}" y="{y + h - pad - 6}" text-anchor="middle" font-family="{css}" font-size="{size:.1f}" fill="#f4e8c6">{label}</text>')
         fonts.add((family, fname))
     return "".join(parts), fonts
 
@@ -89,6 +93,12 @@ def build(assign: Path, outdir: Path) -> None:
         part, f = cell(lib[ad_id], 0, i * 128, 260, 120, pad=6)
         parts.append(part)
         allfonts |= f
+    # Seagullotine editorial panel (the paper's own art): same ink matte so the art panels read as one family.
+    sg = {"id": "seagullotine-panel", "file": "../../issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
+          "sha256": hashlib.sha256((HERE.parents[2] / "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png").read_bytes()).hexdigest(),
+          "width_px": 1536, "height_px": 1024, "lettering": "complete"}
+    sg_body, _ = cell(sg, 0, 0, 476, 248, pad=8, base=HERE.parents[2])
+    (outdir / "seagullotine-panel.svg").write_text(wrap(476, 248, "Seagullotine editorial panel", sg_body, set()))
     (outdir / "mini-slot.svg").write_text(wrap(260, 248, "Two advertisements", "".join(parts), allfonts))
     print(outdir / "ad-slot.svg", outdir / "mini-slot.svg")
 

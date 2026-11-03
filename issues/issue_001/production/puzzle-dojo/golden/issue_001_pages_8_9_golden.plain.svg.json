@@ -7,7 +7,7 @@
   "assets": {
     "ad": {
       "path": "templates/puzzle-dojo/golden-skin/components/ad-slot.svg",
-      "sha256": "e7d2ae556ffbee6d3778367174944cd200e54329b0f070c3ff35466894e73b0a"
+      "sha256": "943c62b0e80e50478d61a92eb20b709b136c370dada09a7e5a52459b5d5c2a52"
     },
     "cipher_corner": {
       "path": "templates/puzzle-dojo/golden-skin/components/cipher-corner.svg",
@@ -31,7 +31,7 @@
     },
     "mini_ads": {
       "path": "templates/puzzle-dojo/golden-skin/components/mini-slot.svg",
-      "sha256": "25551269c56d0507be7d4ce7bc6b1d2e64a6f18062f57b037c600a0556acef4f"
+      "sha256": "d1c0170faceb0d6899aa9483b1cf0a67ea27345f132578f6ec26c753e8ac51c3"
     },
     "neighborhood_search": {
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
@@ -54,8 +54,8 @@
       "sha256": "046e48a1954713f34285ae3985e1a5d978a2d6904dce39dedad3c884fb8bd631"
     },
     "page_9_seagullotine": {
-      "path": "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
-      "sha256": "ffedc48bf4eae625daf1df85edefd2fc87a31b9129750f2c72c9772e98773759"
+      "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-panel.svg",
+      "sha256": "bca1f3bd7bea55524f2dc52811fb48136423ae6f245f8d2ba6d17f82a65025a3"
     },
     "pizza_cipher": {
       "path": "issues/issue_001/assets/puzzle-dojo/pizza-cipher.svg",

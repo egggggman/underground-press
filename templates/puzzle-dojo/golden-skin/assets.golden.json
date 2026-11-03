@@ -13,7 +13,7 @@
   "page_9_issue_banner": "components/masthead-p9.svg",
   "puzzle_bench": "components/puzzle-bench.svg",
   "cipher_corner": "components/cipher-corner.svg",
-  "page_9_seagullotine": "../../../issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
+  "page_9_seagullotine": "components/seagullotine-panel.svg",
   "mini_ads": "components/mini-slot.svg",
   "memory_fragment": "components/portland-memory.svg",
   "last_issue_solutions": "components/last-solutions.svg",
