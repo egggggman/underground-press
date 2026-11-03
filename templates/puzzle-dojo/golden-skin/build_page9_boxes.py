@@ -9,7 +9,9 @@ import argparse
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-DISPLAY = "Impact,Haettenschweiler,'Arial Narrow Bold','Liberation Sans Narrow',sans-serif"
+from fontcss import HEAD, STRIP, style
+
+DISPLAY = HEAD
 SERIF = "Georgia,'Times New Roman',serif"
 SANS = "'Arial Narrow',Arial,Helvetica,sans-serif"
 MONO = "'Courier New',Courier,monospace"
@@ -23,7 +25,7 @@ def frame(w: int, h: int, title: str, bar: str, tw: int) -> str:
         f'<rect x="7" y="7" width="{w - 14}" height="{h - 14}" fill="none" stroke="{INK}" stroke-width="0.8"/>'
         f'<rect x="7" y="7" width="{w - 14}" height="34" fill="{bar}"/>'
         f'<path d="M7 41H{w - 7}" stroke="{INK}" stroke-width="2"/>'
-        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="23" fill="{CREAM}" '
+        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="25" fill="{CREAM}" letter-spacing="1" '
         f'textLength="{tw}" lengthAdjust="spacingAndGlyphs">{escape(title)}</text>'
         f'<path d="M{w - 26} 14l2.6 6.2 6.6.6-5 4.4 1.6 6.6-5.8-3.6-5.8 3.6 1.6-6.6-5-4.4 6.6-.6z" fill="{CREAM}" opacity=".85"/>'
     )
@@ -31,7 +33,7 @@ def frame(w: int, h: int, title: str, bar: str, tw: int) -> str:
 
 def wrap(w: int, h: int, title: str, body: str) -> str:
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img"><title>{escape(title)}</title>{body}</svg>\n')
+            f'role="img"><title>{escape(title)}</title>{style("Anton", "Bebas Neue")}{body}</svg>\n')
 
 
 def puzzle_bench() -> str:
@@ -41,16 +43,16 @@ def puzzle_bench() -> str:
           f'<tspan x="26" y="78">Sharpen a pencil. Trade a clue. Leave the bench</tspan>'
           f'<tspan x="26" y="101">ready for the next solver.</tspan></text>')
     b += f'<path d="M26 113H{w - 26}" stroke="{INK}" stroke-width="1.2"/>'
-    b += (f'<text x="26" y="147" font-family="{DISPLAY}" font-size="14" fill="{INK}" letter-spacing=".6">NAME</text>'
+    b += (f'<text x="26" y="147" font-family="{STRIP}" font-size="18.2" fill="{INK}" letter-spacing=".6">NAME</text>'
           f'<path d="M72 148H250" stroke="{INK}" stroke-width="1" stroke-dasharray="3 3"/>'
-          f'<text x="266" y="147" font-family="{DISPLAY}" font-size="14" fill="{INK}" letter-spacing=".6">TIME</text>'
+          f'<text x="266" y="147" font-family="{STRIP}" font-size="18.2" fill="{INK}" letter-spacing=".6">TIME</text>'
           f'<path d="M306 148H{w - 26}" stroke="{INK}" stroke-width="1" stroke-dasharray="3 3"/>'
-          f'<text x="26" y="184" font-family="{DISPLAY}" font-size="14" fill="{INK}" letter-spacing=".6">STUCK ON</text>'
+          f'<text x="26" y="184" font-family="{STRIP}" font-size="18.2" fill="{INK}" letter-spacing=".6">STUCK ON</text>'
           f'<path d="M100 185H{w - 26}" stroke="{INK}" stroke-width="1" stroke-dasharray="3 3"/>')
     # red rubber stamp band, as in the paper's classifieds
     b += (f'<path d="M26 202H{w - 26}" stroke="{INK}" stroke-width="1.2"/>'
           f'<rect x="26" y="212" width="258" height="26" fill="{RED}"/>'
-          f'<text x="155" y="231" text-anchor="middle" font-family="{DISPLAY}" font-size="14.5" fill="{CREAM}" '
+          f'<text x="155" y="231" text-anchor="middle" font-family="{STRIP}" font-size="18.9" fill="{CREAM}" '
           f'textLength="238" lengthAdjust="spacingAndGlyphs">PASS THE PAPER. KEEP THE ANSWERS COVERED.</text>'
           f'<path d="M300 225H{w - 26}" stroke="{RED}" stroke-width="5"/>')
     return wrap(w, h, "Puzzle Bench", b)
@@ -72,9 +74,9 @@ def cipher_corner() -> str:
           f'<path d="M{cx} {cy}L{cx + 14} {cy - 16}" stroke="{RED}" stroke-width="3"/>'
           f'<circle cx="{cx}" cy="{cy}" r="3.5" fill="{RED}"/>')
     b += (f'<rect x="20" y="152" width="124" height="34" fill="none" stroke="{RED}" stroke-width="2"/>'
-          f'<text x="82" y="177" text-anchor="middle" font-family="{MONO}" font-size="16" font-weight="bold" fill="{RED}" textLength="104" lengthAdjust="spacingAndGlyphs">S → P   K → H</text>')
+          f'<text x="82" y="177" text-anchor="middle" font-family="{MONO}" font-size="16" font-weight="bold" fill="{RED}">S → P   K → H</text>')
     b += (f'<path d="M20 206H{w - 20}" stroke="{INK}" stroke-width="1.2"/>'
-          f'<text x="{w / 2}" y="228" text-anchor="middle" font-family="{DISPLAY}" font-size="13" fill="{INK}" '
+          f'<text x="{w / 2}" y="228" text-anchor="middle" font-family="{STRIP}" font-size="16.9" fill="{INK}" '
           f'textLength="214" lengthAdjust="spacingAndGlyphs">KEEP SPACES. CHECK THE WHOLE PHRASE.</text>')
     return wrap(w, h, "Cipher Corner", b)
 
@@ -87,7 +89,7 @@ def portland_memory() -> str:
     b += (f'<path d="M20 22l436-8 2 168-434 6z" fill="#fff6dc" fill-opacity=".55" stroke="{INK}" '
           f'stroke-width="1.4" stroke-dasharray="7 4"/>'
           f'<rect x="20" y="22" width="436" height="26" fill="{RED}" transform="rotate(-1 20 22)"/>')
-    b += (f'<text x="34" y="41" font-family="{DISPLAY}" font-size="15" fill="{CREAM}" letter-spacing=".8" '
+    b += (f'<text x="34" y="41" font-family="{STRIP}" font-size="19.5" fill="{CREAM}" letter-spacing=".8" '
           f'textLength="300" lengthAdjust="spacingAndGlyphs" transform="rotate(-1 20 22)">PORTLAND MEMORY • HEARD NEAR THE STAIRS</text>')
     b += (f'<text font-family="{SERIF}" font-size="18" font-style="italic" fill="{INK}">'
           f'<tspan x="34" y="84">“On wet mornings, the first puzzle copy always</tspan>'
@@ -109,7 +111,7 @@ def last_issue_solutions() -> str:
           f'<tspan x="20" y="70">Issue #1 opens the dojo.</tspan><tspan x="20" y="91">There is no prior answer key.</tspan>'
           f'<tspan x="20" y="120">Issue #1 solutions return</tspan><tspan x="20" y="141">with Issue #2.</tspan></text>')
     b += (f'<path d="M20 156H{w - 20}" stroke="{INK}" stroke-width="1.2" stroke-dasharray="4 3"/>'
-          f'<text x="{w / 2}" y="180" text-anchor="middle" font-family="{DISPLAY}" font-size="13" fill="{GREEN}" '
+          f'<text x="{w / 2}" y="180" text-anchor="middle" font-family="{STRIP}" font-size="16.9" fill="{GREEN}" '
           f'textLength="192" lengthAdjust="spacingAndGlyphs">CLIP • SAVE • CHECK NEXT TIME</text>')
     return wrap(w, h, "Last Issue Solutions", b)
 
