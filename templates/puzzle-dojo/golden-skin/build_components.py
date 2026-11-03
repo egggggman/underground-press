@@ -12,10 +12,9 @@ import json
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from fontcss import HEAD, STRIP, style
+from fontcss import HEAD, SERIF, SERIF_I, STRIP, style
 
 DISPLAY = HEAD
-SERIF = "Georgia,'Times New Roman',serif"
 SANS = STRIP
 MOTTO = "WE’RE ALL LOOKING FOR A PLACE TO LAND"
 
@@ -30,22 +29,22 @@ def seal(cx: float, cy: float, r: float) -> str:
 
 
 def masthead(title: str, tagline: str, page: int, issue_label: str) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="51" viewBox="0 0 748 51">{style("Anton", "Bebas Neue")}
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="51" viewBox="0 0 748 51">{style()}
 <rect width="748" height="13" fill="#8c2118"/>
 <text x="8" y="10.6" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="1.6">{escape(issue_label)}</text>
 <text x="374" y="10" text-anchor="middle" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="2.4">{escape(MOTTO)}</text>
 <text x="740" y="10" text-anchor="end" font-family="{SANS}" font-size="12" fill="#f4e8c6" letter-spacing="1.6">PAGE {page}</text>
-<text x="8.6" y="43" font-family="{DISPLAY}" font-size="31" fill="#7a6a4a" fill-opacity="0.5" letter-spacing="0.6">{escape(title)}</text>
-<text x="7" y="41.4" font-family="{DISPLAY}" font-size="31" fill="#171812" letter-spacing="0.6">{escape(title)}</text>
+<text x="8.6" y="43" font-family="{DISPLAY}" font-size="35" fill="#7a6a4a" fill-opacity="0.5" letter-spacing="1.2">{escape(title)}</text>
+<text x="7" y="41.4" font-family="{DISPLAY}" font-size="35" fill="#171812" letter-spacing="1.2">{escape(title)}</text>
 {seal(690, 28, 15)}
-<text x="668" y="33" text-anchor="end" font-family="{SERIF}" font-size="10.5" font-style="italic" fill="#143f2c">{escape(tagline)}</text>
+<text x="668" y="33" text-anchor="end" font-family="{SERIF_I}" font-size="10.5" fill="#143f2c">{escape(tagline)}</text>
 <path d="M0 46H748" stroke="#171812" stroke-width="2.4"/><path d="M0 49.5H748" stroke="#171812" stroke-width="0.8"/>
 </svg>
 """
 
 
 def footer(text: str) -> str:
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="30" viewBox="0 0 748 30">{style("Anton", "Bebas Neue")}
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="748" height="30" viewBox="0 0 748 30">{style()}
 <rect width="748" height="30" fill="#171812"/><rect width="30" height="30" fill="#8c2118"/><rect x="718" width="30" height="30" fill="#8c2118"/>
 <path d="M15 6l3 7 7 .6-5.4 4.6 1.8 7-6.4-4-6.4 4 1.8-7L5 13.600 12 13z" fill="#f4e8c6" transform="translate(0 -1)"/>
 <path d="M733 6l3 7 7 .6-5.4 4.6 1.8 7-6.4-4-6.4 4 1.8-7L723 13.600 730 13z" fill="#f4e8c6" transform="translate(0 -1)"/>
@@ -64,7 +63,7 @@ def scorecard_compact(puzzles: list[str], width: int, height: int) -> str:
             f'<text x="{x + 20}" y="{y + 12}" font-family="{DISPLAY}" font-size="11.5" fill="#171812">{escape(name.upper())}</text>'
         )
     body = "\n".join(cells)
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style("Anton", "Bebas Neue")}
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style()}
 <rect x="1.5" y="1.5" width="{width - 3}" height="{height - 3}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
 <rect x="1.5" y="1.5" width="{width - 3}" height="28" fill="#173f32"/>
 <text x="{width / 2}" y="21" text-anchor="middle" font-family="{DISPLAY}" font-size="15" fill="#f4e8c6">SOLVER’S SCORECARD</text>
@@ -90,11 +89,11 @@ def scorecard(puzzles: list[str], width: int = 368, height: int = 287) -> str:
         )
     body = "\n".join(rows)
     base = 66 + len(puzzles) * gap
-    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style("Anton", "Bebas Neue")}
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="{width}" height="{height}" viewBox="0 0 {width} {height}">{style()}
 <rect x="2" y="2" width="{width - 4}" height="{height - 4}" fill="#fffaf0" stroke="#171812" stroke-width="3"/>
 <rect x="2" y="2" width="{width - 4}" height="36" fill="#173f32"/>
 <text x="{width / 2}" y="27" text-anchor="middle" font-family="{DISPLAY}" font-size="20" fill="#f4e8c6">SOLVER’S SCORECARD</text>
-<text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF}" font-size="11.5" font-style="italic" fill="#171812">Check them off in pencil. Ink comes later.</text>
+<text x="{width / 2}" y="55" text-anchor="middle" font-family="{SERIF_I}" font-size="11.5" fill="#171812">Check them off in pencil. Ink comes later.</text>
 {body}
 <path d="M18 {base:.0f}H{width - 18}" stroke="#171812" stroke-width="2"/>
 <text x="18" y="{base + 24:.0f}" font-family="{SANS}" font-size="15" letter-spacing="1" fill="#171812">TOTAL TIME ____________</text>

@@ -9,10 +9,10 @@ import argparse
 from pathlib import Path
 from xml.sax.saxutils import escape
 
-from fontcss import HEAD, STRIP, style
+import comic
+from fontcss import HEAD, SERIF, SERIF_I, STRIP, style
 
 DISPLAY = HEAD
-SERIF = "Georgia,'Times New Roman',serif"
 SANS = "'Arial Narrow',Arial,Helvetica,sans-serif"
 MONO = "'Courier New',Courier,monospace"
 INK, RED, GREEN, CREAM = "#171812", "#8c2118", "#173f32", "#f4e8c6"
@@ -25,15 +25,14 @@ def frame(w: int, h: int, title: str, bar: str, tw: int, size: int = 25) -> str:
         f'<rect x="7" y="7" width="{w - 14}" height="{h - 14}" fill="none" stroke="{INK}" stroke-width="0.8"/>'
         f'<rect x="7" y="7" width="{w - 14}" height="34" fill="{bar}"/>'
         f'<path d="M7 41H{w - 7}" stroke="{INK}" stroke-width="2"/>'
-        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="{size}" fill="{CREAM}" letter-spacing="1" '
-        f'textLength="{tw}" lengthAdjust="spacingAndGlyphs">{escape(title)}</text>'
-        f'<path d="M{w - 26} 14l2.6 6.2 6.6.6-5 4.4 1.6 6.6-5.8-3.6-5.8 3.6 1.6-6.6-5-4.4 6.6-.6z" fill="{CREAM}" opacity=".85"/>'
+        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="{size}" fill="{CREAM}" letter-spacing="1.5">{escape(title)}</text>'
+        + comic.shuriken(w - 24, 24, 12, 15, fill="#cfc4a0")
     )
 
 
 def wrap(w: int, h: int, title: str, body: str) -> str:
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" '
-            f'role="img"><title>{escape(title)}</title>{style("Anton", "Bebas Neue")}{body}</svg>\n')
+            f'role="img"><title>{escape(title)}</title>{style()}{body}</svg>\n')
 
 
 def puzzle_bench() -> str:
@@ -54,7 +53,7 @@ def puzzle_bench() -> str:
           f'<rect x="26" y="212" width="258" height="26" fill="{RED}"/>'
           f'<text x="155" y="231" text-anchor="middle" font-family="{STRIP}" font-size="18.9" fill="{CREAM}" '
           f'textLength="238" lengthAdjust="spacingAndGlyphs">PASS THE PAPER. KEEP THE ANSWERS COVERED.</text>'
-          f'<path d="M300 225H{w - 26}" stroke="{RED}" stroke-width="5"/>')
+          )
     return wrap(w, h, "Puzzle Bench", b)
 
 
@@ -91,11 +90,11 @@ def portland_memory() -> str:
           f'<rect x="20" y="22" width="436" height="26" fill="{RED}" transform="rotate(-1 20 22)"/>')
     b += (f'<text x="34" y="41" font-family="{STRIP}" font-size="19.5" fill="{CREAM}" letter-spacing=".8" '
           f'textLength="300" lengthAdjust="spacingAndGlyphs" transform="rotate(-1 20 22)">PORTLAND MEMORY • HEARD NEAR THE STAIRS</text>')
-    b += (f'<text font-family="{SERIF}" font-size="18" font-style="italic" fill="{INK}">'
+    b += (f'<text font-family="{SERIF_I}" font-size="18" fill="{INK}">'
           f'<tspan x="34" y="84">“On wet mornings, the first puzzle copy always</tspan>'
           f'<tspan x="34" y="108">curled at the harbor-facing corner.”</tspan></text>')
     b += (f'<path d="M34 124H{w - 130}" stroke="{INK}" stroke-width="1"/>'
-          f'<text font-family="{SANS}" font-size="12" fill="{INK}">'
+          f'<text font-family="{SERIF}" font-size="12" fill="{INK}">'
           f'<tspan x="34" y="146">A neighborhood recollection, not a historical claim.</tspan>'
           f'<tspan x="34" y="164">The teller\'s name was lost under a coffee ring.</tspan></text>')
     # coffee ring over the clipping
@@ -106,7 +105,7 @@ def portland_memory() -> str:
 
 def last_issue_solutions() -> str:
     w, h = 260, 204
-    b = frame(w, h, "LAST ISSUE SOLUTIONS", RED, 202)
+    b = frame(w, h, "LAST ISSUE SOLUTIONS", RED, 202, 20)
     b += (f'<text font-family="{SERIF}" font-size="15" fill="{INK}">'
           f'<tspan x="20" y="70">Issue #1 opens the dojo.</tspan><tspan x="20" y="91">There is no prior answer key.</tspan>'
           f'<tspan x="20" y="120">Issue #1 solutions return</tspan><tspan x="20" y="141">with Issue #2.</tspan></text>')
@@ -130,7 +129,7 @@ def puzzle_tip() -> str:
 def seagullotine_says() -> str:
     w, h = 230, 130
     b = frame(w, h, "SEAGULLOTINE SAYS", RED, 0, 21)
-    b += (f'<text font-family="{SERIF}" font-size="14" font-style="italic" fill="{INK}">'
+    b += (f'<text font-family="{SERIF_I}" font-size="14" fill="{INK}">'
           f'<tspan x="18" y="62">“A blank square isn\'t empty.</tspan><tspan x="18" y="79">It\'s waiting for you to make</tspan>'
           f'<tspan x="18" y="96">the first move.”</tspan></text>'
           f'<path d="M18 108q20-7 40 0t40 0" fill="none" stroke="{GREEN}" stroke-width="2"/>'

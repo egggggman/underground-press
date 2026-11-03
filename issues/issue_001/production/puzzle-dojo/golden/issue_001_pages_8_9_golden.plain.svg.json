@@ -11,7 +11,7 @@
     },
     "cipher_corner": {
       "path": "templates/puzzle-dojo/golden-skin/components/cipher-corner.svg",
-      "sha256": "d522c1458ec985d00e18dbd163f40231415f64f02cb0b5ddd5e70ce604249747"
+      "sha256": "c4bd174f7b98d480d16770ea4baf709b1f4bd2062ec71c2047c91eb8664646fe"
     },
     "clues": {
       "path": "issues/issue_001/assets/puzzle-dojo/crossword-clues.svg",
@@ -23,11 +23,11 @@
     },
     "last_issue_solutions": {
       "path": "templates/puzzle-dojo/golden-skin/components/last-solutions.svg",
-      "sha256": "7c1e38aef361364f2e66463e96f8b60d28b7d9952b896383cf3f12133dc49a1f"
+      "sha256": "79e4fbe853d459a0e9445d586d7ef3b2723fe082c1ee3755d98cbb017e5d4762"
     },
     "memory_fragment": {
       "path": "templates/puzzle-dojo/golden-skin/components/portland-memory.svg",
-      "sha256": "7462b73b63e6eb911a8207a34f297213281a9d8bcb9f0fcbeffea4ce801d7501"
+      "sha256": "56174932def67862a9fa0c8d384ef8ec81ead6455028c7503befe314b70c9b8b"
     },
     "mini_ads": {
       "path": "templates/puzzle-dojo/golden-skin/components/mini-slot.svg",
@@ -39,19 +39,19 @@
     },
     "page_8_footer": {
       "path": "templates/puzzle-dojo/golden-skin/components/footer-p8.svg",
-      "sha256": "a34a17c21f67ec0eeecc882539339c0d7138c40c77f9bd1fcef771f26c39c64b"
+      "sha256": "18af1c1fcbbbd60bb3badc38bbbeff20621dc142a25683dc07d7799be0ed5a43"
     },
     "page_8_issue_banner": {
       "path": "templates/puzzle-dojo/golden-skin/components/masthead-p8.svg",
-      "sha256": "4b053df9eb3cdb4f88b5ce30b9ce46f36f1635d310878fc95de750bd4c9b2c56"
+      "sha256": "62bc6a5837a1b58a29973de5b16203761c5e61308145ca7448fbdf8d324927f3"
     },
     "page_9_footer": {
       "path": "templates/puzzle-dojo/golden-skin/components/footer-p9.svg",
-      "sha256": "d3a0925d02787b449ed2cc4314ac1b4a8d1ce7cac33c8a463aff356ebf4c6876"
+      "sha256": "0d4500b55991b6eb637ae5d11a4906fb6b98e479a9afadfadf4a9c248b0311f5"
     },
     "page_9_issue_banner": {
       "path": "templates/puzzle-dojo/golden-skin/components/masthead-p9.svg",
-      "sha256": "5c9510e562d4b166afbad69f8e260c0771b8369f157673643848e9112363455f"
+      "sha256": "fc9378be057147266b0a24213d1fb1649feb176dbca3344ae23ccb836c2725eb"
     },
     "page_9_seagullotine": {
       "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-panel.svg",
@@ -63,19 +63,19 @@
     },
     "puzzle_bench": {
       "path": "templates/puzzle-dojo/golden-skin/components/puzzle-bench.svg",
-      "sha256": "484212c9393ca6343a1f57a3403773f4c371c7933c2cea86945d99f791a62857"
+      "sha256": "e0484e5f1aaef49d3dd54a0055f27659466d4eb0dce99139c36576733a214577"
     },
     "puzzle_tip": {
       "path": "templates/puzzle-dojo/golden-skin/components/puzzle-tip.svg",
-      "sha256": "c7c5be0aea589d4ef7425bdec705689d0c7f70a7392cf639732160952f6e3428"
+      "sha256": "93faa922815892ae44d47f5ea2f91eff3fbe06fa1a1a5c45a469623e57532426"
     },
     "scorecard": {
       "path": "templates/puzzle-dojo/golden-skin/components/scorecard.svg",
-      "sha256": "c11481ac88cc9376bfa36d905a0b0a3292f5aef61d8d4b651ae9d1be34de8aef"
+      "sha256": "9c55452a9deed1334365e92e5a3c18153b9dffd93acc4778c1409fe2590c30fb"
     },
     "seagullotine": {
       "path": "templates/puzzle-dojo/golden-skin/components/seagullotine-says.svg",
-      "sha256": "ae3e48e59f932040cff7283c082f57f647c65ac3eb779b9065121f0475ea0c81"
+      "sha256": "b5dc73683e656bcb528bc949befa2a63c2c7a864c6e909a67b8d37103f60747b"
     },
     "sewer_cap": {
       "path": "templates/puzzle-dojo/golden-skin/components/sewer-cap.svg",

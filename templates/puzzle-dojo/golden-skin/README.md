@@ -46,3 +46,15 @@ The approved PNGs are embedded byte-for-byte and fitted proportionally inside a 
 ## Page-9 boxes
 
 `build_page9_boxes.py components` writes newspaper-style Puzzle Bench, Cipher Corner, Portland Memory and Last Issue Solutions boxes (same wording and sizes as the design-system components, which stay unmodified). Visual restyle only; not print approval.
+
+## Fonts and comic props
+
+Titles and box headers use Bangers (comic lettering), small labels and the header/footer strips use Bebas Neue, body text uses PT Serif. All three are SIL OFL, embedded as subsets (`fontcss.py`, licences in `fonts/`).
+
+`comic.py` draws original vector props (ninja stars, pizza slices, ooze barrels, sparkles, POW-style bursts). Each issue lists placements in `decor.issue_NNN.json` (page points, origin top-left) and passes it to the compositor:
+
+```
+python compose_golden.py assets.golden.json out.svg --seed 1991 --decor decor.issue_001.json
+```
+Props are generic objects, not characters, and sit in the page margins and gaps. They never overlap puzzle grids, clues or approved ad art.
+

@@ -86,7 +86,11 @@ def finish_layer(page: int) -> ET.Element:
 APPROVED_ART_ZONES = ("ad", "mini_ads")  # approved raster ad art: never redrawn, filtered or recoloured by default
 
 
-def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful") -> None:
+import comic
+import fontcss
+
+
+def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful", decor: dict | None = None) -> None:
     tree = ET.parse(plain)
     root = tree.getroot()
     defs = ET.fromstring(
@@ -104,6 +108,8 @@ def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful") -> 
         f'<feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="{seed + 11}" result="n"/>'
         '<feColorMatrix in="n" type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  -18 0 0 0 13.9" result="keep"/>'
         '<feComposite in="shaped" in2="keep" operator="in"/></filter>'))
+    if decor:
+        defs.append(ET.fromstring(f'<style xmlns="{SVG_NS}">{fontcss.css("Bangers")}</style>'))
     root.insert(2, defs)
     # Locked puzzle files carry a tan page background (#e8d6a8). Lift it to white here so the
     # multiply blend lets the paper show through; source files stay untouched.
@@ -137,6 +143,10 @@ def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful") -> 
                 x, y, w, h = (float(child.get(k)) for k in ("x", "y", "width", "height"))
                 ET.SubElement(frames, q("rect"), {"x": f"{x + 1.5:.1f}", "y": f"{y + 1.5:.1f}", "width": f"{w - 3:.1f}", "height": f"{h - 3:.1f}",
                                                   "fill": "none", "stroke": "#171812", "stroke-width": "3"})
+        items = (decor or {}).get("pages", {}).get(str(page), [])
+        if items:  # original comic props, inked into the page like everything else
+            props = ET.fromstring(f'<g xmlns="{SVG_NS}" id="comic-{page}">' + comic.layer(items) + "</g>")
+            inked.append(props)
         multiply, wear = finish_layer(page)
         page_group.append(multiply)
         page_group.append(wear)
@@ -155,11 +165,13 @@ def main() -> int:
     parser.add_argument("--seed", type=int, default=1991, help="paper texture seed (change per issue)")
     parser.add_argument("--ad-treatment", choices=("faithful", "print"), default="faithful",
                         help="faithful: approved ad art untouched on top of the page (default); print: sits under the paper grain like the rest of the page")
+    parser.add_argument("--decor", type=Path, help="comic props JSON (see decor.issue_001.json)")
     args = parser.parse_args()
     v1 = load_v1()
     plain = args.output.with_name(args.output.stem + ".plain.svg")
     v1.compose((HERE / "layout_contract.golden.json").resolve(), args.assets.resolve(), plain.resolve(), False)
-    dress(plain, args.output, args.seed, args.ad_treatment)
+    decor = json.loads(args.decor.read_text(encoding="utf-8")) if args.decor else None
+    dress(plain, args.output, args.seed, args.ad_treatment, decor)
     print(json.dumps({"plain": str(plain), "dressed": str(args.output), "seed": args.seed}, indent=2))
     return 0
 
