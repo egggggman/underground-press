@@ -18,14 +18,14 @@ MONO = "'Courier New',Courier,monospace"
 INK, RED, GREEN, CREAM = "#171812", "#8c2118", "#173f32", "#f4e8c6"
 
 
-def frame(w: int, h: int, title: str, bar: str, tw: int) -> str:
+def frame(w: int, h: int, title: str, bar: str, tw: int, size: int = 25) -> str:
     """Double-rule box with a condensed-headline bar and star notch."""
     return (
         f'<rect x="2" y="2" width="{w - 4}" height="{h - 4}" fill="none" stroke="{INK}" stroke-width="3"/>'
         f'<rect x="7" y="7" width="{w - 14}" height="{h - 14}" fill="none" stroke="{INK}" stroke-width="0.8"/>'
         f'<rect x="7" y="7" width="{w - 14}" height="34" fill="{bar}"/>'
         f'<path d="M7 41H{w - 7}" stroke="{INK}" stroke-width="2"/>'
-        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="25" fill="{CREAM}" letter-spacing="1" '
+        f'<text x="19" y="33" font-family="{DISPLAY}" font-size="{size}" fill="{CREAM}" letter-spacing="1" '
         f'textLength="{tw}" lengthAdjust="spacingAndGlyphs">{escape(title)}</text>'
         f'<path d="M{w - 26} 14l2.6 6.2 6.6.6-5 4.4 1.6 6.6-5.8-3.6-5.8 3.6 1.6-6.6-5-4.4 6.6-.6z" fill="{CREAM}" opacity=".85"/>'
     )
@@ -116,13 +116,36 @@ def last_issue_solutions() -> str:
     return wrap(w, h, "Last Issue Solutions", b)
 
 
+def puzzle_tip() -> str:
+    w, h = 230, 130
+    b = frame(w, h, "PUZZLE TIP", GREEN, 0, 21)
+    b += (f'<text font-family="{SERIF}" font-size="13.5" fill="{INK}">'
+          f'<tspan x="18" y="62">Start with the surest answer.</tspan><tspan x="18" y="79">Crossing letters turn guesses</tspan>'
+          f'<tspan x="18" y="96">into evidence.</tspan></text>'
+          f'<path d="M176 100l12-9 12 9-4 14h-16z" fill="none" stroke="{RED}" stroke-width="2.6"/>'
+          f'<text x="18" y="114" font-family="{STRIP}" font-size="12" letter-spacing="1" fill="{RED}">PENCIL FIRST. INK LATER.</text>')
+    return wrap(w, h, "Puzzle Tip", b)
+
+
+def seagullotine_says() -> str:
+    w, h = 230, 130
+    b = frame(w, h, "SEAGULLOTINE SAYS", RED, 0, 21)
+    b += (f'<text font-family="{SERIF}" font-size="14" font-style="italic" fill="{INK}">'
+          f'<tspan x="18" y="62">“A blank square isn\'t empty.</tspan><tspan x="18" y="79">It\'s waiting for you to make</tspan>'
+          f'<tspan x="18" y="96">the first move.”</tspan></text>'
+          f'<path d="M18 108q20-7 40 0t40 0" fill="none" stroke="{GREEN}" stroke-width="2"/>'
+          f'<text x="212" y="114" text-anchor="end" font-family="{STRIP}" font-size="12" letter-spacing="1" fill="{GREEN}">CLIPPED FOR LATER</text>')
+    return wrap(w, h, "Seagullotine quote", b)
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("outdir", type=Path)
     a = p.parse_args()
     a.outdir.mkdir(parents=True, exist_ok=True)
     for name, fn in {"puzzle-bench.svg": puzzle_bench, "cipher-corner.svg": cipher_corner,
-                     "portland-memory.svg": portland_memory, "last-solutions.svg": last_issue_solutions}.items():
+                     "portland-memory.svg": portland_memory, "last-solutions.svg": last_issue_solutions,
+                     "puzzle-tip.svg": puzzle_tip, "seagullotine-says.svg": seagullotine_says}.items():
         (a.outdir / name).write_text(fn(), encoding="utf-8"); print(a.outdir / name)
     return 0
 

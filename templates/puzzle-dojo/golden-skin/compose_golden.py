@@ -128,6 +128,15 @@ def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful") -> 
         inked = ET.SubElement(page_group, q("g"), {"id": f"ink-{page}", "filter": "url(#bleed)", "style": "mix-blend-mode:multiply"})
         for child in content:
             inked.append(child)
+        # Locked puzzle panels are crops with open edges. Draw one consistent frame over each zone,
+        # on top of the untouched asset (sources are never modified).
+        frames = ET.SubElement(inked, q("g"), {"id": f"frames-{page}"})
+        for child in content:
+            href = child.get("href") or ""
+            if child.tag == q("image") and "assets/puzzle-dojo/" in href and href.endswith(".svg"):
+                x, y, w, h = (float(child.get(k)) for k in ("x", "y", "width", "height"))
+                ET.SubElement(frames, q("rect"), {"x": f"{x + 1.5:.1f}", "y": f"{y + 1.5:.1f}", "width": f"{w - 3:.1f}", "height": f"{h - 3:.1f}",
+                                                  "fill": "none", "stroke": "#171812", "stroke-width": "3"})
         multiply, wear = finish_layer(page)
         page_group.append(multiply)
         page_group.append(wear)
