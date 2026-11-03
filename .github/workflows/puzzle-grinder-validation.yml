@@ -6,7 +6,10 @@ on:
       - "tools/puzzle_grinder.py"
       - "tests/test_puzzle_grinder.py"
       - "prototypes/puzzle-grinder-v0.2/**"
-      - "issues/issue_001/assets/puzzle-dojo/**"
+      # Grinder inputs only (grinder_contract.json reads the top-level puzzle
+      # SVG/JSON). The art/ subfolder (ad and furniture art) is not an input.
+      - "issues/issue_001/assets/puzzle-dojo/*.svg"
+      - "issues/issue_001/assets/puzzle-dojo/*.json"
       - ".github/workflows/puzzle-grinder-validation.yml"
 
 jobs:
