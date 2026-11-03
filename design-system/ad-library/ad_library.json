@@ -1,0 +1,366 @@
+{
+  "library": "The Underground Press approved advertising art",
+  "handoff": "2026-11-02",
+  "rules": [
+    "Use approved/ files unchanged: no AI redraw, recolor, rewording or stretching.",
+    "Resize proportionally; crop only with editorial approval.",
+    "previous_versions/ is provenance only, never production art.",
+    "Artwork approval is not canon, publication or print approval."
+  ],
+  "ads": [
+    {
+      "id": "tonys-donuts",
+      "business": "Tony’s Donuts",
+      "kind": "ad",
+      "artwork_status": "Approved illustration",
+      "art_direction": "Three frosted sprinkled donuts, one bitten, with steaming diner mug",
+      "file": "approved/tonys-donuts.png",
+      "source_filename": "a_vintage_comic_style_ink_illustration_on_a_flat_c.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "8d09b0a506000df4b1c91b3cf385ccf1325de9176f2405db7daa69cd31c58bb5",
+      "lettering": "illustration-only",
+      "copy_in_art": [],
+      "canon": "flagship: Tony’s Donuts (world/businesses/FLAGSHIP_BUSINESSES.md)",
+      "notes": "No lettering in the art; layout must add the business name only (no invented copy).",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "myrtle-suds",
+      "business": "Myrtle St. Suds",
+      "kind": "ad",
+      "artwork_status": "Approved revised illustration",
+      "art_direction": "Washing machine and real Myrtle-inspired tortoiseshell cat",
+      "file": "approved/myrtle-suds.png",
+      "source_filename": "a_vintage_comic_ink_illustration_in_the_same_gritt.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "b71b279fa49a95b437d3d89100242d9463f76db835377d8f187d260b4b7131d1",
+      "lettering": "illustration-only",
+      "copy_in_art": [],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Cat is modeled on the real Myrtle (tortoiseshell, green eyes): keep her face and coat. No lettering in the art; layout must add the business name only.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "foghorn-tapes",
+      "business": "Foghorn Tapes",
+      "kind": "ad",
+      "artwork_status": "Approved logo",
+      "art_direction": "Foghorn / nautical music-store logo and tagline",
+      "file": "approved/foghorn-tapes.png",
+      "source_filename": "a_detailed_vintage_gritty_comic_ink_style_logo_il.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "ef1f728879b2a8ca2c22fb4369cd837afd8ee74007a5eddf148b7538d36dd4e6",
+      "lettering": "complete",
+      "copy_in_art": [
+        "FOGHORN TAPES",
+        "RECORDS • TAPES • LOCAL SOUNDS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Logo with tagline, not a still life.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "harbor-heights-hardware",
+      "business": "Harbor Heights Hardware",
+      "kind": "ad",
+      "artwork_status": "Approved renamed/revised logo",
+      "art_direction": "Gritty pirate mascot and harbor",
+      "file": "approved/harbor-heights-hardware.png",
+      "source_filename": "gritty_vintage_distressed_ink_screenprint_logo_po.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "1a3caf44d25781f0efeb41a21a393451699960f9cf1b48beec546595edc361e1",
+      "lettering": "complete",
+      "copy_in_art": [
+        "HARBOR HEIGHTS HARDWARE"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Renamed from Harbor Lantern Hardware: use the final name.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/harbor-heights-early-logo.png",
+          "sha256": "b4d61a2ebb7a1fbf2cd300d47d2056f5689af0265e3a314fa8a9034e61db9dea"
+        },
+        {
+          "file": "previous_versions/harbor-heights-pirate-variant.png",
+          "sha256": "376a55099d6a309f6199c02013f1b3c7b6b74f49882d0f495ce004d18902e4f0"
+        },
+        {
+          "file": "previous_versions/harbor-lantern-original.png",
+          "sha256": "df5db0d1d1f9bba0d303a85de230b75e302d2921719895dfc6a502c2e51c340f"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "gull-ladle",
+      "business": "The Gull & Ladle",
+      "kind": "ad",
+      "artwork_status": "Approved simplified logo",
+      "art_direction": "Bold gull chef; home of the $1 whoopie; best soup du jour",
+      "file": "approved/gull-ladle.png",
+      "source_filename": "a_bold_vintage_distressed_retro_logo_poster_with.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "acc7698077f46cc91f1cb8393b8fefe4d886c927220d265fe8a6ea310f1386be",
+      "lettering": "complete",
+      "copy_in_art": [
+        "THE GULL & LADLE",
+        "HOME OF THE $1.00 WHOOPIE",
+        "AND THE BEST SOUP DU JOUR!"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "BLOCKER (wording): README gives the copy as “Home of the $1 Whoopie” and “Best Soup du Jour”; the approved image reads “$1.00” and “AND THE BEST SOUP DU JOUR!”. Image kept as is; editorial to confirm.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/gull-ladle-detailed.png",
+          "sha256": "dfd406e453063dab7691c9ae5ad5e5df56dcbde89acc803dbcc0ed89e6ed8fc8"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "cassiopeia-books",
+      "business": "Cassiopeia Books",
+      "kind": "ad",
+      "artwork_status": "Approved Portland revision",
+      "art_direction": "Worn book-cover composition with Portland waterfront skyline and black cat",
+      "file": "approved/cassiopeia-books.png",
+      "source_filename": "a_vintage_worn_book_cover_design_for_cassiopeia_b.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "f382aab4053cf0c1a7ebc2b519bedd01bf5f24be4ede8b67dba834776f316557",
+      "lettering": "complete",
+      "copy_in_art": [
+        "CASSIOPEIA BOOKS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Book-cover composition; Portland waterfront revision approved, not the earlier skyline.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/cassiopeia-earlier-book-cover.png",
+          "sha256": "59f964d3ff8978fe7ab0009403803688060793a6922ffe70127e21a8a0c47203"
+        },
+        {
+          "file": "previous_versions/cassiopeia-earlier-logo.png",
+          "sha256": "b15cf20621be5798c440972ca4230b239a2c452d14d4dfccf53fe4c50eabeffe"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "quality-cuts",
+      "business": "Quality Cuts",
+      "kind": "ad",
+      "artwork_status": "Approved logo",
+      "art_direction": "Simple barber pole and comb logo",
+      "file": "approved/quality-cuts.png",
+      "source_filename": "a_vintage_distressed_sign_logo_on_aged_stained_be.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "fd39cc7165ccd0a266c8feaecdfb40f231d99fa9e642c9dd4ca6c9f62e9cf9c7",
+      "lettering": "complete",
+      "copy_in_art": [
+        "QUALITY CUTS",
+        "BARBERSHOP"
+      ],
+      "canon": "CHECK: canon has “Quality Shop” (Italian sandwich shop, Shamos family); “Quality Cuts” is a different business with a similar name",
+      "notes": "BLOCKER (canon): editorial to confirm the two Quality businesses are meant to coexist.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "deez-bait",
+      "business": "Deez Bait",
+      "kind": "ad",
+      "artwork_status": "Approved renamed logo",
+      "art_direction": "Chum bucket with worms and fish emblem",
+      "file": "approved/deez-bait.png",
+      "source_filename": "a_vintage_distressed_bold_graphic_logo_sign_on_a.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "e7ce287e429f17fb56392a4e25b967193d013581d276975f8f2f7d06066ffbbf",
+      "lettering": "complete",
+      "copy_in_art": [
+        "DEEZ BAIT"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Renamed from Ferry Fare Bait: use the final name.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "deez-bait-coupon",
+      "business": "Deez Bait",
+      "kind": "coupon",
+      "artwork_status": "Approved coupon",
+      "art_direction": "Perforated coupon: BUY 2 GET NONE FREE!",
+      "file": "approved/deez-bait-coupon.png",
+      "source_filename": "a_vintage_distressed_coupon_ticket_design_with_rou.png",
+      "width_px": 1774,
+      "height_px": 887,
+      "sha256": "868a1aef5e435b237d42e624b848f199b274137718704c19d664f2490882c77e",
+      "lettering": "complete",
+      "copy_in_art": [
+        "COUPON",
+        "BUY 2 GET NONE FREE!",
+        "DEEZ BAIT"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Joke wording is intentional. Perforations are drawn only: physical perforation needs print guidance.",
+      "previous_versions": [],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "alice-alterations",
+      "business": "Alice’s Alterations",
+      "kind": "ad",
+      "artwork_status": "Approved final revision",
+      "art_direction": "Whimsical elderly seamstress with tiny bifocals trying to thread split thread",
+      "file": "approved/alice-alterations.png",
+      "source_filename": "vintage_comic_retro_sign_style_illustration_wit.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "898e3e6ebaa217bc12805fba5384858d5a1ca2eb3f804feaab04d4ed35f8df55",
+      "lettering": "complete",
+      "copy_in_art": [
+        "ALICE’S ALTERATIONS"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Final whimsical revision.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/alice-earlier-seamstress.png",
+          "sha256": "26ffbe5ff4ae3c97cd09c8ed54d4208c8825f74c9e4006a3c9eda2b42eb391be"
+        },
+        {
+          "file": "previous_versions/alice-earlier-sewing-machine.png",
+          "sha256": "fe2b1205a39aeac36ed91fabaf3aabd78076a3be600e37f974e828924ff6e081"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "gull-taxi",
+      "business": "Seagull Cab Co.",
+      "kind": "ad",
+      "artwork_status": "Approved final cigarette revision",
+      "art_direction": "Yellow checkered cab with gull driver and cigarette",
+      "file": "approved/gull-taxi.png",
+      "source_filename": "a_vintage_distressed_comic_sign_illustration_lik.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "023365b3d708ade74bcf1bd7a27184d86e648ea878b7024d07b355f660a88f69",
+      "lettering": "complete",
+      "copy_in_art": [
+        "SEAGULL CAB CO.",
+        "TAXI"
+      ],
+      "canon": "not in canon docs (advertising concept)",
+      "notes": "Lit cigarette in the gull’s beak: the revision is approved.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/gull-taxi-before-cigarette.png",
+          "sha256": "346013f38bff43545ad7e2cddf4cfb04ce395a7a04bd89db96f52d4719d36fef"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    },
+    {
+      "id": "crust-bucket",
+      "business": "The Crust Bucket",
+      "kind": "ad",
+      "artwork_status": "Approved final SNES revision",
+      "art_direction": "Pizza-crust bucket mascot, arcade machines, SNES-era pixel art; Any Pizza is Good Pizza!",
+      "file": "approved/crust-bucket.png",
+      "source_filename": "a_pixel_art_snes_16_bit_style_retro_advertisement.png",
+      "width_px": 1536,
+      "height_px": 1024,
+      "sha256": "8610597f366d9a7caada7048f38d0c69c45fb1c4999b2a11cd621a4916166ed9",
+      "lettering": "complete",
+      "copy_in_art": [
+        "THE CRUST BUCKET",
+        "“ANY PIZZA IS GOOD PIZZA!”"
+      ],
+      "canon": "flagship: The Crust Bucket (replaces Tony’s Pizza)",
+      "notes": "SNES-era pixel art is an approved, intentional exception to the halftone style.",
+      "previous_versions": [
+        {
+          "file": "previous_versions/crust-bucket-arcade-before-pixel.png",
+          "sha256": "3f20cf8bddfbb581a88b6a9c39e1d5249876175896fe33efdf074f47f63043df"
+        },
+        {
+          "file": "previous_versions/crust-bucket-original.png",
+          "sha256": "f61db442a5bab2f08706938d60b15bb872dc24ede9fe3fe549f8b6626357197d"
+        }
+      ],
+      "approvals": {
+        "artwork": "approved (2026-11-02 handoff)",
+        "canon": "pending editorial",
+        "publication": "pending",
+        "print_proof": "pending"
+      }
+    }
+  ]
+}

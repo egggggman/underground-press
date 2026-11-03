@@ -83,7 +83,10 @@ def finish_layer(page: int) -> ET.Element:
     return group, wear
 
 
-def dress(plain: Path, out: Path, seed: int) -> None:
+APPROVED_ART_ZONES = ("ad", "mini_ads")  # approved raster ad art: never redrawn, filtered or recoloured by default
+
+
+def dress(plain: Path, out: Path, seed: int, ad_treatment: str = "faithful") -> None:
     tree = ET.parse(plain)
     root = tree.getroot()
     defs = ET.fromstring(
@@ -108,13 +111,17 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         href = img.get("href") or ""
         if "/art/" not in href and href.endswith(".svg") and "puzzle-dojo" in href and "golden-skin" not in href and not href.startswith("components/"):
             img.set("filter", "url(#lift)")
-        elif img.get("id") in ("ad", "mini_ads", "sewer_cap"):
-            img.set("filter", "url(#press)")  # newsprint look: wobbly edges, ink dropout
+        elif img.get("id") == "sewer_cap":
+            img.set("filter", "url(#press)")  # newsprint look for our own vector art only; approved ad art is never filtered
     for page_group in [g for g in root if g.tag == q("g") and g.get("id", "").startswith("page-")]:
         page = page_group.get("id").split("-")[1]
         children = list(page_group)
         flat = children[0]  # v1's hard-coded cream rect
         content = children[1:]
+        approved = []
+        if ad_treatment == "faithful":
+            approved = [c for c in content if c.get("id") in APPROVED_ART_ZONES]
+            content = [c for c in content if c not in approved]
         for child in children:
             page_group.remove(child)
         page_group.append(paper_layer(page))
@@ -124,6 +131,10 @@ def dress(plain: Path, out: Path, seed: int) -> None:
         multiply, wear = finish_layer(page)
         page_group.append(multiply)
         page_group.append(wear)
+        if approved:  # on top of every skin layer, so the art keeps its exact supplied colours
+            group = ET.SubElement(page_group, q("g"), {"id": f"approved-art-{page}"})
+            for child in approved:
+                group.append(child)
     out.parent.mkdir(parents=True, exist_ok=True)
     tree.write(out, encoding="utf-8", xml_declaration=True)
 
@@ -133,11 +144,13 @@ def main() -> int:
     parser.add_argument("assets", type=Path, help="zone-to-asset JSON map (see assets.golden.json)")
     parser.add_argument("output", type=Path, help="dressed spread SVG")
     parser.add_argument("--seed", type=int, default=1991, help="paper texture seed (change per issue)")
+    parser.add_argument("--ad-treatment", choices=("faithful", "print"), default="faithful",
+                        help="faithful: approved ad art untouched on top of the page (default); print: sits under the paper grain like the rest of the page")
     args = parser.parse_args()
     v1 = load_v1()
     plain = args.output.with_name(args.output.stem + ".plain.svg")
     v1.compose((HERE / "layout_contract.golden.json").resolve(), args.assets.resolve(), plain.resolve(), False)
-    dress(plain, args.output, args.seed)
+    dress(plain, args.output, args.seed, args.ad_treatment)
     print(json.dumps({"plain": str(plain), "dressed": str(args.output), "seed": args.seed}, indent=2))
     return 0
 

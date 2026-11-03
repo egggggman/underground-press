@@ -1,0 +1,3 @@
+# Instructions for Claude — Underground Press ad art
+
+Import the twelve approved PNG assets in `approved_artwork/` into the newspaper's advertising asset library. Consult `ASSET_MANIFEST.csv` for dimensions and hashes, and `README.md` for business naming, slogans, version history and exceptions. Do not use `previous_versions/` as production art. Do not modify the approved images or invent additional ad copy. Report any missing assets, scaling/bleed issues, spelling mismatches, or business-canon conflicts as blockers. Prepare layout previews for human review; artwork approval does not imply publication approval. Keep the Issue #1 page lock and puzzle sections intact. Maintain reusable ad-to-page assignments so later issues can rotate these businesses.

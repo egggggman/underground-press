@@ -1,0 +1,11 @@
+{
+  "issue": 1,
+  "note": "Layout preview only. Artwork approval is not publication approval, and Issue 1's page lock still decides what actually runs.",
+  "slots": {
+    "ad": "crust-bucket",
+    "mini_ads": ["tonys-donuts", "deez-bait-coupon"]
+  },
+  "approvals": {"artwork": "approved", "placement": "pending editorial", "print_proof": "pending"},
+  "pool": ["crust-bucket", "tonys-donuts", "myrtle-suds", "foghorn-tapes", "harbor-heights-hardware", "gull-ladle",
+           "cassiopeia-books", "quality-cuts", "deez-bait", "deez-bait-coupon", "alice-alterations", "gull-taxi"]
+}

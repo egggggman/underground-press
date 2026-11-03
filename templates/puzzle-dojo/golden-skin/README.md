@@ -21,18 +21,17 @@ python templates/puzzle-dojo/golden-skin/render.py proofs/puzzle-dojo-golden.svg
 
 For a new issue: copy `issue_001_furniture.json`, copy `assets.golden.json` and repoint the puzzle and art entries at the new issue's assets, and change `--seed` so the paper stock differs each week.
 
-## Ad library and rotation
+## Ads
 
-`ad_library.py` holds a dozen local-business ads as data (`ADS`). Each keeps its own lettering and art (slab, diner script, stencil, blackletter, deco...) but shares the paper's frame: ink border, dashed accent rule, paper dots, house palette and an ADVERTISEMENT footer. Every ad renders in two sizes: `big` (476 x 280) and `mini` (236 x 104).
-
-Per issue, copy `ads_rotation.issue_001.json` and pick which ads run: one `big`, two `mini`. Then:
+Ads come from the approved art library (`design-system/ad-library/`). `ad_slots.py` places them without touching the art:
 
 ```
-python build_ads.py <chef art> components            # sewer cap
-python ad_library.py <chef art> components --rotation ads_rotation.issue_NNN.json
+python build_ads.py components                                    # Sewer Cap card (our own vector art)
+python ad_slots.py ad_assignments.issue_NNN.json components       # big ad slot + two mini slots
+python compose_golden.py assets.golden.json out.svg --seed N      # --ad-treatment faithful (default) | print
 ```
 
-This writes `components/ads/*` (the whole library) plus `components/crust-bucket.svg` and `components/mini-ads.svg` (the two slots `assets.golden.json` points at). Painted art: drop `<ad-id>.png` files in the issue's `ad-art/` folder and add `--art-dir` to the command; see `ads/ART-PROMPTS.md` for ready-made prompts. To add an ad, add an entry to `ADS` with its fonts, panel colour, motif and copy. Business names in the library are drafts and need editorial sign-off. Fonts are embedded subsets of open (SIL OFL) typefaces, licences in `fonts/`.
+The approved PNGs are embedded byte-for-byte and fitted proportionally inside a framed mat (no stretching or cropping). Two assets have no lettering, so the slot adds only the business name in that business's own font. `--ad-treatment faithful` puts the art on top of every skin layer so colours are exactly as approved; `print` lets the paper grain sit over it like the rest of the page. Pick ads per issue in the assignments file (`slots`); `pool` lists everything available to rotate. Fonts for the name lines are embedded subsets of open (SIL OFL) typefaces, licences in `fonts/`.
 
 ## Layout contract v1.2
 

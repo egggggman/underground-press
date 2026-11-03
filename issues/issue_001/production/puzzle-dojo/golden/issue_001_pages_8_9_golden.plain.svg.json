@@ -6,8 +6,8 @@
   "missing_required": [],
   "assets": {
     "ad": {
-      "path": "templates/puzzle-dojo/golden-skin/components/crust-bucket.svg",
-      "sha256": "d6581fa9675ca910546837ab92ec212997cca10c361fcf5fdd1546d82994dffd"
+      "path": "templates/puzzle-dojo/golden-skin/components/ad-slot.svg",
+      "sha256": "e7d2ae556ffbee6d3778367174944cd200e54329b0f070c3ff35466894e73b0a"
     },
     "cipher_corner": {
       "path": "design-system/components/puzzle-dojo/cipher_corner.svg",
@@ -30,8 +30,8 @@
       "sha256": "4b28a092fb79da481f479344890fc56c0e9890171f563109b02c386791f70533"
     },
     "mini_ads": {
-      "path": "templates/puzzle-dojo/golden-skin/components/mini-ads.svg",
-      "sha256": "713a939cd14efb68807424581a07cde4bf15ad6c96882f4946439b21baf52090"
+      "path": "templates/puzzle-dojo/golden-skin/components/mini-slot.svg",
+      "sha256": "25551269c56d0507be7d4ce7bc6b1d2e64a6f18062f57b037c600a0556acef4f"
     },
     "neighborhood_search": {
       "path": "issues/issue_001/assets/puzzle-dojo/neighborhood-search.svg",
