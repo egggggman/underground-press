@@ -1,0 +1,88 @@
+name: Historical Page 1 retry announcements
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - .github/workflows/historical-page1-retry-announcements.yml
+      - artifacts/underground-press/**
+      - lib/api-client-react/**
+      - lib/replit-auth-web/**
+      - .npmrc
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.base.json
+      - tsconfig.json
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/historical-page1-retry-announcements.yml
+      - artifacts/underground-press/**
+      - lib/api-client-react/**
+      - lib/replit-auth-web/**
+      - .npmrc
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+      - tsconfig.base.json
+      - tsconfig.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  firefox:
+    name: Saved Page 1 retry announcements (Firefox)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --filter @workspace/underground-press... --frozen-lockfile
+      - name: Install official Playwright Firefox and OS dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps firefox
+      - name: Run saved historical Page 1 tests in Firefox
+        run: pnpm --filter @workspace/underground-press exec playwright test --config browser-tests/playwright.config.ts --project=firefox --grep="saved historical Page 1"
+      - name: Preserve Firefox test artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-page1-firefox-test-results
+          path: artifacts/underground-press/browser-tests/test-results/
+          if-no-files-found: ignore
+
+  webkit:
+    name: Saved Page 1 retry announcements (WebKit)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install workspace dependencies
+        run: pnpm install --filter @workspace/underground-press... --frozen-lockfile
+      - name: Install official Playwright WebKit and OS dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps webkit
+      - name: Run saved historical Page 1 tests in WebKit
+        run: pnpm --filter @workspace/underground-press exec playwright test --config browser-tests/playwright.config.ts --project=webkit --grep="saved historical Page 1"
+      - name: Preserve WebKit test artifacts on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: historical-page1-webkit-test-results
+          path: artifacts/underground-press/browser-tests/test-results/
+          if-no-files-found: ignore

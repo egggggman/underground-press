@@ -50,3 +50,10 @@ Desktop.ini
 *.woff
 *.woff2
 *.eot
+
+# Node.js and pnpm workspace output
+node_modules/
+dist/
+artifacts/underground-press/browser-tests/test-results/
+artifacts/underground-press/browser-tests/playwright-report/
+*.tsbuildinfo

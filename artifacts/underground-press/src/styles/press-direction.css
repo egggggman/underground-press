@@ -1,0 +1,19 @@
+:root{--pd-paper:#e6d9b8;--pd-ink:#1b1511;--pd-oxblood:#5c1a20;--pd-sewer:#34503f;--pd-mustard:#d6a021;--pd-head:'Oswald','Arial Narrow',Impact,'Franklin Gothic Condensed',sans-serif;--pd-body:'Source Serif 4',Georgia,serif}
+.press-preview{background:var(--pd-paper);color:var(--pd-ink);font-family:var(--pd-body);line-height:1.4;letter-spacing:0;border:1px solid var(--pd-ink)}
+.press-preview .pd-head,.press-preview h2,.press-preview h3{font-family:var(--pd-head);font-stretch:condensed;text-transform:uppercase;letter-spacing:.01em}
+.press-preview .pd-rule{border:1.5px solid var(--pd-ink);padding:.5rem}
+.press-preview img{display:block}
+.pd-sw{width:100%;height:2.5rem;border:1px solid var(--pd-ink)}
+.pd-badge{display:inline-block;font:700 10px 'Courier Prime',monospace;text-transform:uppercase;padding:1px 6px;border:1px solid var(--pd-ink)}
+.pd-badge-ok{background:var(--pd-sewer);color:#f2ead3}.pd-badge-bad{background:var(--pd-oxblood);color:#f2ead3}.pd-badge-warn{background:var(--pd-mustard)}
+.pd-frame{background:var(--pd-paper);border:2px solid var(--pd-ink);padding:4px;box-shadow:2px 2px 0 var(--pd-oxblood)}
+.pd-frame img{display:block;max-width:100%;filter:none}
+.press-preview{font-family:var(--pd-body)}
+.press-preview{background-image:radial-gradient(rgba(27,21,17,.035) .5px,transparent .7px);background-size:5px 5px;overflow-wrap:anywhere}
+.press-preview .pd-head{text-shadow:.4px .3px 0 var(--pd-mustard)}
+.press-preview .pd-columns{font-size:10pt;line-height:1.45;column-rule:1px solid var(--pd-ink)}
+.pd-puzzle-source{font-family:var(--app-font-mono);white-space:pre-wrap;line-height:1.5;overflow-wrap:normal;word-break:normal}
+.proof-sheet.press-preview>div:last-child{position:static;margin-top:1.25rem;gap:.75rem;flex-wrap:wrap}
+.press-preview figure,.press-preview .pd-rule{break-inside:avoid}
+@media(max-width:640px){.press-preview .pd-columns{columns:1}.proof-sheet.press-preview{padding:1rem}.press-preview figure{max-width:100%}}
+@media print{.press-preview{background-image:none;print-color-adjust:exact}.press-preview .pd-head{text-shadow:none}.press-preview .pd-columns{columns:2}}
