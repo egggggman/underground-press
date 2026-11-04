@@ -1,0 +1,1134 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 1.0.0
+servers:
+  - url: /api
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/HealthStatus" }
+  /press/issue:
+    get:
+      operationId: getIssue
+      responses:
+        "200":
+          description: Current working issue
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+  /press/readiness:
+    get:
+      operationId: getReadiness
+      responses:
+        "200":
+          description: Computed readiness and next action
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Readiness" }
+  /press/commands:
+    post:
+      operationId: executePressCommand
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PressCommand" }
+      responses:
+        "200":
+          description: Updated issue
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+        "400":
+          description: Validation or gate failure
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErrorEnvelope" }
+        "401":
+          description: Login required
+        "409":
+          description: Stale revision
+  /press/editor-assignments:
+    get:
+      operationId: listMyrtleEditorAssignments
+      responses:
+        "200":
+          description: Authenticated accounts, current Myrtle editor access, and recent change history
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/EditorAssignmentsResponse" }
+        "401": { description: Login required }
+        "403": { description: Newsroom administrator access required }
+  /press/editor-assignments/{accountId}:
+    patch:
+      operationId: updateMyrtleEditorAssignment
+      parameters:
+        - { name: accountId, in: path, required: true, schema: { type: string, minLength: 1 } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UpdateEditorAssignmentBody" }
+      responses:
+        "200":
+          description: Updated Myrtle editor assignment
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/EditorAssignment" }
+        "400": { description: Invalid account or request }
+        "401": { description: Login required }
+        "403": { description: Newsroom administrator access required }
+        "404": { description: Account not found }
+  /press/versions:
+    get:
+      operationId: listVersions
+      responses:
+        "200":
+          description: Immutable history
+          content:
+            application/json:
+              schema:
+                type: array
+                items: { $ref: "#/components/schemas/Version" }
+  /press/versions/{id}:
+    get:
+      operationId: getVersion
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Historical snapshot
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+  /press/export:
+    get:
+      operationId: exportIssue
+      responses:
+        "200":
+          description: Structured portable issue, never a GitHub commit
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+  /press/import:
+    post:
+      operationId: importIssue
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IssueImport" }
+      responses:
+        "200":
+          description: Imported working copy; approvals reset; page one preserved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+        "400": { description: Invalid input }
+        "409": { description: Stale revision }
+  /press/github/status:
+    get:
+      operationId: getGitHubConnectionStatus
+      responses:
+        "200":
+          description: Authenticated GitHub account for this workspace connection
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubConnectionStatus" }
+        "401": { description: Sign-in required }
+        "503": { description: GitHub connection unavailable }
+  /press/github/repositories/{page}:
+    get:
+      operationId: listGitHubRepositories
+      parameters:
+        - { name: page, in: path, required: true, schema: { type: integer, minimum: 1, maximum: 100 } }
+      responses:
+        "200":
+          description: Repositories visible to the authorized GitHub account
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubRepositoryPage" }
+        "401": { description: Sign-in required }
+        "503": { description: GitHub connection unavailable }
+  /press/github/pull/preview:
+    post:
+      operationId: previewGitHubPull
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubSyncSelection" }
+      responses:
+        "200":
+          description: Remote issue preview; Page 1 is reported but never imported
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubSyncPreview" }
+        "400": { description: Invalid selection }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision changed }
+  /press/github/pull/apply:
+    post:
+      operationId: applyGitHubPull
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubPullConfirmation" }
+      responses:
+        "200":
+          description: Imported working copy; Page 1 preserved and approvals reset
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+        "400": { description: Invalid or unconfirmed pull }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision or GitHub commit changed }
+  /press/github/push/preview:
+    post:
+      operationId: previewGitHubPush
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubSyncSelection" }
+      responses:
+        "200":
+          description: Proposed GitHub commit; the existing GitHub Page 1 is preserved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubSyncPreview" }
+        "400": { description: Invalid selection }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision changed }
+  /press/github/push/apply:
+    post:
+      operationId: applyGitHubPush
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubPushConfirmation" }
+      responses:
+        "200":
+          description: Created GitHub commit on the selected branch
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubPushResult" }
+        "400": { description: Invalid or unconfirmed push }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision or GitHub commit changed }
+  /press/github/source-load/preview:
+    post:
+      operationId: previewGitHubPageOneSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubSyncSelection" }
+      responses:
+        "200":
+          description: Separate preview for loading the locked Page 1 source from GitHub
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubSyncPreview" }
+        "400": { description: Invalid selection }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision changed }
+  /press/github/source-load/apply:
+    post:
+      operationId: applyGitHubPageOneSource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubSourceLoadConfirmation" }
+      responses:
+        "200":
+          description: Locked Page 1 source loaded without approval or artwork attestations
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Issue" }
+        "400": { description: Invalid or separately unconfirmed source load }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision or GitHub commit changed }
+  /press/github/media/preview:
+    post:
+      operationId: previewGitHubMediaTransfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubMediaTransferSelection" }
+      responses:
+        "200":
+          description: Separate media-only transfer preview; issue review state is not changed
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubMediaTransferPreview" }
+        "400": { description: Invalid selection or unsupported media }
+        "401": { description: Sign-in required }
+        "409": { description: Local revision or GitHub branch changed }
+  /press/github/media/apply:
+    post:
+      operationId: applyGitHubMediaTransfer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GitHubMediaTransferConfirmation" }
+      responses:
+        "200":
+          description: Media files transferred without importing issue or approval data
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubMediaTransferResult" }
+        "400": { description: Invalid or unconfirmed transfer }
+        "401": { description: Sign-in required }
+        "409": { description: "Local revision, GitHub branch, or file changed" }
+  /press/github/media/replacements:
+    get:
+      operationId: listGitHubMediaReplacementAudits
+      responses:
+        "200":
+          description: Completed GitHub media replacements, available only to newsroom editors and administrators
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubMediaReplacementAuditList" }
+        "401": { description: Sign-in required }
+        "403": { description: Newsroom role required }
+  /press/github/media/restores:
+    get:
+      operationId: listGitHubMediaRestores
+      responses:
+        "200":
+          description: Completed and failed private-storage GitHub media restores, available only to newsroom editors and administrators
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GitHubMediaRestoreHistory" }
+        "401": { description: Sign-in required }
+        "403": { description: Newsroom role required }
+  /storage/uploads/request-url:
+    post:
+      operationId: requestUploadUrl
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/UploadUrlRequest" }
+      responses:
+        "200":
+          description: Signed direct upload URL
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/UploadUrlResponse" }
+  /storage/objects/{objectPath}:
+    get:
+      operationId: getStorageObject
+      parameters:
+        - { name: objectPath, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: File bytes
+          content:
+            application/octet-stream:
+              schema: { type: string, format: binary }
+  /auth/user:
+    get:
+      operationId: getCurrentAuthUser
+      responses:
+        "200":
+          description: Auth state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AuthState" }
+  /login:
+    get:
+      operationId: login
+      responses:
+        "302": { description: OIDC redirect }
+  /callback:
+    get:
+      operationId: oidcCallback
+      responses:
+        "302": { description: Login complete }
+  /logout:
+    get:
+      operationId: logout
+      responses:
+        "302": { description: Logout }
+  /mobile-auth/token-exchange:
+    post:
+      operationId: exchangeMobileAuthorizationCode
+      requestBody:
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MobileCodeInput" }
+      responses:
+        "200":
+          description: Session
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/MobileSession" }
+  /mobile-auth/logout:
+    post:
+      operationId: logoutMobileSession
+      responses:
+        "200":
+          description: Logged out
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SuccessResult" }
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string }
+    ErrorEnvelope:
+      type: object
+      required: [error]
+      properties:
+        error: { type: string }
+    Approval:
+      type: object
+      required: [reviewer, at, notes]
+      properties:
+        reviewer: { type: string }
+        at: { type: string }
+        notes: { type: string }
+        reviewerAccountId: { type: string }
+        reviewerRole: { type: string, enum: [myrtle_editor] }
+    Page:
+      type: object
+      required: [number, title, section, copy, status, locked, provenance, editorialApproval, artApproval]
+      properties:
+        number: { type: integer, minimum: 1, maximum: 10 }
+        title: { type: string, minLength: 1 }
+        section: { type: string }
+        copy: { type: string }
+        status: { type: string, enum: [draft, in_review, approved] }
+        locked: { type: boolean }
+        provenance: { type: string }
+        draftRevision: { type: integer, minimum: 1 }
+        branchedFrom: { type: string }
+        sourceIdentity: { type: string }
+        sourceEvidence:
+          anyOf:
+            - { $ref: "#/components/schemas/SourceEvidence" }
+            - { type: "null" }
+        artworkSlots: { type: array, items: { $ref: "#/components/schemas/ArtworkSlot" } }
+        printApproval:
+          anyOf:
+            - { $ref: "#/components/schemas/Approval" }
+            - { type: "null" }
+        editorialApproval:
+          anyOf:
+            - { $ref: "#/components/schemas/Approval" }
+            - { type: "null" }
+        artApproval:
+          anyOf:
+            - { $ref: "#/components/schemas/Approval" }
+            - { type: "null" }
+    Asset:
+      type: object
+      required: [id, name, objectPath, contentType, size, caption, credit, source, provenance, pages, review, reviewer, reviewNotes, dpi]
+      properties:
+        id: { type: string }
+        name: { type: string }
+        objectPath: { type: string }
+        contentType: { type: string }
+        size: { type: integer }
+        caption: { type: string }
+        credit: { type: string }
+        source: { type: string }
+        provenance: { type: string, enum: [sample, uploaded_unverified, repository_reference] }
+        pages: { type: array, items: { type: integer, minimum: 2, maximum: 10 } }
+        review: { type: string, enum: [pending, approved, rejected] }
+        reviewer: { type: string }
+        reviewNotes: { type: string }
+        dpi: { type: integer, minimum: 0 }
+        styleReview:
+          anyOf:
+            - { $ref: "#/components/schemas/AssetStyleReview" }
+            - { type: "null" }
+    StyleChecks:
+      type: object
+      required: [referenceMatch, spotInks, typography, inkIllustration, halftoneRegistration, boxedComposition, legibilityPrint, provenancePreserved]
+      properties:
+        referenceMatch: { type: boolean }
+        spotInks: { type: boolean }
+        typography: { type: boolean }
+        inkIllustration: { type: boolean }
+        halftoneRegistration: { type: boolean }
+        boxedComposition: { type: boolean }
+        legibilityPrint: { type: boolean }
+        provenancePreserved: { type: boolean }
+    AssetStyleReview:
+      type: object
+      required: [decision, checks, reviewer, reviewerAccountId, notes, at, referenceIds]
+      properties:
+        decision: { type: string, enum: [passed, failed] }
+        checks: { $ref: "#/components/schemas/StyleChecks" }
+        reviewer: { type: string }
+        reviewerAccountId: { type: string }
+        notes: { type: string }
+        at: { type: string }
+        referenceIds: { type: array, items: { type: string } }
+    ArtReferenceInput:
+      type: object
+      required: [kind, title, assetId, url, sourceIdentity]
+      properties:
+        kind: { type: string, enum: [golden_image, front_page] }
+        title: { type: string, minLength: 1 }
+        assetId: { type: string }
+        url: { type: string }
+        sourceIdentity: { type: string, minLength: 1 }
+    ArtReference:
+      type: object
+      required: [id, version, kind, title, assetId, url, sourceIdentity, at, suppliedBy, approval]
+      properties:
+        id: { type: string }
+        version: { type: integer, minimum: 1 }
+        kind: { type: string, enum: [golden_image, front_page] }
+        title: { type: string }
+        assetId: { type: string }
+        url: { type: string }
+        sourceIdentity: { type: string }
+        at: { type: string }
+        suppliedBy: { type: string }
+        registrationNotes: { type: string }
+        assetSnapshot: { $ref: "#/components/schemas/Asset" }
+        imageAvailable: { type: boolean, description: "Derived from current storage availability; not persisted with the reference." }
+        approval:
+          anyOf:
+            - { $ref: "#/components/schemas/Approval" }
+            - { type: "null" }
+    ArtDirection:
+      type: object
+      required: [references, history]
+      properties:
+        references: { type: array, items: { $ref: "#/components/schemas/ArtReference" } }
+        history: { type: array, items: { $ref: "#/components/schemas/ArtReference" } }
+    ArtworkSlot:
+      type: object
+      required: [id, label, assetId]
+      properties:
+        id: { type: string }
+        label: { type: string, minLength: 1 }
+        assetId: { type: string }
+    SourceEvidence:
+      type: object
+      required: [actor, at, notes]
+      properties:
+        actor: { type: string }
+        at: { type: string }
+        notes: { type: string }
+    PageSourceInput:
+      type: object
+      required: [page, copy, sourceIdentity]
+      properties:
+        page: { type: integer, minimum: 2, maximum: 10 }
+        title: { type: string, minLength: 1 }
+        copy: { type: string, minLength: 1, maxLength: 100000 }
+        sourceIdentity: { type: string, minLength: 1, maxLength: 2000 }
+    ReportedPreflight:
+      type: object
+      required: [id, sourceIdentity, entries, evidence]
+      properties:
+        id: { type: string }
+        sourceIdentity: { type: string, minLength: 1 }
+        entries: { type: array, minItems: 48, maxItems: 48, items: { type: string, maxLength: 10000 } }
+        evidence: { $ref: "#/components/schemas/SourceEvidence" }
+    PageOneApprovalVerification:
+      type: object
+      required: [id, issueRevision, at, decision, reviewer, reviewerAccountId, reviewerRole, approvalDocumentIdentity, notes, sourceIdentity, sourceFingerprint, referenceId, referenceVersion, referenceSourceIdentity, referenceFingerprint]
+      properties:
+        id: { type: string }
+        issueRevision: { type: integer }
+        at: { type: string }
+        decision: { type: string, enum: [verified, not_verified] }
+        reviewer: { type: string }
+        reviewerAccountId: { type: string }
+        reviewerRole: { type: string, enum: [myrtle_editor] }
+        approvalDocumentIdentity: { type: string, minLength: 1, maxLength: 2000 }
+        notes: { type: string, minLength: 20, maxLength: 10000 }
+        sourceIdentity: { type: string }
+        sourceFingerprint: { type: string }
+        referenceId: { type: string }
+        referenceVersion: { type: integer, minimum: 1 }
+        referenceSourceIdentity: { type: string }
+        referenceFingerprint: { type: string }
+        isCurrent: { type: boolean }
+        staleReasons:
+          type: array
+          items:
+            type: string
+            enum: [source_unavailable, source_identity_changed, source_content_changed, reference_missing, reference_unavailable, reference_image_unavailable, reference_version_changed, reference_source_changed, reference_image_changed, reference_record_changed]
+    PageSnapshot:
+      type: object
+      required: [id, issueRevision, at, actor, notes, page, puzzles, assets]
+      properties:
+        id: { type: string }
+        issueRevision: { type: integer }
+        at: { type: string }
+        actor: { type: string }
+        notes: { type: string }
+        page: { $ref: "#/components/schemas/Page" }
+        puzzles: { type: array, items: { $ref: "#/components/schemas/Puzzle" } }
+        assets: { type: array, items: { $ref: "#/components/schemas/Asset" } }
+    PageReadiness:
+      type: object
+      required: [page, editorial, art, puzzle, print, canLock, blockers, nextMove]
+      properties:
+        page: { type: integer }
+        editorial: { type: boolean }
+        art: { type: boolean }
+        puzzle: { type: boolean }
+        print: { type: boolean }
+        canLock: { type: boolean }
+        blockers: { type: array, items: { type: string } }
+        nextMove: { type: string }
+    Puzzle:
+      type: object
+      required: [id, title, kind, source, solution, validation, validationNotes, reviewer, artworkId, pages, provenance]
+      properties:
+        id: { type: string }
+        title: { type: string, minLength: 1 }
+        kind: { type: string }
+        source: { type: string }
+        solution: { type: string }
+        validation: { type: string, enum: [unvalidated, passed, failed] }
+        validationNotes: { type: string }
+        reviewer: { type: string }
+        artworkId: { type: string }
+        pages: { type: array, items: { type: integer, minimum: 2, maximum: 10 } }
+        provenance: { type: string }
+        sourceIdentity: { type: string }
+        sourceEvidence:
+          anyOf:
+            - { $ref: "#/components/schemas/SourceEvidence" }
+            - { type: "null" }
+        validationAt: { type: string }
+        validationAccountId: { type: string }
+    ChecklistItem:
+      type: object
+      required: [id, label, checked, reviewer, notes]
+      properties:
+        id: { type: string }
+        label: { type: string }
+        checked: { type: boolean }
+        reviewer: { type: string }
+        notes: { type: string }
+    Proof:
+      type: object
+      required: [id, revision, createdAt, blockers, status, approval]
+      properties:
+        id: { type: string }
+        revision: { type: integer }
+        createdAt: { type: string }
+        blockers: { type: array, items: { type: string } }
+        status: { type: string, enum: [blocked, awaiting_review, approved] }
+        approval:
+          anyOf:
+            - { $ref: "#/components/schemas/Approval" }
+            - { type: "null" }
+    Issue:
+      type: object
+      required: [schemaVersion, number, name, revision, motto, attribution, advertisers, githubSync, pages, assets, puzzles, checklist, proofs, updatedAt]
+      properties:
+        schemaVersion: { type: integer, enum: [1] }
+        number: { type: integer, enum: [1] }
+        name: { type: string }
+        revision: { type: integer }
+        motto: { type: string }
+        attribution: { type: string }
+        advertisers: { type: array, items: { type: string } }
+        githubSync: { type: string, enum: [inactive] }
+        pages: { type: array, minItems: 10, maxItems: 10, items: { $ref: "#/components/schemas/Page" } }
+        assets: { type: array, items: { $ref: "#/components/schemas/Asset" } }
+        puzzles: { type: array, items: { $ref: "#/components/schemas/Puzzle" } }
+        checklist: { type: array, items: { $ref: "#/components/schemas/ChecklistItem" } }
+        proofs: { type: array, items: { $ref: "#/components/schemas/Proof" } }
+        updatedAt: { type: string }
+        pageSnapshots: { type: array, items: { $ref: "#/components/schemas/PageSnapshot" } }
+        artDirection: { $ref: "#/components/schemas/ArtDirection" }
+        reportedPreflight: { $ref: "#/components/schemas/ReportedPreflight" }
+        reportedPreflightPresent: { type: boolean }
+        pageOneApprovalHistory: { type: array, items: { $ref: "#/components/schemas/PageOneApprovalVerification" } }
+    PressCommand:
+      type: object
+      required: [revision, action]
+      properties:
+        revision: { type: integer }
+        action:
+          type: string
+          enum: [edit_page, submit_page, approve_editorial, approve_art, add_puzzle, edit_puzzle, delete_puzzle, validate_puzzle, add_asset, edit_asset, delete_asset, review_asset, check_continuity, run_preflight, approve_proof, check_page_print, lock_page, branch_page, set_artwork_slots, set_art_reference, confirm_art_reference, review_asset_style, import_page_sources, import_puzzle_inventory, record_reported_preflight, verify_page_one_approval]
+        page: { type: integer, minimum: 1, maximum: 10 }
+        id: { type: string }
+        title: { type: string }
+        copy: { type: string }
+        sourceIdentity: { type: string }
+        artworkSlots: { type: array, items: { $ref: "#/components/schemas/ArtworkSlot" } }
+        reviewer: { type: string }
+        notes: { type: string }
+        decision: { type: string, enum: [passed, failed, approved, rejected, verified, not_verified] }
+        checked: { type: boolean }
+        referenceId: { type: string }
+        approvalDocumentIdentity: { type: string, minLength: 1, maxLength: 2000 }
+        puzzle: { $ref: "#/components/schemas/Puzzle" }
+        asset: { $ref: "#/components/schemas/Asset" }
+        artReference: { $ref: "#/components/schemas/ArtReferenceInput" }
+        styleChecks: { $ref: "#/components/schemas/StyleChecks" }
+        pageSources: { type: array, minItems: 1, maxItems: 9, items: { $ref: "#/components/schemas/PageSourceInput" } }
+        puzzleInventory: { type: array, minItems: 1, maxItems: 100, items: { $ref: "#/components/schemas/Puzzle" } }
+        reportedEntries: { type: array, minItems: 48, maxItems: 48, items: { type: string, maxLength: 10000 } }
+    IssueImport:
+      type: object
+      required: [revision, issue, confirmed]
+      properties:
+        revision: { type: integer }
+        issue: { $ref: "#/components/schemas/Issue" }
+        confirmed: { type: boolean }
+    GitHubAccount:
+      type: object
+      required: [login, name]
+      properties:
+        login: { type: string }
+        name: { type: ["string", "null"] }
+    GitHubConnectionStatus:
+      type: object
+      required: [connected, account]
+      properties:
+        connected: { type: boolean }
+        account:
+          anyOf:
+            - { $ref: "#/components/schemas/GitHubAccount" }
+            - { type: "null" }
+    GitHubRepository:
+      type: object
+      required: [id, name, fullName, owner, defaultBranch, private, pushAccess, htmlUrl]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        fullName: { type: string }
+        owner: { type: string }
+        defaultBranch: { type: string }
+        private: { type: boolean }
+        pushAccess: { type: boolean }
+        htmlUrl: { type: string, format: uri }
+    GitHubRepositoryPage:
+      type: object
+      required: [repositories, page, hasNextPage]
+      properties:
+        repositories:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubRepository" }
+        page: { type: integer }
+        hasNextPage: { type: boolean }
+    GitHubSyncSelection:
+      type: object
+      required: [owner, repo, branch, path, revision]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+    GitHubSyncPreview:
+      type: object
+      required: [mode, owner, repo, branch, path, localRevision, headSha, fileExists, blobSha, remoteIssue, remoteIssueError, pullBlockers, pushAccess, pageOneDiffers]
+      properties:
+        mode: { type: string, enum: [pull, push, source_load] }
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        path: { type: string }
+        localRevision: { type: integer }
+        headSha: { type: string }
+        fileExists: { type: boolean }
+        blobSha: { type: ["string", "null"] }
+        remoteIssue:
+          anyOf:
+            - { $ref: "#/components/schemas/Issue" }
+            - { type: "null" }
+        remoteIssueError: { type: ["string", "null"] }
+        pullBlockers: { type: array, items: { type: string } }
+        pushAccess: { type: boolean }
+        pageOneDiffers: { type: boolean }
+    GitHubPullConfirmation:
+      type: object
+      required: [owner, repo, branch, path, revision, expectedHeadSha, expectedBlobSha, confirmed]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+        expectedHeadSha: { type: string, minLength: 40, maxLength: 64 }
+        expectedBlobSha: { type: ["string", "null"], minLength: 40, maxLength: 64 }
+        confirmed: { type: boolean }
+    GitHubPushConfirmation:
+      type: object
+      required: [owner, repo, branch, path, revision, expectedHeadSha, expectedBlobSha, confirmed, message]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+        expectedHeadSha: { type: string, minLength: 40, maxLength: 64 }
+        expectedBlobSha: { type: ["string", "null"], minLength: 40, maxLength: 64 }
+        confirmed: { type: boolean }
+        message: { type: string, minLength: 1, maxLength: 200 }
+    GitHubSourceLoadConfirmation:
+      type: object
+      required: [owner, repo, branch, path, revision, expectedHeadSha, expectedBlobSha, sourceLoadConfirmed]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+        expectedHeadSha: { type: string, minLength: 40, maxLength: 64 }
+        expectedBlobSha: { type: ["string", "null"], minLength: 40, maxLength: 64 }
+        sourceLoadConfirmed: { type: boolean }
+    GitHubMediaTransferSelection:
+      type: object
+      required: [owner, repo, branch, path, revision, direction]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+        direction: { type: string, enum: [to_repository, from_repository] }
+    GitHubMediaTransferFile:
+      type: object
+      required: [assetId, assetName, path, contentType, size, localSize, remoteSize, status, localSha256, remoteSha256, remoteBlobSha, message]
+      properties:
+        assetId: { type: string }
+        assetName: { type: string }
+        path: { type: string }
+        contentType: { type: string }
+        size: { type: integer, minimum: 0 }
+        localSize: { type: ["integer", "null"], minimum: 0 }
+        remoteSize: { type: ["integer", "null"], minimum: 0 }
+        status:
+          type: string
+          enum: [ready, already_current, remote_conflict, storage_conflict, missing_remote, missing_local, path_conflict, unsupported_type, too_large, invalid_record]
+        localSha256: { type: ["string", "null"] }
+        remoteSha256: { type: ["string", "null"] }
+        remoteBlobSha: { type: ["string", "null"] }
+        message: { type: ["string", "null"] }
+    GitHubMediaTransferPreview:
+      type: object
+      required: [direction, owner, repo, branch, issuePath, mediaDirectory, localRevision, headSha, pushAccess, repositoryPrivate, maxFileBytes, maxFiles, maxTransferBytes, files, blockers]
+      properties:
+        direction: { type: string, enum: [to_repository, from_repository] }
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        issuePath: { type: string }
+        mediaDirectory: { type: string }
+        localRevision: { type: integer }
+        headSha: { type: string }
+        pushAccess: { type: boolean }
+        repositoryPrivate: { type: boolean }
+        maxFileBytes: { type: integer }
+        maxFiles: { type: integer }
+        maxTransferBytes: { type: integer }
+        files:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaTransferFile" }
+        blockers: { type: array, items: { type: string } }
+    GitHubMediaTransferFingerprint:
+      type: object
+      required: [assetId, path, status, localSha256, remoteSha256, remoteBlobSha]
+      properties:
+        assetId: { type: string }
+        path: { type: string }
+        status:
+          type: string
+          enum: [ready, already_current, remote_conflict, storage_conflict, missing_remote, missing_local, path_conflict, unsupported_type, too_large, invalid_record]
+        localSha256: { type: ["string", "null"] }
+        remoteSha256: { type: ["string", "null"] }
+        remoteBlobSha: { type: ["string", "null"] }
+    GitHubMediaTransferConfirmation:
+      type: object
+      required: [owner, repo, branch, path, revision, direction, expectedHeadSha, expectedFiles, selectedAssetIds, confirmed, replaceRemoteConflicts]
+      properties:
+        owner: { type: string, minLength: 1, maxLength: 100 }
+        repo: { type: string, minLength: 1, maxLength: 100 }
+        branch: { type: string, minLength: 1, maxLength: 255 }
+        path: { type: string, minLength: 1, maxLength: 400 }
+        revision: { type: integer, minimum: 1 }
+        direction: { type: string, enum: [to_repository, from_repository] }
+        expectedHeadSha: { type: string, minLength: 40, maxLength: 64 }
+        expectedFiles:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaTransferFingerprint" }
+        selectedAssetIds:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          items: { type: string, minLength: 1 }
+        confirmed: { type: boolean }
+        replaceRemoteConflicts: { type: boolean }
+    GitHubMediaTransferSkippedFile:
+      type: object
+      required: [assetId, assetName, reason]
+      properties:
+        assetId: { type: string }
+        assetName: { type: string }
+        reason: { type: string }
+    GitHubMediaTransferResult:
+      type: object
+      required: [direction, owner, repo, branch, issuePath, filesTransferred, filesAlreadyCurrent, skippedFiles, commitSha, htmlUrl]
+      properties:
+        direction: { type: string, enum: [to_repository, from_repository] }
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        issuePath: { type: string }
+        filesTransferred: { type: integer, minimum: 0 }
+        filesAlreadyCurrent: { type: integer, minimum: 0 }
+        skippedFiles:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaTransferSkippedFile" }
+        commitSha: { type: ["string", "null"] }
+        htmlUrl: { type: ["string", "null"], format: uri }
+    GitHubMediaReplacementFingerprint:
+      type: object
+      required: [remoteSha256, remoteBlobSha]
+      properties:
+        remoteSha256: { type: ["string", "null"] }
+        remoteBlobSha: { type: ["string", "null"] }
+    GitHubMediaReplacementFile:
+      type: object
+      required: [assetId, path, priorRemoteFingerprint]
+      properties:
+        assetId: { type: string }
+        path: { type: string }
+        priorRemoteFingerprint: { $ref: "#/components/schemas/GitHubMediaReplacementFingerprint" }
+    GitHubMediaReplacementAudit:
+      type: object
+      required: [id, accountId, at, owner, repo, branch, issuePath, files, commitSha]
+      properties:
+        id: { type: integer }
+        accountId: { type: string }
+        at: { type: string, format: date-time }
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        issuePath: { type: string }
+        files:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaReplacementFile" }
+        commitSha: { type: string }
+    GitHubMediaReplacementAuditList:
+      type: object
+      required: [replacements]
+      properties:
+        replacements:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaReplacementAudit" }
+    GitHubMediaRestoreOutcome:
+      type: string
+      enum: [completed, failed]
+    GitHubMediaRestoreRecord:
+      type: object
+      required: [id, at, owner, repo, branch, issuePath, assetId, fileName, filePath, actorDisplayName, outcome, failureReason]
+      properties:
+        id: { type: integer }
+        at: { type: string, format: date-time }
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        issuePath: { type: string }
+        assetId: { type: string }
+        fileName: { type: string }
+        filePath: { type: string }
+        actorDisplayName: { type: string }
+        outcome: { $ref: "#/components/schemas/GitHubMediaRestoreOutcome" }
+        failureReason: { type: ["string", "null"] }
+    GitHubMediaRestoreHistory:
+      type: object
+      required: [restores]
+      properties:
+        restores:
+          type: array
+          items: { $ref: "#/components/schemas/GitHubMediaRestoreRecord" }
+    GitHubPushResult:
+      type: object
+      required: [owner, repo, branch, path, revision, commitSha, htmlUrl]
+      properties:
+        owner: { type: string }
+        repo: { type: string }
+        branch: { type: string }
+        path: { type: string }
+        revision: { type: integer }
+        commitSha: { type: string }
+        htmlUrl: { type: string, format: uri }
+    Readiness:
+      type: object
+      required: [revision, approvedPages, totalPages, validatedPuzzles, totalPuzzles, reviewedAssets, totalAssets, continuityComplete, continuityTotal, readyToPrint, blockers, nextMove, manifest]
+      properties:
+        revision: { type: integer }
+        approvedPages: { type: integer }
+        totalPages: { type: integer }
+        validatedPuzzles: { type: integer }
+        totalPuzzles: { type: integer }
+        reviewedAssets: { type: integer }
+        totalAssets: { type: integer }
+        continuityComplete: { type: integer }
+        continuityTotal: { type: integer }
+        readyToPrint: { type: boolean }
+        blockers: { type: array, items: { type: string } }
+        nextMove: { type: string }
+        blockerDetails: { type: array, items: { $ref: "#/components/schemas/ProductionBlocker" } }
+        productionQueue: { type: array, items: { $ref: "#/components/schemas/ProductionStage" } }
+        pageChecks: { type: array, items: { $ref: "#/components/schemas/PageReadiness" } }
+        manifest:
+          type: array
+          items: { $ref: "#/components/schemas/ManifestEntry" }
+    ManifestEntry:
+      type: object
+      required: [page, role, puzzleIds, validated]
+      properties:
+        page: { type: integer }
+        role: { type: string }
+        puzzleIds: { type: array, items: { type: string } }
+        validated: { type: boolean }
+    ProductionBlocker:
+      type: object
+      required: [id, ordinal, description, rootCause, owner, pages, state, priority, prerequisite, nextMove, href]
+      properties:
+        id: { type: string }
+        ordinal: { type: integer }
+        description: { type: string }
+        rootCause: { type: string }
+        owner: { type: string }
+        pages: { type: array, items: { type: integer, minimum: 1, maximum: 10 } }
+        state: { type: string, enum: [missing_source, missing_evidence, awaiting_human_approval, blocked_by_prerequisite, needs_changes, unknown] }
+        priority: { type: integer, minimum: 1, maximum: 5 }
+        prerequisite: { type: string }
+        nextMove: { type: string }
+        href: { type: string }
+    ProductionStage:
+      type: object
+      required: [priority, title, owner, pages, state, prerequisite, nextMove, href, blockerIds]
+      properties:
+        priority: { type: integer, minimum: 1, maximum: 5 }
+        title: { type: string }
+        owner: { type: string }
+        pages: { type: array, items: { type: integer, minimum: 1, maximum: 10 } }
+        state: { type: string, enum: [actionable, waiting_on_prerequisite, clear, awaiting_human_approval] }
+        prerequisite: { type: string }
+        nextMove: { type: string }
+        href: { type: string }
+        blockerIds: { type: array, items: { type: string } }
+    Version:
+      type: object
+      required: [id, revision, at, action, actor]
+      properties:
+        id: { type: integer }
+        revision: { type: integer }
+        at: { type: string }
+        action: { type: string }
+        actor: { type: string }
+    UploadUrlRequest:
+      type: object
+      required: [name, size, contentType]
+      properties:
+        name: { type: string, minLength: 1 }
+        size: { type: integer, minimum: 1, maximum: 20971520 }
+        contentType: { type: string, minLength: 1 }
+    UploadUrlResponse:
+      type: object
+      required: [uploadURL, objectPath]
+      properties:
+        uploadURL: { type: string }
+        objectPath: { type: string }
+    AuthUser:
+      type: object
+      required: [id, email, firstName, lastName, profileImageUrl]
+      properties:
+        id: { type: string }
+        email: { type: ["string", "null"] }
+        firstName: { type: ["string", "null"] }
+        lastName: { type: ["string", "null"] }
+        profileImageUrl: { type: ["string", "null"] }
+    AuthState:
+      type: object
+      required: [user, roles]
+      properties:
+        user:
+          anyOf:
+            - { $ref: "#/components/schemas/AuthUser" }
+            - { type: "null" }
+        roles:
+          type: array
+          items: { type: string, enum: [myrtle_editor, newsroom_admin] }
+    EditorAssignment:
+      type: object
+      required: [accountId, email, firstName, lastName, enabled, changedBy, changedAt]
+      properties:
+        accountId: { type: string }
+        email: { type: ["string", "null"] }
+        firstName: { type: ["string", "null"] }
+        lastName: { type: ["string", "null"] }
+        enabled: { type: boolean }
+        changedBy: { type: ["string", "null"] }
+        changedAt: { type: ["string", "null"], format: date-time }
+    EditorRoleChange:
+      type: object
+      required: [id, targetAccountId, enabled, changedBy, changedAt]
+      properties:
+        id: { type: integer }
+        targetAccountId: { type: string }
+        enabled: { type: boolean }
+        changedBy: { type: string }
+        changedAt: { type: string, format: date-time }
+    EditorAssignmentsResponse:
+      type: object
+      required: [accounts, changes]
+      properties:
+        accounts:
+          type: array
+          items: { $ref: "#/components/schemas/EditorAssignment" }
+        changes:
+          type: array
+          items: { $ref: "#/components/schemas/EditorRoleChange" }
+    UpdateEditorAssignmentBody:
+      type: object
+      required: [enabled]
+      properties:
+        enabled: { type: boolean }
+    MobileCodeInput:
+      type: object
+      required: [code, code_verifier, redirect_uri, state]
+      properties:
+        code: { type: string }
+        code_verifier: { type: string }
+        redirect_uri: { type: string }
+        nonce: { type: string }
+        state: { type: string }
+    MobileSession:
+      type: object
+      required: [token]
+      properties:
+        token: { type: string }
+    SuccessResult:
+      type: object
+      required: [success]
+      properties:
+        success: { type: boolean }
