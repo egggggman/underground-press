@@ -71,6 +71,18 @@ Recurring memories, traditions, inside jokes, and community stories should rewar
 
 The masthead is living rather than mechanically frozen: it may collect earned history while retaining its core identity. Use the turtle-shell mark for navigation and wayfinding. Treat sewer caps as collectible issue objects, not interchangeable navigation icons.
 
+## Puzzle Dojo Principle - The Newspaper Contains the Puzzles
+
+Puzzle Dojo is not an activity-book insert styled to resemble *The Underground Press*. It consists of normal pages of *The Underground Press* in which playable puzzles naturally appear alongside advertisements, notices, neighborhood material, illustrations, recurring characters, editorial debris, and other newspaper content.
+
+Puzzle data and playable geometry remain visually clean and protected. The surrounding newspaper may be dense, distressed, irregular, humorous, and layered.
+
+A successful Puzzle Dojo page should remain interesting even to a reader who does not solve the puzzles.
+
+The governing Puzzle Dojo presentation QA rule is:
+
+> **Cover the puzzles. If what remains still looks and reads like The Underground Press, the page passes.**
+
 ## Page approval standard
 
 A page is ready only when it:
