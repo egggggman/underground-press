@@ -4,10 +4,10 @@
     "LOW": "58\u00b0F",
     "FORECAST": "Steam, then suspicious drizzle"
   },
-  "subway_status": {
-    "LINE": "CANAL LOCAL",
-    "STATUS": "RUNNING",
-    "NOTE": "Expect mutant-related delays"
+  "transit_watch": {
+    "ROUTE": "LOCAL ACCESS",
+    "STATUS": "OPEN",
+    "NOTE": "Confirm current conditions"
   },
   "press_status": {
     "EDITION": "FIRST",
@@ -17,7 +17,7 @@
   "calendar": {
     "DATE": "FRI 8 PM",
     "EVENT": "ROOFTOP SPARRING",
-    "PLACE": "WEST 17TH WATER TOWER"
+    "PLACE": "PORTLAND OBSERVATORY"
   },
   "next_issue": {
     "DATE": "NEXT THURSDAY",
@@ -29,9 +29,9 @@
     "THEME": "BRIDGES & TUNNELS",
     "CREDIT": "RESTORED FROM THE ARCHIVE"
   },
-  "tonys_pizza": {
-    "ADDRESS": "CANAL ST. BELOW THE TRACKS",
+  "crust_bucket": {
+    "ADDRESS": "PORTLAND, MAINE",
     "OFFER": "ONE FREE GARLIC KNOT",
-    "COUPON_CODE": "KOWABUNGA91"
+    "COUPON_CODE": "COWABUNGA91"
   }
 }

@@ -1,5 +1,7 @@
 # The Underground Press Component Library v1.0
 
+> **HISTORICAL / SUPERSEDED.** This document records the retired New York/subway-era component pack. It is not an active production guide. Current work uses `design-system/components/`, `design-system/tokens/`, and the current Business Bible; historical wording below is intentionally preserved.
+
 A reusable production asset pack derived from the established Puzzle Dojo visual system: 1991 mutant-subway tabloid, warm newsprint, oxblood/sewer-green spot color, condensed headlines, strong rules, live editorial type, and modular boxes.
 
 ## Quick start
