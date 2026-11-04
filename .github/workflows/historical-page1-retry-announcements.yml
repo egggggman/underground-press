@@ -1,0 +1,79 @@
+name: Historical Page 1 retry announcements
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/historical-page1-retry-announcements.yml
+      - artifacts/underground-press/**
+      - lib/api-client-react/**
+      - lib/replit-auth-web/**
+      - package.json
+      - pnpm-lock.yaml
+      - pnpm-workspace.yaml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  firefox:
+    name: Historical Page 1 retry announcement / Firefox
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Firefox and its system dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps firefox
+
+      - name: Run the saved historical Page 1 announcement test
+        run: >-
+          pnpm --filter @workspace/underground-press exec playwright test
+          --config browser-tests/playwright.config.ts
+          --project=firefox
+          --grep="saved historical Page 1 first-load success stays silent and a later retry announces success"
+
+  webkit:
+    name: Historical Page 1 retry announcement / WebKit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.26.1
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+
+      - name: Install workspace dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install WebKit and its official system dependencies
+        run: pnpm --filter @workspace/underground-press exec playwright install --with-deps webkit
+
+      - name: Run the saved historical Page 1 announcement test
+        run: >-
+          pnpm --filter @workspace/underground-press exec playwright test
+          --config browser-tests/playwright.config.ts
+          --project=webkit
+          --grep="saved historical Page 1 first-load success stays silent and a later retry announces success"
