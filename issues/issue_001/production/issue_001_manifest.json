@@ -1,0 +1,329 @@
+{
+  "manifest": "Issue 001 Prototype v0.1 page manifest",
+  "version": 1,
+  "issue": 1,
+  "audited_at": "2026-11-03",
+  "main_commit": "ed58b0b0048de1e212e86b6c10b5c271521bdf47",
+  "page_size_pt": [
+    792,
+    1224
+  ],
+  "page_plan_source": "Only page map in the repository: Page One 'INSIDE THIS ISSUE' (City Beat 2, Crime & Neighborhood Watch 3, Editorial 4, Community/Classifieds 7, Puzzle Dojo 8-9). Pages 5, 6 and 10 are undefined.",
+  "rules": [
+    "Status definitions: READY = source layout on main, content populated, artwork placed, validators pass; PARTIAL = some of that exists; MISSING = nothing usable exists.",
+    "Sources with location 'unmerged' live only on a draft PR branch and are recorded by SHA-256 so they can be recovered; they must land on main before assembly.",
+    "No content is invented here: MISSING means MISSING.",
+    "READY is not print approval."
+  ],
+  "pages": [
+    {
+      "page": 1,
+      "department": "Front Page",
+      "status": "PARTIAL",
+      "template": "Approved Page One (execution benchmark, locked)",
+      "source_layouts": [
+        {
+          "path": "issues/issue_001/production/page-one/issue_001_page_one.svg",
+          "location": "unmerged",
+          "pr": "#13 and #14 (identical page sources on both branches)",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "13348c7f8784ce7b6ea9fd3f7a6e860406856826ce6f5992c2de6ddfb0832908"
+        },
+        {
+          "path": "scripts/build_page_one.py",
+          "location": "unmerged",
+          "pr": "#13 and #14 (identical page sources on both branches)",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "6cef48153b2962b738094cd8ee891d55fc85f5d9fe4fe06931cde9c229794743"
+        }
+      ],
+      "benchmark": {
+        "path": "issues/issue_001/production/page-one/issue_001_page_one_polished_press_v3.png",
+        "location": "unmerged",
+        "pr": "#13 and #14 (identical page sources on both branches)",
+        "ref": "feature/issue-001-art-style-lock",
+        "sha256": "07d4e8332880a23b947d49ea4ea813ae558f4ada220529d63e5d37cd5bc43691"
+      },
+      "content": {
+        "source": "embedded in the builder script and SVG master (no separate copy file)",
+        "state": "populated; lead keeps the 'Foot Clan' rumor unconfirmed"
+      },
+      "artwork": [
+        {
+          "path": "issues/issue_001/assets/page-one/art/waterfront-night-watch-halftone-v2.png",
+          "location": "unmerged",
+          "pr": "#13 and #14 (identical page sources on both branches)",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "8673b40189fe29cf7c6b07801b08390d52005bf4ef4799b8c453b7a50555372a"
+        }
+      ],
+      "outstanding": [
+        "Editable SVG master, builder and approved benchmark are not on main (only in draft PRs #13/#14; #15 carries the PNG).",
+        "Benchmark PNG is 1009 x 1559 px, about 92 ppi at 11 x 17 in: proof-grade only, not print resolution.",
+        "Index box says Editorial p4, Community/Classifieds p7, Puzzle Dojo p8-9; pages 5, 6 and 10 are not indexed."
+      ],
+      "blockers": [
+        "Land page sources on main",
+        "Print-resolution master"
+      ]
+    },
+    {
+      "page": 2,
+      "department": "City Beat",
+      "status": "PARTIAL",
+      "template": "City Beat template (approved, do not redesign); page contract in PR #14 (design-system/issue-production-v1/page_contract.json)",
+      "source_layouts": [
+        {
+          "path": "issues/issue_001/production/city-beat/issue_001_page_2_city_beat.svg",
+          "location": "unmerged",
+          "pr": "#13 and #14 (identical page sources on both branches)",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "1771fe423a970810f1a797a3828637390e1b13abb542d3cc99effd5424b3dd52"
+        },
+        {
+          "path": "scripts/build_city_beat.py",
+          "location": "unmerged",
+          "pr": "#13/#14",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "bb78d98bdc12241920f149db9d19d9025c88b06ad73fc6f2f045f8839df435e2"
+        }
+      ],
+      "content": {
+        "path": "issues/issue_001/production/city-beat/COPY.md",
+        "location": "unmerged",
+        "pr": "#13 and #14 (identical page sources on both branches)",
+        "ref": "feature/issue-001-art-style-lock",
+        "sha256": "9db73dda7a978498ef5fe1c4fab665f0f3359742032ea40fab2a959642cf6edb",
+        "state": "populated (lead, weather, transit, calendar, neighborhood notes per CITY_BEAT_PLAN.md); press-time facts still need editorial verification per the plan"
+      },
+      "artwork": [
+        {
+          "path": "issues/issue_001/assets/art-style-studies/city-beat-fog-lead-study-v1.png",
+          "location": "unmerged",
+          "pr": "#13",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "0b9c9fd7d9065b4c6154752b3814284d3741481ce0b64d0b3977af46d45f8b32",
+          "note": "study only, not final art, not placed in the page SVG"
+        }
+      ],
+      "outstanding": [
+        "Rendered SVG has no dominant illustration; page contract requires one.",
+        "Art Style Lock calls Pages 2-3 'cleaner preliminary proofs'; physical press treatment not applied.",
+        "Sources are unmerged and the two draft branches have diverged from main."
+      ],
+      "blockers": [
+        "Dominant art",
+        "Press treatment",
+        "Land sources on main"
+      ]
+    },
+    {
+      "page": 3,
+      "department": "Crime & Neighborhood Watch",
+      "status": "PARTIAL",
+      "template": "Page contract in PR #14 (no department-specific template)",
+      "source_layouts": [
+        {
+          "path": "issues/issue_001/production/neighborhood-watch/issue_001_page_3_neighborhood_watch.svg",
+          "location": "unmerged",
+          "pr": "#13 and #14 (identical page sources on both branches)",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "a77d412fb2629587962afa3ce9292d9f0bca669dd75a50b3ad08d3a37d7d83c5"
+        },
+        {
+          "path": "scripts/build_page_three.py",
+          "location": "unmerged",
+          "pr": "#13/#14",
+          "ref": "feature/issue-001-art-style-lock",
+          "sha256": "7ba11e160929dbaa555208f375344fc99a04fe6260bff1af4ce1fb14037de4aa"
+        }
+      ],
+      "content": {
+        "path": "issues/issue_001/production/neighborhood-watch/COPY.md",
+        "location": "unmerged",
+        "pr": "#13 and #14 (identical page sources on both branches)",
+        "ref": "feature/issue-001-art-style-lock",
+        "sha256": "7cd81cd0d23c54ca91e8248ab74d71a3276f3a718d7d6212e27e3519c9d8de1c",
+        "state": "populated (headline, dek, reported body, evidence ledger)"
+      },
+      "artwork": [],
+      "outstanding": [
+        "Rendered SVG is a headline plus one text block: no art, no modules, far below the page contract (8 modules, 82% occupancy).",
+        "No dominant illustration, utility rail or discovery item."
+      ],
+      "blockers": [
+        "Layout build-out",
+        "Dominant art",
+        "Land sources on main"
+      ]
+    },
+    {
+      "page": 4,
+      "department": "Editorial",
+      "status": "MISSING",
+      "template": "Editorial Template is named in the preservation rule but no file exists on main or any branch",
+      "source_layouts": [],
+      "content": {
+        "source": "content/editorials/inventory.json",
+        "state": "10 approved-inventory editorials exist; none selected or assigned to Issue 001"
+      },
+      "artwork": [
+        {
+          "path": "art/seagullotine/editorial_panel.svg",
+          "location": "main",
+          "sha256": "f191a32fb27c270850966311444815933ff8666b51b39147b8e5205c63cf5570",
+          "note": "existing Seagullotine editorial panel art"
+        }
+      ],
+      "outstanding": [
+        "Page layout does not exist.",
+        "Editorial selection and approval needed."
+      ],
+      "blockers": [
+        "No layout",
+        "No content selection"
+      ]
+    },
+    {
+      "page": 5,
+      "department": "(unassigned)",
+      "status": "MISSING",
+      "template": "none",
+      "source_layouts": [],
+      "content": {
+        "source": "none",
+        "state": "No department is assigned to page 5 anywhere in the repository"
+      },
+      "artwork": [],
+      "outstanding": [
+        "HQ must assign a department (Tournament Report is named in the preservation rule, but no file or plan exists)."
+      ],
+      "blockers": [
+        "Page plan undefined"
+      ]
+    },
+    {
+      "page": 6,
+      "department": "(unassigned)",
+      "status": "MISSING",
+      "template": "none",
+      "source_layouts": [],
+      "content": {
+        "source": "none",
+        "state": "No department is assigned to page 6 anywhere in the repository"
+      },
+      "artwork": [],
+      "outstanding": [
+        "HQ must assign a department."
+      ],
+      "blockers": [
+        "Page plan undefined"
+      ]
+    },
+    {
+      "page": 7,
+      "department": "Community / Classifieds",
+      "status": "MISSING",
+      "template": "drop-zone templates only (design-system/templates/drop-zones); no assembled page",
+      "source_layouts": [],
+      "content": {
+        "source": "content/classifieds, community_calendar, letters, polls, business_spotlights, advertisements inventories",
+        "state": "50 classifieds, 50 calendar items, 20 letters, 20 polls, 4 spotlights, 20 ad copy items exist; none selected for Issue 001"
+      },
+      "artwork": [
+        {
+          "path": "ads/tonys-pizza/tonys_classified.svg",
+          "location": "main",
+          "sha256": "30fc01fc2684de9363f19169aab4a5e5f131d5351dd6c71c2997176426de692a",
+          "note": "existing Tony's classified master"
+        }
+      ],
+      "outstanding": [
+        "Page layout does not exist.",
+        "Content selection and editorial approval needed; ad rotation pool is in PR #27."
+      ],
+      "blockers": [
+        "No layout",
+        "No content selection"
+      ]
+    },
+    {
+      "page": "8-9",
+      "department": "Puzzle Dojo",
+      "status": "READY",
+      "template": "templates/puzzle-dojo/v1 (approved); golden-skin proposal in PRs #25/#27",
+      "source_layouts": [
+        {
+          "path": "issues/issue_001/production/puzzle-dojo/issue_001_pages_8_9.svg",
+          "location": "main",
+          "sha256": "e7f82d40a2e3176d904f1ca34c9cdd7b03be02cb1f1e9966ce1b004454fb07e9"
+        },
+        {
+          "path": "issues/issue_001/assets/puzzle-dojo/composition.json",
+          "location": "main",
+          "sha256": "28c191adc997576fcc66679f55b0de6ea7602c2f335061584fcd4491681f5266"
+        },
+        {
+          "path": "templates/puzzle-dojo/v1/compose.py",
+          "location": "main",
+          "sha256": "ac0e63b2682bee9a248b1ade5ddcc946c27416d47c5d35a187f4f5ae4494ec18"
+        }
+      ],
+      "content": {
+        "source": "issues/issue_001/assets/puzzle-dojo/",
+        "state": "crossword, sudoku, Pizza Cipher and Neighborhood Search present and hash-locked in validation_manifest.json; Neighborhood Search answer data in neighborhood-search.json"
+      },
+      "artwork": [
+        {
+          "path": "issues/issue_001/assets/puzzle-dojo/art/tonys-pizza-issue-001.png",
+          "location": "main",
+          "sha256": "ad3153499e15f575218911eff9092c3887cfaf333c68c9d0afefbd8a4b3265d5"
+        },
+        {
+          "path": "issues/issue_001/assets/puzzle-dojo/art/sewer-cap-001.png",
+          "location": "main",
+          "sha256": "653a7376d50eeb08cf25c4b755102bde87d1d27c4bfe7c96903303866574f9cc"
+        },
+        {
+          "path": "issues/issue_001/assets/puzzle-dojo/art/seagullotine-issue-001.png",
+          "location": "main",
+          "sha256": "ffedc48bf4eae625daf1df85edefd2fc87a31b9129750f2c72c9772e98773759"
+        }
+      ],
+      "outstanding": [
+        "READY means source-complete and validators pass, not visually or print approved.",
+        "Pending HQ decision: adopt the golden skin (PR #25/#27) and v2 puzzle fonts.",
+        "Answer keys for crossword, sudoku and Pizza Cipher are not stored in the repository (Issue 2 must print them).",
+        "Pizza Cipher plaintext unrecorded (plan in PR #29)."
+      ],
+      "blockers": []
+    },
+    {
+      "page": 10,
+      "department": "(unassigned)",
+      "status": "MISSING",
+      "template": "none",
+      "source_layouts": [],
+      "content": {
+        "source": "none",
+        "state": "No page 10 is defined anywhere in the repository"
+      },
+      "artwork": [],
+      "outstanding": [
+        "HQ must define page 10 (back page)."
+      ],
+      "blockers": [
+        "Page plan undefined"
+      ]
+    }
+  ],
+  "gate": {
+    "all_10_pages_have_source_layouts": false,
+    "every_required_content_field_populated": false,
+    "approved_artwork_and_ads_placed": false,
+    "puzzle_dojo_complete_and_verified": true,
+    "repository_validation_passes": true,
+    "reproducible_10_page_pdf_proof_exists": false
+  },
+  "return_status": "BLOCKED"
+}
