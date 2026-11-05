@@ -87,7 +87,7 @@ def cloth_strip(x, y, rot=-10):
 
 def evidence_board(w=470, h=300):
     """Corkboard with three evidence tags, built only from facts in the Page 3 copy."""
-    tag_w, tag_h = 130, 150
+    tag_w, tag_h = 130, 138
     xs = [22, 170, 318]
     labels = [("WATERFRONT", "SERVICE DOOR", "REPORTED"), ("GREEN-LAMP", "APPROACH", "DISPUTED COUNT"), ("DELIVERY", "TURN", "FOUND ITEM")]
     cork = ('<defs><filter id="cork" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7"/>'
@@ -96,7 +96,7 @@ def evidence_board(w=470, h=300):
          f'<rect x="3" y="3" width="{w-6}" height="{h-6}" rx="6" fill="#b98a55" filter="url(#cork)"/>'
          f'<rect x="3" y="3" width="{w-6}" height="{h-6}" rx="6" fill="none" stroke="#6b4a22" stroke-width="3" opacity=".6"/>')
     # red string through the three pins, with a question mark between the cards
-    oy = max((h - 200) / 2 - 10, 0)
+    oy = -14 if h >= 280 else max((h - 200) / 2 - 10, 0)
     pins = [(xs[i] + tag_w / 2, 38 + oy) for i in range(3)]
     b += f'<path d="M{pins[0][0]} {pins[0][1]} Q{(pins[0][0]+pins[1][0])/2} {62+oy} {pins[1][0]} {pins[1][1]} Q{(pins[1][0]+pins[2][0])/2} {62+oy} {pins[2][0]} {pins[2][1]}" fill="none" stroke="{RED}" stroke-width="2.6" stroke-dasharray="7 4"/>'
     for i, (lx, ly) in enumerate(labels and zip(xs, [0, 0, 0])):
@@ -117,6 +117,22 @@ def evidence_board(w=470, h=300):
         else:
             b += cloth_strip(cx, cy, -8) + f'<circle cx="{cx+22}" cy="{cy-8}" r="3" fill="#c9c9c9" stroke="{INK}" stroke-width="1.4"/>'
         b += f'<g transform="translate({x0+tag_w/2} {top+1})">{pin(RED if i != 1 else "#2f7a3a", 5)}</g></g>'
-    b += (f'<g transform="translate({w-150} {h-40}) rotate(-6)"><rect x="-4" y="-6" width="126" height="26" fill="{MUSTARD}" stroke="{INK}" stroke-width="{SW}"/>'
+    if h >= 280:
+        my = 172
+        b += f'<rect x="18" y="{my}" width="{w-36}" height="{h-my-16}" fill="#f4e8c6" stroke="{INK}" stroke-width="{SW}"/>'
+        b += f'<rect x="18" y="{my}" width="{w-36}" height="18" fill="{INK}"/><text x="{w/2}" y="{my+13}" text-anchor="middle" font-family="\'Bebas Neue\',sans-serif" font-size="12.5" letter-spacing="1.5" fill="#fff8df">BELOW-STREET APPROACHES</text>'
+        ny = my + 62
+        nx = [80, w/2, w-80]
+        names = ["WATERFRONT SERVICE DOOR", "GREEN-LAMP APPROACH", "DELIVERY TURN"]
+        notes = ["2 SETS OF STEPS", "4 SHADOWS? 1 RUNNER?", "CLOTH ON A SCREW"]
+        b += f'<path d="M{nx[0]+14} {ny} L{nx[1]-14} {ny} M{nx[1]+14} {ny} L{nx[2]-14} {ny}" stroke="{INK}" stroke-width="2.2" stroke-dasharray="3 6" fill="none"/>'
+        for i,x in enumerate(nx):
+            b += f'<circle cx="{x}" cy="{ny}" r="10" fill="{(RED,GREEN,INK)[i]}" stroke="{INK}" stroke-width="{SW}"/><text x="{x}" y="{ny+4.5}" text-anchor="middle" font-family="Bangers" font-size="13" fill="#fff8df">{i+1}</text>'
+            b += f'<text x="{x}" y="{ny+26}" text-anchor="middle" font-family="\'Bebas Neue\',sans-serif" font-size="12" letter-spacing=".8" fill="{INK}">{names[i]}</text>'
+            b += f'<text x="{x}" y="{ny-18}" text-anchor="middle" font-family="\'PT Sans Narrow\',sans-serif" font-weight="bold" font-size="10.5" fill="{RED}">{notes[i]}</text>'
+        b += f'<text x="{(nx[0]+nx[1])/2}" y="{ny-5}" text-anchor="middle" font-family="Bangers" font-size="17" fill="{RED}">?</text><text x="{(nx[1]+nx[2])/2}" y="{ny-5}" text-anchor="middle" font-family="Bangers" font-size="17" fill="{RED}">?</text>'
+        for x in [22, 170, 318]:
+            b += f'<rect x="{x+48}" y="{30+oy-9}" width="34" height="14" fill="#e9d9ab" opacity=".85" stroke="{INK}" stroke-width="1" transform="rotate(-4 {x+65} {30+oy})"/>'
+    if h < 280: b += (f'<g transform="translate({w-150} {h-40}) rotate(-6)"><rect x="-4" y="-6" width="126" height="26" fill="{MUSTARD}" stroke="{INK}" stroke-width="{SW}"/>'
           f'<text x="59" y="13" text-anchor="middle" font-family="Bangers" font-size="17" fill="{INK}">UNCONFIRMED</text></g>')
     return svg(w, h, b)

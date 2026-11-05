@@ -166,6 +166,7 @@ def page2(copy: dict) -> str:
              + "<div class='abs rule2' style='top:122pt'></div>")
     body += (f"<div class='abs lead' style='left:14pt;top:132pt;width:764pt;height:98pt;font-size:45pt' data-fit='1'><span class='l1'>{escape(head1)}</span><span class='l2'>{escape(head2)}</span></div>")
     body += f"<div class='abs dek' style='left:14pt;top:232pt;width:764pt;height:36pt' data-fit='1'>{md_inline(dek)}</div>"
+    body += "<div class='abs' style='left:540pt;top:150pt;display:flex;gap:22pt;align-items:flex-end'>" + pp.lantern(52, -6) + pp.bell(46, 8) + pp.cloud(80, True) + "</div>"
     # art + rail
     body += (f"<div class='abs artwrap' style='left:14pt;top:278pt;width:468pt;height:296pt'><img src='../../assets/art-style-studies/city-beat-fog-lead-study-v1.png' "
              "style='object-position:50% 46%;transform:scale(1.07)'></div>")
@@ -205,6 +206,8 @@ def page3(copy: dict) -> str:
              "<div class='abs rule2' style='top:122pt'></div>" + badges
              + "<div class='abs sub' style='left:462pt;top:80pt;width:316pt;line-height:1.35'>THE DESK COMPARED THE ACCOUNTS WITHOUT TURNING RESEMBLANCE INTO CERTAINTY</div>")
     body += (f"<div class='abs lead' style='left:14pt;top:132pt;width:764pt;height:98pt;font-size:45pt' data-fit='1'><span class='l1'>{escape(head1)}</span><span class='l2'>{escape(head2)}</span></div>")
+    body += "<div class='abs' style='left:470pt;top:150pt;transform:rotate(-7deg);border:3.5pt double #8c2118;color:#8c2118;padding:2pt 12pt;font-family:Bangers,sans-serif;font-size:34pt;letter-spacing:2pt;opacity:.88;mix-blend-mode:multiply'>UNCONFIRMED</div>"
+    body += f"<div class='abs' style='left:640pt;top:176pt'>{pp.shadow_figures(0, 0, 4, 1.1)}</div>"
     body += f"<div class='abs dek' style='left:14pt;top:232pt;width:764pt;height:36pt' data-fit='1'>{md_inline(dek)}</div>"
     body += f"<div class='abs' style='left:14pt;top:278pt;width:470pt;height:300pt'>{pp.evidence_board(470, 300)}</div>"
     body += box(494, 278, 284, 320, "red", "INCIDENT LEDGER", item_html(ledger), pp.lantern(22), cls="big")
