@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "page": {"width_pt": 792, "height_pt": 1224, "safe_margin_pt": 14},
+  "required_roles": [
+    "department", "lead-headline", "lead-dek", "lead-copy", "dominant-art",
+    "caption", "secondary-package", "utility", "discovery", "motto", "folio"
+  ],
+  "minimum_distinct_modules": 8,
+  "minimum_spot_objects": 2,
+  "minimum_typographic_scales": 3,
+  "minimum_safe_area_occupancy": 0.82,
+  "maximum_empty_region_ratio": 0.18,
+  "benchmark_sha256": "07d4e8332880a23b947d49ea4ea813ae558f4ada220529d63e5d37cd5bc43691",
+  "motto": "WE'RE ALL LOOKING FOR A PLACE TO LAND."
+}
+
