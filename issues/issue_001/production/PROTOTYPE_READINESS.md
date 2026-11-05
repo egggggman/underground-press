@@ -6,7 +6,7 @@
 
 | Page | Department | Status | Source layout | Content | Artwork | Outstanding |
 |---|---|---|---|---|---|---|
-| 1 | Front Page | PARTIAL | SVG master + `build_page_one.py` and locked benchmark PNG (`07d4e833…`), only in draft PRs #13/#14 (PNG also #15) | Embedded in the builder; populated | Waterfront halftone placed | Not on main. Benchmark is 1009x1559 px (about 92 ppi at 11x17 in): proof grade, not print grade. |
+| 1 | Front Page | PARTIAL | SVG master + `build_page_one.py` and locked benchmark PNG (`07d4e833…`), only in draft PRs #13/#14 (PNG also #15) | Embedded in the builder; populated | Waterfront halftone placed | Not on main. **The SVG master does not match the benchmark** (title clipped at the right edge, lead headline overlaps the Crust Bucket box), so the approved Page One has no usable editable source. Benchmark is 1009x1559 px (about 92 ppi at 11x17 in): proof grade, not print grade. |
 | 2 | City Beat | PARTIAL | SVG + `build_city_beat.py`, draft #13/#14 | `COPY.md` populated | Fog study exists, **not placed**; page has no dominant art | Press treatment not applied ("cleaner preliminary proof" per the art-style lock). Not on main. |
 | 3 | Crime & Neighborhood Watch | PARTIAL | SVG + `build_page_three.py`, draft #13/#14 | `COPY.md` populated | none | Rendered page is a headline and one text block: no art, modules, utility or discovery. Far below the page contract. |
 | 4 | Editorial | MISSING | none (Editorial Template named in the preservation rule, no file anywhere) | 10 inventory editorials, none selected | Seagullotine editorial panel on main | Layout and selection needed |

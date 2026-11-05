@@ -58,11 +58,13 @@
         }
       ],
       "outstanding": [
+        "The editable SVG master does not reproduce the approved benchmark: rendered at 11x17 in the title is clipped at the right edge and the lead headline overlaps the Crust Bucket box. The approved Page One exists only as the 1009x1559 raster, so it has no usable editable source yet.",
         "Editable SVG master, builder and approved benchmark are not on main (only in draft PRs #13/#14; #15 carries the PNG).",
         "Benchmark PNG is 1009 x 1559 px, about 92 ppi at 11 x 17 in: proof-grade only, not print resolution.",
         "Index box says Editorial p4, Community/Classifieds p7, Puzzle Dojo p8-9; pages 5, 6 and 10 are not indexed."
       ],
       "blockers": [
+        "Editable source that matches the benchmark",
         "Land page sources on main",
         "Print-resolution master"
       ]
