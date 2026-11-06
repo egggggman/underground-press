@@ -1,0 +1,15 @@
+{
+  "page": 4,
+  "department": "Editorial & Opinion",
+  "status": "proposed-pending-hq-approval",
+  "authority": "HQ Directive UP-004 (prototype design and editorial selection; selection is not final until HQ approves it)",
+  "rule": "Words are pulled verbatim from the inventories by ID at build time. Nothing on this page is rewritten; layout labels only.",
+  "lead_editorial": "EDT-003",
+  "board_editorials": ["EDT-001", "EDT-005"],
+  "seagullotine": "EDT-004",
+  "letters": ["LTR-001", "LTR-015", "LTR-020", "LTR-018", "LTR-007"],
+  "poll": "POL-010",
+  "discovery_from": "LTR-007",
+  "pull_quote": {"from": "EDT-003", "sentences": [0, 1]},
+  "art_caption": {"from": "EDT-003", "sentences": [2]}
+}
