@@ -2,28 +2,36 @@
 
 **Return status: BLOCKED.** Audited 2026-11-03 against `main` and all open PRs. Evidence: `issue_001_manifest.json` (validated by `python tools/validate_issue_manifest.py`). This audit changes no layouts, art, puzzles, canon or approved assets, and invents no content. It builds on the architecture audit in PR #30.
 
+## HQ update 2026-11-06 (Directive UP-004)
+
+- **Pages 2–3:** visual direction accepted provisionally (spacing, colour, density, presentation). Not final artwork, not print approval. PR #33 at `a418eab`.
+- **Page 1:** reconstruction deferred. The benchmark PNG stays locked; the editable-source fidelity gap below is documented, not resolved by redesign.
+- **Page 4:** prototype built (PR #34); copy selection proposed and awaiting HQ approval.
+- **Page plan:** all 10 pages assigned (see matrix).
+- **Next:** HQ approval of the Page 4 selection; then Pages 5, 6, 7 and 10 in the same system.
+
 ## Page-by-page matrix (10 pages)
 
 | Page | Department | Status | Source layout | Content | Artwork | Outstanding |
 |---|---|---|---|---|---|---|
 | 1 | Front Page | PARTIAL | SVG master + `build_page_one.py` and locked benchmark PNG (`07d4e833…`), only in draft PRs #13/#14 (PNG also #15) | Embedded in the builder; populated | Waterfront halftone placed | Not on main. **The SVG master does not match the benchmark** (title clipped at the right edge, lead headline overlaps the Crust Bucket box), so the approved Page One has no usable editable source. Benchmark is 1009x1559 px (about 92 ppi at 11x17 in): proof grade, not print grade. |
-| 2 | City Beat | PARTIAL | SVG + `build_city_beat.py`, draft #13/#14 | `COPY.md` populated | Fog study exists, **not placed**; page has no dominant art | Press treatment not applied ("cleaner preliminary proof" per the art-style lock). Not on main. |
-| 3 | Crime & Neighborhood Watch | PARTIAL | SVG + `build_page_three.py`, draft #13/#14 | `COPY.md` populated | none | Rendered page is a headline and one text block: no art, modules, utility or discovery. Far below the page contract. |
-| 4 | Editorial | MISSING | none (Editorial Template named in the preservation rule, no file anywhere) | 10 inventory editorials, none selected | Seagullotine editorial panel on main | Layout and selection needed |
-| 5 | unassigned | MISSING | none | none | none | **No department assigned anywhere in the repo** |
-| 6 | unassigned | MISSING | none | none | none | **No department assigned anywhere in the repo** |
-| 7 | Community / Classifieds | MISSING | drop-zone templates only | Inventories exist (50 classifieds, 50 calendar, 20 letters, 20 polls, 4 spotlights, 20 ad copies), none selected | Tony's classified master on main | Layout and selection needed |
+| 2 | City Beat | PARTIAL | HTML master + `press_pages.py`/`build_pages_2_3.py`, PR #33 (supersedes #13/#14 SVGs) | `COPY.md` populated | Fog study placed as lead (study, not final) | **Direction accepted provisionally (UP-004).** Not on main; formatting issues listed in #33. |
+| 3 | Crime & Neighborhood Watch | PARTIAL | HTML master, PR #33 | `COPY.md` populated | Vector placeholders (evidence board, corridor map, props) | **Direction accepted provisionally (UP-004).** Not on main; underfilled modules noted in #33. |
+| 4 | Editorial & Opinion | PARTIAL | HTML master + `press_page4.py`/`build_page_4.py`, PR #34 | Proposed selection of 11 inventory items (`editorial/SELECTION.json`), **pending HQ approval** | Seagullotine figure (approved component); fog/lantern panel placeholder | Selection approval; lead dek (none in inventory). Not on main. |
+| 5 | Arts, Music & Entertainment | MISSING | none | none selected | none | Assigned by HQ (UP-002/UP-004); layout and selection needed |
+| 6 | Business & Neighborhood Life | MISSING | none | none selected (business spotlights inventory exists) | none | Assigned by HQ (UP-002/UP-004); layout and selection needed |
+| 7 | Community & Classifieds | MISSING | drop-zone templates only | Inventories exist (50 classifieds, 50 calendar, 20 letters, 20 polls, 4 spotlights, 20 ad copies), none selected | Tony's classified master on main | Layout and selection needed |
 | 8-9 | Puzzle Dojo | READY | v1 production-linked spread on main, composition and templates; validators pass | Four puzzles present and hash-locked | Tony's, Sewer Cap, Seagullotine placed | READY = source-complete, not visually or print approved. See below. |
-| 10 | unassigned | MISSING | none | none | none | **Page 10 is not defined anywhere in the repo** |
+| 10 | Back Page — Sewer Cap & Community Features | MISSING | none | none selected | Sewer Cap component exists | Assigned by HQ (UP-002/UP-004); layout and selection needed |
 
-Count: 2 pages READY (8-9), 3 PARTIAL (1-3), 5 MISSING (4, 5, 6, 7, 10).
+Count (2026-11-06): 2 pages READY (8-9), 4 PARTIAL (1-4), 4 MISSING (5, 6, 7, 10).
 
-The only page plan in the repository is Page One's "INSIDE THIS ISSUE" box: City Beat 2, Crime & Neighborhood Watch 3, Editorial 4, Community / Classifieds 7, Puzzle Dojo 8-9. Pages 5, 6 and 10 have no assignment in any document, template or branch.
+**Page plan (HQ-approved, UP-002 confirmed in UP-004):** 1 Front Page · 2 City Beat · 3 Crime & Neighborhood Watch · 4 Editorial & Opinion · 5 Arts, Music & Entertainment · 6 Business & Neighborhood Life · 7 Community & Classifieds · 8–9 Puzzle Dojo · 10 Back Page — Sewer Cap & Community Features.
 
 ## Blockers vs polish
 
 **Genuine blockers to a first complete PDF proof**
-1. No page plan for pages 5, 6 and 10 (HQ decision).
+1. ~~No page plan for pages 5, 6 and 10~~ Resolved: HQ assigned them (UP-002/UP-004).
 2. No layouts for pages 4 and 7 (and 5, 6, 10 once assigned).
 3. Pages 1-3 live only in draft PRs; #13 and #14 diverged from `main` (10 ahead / 3 behind and 9 ahead / 3 behind), and #13 has the art-style-lock commits that #14 lacks, while #14 has the page contract and press system. They must be reconciled and landed.
 4. Pages 2 and 3 lack dominant art and the density the page contract requires.
@@ -52,7 +60,7 @@ The only page plan in the repository is Page One's "INSIDE THIS ISSUE" box: City
 
 ## Smallest task list to the first complete PDF proof
 
-1. **HQ:** assign departments for pages 5, 6 and 10; confirm 4 (Editorial) and 7 (Community / Classifieds).
+1. ~~**HQ:** assign departments for pages 5, 6 and 10~~ Done (UP-002/UP-004).
 2. **Reconcile and land Pages 1-3:** merge #13 and #14 sources into one reviewed PR against current `main` (page SVGs, builders, copy, benchmark, page contract). Do not modify the locked Page One PNG.
 3. **Select content** from the existing inventories for pages 4, 7 and any new pages (HQ approves the selection; no new copy).
 4. **Build layouts** for those pages from the approved drop-zone templates and page contract; place existing art (Seagullotine panels, ads, Sewer Cap).
