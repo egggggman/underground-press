@@ -1,0 +1,53 @@
+{
+ "fit": [
+  {
+   "cls": "abs lead",
+   "text": "THREE CORRIDORS,NO SINGLE ST",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs dek",
+   "text": "Reports of damaged locks and",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs box red big",
+   "text": "INCIDENT LEDGERWATERFRONT SE",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.8723404255319149
+  },
+  {
+   "cls": "abs cols",
+   "text": "Three below-street approache",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs box green big",
+   "text": "WHAT WE KNOW / WHAT WE DO NO",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.9245901639344263
+  },
+  {
+   "cls": "abs box black big",
+   "text": "WATCH DESK\u25b8 Write the time f",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.7540983606557377
+  },
+  {
+   "cls": "abs note",
+   "text": "THREE MARKS ARE NOT THREE PE",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  }
+ ]
+}

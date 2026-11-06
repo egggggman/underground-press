@@ -1,0 +1,67 @@
+{
+ "fit": [
+  {
+   "cls": "abs lead",
+   "text": "WHEN THE FOG MOVES IN,THE BL",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs dek",
+   "text": "On the working waterfront an",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs cap",
+   "text": "\u201cFog carries sound. It does ",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs box green ",
+   "text": "WEATHER DESKFOG / LIGHT DRIZ",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.9940828402366864
+  },
+  {
+   "cls": "abs box red ",
+   "text": "TRANSIT WATCHGREEN-LAMP APPR",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.9809885931558935
+  },
+  {
+   "cls": "abs cols",
+   "text": "The fog came in low enough t",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  },
+  {
+   "cls": "abs box red ",
+   "text": "COMMUNITY CALENDARSATURDAY, ",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.9934426229508196
+  },
+  {
+   "cls": "abs box green ",
+   "text": "NEIGHBORHOOD NOTESLATCH TABL",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": 0.8852459016393442
+  },
+  {
+   "cls": "abs note",
+   "text": "LOUDER IS NOT CLOSER.",
+   "overflow_px": 0,
+   "widthOverflow_px": 0,
+   "fill": null
+  }
+ ]
+}
